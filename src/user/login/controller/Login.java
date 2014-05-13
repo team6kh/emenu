@@ -46,7 +46,7 @@ public class Login {
 	}
 	
 	@RequestMapping(value="/user/loginFormPro.do",method=RequestMethod.POST)
-	public String loginFormPro(HttpSession session, @ModelAttribute LoginDTO login) throws Exception {
+	public String loginFormPro(HttpSession session, @ModelAttribute LoginDTO login) throws SQLException {
 		
 		/* 로그인 후 이전 페이지로 redirect 기능 구현 필요
 		 * 로그인 후에는 여기를 숨겨야 한다 */		
