@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC '-//ibatis.apache.org//DTD Sql Map 2.0//EN' 'http://ibatis.apache.org/dtd/sql-map-2.dtd'>
+
+<sqlMap namespace="Common">
+
+	<typeAlias alias="restOptDTO" type="restopt.dto.RestOptDTO" />
+
+	<!-- 리절트 맵 정의 -->
+	<resultMap id="restOptRes" class="restOptDTO">
+		<result property="restopt_num" column="restopt_num" />
+		<result property="restopt_rest_num" column="restopt_rest_num" />
+		<result property="restopt_subject" column="restopt_subject" />
+		<result property="restopt_priceplus" column="restopt_priceplus" />
+		<result property="restopt_amount" column="restopt_amount" />
+		<result property="restopt_destFile1" column="restopt_destFile1" />
+		<result property="restopt_orgname" column="restopt_orgname" />
+		<result property="restopt_savname" column="restopt_savname" />
+	</resultMap>
+
+	<!-- select -->
+	<select id="getRestCount" resultClass="int">
+		SELECT COUNT(*) FROM Rest_Board
+	</select>
+
+	<select id="getRestOptCount" resultClass="int">
+		SELECT COUNT(*) FROM RestOpt_Board
+	</select>		
+
+	<select id="getPaidCount" resultClass="int">
+		SELECT COUNT(*) FROM Paid_Board
+	</select>	
+
+	<select id="getReviewCount" resultClass="int">
+		SELECT COUNT(*) FROM Review_Board
+	</select>
+
+	<select id="getRecipeCount" resultClass="int">
+		SELECT COUNT(*) FROM Recipe_Board
+	</select>
+
+	<select id="getNoticeCount" resultClass="int">
+		SELECT COUNT(*) FROM Notice_Board
+	</select>
+
+	<select id="getQnACount" resultClass="int">
+		SELECT COUNT(*) FROM QnA_board
+	</select>
+	
+	<select id="listRestOpt" resultMap="restOptRes">
+		SELECT * FROM RestOpt_Board
+	</select>	
+
+</sqlMap>

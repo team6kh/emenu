@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC '-//ibatis.apache.org//DTD Sql Map 2.0//EN' 'http://ibatis.apache.org/dtd/sql-map-2.dtd'>
+
+<sqlMap namespace="Coupon">
+
+	<typeAlias alias="couponDTO" type="coupon.dto.CouponDTO" />
+      
+    <resultMap class="couponDTO" id="couponRes">
+		<result property="cpn_num" column="cpn_num" />
+	</resultMap>
+    
+    <!-- select -->   
+	<select id="selectCheckedCpn" resultClass="int" parameterClass="java.lang.String">
+		SELECT COUNT(*) FROM coupon_table WHERE cpn_num = #cpn_num#
+	</select>
+   
+   <!-- insert -->
+	<insert id="insertCpn" parameterClass="couponDTO">
+		INSERT INTO coupon_table (cpn_num) VALUES (#cpn_num#)
+	</insert>
+    
+</sqlMap>

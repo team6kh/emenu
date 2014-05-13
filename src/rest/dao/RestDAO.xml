@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC '-//ibatis.apache.org//DTD Sql Map 2.0//EN' 'http://ibatis.apache.org/dtd/sql-map-2.dtd'>
+
+<sqlMap namespace="Rest">
+
+	<typeAlias alias="restDTO" type="rest.dto.RestDTO" />
+	<typeAlias alias="restoptDTO" type="restopt.dto.RestOptDTO" />
+	
+	<!-- 리절트 맵 정의 -->
+	<resultMap id="restRes" class="restDTO">
+		<result property="rest_num" column="rest_num" />
+		<result property="rest_subject" column="rest_subject" />
+		<result property="rest_localcategory" column="rest_localcategory" />
+		<result property="rest_typecategory" column="rest_typecategory" />
+		<result property="rest_destFile1" column="rest_destFile1" />
+		<result property="rest_main_orgname" column="rest_main_orgname" />
+		<result property="rest_main_savname" column="rest_main_savname" />
+		<result property="rest_destFile2" column="rest_destFile2" />
+		<result property="rest_content_orgname" column="rest_content_orgname" />
+		<result property="rest_content_savname" column="rest_content_savname" />
+		<result property="rest_writer_id" column="rest_writer_id" />
+		<result property="rest_writer_name" column="rest_writer_name" />
+		<result property="rest_writer_telnum" column="rest_writer_telnum" />
+		<result property="rest_writer_mobilenum" column="rest_writer_mobilenum" />
+		<result property="rest_writer_address" column="rest_writer_address" />
+		<result property="rest_writer_email" column="rest_writer_email" />
+		<result property="rest_readcount" column="rest_readcount" />
+		<result property="rest_reg_date" column="rest_reg_date" />
+	</resultMap>
+
+	<resultMap id="restoptRes" class="restoptDTO">
+		<result property="restopt_num" column="restopt_num" />
+		<result property="restopt_rest_num" column="restopt_rest_num" />
+		<result property="restopt_subject" column="restopt_subject" />
+		<result property="restopt_priceplus" column="restopt_priceplus" />
+		<result property="restopt_amount" column="restopt_amount" />
+		<result property="restopt_destFile1" column="restopt_destFile1" />
+		<result property="restopt_orgname" column="restopt_orgname" />
+		<result property="restopt_savname" column="restopt_savname" />
+	</resultMap>
+	
+	<!-- 공통정의 -->
+	<sql id="select-all">
+		SELECT * FROM REST_BOARD
+	</sql>
+
+	<sql id="where-num">
+		WHERE rest_num = #rest_num#
+	</sql>
+
+	<!-- insert -->
+	<insert id="insertRest" parameterClass="restDTO">
+		INSERT INTO REST_BOARD
+			(rest_num, rest_subject, rest_localcategory, rest_typecategory, rest_writer_id,
+			rest_writer_name, rest_writer_telnum, rest_writer_mobilenum, rest_writer_address, rest_writer_email,
+			rest_reg_date)
+		VALUES
+			(rest_seq_num.NEXTVAL, #rest_subject#, #rest_localcategory#, #rest_typecategory#, #rest_writer_id#,
+			#rest_writer_name#, #rest_writer_telnum#, #rest_writer_mobilenum#, #rest_writer_address#, #rest_writer_email#,
+			#rest_reg_date#)
+	</insert>
+
+	<insert id="insertRestopt" parameterClass="restoptDTO">
+		INSERT INTO RESTOPT_BOARD
+			(restopt_num, restopt_rest_num, restopt_subject, restopt_priceplus, restopt_destFile1,
+			restopt_orgname, restopt_savname)
+		VALUES
+			(restopt_seq_num.NEXTVAL, #restopt_rest_num#, #restopt_subject#, #restopt_priceplus#, #restopt_destFile1#,
+			#restopt_orgname#, #restopt_savname#)
+	</insert>
+	
+	<!-- select -->
+	<select id="selectLastNum" resultClass="restDTO" parameterClass="int">
+		SELECT MAX(rest_num) AS rest_num FROM REST_BOARD
+	</select>
+	
+	<select id="selectCount" resultClass="int">
+		SELECT COUNT(*) FROM REST_BOARD
+	</select>
+	
+	<select id="selectCountForSeller" resultClass ="int" parameterClass="java.lang.String">
+		SELECT COUNT(*) FROM REST_BOARD
+		WHERE rest_writer_id = #session_id#
+	</select>
+
+	<select id="selectAll" resultMap="restRes" parameterClass="int">
+		<include refid="select-all" />
+		ORDER BY rest_num DESC
+	</select>
+	
+	<select id="selectLocalAll" resultMap="restRes" parameterClass="int">
+		SELECT * FROM REST_BOARD
+		WHERE rest_localcategory LIKE '1%'
+		ORDER BY rest_num DESC
+	</select>
+	
+	<select id="selectTypeAll" resultMap="restRes" parameterClass="int">
+		SELECT * FROM REST_BOARD
+		WHERE rest_typecategory LIKE '2%'
+		ORDER BY rest_num DESC
+	</select>
+	
+	<select id="selectLocal" resultMap="restRes" parameterClass="restDTO">
+		SELECT * FROM REST_BOARD
+		WHERE rest_localcategory = #rest_localcategory#
+	</select>
+	
+	<select id="selectType" resultMap="restRes" parameterClass="restDTO">
+		SELECT * FROM REST_BOARD
+		WHERE rest_typecategory = #rest_typecategory#
+	</select>
+
+	<select id="selectRestOne" resultMap="restRes" parameterClass="int">
+		<include refid="select-all" />
+		<include refid="where-num" />
+	</select>
+
+	<select id="selectRestoptOne" resultMap="restoptRes" parameterClass="int">
+		SELECT * FROM RESTOPT_BOARD
+		WHERE restopt_rest_num = #restopt_rest_num#
+	</select>
+
+	<!-- update -->
+	<update id="updateRestone" parameterClass="restDTO">
+		UPDATE REST_BOARD
+		SET
+			rest_subject = #rest_subject#,
+			rest_localcategory = #rest_localcategory#,
+			rest_typecategory = #rest_typecategory#
+		<include refid="where-num" />
+	</update>
+	
+	<update id="updateFile" parameterClass="restDTO">
+		UPDATE REST_BOARD
+		SET
+			rest_destFile1 = #rest_destFile1#,
+			rest_main_orgname = #rest_main_orgname#,
+			rest_main_savname = #rest_main_savname#,
+			rest_destFile2 = #rest_destFile2#,
+			rest_content_orgname = #rest_content_orgname#,
+			rest_content_savname = #rest_content_savname#
+		<include refid="where-num" />
+	</update>
+	
+	<update id="updateRestopt" parameterClass="restoptDTO">
+		UPDATE RESTOPT_BOARD
+		SET
+			restopt_subject=#restopt_subject#,
+			restopt_priceplus=#restopt_priceplus#,
+			restopt_destFile1=#restopt_destFile1#,
+			restopt_orgname=#restopt_orgname#,
+			restopt_savname=#restopt_savname#
+		WHERE
+			restopt_rest_num = #restopt_rest_num# AND
+			restopt_subject=#restopt_subject#
+	</update>
+	
+	<update id="updateRest_readcount" parameterClass="restDTO">
+		UPDATE REST_BOARD
+		SET rest_readcount = rest_readcount + 1
+		<include refid="where-num" />
+	</update>	
+
+	<!-- delete -->
+	<delete id="deleteTempArticle" parameterClass="restDTO">
+		DELETE FROM REST_BOARD
+		<include refid="where-num" />
+	</delete>
+	
+	<delete id="deleteRestBoard" parameterClass="restDTO">
+		DELETE FROM REST_BOARD
+		WHERE rest_num = #rest_num# AND rest_writer_id = #rest_writer_id#	
+	</delete>
+	
+	<delete id="deleteRestoptBoard" parameterClass="int">
+		DELETE FROM RESTOPT_BOARD
+		WHERE restopt_rest_num = #rest_num#	
+	</delete>
+	
+	<delete id="deleteRestoptOne" parameterClass="restoptDTO">
+		DELETE FROM RESTOPT_BOARD
+		WHERE restopt_rest_num = #restopt_rest_num# AND restopt_subject = #restopt_subject#
+	</delete>
+	
+	<delete id="deleteCartBoard" parameterClass="restDTO">
+		DELETE FROM CART_BOARD
+		WHERE cart_rest_num = #rest_num# AND session_id = #rest_writer_id#	
+	</delete>	
+
+</sqlMap>

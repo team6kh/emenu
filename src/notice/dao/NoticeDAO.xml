@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC '-//ibatis.apache.org//DTD Sql Map 2.0//EN' 'http://ibatis.apache.org/dtd/sql-map-2.dtd'>
+
+<sqlMap namespace="Notice">
+
+	<typeAlias alias="noticeDTO" type="notice.dto.NoticeDTO" />
+
+	<!-- 리절트 맵 정의 -->
+	<resultMap id="noticeResAll" class="noticeDTO">
+		<result property="notice_num" column="notice_num" />
+		<result property="notice_headtag" column="notice_headtag" />
+		<result property="notice_subject" column="notice_subject" />
+		<result property="notice_content" column="notice_content" />
+		<result property="notice_reg_date" column="notice_reg_date" />
+		<result property="notice_readcount" column="notice_readcount" />
+		<result property="rnum" column="rnum" />
+	</resultMap>
+	
+	<resultMap id="noticeRes" class="noticeDTO">
+		<result property="notice_num" column="notice_num" />
+		<result property="notice_headtag" column="notice_headtag" />
+		<result property="notice_subject" column="notice_subject" />
+		<result property="notice_content" column="notice_content" />
+		<result property="notice_reg_date" column="notice_reg_date" />
+		<result property="notice_readcount" column="notice_readcount" />
+	</resultMap>
+
+	<!-- 공통으로 사용할 select 절 정의 -->
+	<sql id="select-all">
+		SELECT * FROM NOTICE_BOARD
+	</sql>
+
+	<!-- 공통으로 사용할 where-notice_num 절 정의 -->
+	<sql id="where-notice_num">
+		WHERE NOTICE_NUM = #notice_num#
+	</sql>
+
+	<!-- select 쿼리문 정의 -->
+	<select id="selectAll" resultMap="noticeResAll" >
+		SELECT * FROM
+			(SELECT
+				NOTICE_NUM,
+				NOTICE_HEADTAG,
+				NOTICE_SUBJECT,
+				NOTICE_CONTENT,
+				NOTICE_REG_DATE,
+				NOTICE_READCOUNT,
+				ROWNUM RNUM
+			FROM
+				(SELECT * FROM NOTICE_BOARD ORDER BY NOTICE_NUM)
+			)
+		ORDER BY RNUM DESC
+	</select>
+	
+	<select id="selectOne" resultMap="noticeRes" parameterClass="int">
+		<include refid="select-all" />
+		<include refid="where-notice_num" />
+	</select>
+	
+	<!-- notice_board의 게시글 총 갯수 -->
+	<select id="selectNCount" resultClass="noticeDTO" parameterClass="int">
+		SELECT COUNT(NOTICE_NUM) AS NOTICE_NUM FROM NOTICE_BOARD
+	</select>
+	
+	<!-- insert 쿼리문 정의 -->
+	<insert id="insertNotice" parameterClass="noticeDTO">
+		INSERT INTO NOTICE_BOARD
+			(NOTICE_NUM,
+			NOTICE_HEADTAG,
+			NOTICE_SUBJECT,
+			NOTICE_CONTENT,
+			NOTICE_REG_DATE)
+		VALUES
+			(NOTICE_BOARD_SEQ.NEXTVAL,
+			#notice_headtag#,
+			#notice_subject#,
+			#notice_content#,
+			#notice_reg_date#)
+	</insert>
+
+	<!-- update 쿼리문 정의 -->
+	<update id="updateNotice" parameterClass="noticeDTO">
+		UPDATE NOTICE_BOARD
+		SET
+			NOTICE_HEADTAG = #notice_headtag#,
+			NOTICE_SUBJECT = #notice_subject#,
+			NOTICE_CONTENT = #notice_content#
+		<include refid="where-notice_num" />
+	</update>
+
+	<update id="updateReadCount" parameterClass="noticeDTO">
+		UPDATE NOTICE_BOARD
+		SET NOTICE_READCOUNT = NOTICE_READCOUNT + 1
+		<include refid="where-notice_num" />
+	</update>
+
+	<!-- delete 쿼리문 정의 -->
+	<delete id="deleteNotice" parameterClass="noticeDTO">
+		DELETE FROM NOTICE_BOARD
+		<include refid="where-notice_num" />
+	</delete>
+
+</sqlMap>

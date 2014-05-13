@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC '-//ibatis.apache.org//DTD Sql Map 2.0//EN' 'http://ibatis.apache.org/dtd/sql-map-2.dtd'>
+
+<sqlMap namespace="Review">
+
+	<typeAlias alias="reviewDTO" type="review.dto.ReviewDTO" />
+
+	<!-- 리절트맵 정의 -->
+	<resultMap id="reviewRes" class="reviewDTO">
+		<result property="review_num" column="review_num" />
+		<result property="review_rest" column="review_rest" />
+		<result property="review_writer" column="review_writer" />
+		<result property="review_content" column="review_content" />
+		<result property="review_file" column="review_file" />
+		<result property="review_reg_date" column="review_reg_date" />
+		<result property="review_rating" column="review_rating" />
+	</resultMap>
+
+	<!-- review_board 테이블의 모든 컬럼 값을 뽑아낼 경우 -->
+	<sql id="select-all">
+		SELECT * FROM review_board
+	</sql>
+
+	<!-- PK인 review_num을 조건으로 하여 레코드를 추출하고자 할 경우 -->
+	<sql id="where-review_num">
+		WHERE review_num = #review_num#
+	</sql>
+	
+	<!-- FK인 review_rest(rest_board의 PK)을 조건으로 하여 레코드를 추출하고자 할 경우 -->
+	<sql id="where-review_rest">
+		WHERE review_rest = #review_rest#
+	</sql>
+
+	<!-- SELECT 쿼리문 정의 -->
+
+	<!-- 해당 레스토랑에 적힌 모든 리뷰글 추출하는 쿼리문 -->
+	<select id="selectReviewList" resultMap="reviewRes" parameterClass="int">
+		<include refid="select-all" />
+		<include refid="where-review_rest"/>
+		ORDER BY review_reg_date DESC 
+	</select>
+
+	<!-- review_num으로 리뷰글 하나만 추출하는 쿼리문 -->
+	<select id="selectReviewOne" resultClass="reviewDTO" >
+		<include refid="select-all" />
+		<include refid="where-review_num" />
+	</select>
+
+	<!-- 제일 마지막으로 작성된 리뷰글의 글번호 가져오기 -->
+	<select id="selectLastNum" resultClass="reviewDTO">
+		SELECT MAX(review_num) AS review_num
+		FROM review_board
+	</select>
+
+	<!-- INSERT 쿼리문 정의 -->
+	
+	<!-- 리뷰글 쓰기를 위한 쿼리문 -->
+	<insert id="insertReview" parameterClass="reviewDTO">
+		INSERT INTO review_board 
+			(
+			review_num,
+			review_rest,
+			review_writer,
+			review_content,
+			review_reg_date,
+			review_rating
+			)
+		VALUES
+			(
+			review_seq.nextval,
+			#review_rest#,
+			#review_writer#,
+			#review_content#,
+			#review_reg_date#,
+			#review_rating#
+			)
+	</insert>
+
+	<!-- UPDATE 쿼리문 정의 -->
+
+	<!-- 리뷰글 수정을 위한 쿼리문 -->
+	<update id="updateReview" parameterClass="reviewDTO">
+		UPDATE review_board 		
+		SET
+			review_rating = #review_rating#,
+			review_content = #review_content#
+		<include refid="where-review_num" />
+	</update>
+    
+	<!-- 첨부파일명들을 DB에 저장하기 위한 쿼리문 -->
+	<update id="updateReviewFile" parameterClass="reviewDTO">
+		UPDATE review_board 
+		SET review_file = #review_file#
+		<include refid="where-review_num" />
+	</update>
+
+	<!-- DELETE 쿼리문 정의 -->
+	
+	<!-- 리뷰글 삭제를 위한 쿼리문 -->
+	<delete id="deleteReview">
+		DELETE FROM review_board
+		<include refid="where-review_num" />
+	</delete>
+	
+</sqlMap>

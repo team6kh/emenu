@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC '-//ibatis.apache.org//DTD Sql Map 2.0//EN' 'http://ibatis.apache.org/dtd/sql-map-2.dtd'>
+
+<sqlMap namespace="Buyer">
+
+	<typeAlias alias="buyerDTO" type="user.buyer.dto.BuyerDTO" />
+
+	<!-- 구매자 리절트 맵 정의 -->
+	<resultMap id="buyerRes" class="buyerDTO">
+		<result property="user_seq" column="user_seq" />
+		<result property="buyer_id" column="buyer_id" />
+		<result property="buyer_pw" column="buyer_pw" />
+		<result property="buyer_name" column="buyer_name" />
+		<result property="buyer_reg_date" column="buyer_reg_date" />
+		<result property="buyer_email" column="buyer_email" />
+		<result property="buyer_mobilenum" column="buyer_mobilenum" />
+		<result property="buyer_verification" column="buyer_verification" />
+	</resultMap>
+
+	<!-- 공통으로 사용할 select 절 정의 -->
+	<sql id="select-all">
+		SELECT * FROM buyer_table
+	</sql>
+
+	<!-- 공통으로 사용할 where-buyer_id 절 정의 -->
+	<sql id="where-buyer_id">
+		WHERE buyer_id = #buyer_id#
+	</sql>
+
+	<!-- select 쿼리문 정의 -->
+	<select id="listBuyer" resultMap="buyerRes" parameterClass="buyerDTO">
+		<include refid="select-all" />
+		ORDER BY buyer_reg_date DESC
+	</select>	
+	
+	<select id="getBuyerSession" resultMap="buyerRes" parameterClass="java.lang.String">
+		SELECT * FROM buyer_table
+		where buyer_id = #session_id#
+	</select>
+
+	<select id="getBuyerCount" resultClass="int">
+		SELECT COUNT(*) FROM buyer_table
+	</select>
+
+	<select id="getBuyerId" resultMap="buyerRes" parameterClass="buyerDTO">
+		<include refid="select-all" />
+		<include refid="where-buyer_id" />
+	</select>
+
+	<select id="getBuyerPw" resultMap="buyerRes">
+		<include refid="select-all" />
+		<include refid="where-buyer_id" />
+		AND buyer_pw = #buyer_pw#
+	</select>
+
+	<!-- insert 쿼리문 정의 -->
+	<insert id="insertBuyer" parameterClass="buyerDTO">
+		INSERT INTO buyer_table
+			(user_seq,
+			buyer_id,
+			buyer_pw,
+			buyer_name,
+			buyer_reg_date,
+			buyer_email,	
+			buyer_mobilenum,					
+			buyer_verification
+			)
+		VALUES 
+			(user_seq.nextval,
+			#buyer_id#,
+			#buyer_pw#,
+			#buyer_name#,
+			#buyer_reg_date#,
+			#buyer_email#,	
+			#buyer_mobilenum#,					
+			#buyer_verification#
+			)
+	</insert>
+
+	<!-- update 쿼리문 정의 -->
+	<update id="updateBuyer" parameterClass="buyerDTO">
+		UPDATE buyer_table
+		SET
+			buyer_pw = #buyer_pw#,			
+			buyer_mobilenum = #buyer_mobilenum#,
+			buyer_email = #buyer_email#
+		<include refid="where-buyer_id" />
+	</update>
+	
+	<!-- buyer_verification 업데이트 -->
+	<update id="updateVerification" parameterClass="buyerDTO">
+		UPDATE buyer_table
+		SET buyer_verification = #buyer_verification#
+		<include refid="where-buyer_id"	/>
+	</update>
+
+	<!-- delete 쿼리문 정의 -->
+	<delete id="deleteBuyer" parameterClass="buyerDTO">
+		DELETE FROM buyer_table
+		<include refid="where-buyer_id" />
+	</delete>
+
+</sqlMap>

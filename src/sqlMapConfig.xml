@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+	<properties resource="/dbconnect.properties" />
+	<settings cacheModelsEnabled="true" 
+	         enhancementEnabled="true"
+	         lazyLoadingEnabled="true" 
+	         maxRequests="32" 
+	         maxSessions="10" 
+	         maxTransactions="5" 
+	         useStatementNamespaces="true" />
+
+	<transactionManager type="JDBC" commitRequired="false">
+		<dataSource type="SIMPLE">
+            			<property name="JDBC.Driver" value="${driver}" />
+            			<property name="JDBC.ConnectionURL" value="${url}" />
+            			<property name="JDBC.Username" value="${username}" />
+            			<property name="JDBC.Password" value="${password}" />
+		</dataSource>
+	</transactionManager>		
+
+	<sqlMap resource="/cart/dao/CartDAO.xml"/>
+	<sqlMap resource="/common/dao/CommonDAO.xml"/>	
+	<sqlMap resource="/coupon/dao/CouponDAO.xml"/>
+	<sqlMap resource="/notice/dao/NoticeDAO.xml"/>
+	<sqlMap resource="/paid/dao/PaidDAO.xml"/>
+	<sqlMap resource="/qna/dao/QnaDAO.xml"/>
+	<sqlMap resource="/recipe/dao/RecipeDAO.xml"/>
+	<sqlMap resource="/rest/dao/RestDAO.xml"/>
+	<sqlMap resource="/review/dao/ReviewDAO.xml"/>	
+	<sqlMap resource="/test/dao/TestDAO.xml"/>	
+	<sqlMap resource="/user/buyer/dao/BuyerDAO.xml"/>
+	<sqlMap resource="/user/seller/dao/SellerDAO.xml"/>	
+	<sqlMap resource="/user/verification/dao/EvDAO.xml"/>	
+	
+</sqlMapConfig>

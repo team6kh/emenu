@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC '-//ibatis.apache.org//DTD Sql Map 2.0//EN' 'http://ibatis.apache.org/dtd/sql-map-2.dtd'>
+
+<sqlMap namespace="Seller">
+
+	<typeAlias alias="sellerDTO" type="user.seller.dto.SellerDTO" />
+
+	<!-- 판매자 리절트 맵 정의 -->
+	<resultMap id="sellerRes" class="sellerDTO">
+		<result property="user_seq" column="user_seq" />
+		<result property="seller_id" column="seller_id" />
+		<result property="seller_pw" column="seller_pw" />
+		<result property="seller_name" column="seller_name" />
+		<result property="seller_reg_date" column="seller_reg_date" />
+		<result property="seller_rest_name" column="seller_rest_name" />
+		<result property="seller_rest_address" column="seller_rest_address" />
+		<result property="seller_email" column="seller_email" />
+		<result property="seller_mobilenum" column="seller_mobilenum" />
+		<result property="seller_telnum" column="seller_telnum" />
+		<result property="seller_verification" column="seller_verification" />
+	</resultMap>
+
+	<!-- 공통으로 사용할 select 절 정의 -->
+	<sql id="select-all">
+		SELECT * FROM seller_table
+	</sql>
+	
+	<!-- 공통으로 사용할 where-seller_id 절 정의 -->
+	<sql id="where-seller_id">
+		WHERE seller_id = #seller_id#
+	</sql>
+
+	<!-- select 쿼리문 정의 -->
+	<select id="listSeller" resultMap="sellerRes" parameterClass="sellerDTO">
+		<include refid="select-all" />
+		ORDER BY seller_reg_date DESC
+	</select>
+	
+	<select id="getSellerCount" resultClass="int">
+		SELECT COUNT(*) FROM seller_table
+	</select>
+	
+	<select id="getSellerId" resultMap="sellerRes" parameterClass="sellerDTO">
+		<include refid="select-all" />
+		<include refid="where-seller_id" />
+	</select>
+
+	<select id="getSellerPw" resultMap="sellerRes">
+		<include refid="select-all" />
+		<include refid="where-seller_id" />
+		AND seller_pw = #seller_pw#
+	</select>	
+
+	<!-- insert 쿼리문 정의 -->
+	<insert id="insertSeller" parameterClass="sellerDTO">
+		INSERT INTO seller_table
+			(user_seq,
+			seller_id,
+			seller_pw,
+			seller_name,
+			seller_reg_date,
+			seller_rest_name,
+			seller_rest_address,
+			seller_email,
+			seller_mobilenum,
+			seller_telnum,
+			seller_verification
+			)
+		VALUES (user_seq.nextval,
+			#seller_id#,
+			#seller_pw#,
+			#seller_name#,
+			#seller_reg_date#,
+			#seller_rest_name#,
+			#seller_rest_address#,
+			#seller_email#,
+			#seller_mobilenum#,
+			#seller_telnum#,
+			#seller_verification#
+			)
+	</insert>
+
+	<!-- update 쿼리문 정의 -->
+	<update id="updateSeller" parameterClass="sellerDTO">
+		UPDATE seller_table
+		SET
+			seller_pw = #seller_pw#,
+			seller_rest_name = #seller_rest_name#,
+			seller_rest_address = #seller_rest_address#,
+			seller_email = #seller_email#,
+			seller_mobilenum = #seller_mobilenum#,
+			seller_telnum = #seller_telnum#
+		<include refid="where-seller_id" />
+	</update>
+	
+	<!-- seller_verification 업데이트 -->
+	<update id="updateVerification" parameterClass="sellerDTO">
+		UPDATE seller_table
+		SET seller_verification = #seller_verification#
+		<include refid="where-seller_id"	/>
+	</update>
+
+	<!-- delete 쿼리문 정의 -->
+	<delete id="deleteSeller" parameterClass="sellerDTO">
+		DELETE FROM seller_table
+		<include refid="where-seller_id" />
+	</delete>
+
+</sqlMap>

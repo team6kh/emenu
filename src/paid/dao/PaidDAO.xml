@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC '-//ibatis.apache.org//DTD Sql Map 2.0//EN' 'http://ibatis.apache.org/dtd/sql-map-2.dtd'>
+
+<sqlMap namespace="Paid">
+
+	<typeAlias alias="paidDTO" type="paid.dto.PaidDTO"/>
+	<typeAlias alias="menuDTO" type="paid.dto.MenuDTO"/>
+	<typeAlias alias="searchConditionDTO" type="paid.dto.SearchConditionDTO"/>
+      
+    <resultMap class="paidDTO" id="paidRes">
+		<result property="paid_num" column="paid_num" />
+		<result property="paid_rest_num" column="paid_rest_num" />
+		<result property="paid_rest_subject" column="paid_rest_subject" />
+		<result property="paid_restopt_num" column="paid_restopt_num" />
+		<result property="paid_restopt_subject" column="paid_restopt_subject" />
+		<result property="paid_restopt_priceplus" column="paid_restopt_priceplus" />
+		<result property="paid_restopt_destFile1" column="paid_restopt_destFile1" />
+		<result property="paid_cpn" column="paid_cpn" />
+		<result property="paid_cpn_used" column="paid_cpn_used" />
+		<result property="session_id" column="session_id" />
+		<result property="paid_reg_date" column="paid_reg_date" />
+	</resultMap>
+      
+    <resultMap class="couponDTO" id="couponRes">
+		<result property="cpn_num" column="cpn_num" />
+	</resultMap>
+      
+	<resultMap class="menuDTO" id="menuRes">	     
+		<result property="paid_restopt_subject" column="paid_restopt_subject"/>
+		<result property="paid_sales_volume" column="paid_sales_volume"/>
+		<result property="paid_sales_price" column="paid_sales_price"/>
+	</resultMap>      
+
+	<!-- 공통정의 -->
+	<sql id="fromRPBoard">
+		FROM rest_board r, paid_board p
+	</sql>
+	
+	<sql id="whereRest">
+    	WHERE rest_writer_id = #session_id# AND rest_num = paid_rest_num
+    </sql>
+    
+    <sql id="paidDate">
+        (paid_reg_date
+        	BETWEEN TO_DATE(#startDate#, 'yyyy-MM-dd')
+        	AND TO_DATE(#endDate#, 'yyyy-MM-dd') + 0.99999) 
+    </sql>    
+    
+    <!-- select -->
+    <!-- 레스토랑 테이블에서 판매자 아이디로 레스토랑 코드 값을 찾아서, 
+    결제내역 테이블에서 동일한 레스토랑 코드 값을 가진 결제내역들을 추출   -->
+    <select id="selectPaidList" resultMap="paidRes" parameterClass="searchConditionDTO">
+        SELECT *
+        <include refid="fromRPBoard"/> 
+        <include refid="whereRest"/> AND <include refid="paidDate"/>
+        ORDER BY paid_reg_date DESC  	
+    </select>
+    
+    <!-- 판매자의 레스토랑에서 일정 기간 동안 가장 많이 팔린 메뉴 5가지와 그 메뉴들의 매출금 합을 추출 -->
+   	<select id="selectHotMenu" resultMap="menuRes" parameterClass="searchConditionDTO">          
+    	SELECT	 paid_restopt_subject, paid_sales_volume, paid_sales_price, rownum
+    	FROM
+  				(SELECT 
+							paid_restopt_subject, 
+							COUNT(*) AS paid_sales_volume, 
+							SUM(paid_restopt_priceplus) AS paid_sales_price
+  										
+   				FROM 		paid_board 	
+   				WHERE 		paid_rest_num = #rest_num# AND <include refid="paidDate"/> 
+   				GROUP BY	paid_restopt_subject
+   				ORDER BY	paid_sales_volume DESC) 
+   				
+		WHERE  rownum <![CDATA[>=]]> 1 AND rownum <![CDATA[<=]]> 5
+   	</select>
+   
+	<!-- 쿠폰 사용 요청(PAID_BOARD에서 PAID_CPN_USED = 1 인 레코드) 내역 추출 -->
+	<select id="selectRequestedCpn" resultMap="paidRes" parameterClass="searchConditionDTO">
+   		SELECT *
+   		<include refid="fromRPBoard"/>
+   		<include refid="whereRest"/> AND p.paid_cpn_used = 1 
+   		ORDER BY paid_reg_date
+	</select>
+
+	<select id="selectPaidLastNum" resultClass="paidDTO" parameterClass="int">
+		SELECT MAX(paid_num) AS paid_num FROM paid_board
+	</select>
+
+	<select id="selectPaidCount" resultClass="int">
+		SELECT COUNT(*) FROM paid_board
+	</select>
+	
+	<select id="selectPaidNow" resultMap="paidRes" parameterClass="paidDTO">
+		SELECT * FROM paid_board WHERE paid_num > #paid_num#
+	</select>
+	
+	<select id="selectMyCpn" resultMap="paidRes" parameterClass="java.lang.String">
+		SELECT * FROM paid_board WHERE session_id = #session_id# ORDER BY paid_num DESC
+	</select>
+	
+	<select id="selectMyDate" resultMap="paidRes" parameterClass="searchConditionDTO">
+		SELECT * FROM paid_board 
+		WHERE session_id = #session_id# 
+		AND (paid_reg_date
+			BETWEEN TO_DATE(#startDate#, 'yyyy-MM-dd')
+			AND TO_DATE(#endDate#, 'yyyy-MM-dd') + 0.99999)
+		ORDER BY paid_num DESC
+	</select>   
+   
+	<!-- insert -->	
+	<insert id="insertPaid" parameterClass="paidDTO">
+		INSERT INTO paid_board (paid_num, paid_rest_num, paid_rest_subject, paid_restopt_num, paid_restopt_subject, paid_restopt_priceplus, paid_restopt_destFile1, paid_cpn, paid_cpn_used, session_id, paid_reg_date)
+		VALUES (paid_seq_num.NEXTVAL, #paid_rest_num#, #paid_rest_subject#, #paid_restopt_num#, #paid_restopt_subject#, #paid_restopt_priceplus#, #paid_restopt_destFile1#, #paid_cpn#, #paid_cpn_used#, #session_id#, #paid_reg_date#)
+	</insert>   
+   
+	<!-- update -->
+	
+	<!-- 판매자의 마이페이지에서 쿠폰 승인 버튼을 클릭했을 때 동작하는 쿼리문 : paid_cpn_used의 값을 2로 업데이트-->
+	<update id="updateResponseCpn" parameterClass="int">
+    	UPDATE paid_board
+        SET paid_cpn_used = 2    
+        WHERE paid_num = #paid_num#
+    </update>
+    
+    <update id="updateRequestCpn" parameterClass="int">
+		UPDATE paid_board
+		SET paid_cpn_used = 1
+		WHERE paid_num = #paid_num#
+	</update>    
+    
+</sqlMap>

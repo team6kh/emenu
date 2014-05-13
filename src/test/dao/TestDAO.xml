@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC '-//ibatis.apache.org//DTD Sql Map 2.0//EN' 'http://ibatis.apache.org/dtd/sql-map-2.dtd'>
+
+<sqlMap namespace="Test">
+
+	<typeAlias alias="testDTO" type="test.dto.TestDTO" />
+
+	<!-- 리절트 맵 정의 -->
+	<resultMap id="testRes" class="testDTO">
+		<result property="test_num" column="test_num" />
+		<result property="test_writer_name" column="test_writer_name" />
+		<result property="test_writer_pw" column="test_writer_pw" />
+		<result property="test_subject" column="test_subject" />
+		<result property="test_content" column="test_content" />
+		<result property="test_reg_date" column="test_reg_date" />
+		<result property="test_readcount" column="test_readcount" />
+	</resultMap>
+
+	<!-- 공통으로 사용할 select 절 정의 -->
+	<sql id="select-all">
+		SELECT * FROM test_board
+	</sql>
+
+	<!-- 공통으로 사용할 where 절 정의 -->
+	<sql id="where-test_num">
+		WHERE test_num = #test_num#
+	</sql>
+
+	<!-- select 쿼리문 정의 -->
+	<select id="selectAll" resultMap="testRes" parameterClass="int">
+		<include refid="select-all" />
+		ORDER BY test_num DESC
+	</select>
+
+	<select id="selectTestNum" resultMap="testRes" parameterClass="int">
+		<include refid="select-all" />
+		<include refid="where-test_num" />
+	</select>
+
+	<select id="selectMaxNum" resultClass="testDTO" parameterClass="int">
+		SELECT MAX(test_num) as test_num FROM test_board
+	</select>
+
+	<select id="selectTestWriterPw" resultMap="testRes">
+		<include refid="select-all" />
+		<include refid="where-test_num" />
+		AND test_writer_pw = #test_writer_pw#
+	</select>
+
+	<!-- insert 쿼리문 정의 -->
+	<insert id="insertTest" parameterClass="testDTO">
+		INSERT INTO test_board
+			(test_num,
+			test_writer_name,
+			test_writer_pw,
+			test_subject,
+			test_content,
+			test_reg_date
+			)
+		VALUES
+			(test_board_seq.nextval,
+			#test_writer_name#,
+			#test_writer_pw#,
+			#test_subject#,
+			#test_content#,
+			#test_reg_date#
+			)
+	</insert>
+
+	<!-- update 쿼리문 정의 -->
+	<update id="updateTest" parameterClass="testDTO">
+		UPDATE test_board SET
+			test_writer_pw = #test_writer_pw#,
+			test_subject = #test_subject#,
+			test_content = #test_content#
+		<include refid="where-test_num" />
+	</update>
+
+	<update id="updateReadcount" parameterClass="testDTO">
+		UPDATE test_board SET test_readcount = test_readcount + 1
+		<include refid="where-test_num" />
+	</update>
+
+	<!-- delete 쿼리문 정의 -->
+	<delete id="deleteTest" parameterClass="testDTO">
+		DELETE FROM test_board
+		<include refid="where-test_num" />
+	</delete>
+
+</sqlMap>

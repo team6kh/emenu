@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC '-//ibatis.apache.org//DTD Sql Map 2.0//EN' 'http://ibatis.apache.org/dtd/sql-map-2.dtd'>
+
+<sqlMap namespace="Cart">
+
+	<typeAlias alias="cartDTO" type="cart.dto.CartDTO" />
+
+	<resultMap id="cartRes" class="cartDTO">
+		<result property="cart_num" column="cart_num" />
+		<result property="cart_rest_num" column="cart_rest_num" />
+		<result property="cart_rest_subject" column="cart_rest_subject" />
+		<result property="cart_restopt_num" column="cart_restopt_num" />
+		<result property="cart_restopt_destFile1" column="cart_restopt_destFile1" />
+		<result property="cart_restopt_subject" column="cart_restopt_subject" />
+		<result property="cart_restopt_priceplus" column="cart_restopt_priceplus" />
+		<result property="session_id" column="session_id" />
+	</resultMap>
+
+	<!-- insert -->
+	<insert id="insertCart" parameterClass="cartDTO">
+		INSERT INTO cart_board
+			(cart_num,
+			cart_rest_num,
+			cart_rest_subject,
+			cart_restopt_num,
+			cart_restopt_destFile1,
+			cart_restopt_subject,
+			cart_restopt_priceplus,
+			session_id)
+		VALUES
+			(cart_seq_num.NEXTVAL,
+			#cart_rest_num#,
+			#cart_rest_subject#,
+			#cart_restopt_num#,
+			#cart_restopt_destFile1#,
+			#cart_restopt_subject#,
+			#cart_restopt_priceplus#,
+			#session_id#)
+	</insert>
+
+	<!-- select -->
+	<select id="selectCartAll" resultMap="cartRes" parameterClass="cartDTO">
+		SELECT * FROM cart_board
+		WHERE cart_rest_num = #cart_rest_num#
+		AND session_id = #session_id#
+	</select>
+
+	<select id="selectForPayment" resultMap="cartRes" parameterClass="cartDTO">
+		SELECT * FROM cart_board
+		WHERE cart_rest_num = #cart_rest_num#
+		AND session_id = #session_id#
+	</select>
+
+	<!-- delete -->
+	<delete id="deleteCartForPaid" parameterClass="cartDTO">
+		DELETE FROM cart_board
+		WHERE cart_rest_num = #cart_rest_num#
+		AND session_id = #session_id#
+	</delete>
+
+</sqlMap>

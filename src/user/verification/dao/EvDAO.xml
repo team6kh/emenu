@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC '-//ibatis.apache.org//DTD Sql Map 2.0//EN' 'http://ibatis.apache.org/dtd/sql-map-2.dtd'>
+
+<sqlMap namespace="Ev">
+
+	<typeAlias alias="evDTO" type="user.verification.dto.EvDTO" />
+
+	<!-- 구매자 리절트 맵 정의 -->
+	<resultMap id="evRes" class="evDTO">
+		<result property="ev_seq" column="ev_seq" />
+		<result property="ev_requested" column="ev_requested" />
+		<result property="ev_code" column="ev_code" />
+		<result property="ev_reg_date" column="ev_reg_date" />
+	</resultMap>
+
+	<!-- 공통으로 사용할 select 절 정의 -->
+	<sql id="select-all">
+		SELECT * FROM ev_table
+	</sql>
+	
+	<sql id="select-rownum1">
+		SELECT * FROM
+			(SELECT * FROM 
+				(SELECT * FROM ev_table
+				ORDER BY ev_reg_date DESC)
+			WHERE ROWNUM = 1)
+	</sql>
+
+	<!-- 공통으로 사용할 where 절 정의 -->
+	<sql id="where-ev_requested">
+		WHERE ev_requested = #ev_requested#
+	</sql>
+
+	<!-- select 쿼리문 정의 -->
+	<select id="listEv" resultMap="evRes" parameterClass="evDTO">
+		<include refid="select-all" />
+		ORDER BY ev_reg_date DESC
+	</select>
+
+	<select id="getEvRequested" resultMap="evRes" parameterClass="evDTO">
+		<include refid="select-all" />
+		<include refid="where-ev_requested" />
+	</select>
+
+	<select id="getLatestEvCode" resultMap="evRes">
+		<include refid="select-rownum1" />
+		WHERE ev_requested = #ev_requested#
+		AND ev_code = #ev_code#
+	</select>
+
+	<!-- insert 쿼리문 정의 -->
+	<insert id="insertEv" parameterClass="evDTO">
+		INSERT INTO ev_table ( ev_seq,
+							   ev_requested,
+							   ev_code,
+							   ev_reg_date
+							 )
+					  VALUES ( ev_table_seq.nextval,
+							   #ev_requested#,
+							   #ev_code#,
+							   #ev_reg_date#
+						     )
+	</insert>
+
+	<!-- update 쿼리문 정의 -->
+	<update id="updateEv" parameterClass="evDTO">
+		UPDATE ev_table SET ev_code = #ev_code#
+		<include refid="where-ev_requested" />
+	</update>
+
+	<!-- delete 쿼리문 정의 -->
+	<delete id="deleteEv" parameterClass="evDTO">
+		DELETE FROM ev_table
+		<include refid="where-ev_requested" />
+	</delete>
+
+</sqlMap>

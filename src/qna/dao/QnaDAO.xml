@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC '-//ibatis.apache.org//DTD Sql Map 2.0//EN' 'http://ibatis.apache.org/dtd/sql-map-2.dtd'>
+<sqlMap namespace="Qna">
+
+	<typeAlias alias="qnaDTO" type="qna.dto.QnaDTO" />
+
+	<!-- 리절트 맵 정의 -->
+	<resultMap id="qnaRes" class="qnaDTO">
+		<result property="qna_num" column="qna_num" />
+		<result property="qna_id" column="qna_id" />
+		<result property="qna_subject" column="qna_subject" />
+		<result property="qna_content" column="qna_content" />
+		<result property="qna_readcount" column="qna_readcount" />
+		<result property="qna_reg_date" column="qna_reg_date" />
+		<result property="qna_reply" column="qna_reply"/>
+	</resultMap>
+
+	<resultMap id="qnaRes2" class="qnaDTO">
+		<result property="qna_num" column="qna_num" />
+		<result property="qna_category" column="qna_category" />
+		<result property="qna_subject" column="qna_subject" />
+		<result property="qna_content" column="qna_content" />		
+		<result property="qna_readcount" column="qna_readcount" />
+		<result property="qna_reg_date" column="qna_reg_date" />
+		<result property="qna_id" column="qna_id"/>
+		<result property="qna_reply" column="qna_reply"/>
+	</resultMap>
+
+	<resultMap id="topQnaRes" class="qnaDTO">
+		<result property="qna_num" column="qna_num" />
+		<result property="qna_category" column="qna_category" />		
+		<result property="qna_subject" column="qna_subject" />
+		<result property="qna_content" column="qna_content" />
+		<result property="qna_reply" column="qna_reply"/>
+	</resultMap>
+
+	<select id="listQna" resultClass="qnaDTO" parameterClass="java.util.HashMap">
+		select 
+			qna_num,
+			qna_category,
+			qna_subject, 
+			qna_readcount, 
+			to_char(qna_reg_date, 'YYYY-MM-DD HH24:MI')	AS qna_reg_date,
+			qna_id,
+			qna_reply
+		from qna_board
+		where 1=1 
+		<isNotEmpty property="qna_category">
+			and qna_category = #qna_category#
+		</isNotEmpty>
+		<isNotEmpty property="searchText">
+			and (qna_subject like '%' || #searchText# || '%'
+			or qna_content like '%' || #searchText# || '%'
+			or qna_id like '%' || #searchText# || '%')
+		</isNotEmpty>
+		<isEqual property="qna_checkreply" compareValue="Y">
+			and qna_reply is null
+		</isEqual>
+		order by qna_num desc
+	</select>
+
+	<select id="listTopQna" resultClass="qnaDTO">
+		SELECT 
+			ROWNUM AS QNA_NUM, QNA_CONTENT, QNA_SUBJECT, QNA_CATEGORY, QNA_REPLY
+		FROM (
+			SELECT 
+			    QNA_NUM, QNA_CONTENT, QNA_SUBJECT, QNA_CATEGORY, QNA_REPLY
+			FROM QNA_BOARD
+			ORDER BY QNA_READCOUNT DESC
+		)
+		WHERE ROWNUM <![CDATA[ < ]]> 11
+	</select>
+
+	<select id="getQna" parameterClass="int" resultMap="qnaRes2">
+		select * from qna_board
+		where qna_num = #qna_num#	
+	</select>
+
+	<insert id="insertQna" parameterClass="qnaDTO">
+		insert into qna_board (qna_num, qna_subject, qna_content,qna_category, qna_reg_date, qna_id)
+		values (
+			(select nvl(max(qna_num) + 1, 1) from qna_board),
+			#qna_subject#,
+			#qna_content#,
+			#qna_category#,
+			sysdate,
+			#qna_id#		
+		)
+	</insert>
+
+	<update id="updateReadCount" parameterClass="int">
+		update qna_board
+		set qna_readcount = (select qna_readcount+1 from qna_board where qna_num = #qna_num#)
+		where qna_num = #qna_num#
+	</update>
+
+	<update id="updateQna" parameterClass="qnaDTO">
+		update qna_board
+		set qna_category = #qna_category#,
+			qna_subject = #qna_subject#,
+			qna_content = #qna_content#,
+			qna_reply = #qna_reply#		
+		where qna_num = #qna_num#
+	</update>
+
+	<delete id="deleteQna" parameterClass="qnaDTO">
+		delete qna_board where qna_num = #qna_num#
+	</delete>
+
+</sqlMap>
