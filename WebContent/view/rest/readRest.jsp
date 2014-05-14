@@ -123,7 +123,6 @@
 			geocodemarker.length = 0;
 		}
 
-		//var address = "대한민국 서울특별시 영등포구 당산로49길"; // rest_writer_address 변수(판매자 테이블의 주소 컬럼)
 		var address = document.getElementById("rest_writer_address").value;
 
 		geocoder.geocode({
@@ -143,9 +142,7 @@
 				alert("Geocode was not successful for the following reason: "
 						+ status);
 			}
-
 		});
-
 	}
 
 	function codeCoordinate(event) {
@@ -350,7 +347,7 @@
 				${resultClass.rest_writer_address} <br/>
 
 				<span class="glyphicon glyphicon-envelope"></span>
-				<a href="sendMail.action?rest_writer_email=${resultClass.rest_writer_email}&rest_num=${rest_num}&currentPage=${currentPage}" >${resultClass.rest_writer_email}</a> <br/>
+				<a href="sendMail.do?rest_writer_email=${resultClass.rest_writer_email}&rest_num=${rest_num}&currentPage=${currentPage}" >${resultClass.rest_writer_email}</a> <br/>
 
 				<span class="glyphicon glyphicon-print"></span>
 				<a href="javascript:printWindow()">프린트하기</a> <br/><br/>
