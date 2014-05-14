@@ -256,7 +256,7 @@
             <!-- 이미지 height를 맞추고 싶으면 style="height: 200px" 추가 -->
         </div>
         <!-- 슬라이드 메뉴 리스트 -->
-        <c:forEach var="list" items="${list}">
+        <c:forEach var="list" items="${list1}">
         <div class="da-slide">
             <h2><i>${list.restopt_subject}</i></h2>
             <p><i>${list.restopt_priceplus} 원</i></p>
@@ -287,10 +287,10 @@
 	    	<c:if test="${sessionScope.session_type!='buyer'}">
 	    		<h2><strong>메뉴 리스트</strong> <small>구매하시려면 판매자로 로그인해주세요.</small></h2>
 	    	</c:if>			
-			<input type="hidden" id="rest_num" name="rest_num" value=<s:property value="resultClass.rest_num" /> />
-			<input type="hidden" id="rest_subject" name="rest_subject" value=<s:property value="resultClass.rest_subject" /> />
+			<input type="hidden" id="rest_num" name="rest_num" value="${resultClass.rest_num}" />
+			<input type="hidden" id="rest_subject" name="rest_subject" value="${resultClass.rest_subject}" />
 			<input type="hidden" id="session_id" name="session_id" value="${sessionScope.session_id}" />
-			<input type="hidden" id="rest_writer_address" name="rest_writer_address" value=<s:property value="resultClass.rest_writer_address" /> />
+			<input type="hidden" id="rest_writer_address" name="rest_writer_address" value="${resultClass.rest_writer_address}" />
 
 			<!-- 글 작성자와 현재 로그인한 세션이 일치할 경우, 수정 및 삭제 버튼을 출력 시킴 -->
 			<c:if test="${sessionScope.session_id==resultClass.rest_writer_id}">
@@ -301,7 +301,7 @@
 			</c:if>	
 		</div>
 
-		<c:forEach var="list" items="${list}">
+		<c:forEach var="list" items="${list1}">
 		<form class="col-sm-4 col-md-4" id="cartForm" name="test">					
 	    	<div class="thumbnail">
 	    		<!-- 옵션 -->

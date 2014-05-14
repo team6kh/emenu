@@ -3,6 +3,7 @@
 <%-- <%@ page isELIgnored="false" %> --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,7 +44,7 @@
 
 			<c:forEach var="list" items="${list}">
 
-				<c:url var="url" value="readRest.action">
+				<c:url var="url" value="readRest.do">
 					<c:param name="rest_num" value="${list.rest_num}"/>
 					<c:param name="currentPage" value="${currentPage}"/>
 				</c:url>			
@@ -70,15 +71,15 @@
 
 			<div class="text-center">
 				<ul class="pagination pagination-sm">
-					<s:property value="pagingHtml" escape="false" />
+				<%-- 	<s:property value="pagingHtml" escape="false" /> --%>
+					${ pagingHtml}
 				</ul>
 			</div>
 			
 			
-			
 			<c:if test="${sessionScope.session_type=='seller' && permission==0}">
 				<div class="pull-right">
-					<a href="insertRestForm.action" class="btn btn-primary">글쓰기</a>
+					<a href="insertRestForm.do" class="btn btn-primary">글쓰기</a>
 				</div>
 			</c:if>
 
