@@ -30,31 +30,31 @@
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li class="dropdown">
-	              <a href="listRest.action?rest_localcategory=1&rest_typecategory=1&session_id=${sessionScope.session_id}" class="dropdown-toggle disabled" data-toggle="dropdown">지역별<b class="caret"></b></a>
+	              <a href="listRest.do?rest_localcategory=1&rest_typecategory=1" class="dropdown-toggle disabled" data-toggle="dropdown">지역별<b class="caret"></b></a>
 	              <ul class="dropdown-menu">
-	                <li><a href="listRest.action?rest_localcategory=11&rest_typecategory=0&session_id=${sessionScope.session_id}">서울특별시</a></li>
-	                <li><a href="listRest.action?rest_localcategory=12&rest_typecategory=0&session_id=${sessionScope.session_id}">경기/인천</a></li>
-	                <li><a href="listRest.action?rest_localcategory=13&rest_typecategory=0&session_id=${sessionScope.session_id}">부산/경남</a></li>
-	                <li><a href="listRest.action?rest_localcategory=14&rest_typecategory=0&session_id=${sessionScope.session_id}">대구/경북</a></li>
-	                <li><a href="listRest.action?rest_localcategory=15&rest_typecategory=0&session_id=${sessionScope.session_id}">대전/전북</a></li>
-	                <li><a href="listRest.action?rest_localcategory=16&rest_typecategory=0&session_id=${sessionScope.session_id}">광주/전남</a></li>
-	                <li><a href="listRest.action?rest_localcategory=17&rest_typecategory=0&session_id=${sessionScope.session_id}">그 외 지역</a></li>
+	                <li><a href="listRest.do?rest_localcategory=11&rest_typecategory=0">서울특별시</a></li>
+	                <li><a href="listRest.do?rest_localcategory=12&rest_typecategory=0">경기/인천</a></li>
+	                <li><a href="listRest.do?rest_localcategory=13&rest_typecategory=0">부산/경남</a></li>
+	                <li><a href="listRest.do?rest_localcategory=14&rest_typecategory=0">대구/경북</a></li>
+	                <li><a href="listRest.do?rest_localcategory=15&rest_typecategory=0">대전/전북</a></li>
+	                <li><a href="listRest.do?rest_localcategory=16&rest_typecategory=0">광주/전남</a></li>
+	                <li><a href="listRest.do?rest_localcategory=17&rest_typecategory=0">그 외 지역</a></li>
 	              </ul>
 	            </li>
 	            <li class="dropdown">
-	              <a href="listRest.action?rest_localcategory=2&rest_typecategory=2&session_id=${sessionScope.session_id}" class="dropdown-toggle disabled" data-toggle="dropdown">종류별<b class="caret"></b></a>
+	              <a href="listRest.do?rest_localcategory=2&rest_typecategory=2" class="dropdown-toggle disabled" data-toggle="dropdown">종류별<b class="caret"></b></a>
 	              <ul class="dropdown-menu">
-	                <li><a href="listRest.action?rest_localcategory=0&rest_typecategory=21&session_id=${sessionScope.session_id}">한식</a></li>
-	                <li><a href="listRest.action?rest_localcategory=0&rest_typecategory=22&session_id=${sessionScope.session_id}">양식</a></li>
-	                <li><a href="listRest.action?rest_localcategory=0&rest_typecategory=23&session_id=${sessionScope.session_id}">중식</a></li>
-	                <li><a href="listRest.action?rest_localcategory=0&rest_typecategory=24&session_id=${sessionScope.session_id}">일식</a></li>
-	                <li><a href="listRest.action?rest_localcategory=0&rest_typecategory=25&session_id=${sessionScope.session_id}">기타</a></li>
+	                <li><a href="listRest.do?rest_localcategory=0&rest_typecategory=21">한식</a></li>
+	                <li><a href="listRest.do?rest_localcategory=0&rest_typecategory=22">양식</a></li>
+	                <li><a href="listRest.do?rest_localcategory=0&rest_typecategory=23">중식</a></li>
+	                <li><a href="listRest.do?rest_localcategory=0&rest_typecategory=24">일식</a></li>
+	                <li><a href="listRest.do?rest_localcategory=0&rest_typecategory=25">기타</a></li>
 	              </ul>
 	            </li>
-				<!-- <li><a href="listReview.action">후기</a></li>  -->
-				<li><a href="listRecipe.action">레시피</a></li>
-				<li><a href="listNotice.action">공지사항</a></li>
-				<li><a href="listQna.action">문의하기</a></li>
+				<!-- <li><a href="listReview.do">후기</a></li>  -->
+				<li><a href="listRecipe.do">레시피</a></li>
+				<li><a href="listNotice.do">공지사항</a></li>
+				<li><a href="listQna.do">문의하기</a></li>
 				<!-- 테스트 메뉴 삭제하였습니다. -->
 			</ul>
 			<c:choose>
