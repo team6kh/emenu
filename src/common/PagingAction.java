@@ -15,7 +15,9 @@ public class PagingAction {
     private String session_id; //세션
     private int rest_num; //글의 번호
     private int ccp; // 리뷰의 페이지 번호
-    private StringBuffer pagingHtml;    
+    private String rest_localcategory;//지역카테고리
+    private String rest_typecategory;//종류카테고리
+    private StringBuffer pagingHtml; //결과반환
 
     // 생성자1: String actionName 파라미터 추가
     public PagingAction(String actionName, int currentPage, int totalCount, int blockCount, int blockPage) {
@@ -233,7 +235,81 @@ public class PagingAction {
 			pagingHtml.append("</a></li>");
 		}
 	}
-	// .생성자3    
+	// .생성자3 
+    
+    
+ // 생성자4: 카테고리 페이지
+    public PagingAction(String actionName, int currentPage, int totalCount, int blockCount, int blockPage, String rest_localcategory, String rest_typecategory) {
+		
+    	this.actionName = actionName;
+		this.blockCount = blockCount;
+		this.blockPage = blockPage;
+		this.currentPage = currentPage;
+		this.totalCount = totalCount;
+		this.rest_localcategory = rest_localcategory;
+		this.rest_typecategory = rest_typecategory;
+
+		// 전체 페이지 수
+		totalPage = (int) Math.ceil((double) totalCount / blockCount);
+		if (totalPage == 0) {
+			totalPage = 1;
+		}
+
+		// 현재 페이지가 전체 페이지 수보다 크면 전체 페이지 수로 설정
+		if (currentPage > totalPage) {
+			currentPage = totalPage;
+		}
+
+		// 현재 페이지의 처음과 마지막 글의 번호 가져오기
+		startCount = (currentPage - 1) * blockCount;
+		endCount = startCount + blockCount - 1;
+
+		// 시작 페이지와 마지막 페이지 값 구하기
+		startPage = (int) ((currentPage - 1) / blockPage) * blockPage + 1;
+		endPage = startPage + blockPage - 1;
+
+		// 마지막 페이지가 전체 페이지 수보다 크면 전체 페이지 수로 설정
+		if (endPage > totalPage) {
+			endPage = totalPage;
+		}
+
+		// 이전 block 페이지
+		pagingHtml = new StringBuffer();
+		if (currentPage > blockPage) {
+			pagingHtml.append("<li><a href=" + actionName
+						+ ".do?rest_typecategory="+rest_typecategory+"&rest_localcategory="+rest_localcategory+"&currentPage=" + (startPage - 1) + ">");
+			pagingHtml.append("이전");
+			pagingHtml.append("</a></li>");
+		}
+
+		// 페이지 번호. 현재 페이지는 파란색으로 강조하고 링크를 제거
+		for (int i = startPage; i <= endPage; i++) {
+			if (i > totalPage) {
+				break;
+			}
+			if (i == currentPage) {
+				pagingHtml.append("<li class='active'><a>");
+				pagingHtml.append(i);
+				pagingHtml.append("</a></li>");
+			} else {
+				pagingHtml.append("<li><a href=" + actionName
+						+ ".do?rest_typecategory="+rest_typecategory+"&rest_localcategory="+rest_localcategory+"&currentPage=");
+				pagingHtml.append(i);
+				pagingHtml.append(">");
+				pagingHtml.append(i);
+				pagingHtml.append("</a><li>");
+			}
+		}
+
+		// 다음 block 페이지
+		if (totalPage - startPage >= blockPage) {
+			pagingHtml.append("<li><a href=" + actionName
+					+ ".do?rest_typecategory="+rest_typecategory+"&rest_localcategory="+rest_localcategory+"&currentPage=" + (endPage + 1) + ">");
+			pagingHtml.append("다음");
+			pagingHtml.append("</a></li>");
+		}
+	}
+    // .생성자4
 
     public String getActionName() {
         return actionName;

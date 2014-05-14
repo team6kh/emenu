@@ -95,7 +95,7 @@ public class ListRest {
 		}else{
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-		page = new PagingAction(actionName, currentPage, totalCount, blockCount, blockPage); // pagingAction 객체 생성.
+		page = new PagingAction(actionName, currentPage, totalCount, blockCount, blockPage, rest_localcategory, rest_typecategory); // pagingAction 객체 생성.
 		pagingHtml = page.getPagingHtml().toString(); // 페이지 HTML 생성.
 
 		int lastCount = totalCount;
