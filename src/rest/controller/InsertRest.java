@@ -30,8 +30,7 @@ import common.Constants;
 public class InsertRest {
 	private RestDTO paramClass = new RestDTO();
 	private RestDTO resultClass = new RestDTO();
-	private RestOptDTO paramClass1 = new RestOptDTO();
-	private RestOptDTO resultClass1 = new RestOptDTO();
+	private RestOptDTO paramClass1 = new RestOptDTO(); //private RestOptDTO resultClass1 = new RestOptDTO();
 	private SellerDTO sellerDTO = new SellerDTO();
 	
 	private int seq_num;
@@ -582,7 +581,6 @@ public class InsertRest {
 			
 			File rest_destFile2 = new File(fileUploadPath2+saveName1); //이과정을 거치면 saveName의 복사 대상이 생김
 			contentfile.transferTo(rest_destFile2);  // 위에서 만든 복사대상에 복사본을 만듬. (이걸로 복사 끝)
-			
 
 			//글넘버
 			paramClass.setRest_num(seq_num);
@@ -599,6 +597,6 @@ public class InsertRest {
 			sqlMapper.update("Rest.updateFile", paramClass);
 		}
 		
-		return "/view/rest/listRest.jsp"; //이전버전 리다이렉트 액션썻음
+		return "redirect:/listRest.do"; //이전버전 리다이렉트 액션썻음
 	}
 }
