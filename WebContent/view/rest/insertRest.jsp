@@ -281,7 +281,7 @@
 						<tr>
 							<td align="right" colspan="2">
 								<input name="submit" type="submit" value="상품 등록" disabled/>
-								<input name="cancel" type="button" value="상품 등록 취소" onClick="javascript:location.href='insertCancelRestForm.action'" />
+								<input name="cancel" type="button" value="상품 등록 취소" onClick="javascript:location.href='/emenu/listRest.do?rest_localcategory=1&rest_typecategory=1'" />
 							</td>
 						</tr>
 
