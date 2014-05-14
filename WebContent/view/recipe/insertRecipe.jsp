@@ -44,21 +44,21 @@
 		<div class="col-md-12">
 		
 			<s:if test="resultClass == NULL && #session.session_id == null">
-			<form name="inputWarning" action="insertRecipe.action" method="post" enctype="multipart/form-data"  onSubmit="return submitContents(this);">
+			<form name="inputWarning" action="insertRecipe.do" method="post" enctype="multipart/form-data"  onSubmit="return submitContents(this);">
 			</s:if>
 			
 			<s:elseif test="resultClass == NULL && #session.session_id != null">
-			<form name="inputWarning" action="insertRecipe.action" method="post" enctype="multipart/form-data"  onSubmit="return submitContents(this);">
+			<form name="inputWarning" action="insertRecipe.do" method="post" enctype="multipart/form-data"  onSubmit="return submitContents(this);">
 			</s:elseif>
 			
 			<s:elseif test="resultClass != NULL && #session.session_id == null">
-			<form name="inputWarning" action="updateRecipe.action" method="post" enctype="multipart/form-data"  onSubmit="return submitContents(this);">
+			<form name="inputWarning" action="updateRecipe.do" method="post" enctype="multipart/form-data"  onSubmit="return submitContents(this);">
 				<s:hidden name="recipe_num" value="%{resultClass.recipe_num}" />
 				<s:hidden name="currentPage" value="%{currentPage}" />
 			</s:elseif>
 			
 			<s:elseif test="resultClass != NULL && session.session_id != null">
-		    <form name="inputWarning" action="updateRecipe.action" method="post" enctype="multipart/form-data"  onSubmit="return submitContents(this);">
+		    <form name="inputWarning" action="updateRecipe.do" method="post" enctype="multipart/form-data"  onSubmit="return submitContents(this);">
 				<s:hidden name="recipe_num" value="%{resultClass.recipe_num}" />
 				<s:hidden name="currentPage" value="%{currentPage}" />
 			</s:elseif>
@@ -134,7 +134,7 @@
 					<tr>
 						<td colspan="4" align="right">		
 							<input class="btn btn-default" type="reset" value="다시작성">	
-							<input class="btn btn-default" name="list" type="button" value="목록보기" OnClick="javascript:location.href='listRecipe.action?currentPage=<s:property value="currentPage" />'">				    
+							<input class="btn btn-default" name="list" type="button" value="목록보기" OnClick="javascript:location.href='listRecipe.do?currentPage=<s:property value="currentPage" />'">				    
 						    <input class="btn btn-primary" name="submit" type="submit" value="등록"> 
 						</td>
 					</tr>

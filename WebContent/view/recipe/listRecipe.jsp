@@ -44,23 +44,23 @@
 		//if(click==false){
 
 		//click = true;
-		document.location.href = 'readcountRecipeDesc.action';
+		document.location.href = 'readcountRecipeDesc.do';
 		//}if(click==true){
 		//	click = false;
-		//	window.location.href='readcountRecipeAsc.action';
+		//	window.location.href='readcountRecipeAsc.do';
 		//}
 	}
 
 	function recipe_timearray() {
-		document.location.href = 'timeRecipeDesc.action';
+		document.location.href = 'timeRecipeDesc.do';
 	}
 
 	function recipe_pricearray() {
-		document.location.href = 'priceRecipeDesc.action';
+		document.location.href = 'priceRecipeDesc.do';
 	}
 
 	function recipe_recommendarray() {
-		document.location.href = 'recommendRecipeDesc.action';
+		document.location.href = 'recommendRecipeDesc.do';
 	}
 </SCRIPT>
 
@@ -105,7 +105,7 @@
 				</tr>
 
 				<s:iterator value="list" status="stat">
-					<s:url id="viewURL" action="readRecipe">
+					<s:url id="viewURL" action="readRecipe.do">
 						<s:param name="recipe_num">
 							<s:property value="recipe_num" />
 						</s:param>
@@ -166,11 +166,11 @@
 				<!-- /.검색[선택] -->
 				<!-- 내가 쓴 글 -->
 				<s:if test="#session.session_id != null">
-					<input name="mylist" type="button" class="btn btn-default" value="마이 레시피" onClick="javascript:location.href='listMyRecipe.action?session_id=<s:property value="#session.session_id" />';">
+					<input name="mylist" type="button" class="btn btn-default" value="마이 레시피" onClick="javascript:location.href='listMyRecipe.do?session_id=<s:property value="#session.session_id" />';">
 				</s:if>
 				<!-- /.내가 쓴 글 -->
-				<input type="button" class="btn btn-primary" value="글쓰기" onClick="javascript:location.href='insertRecipeForm.action?currentPage=<s:property value="currentPage" />';">
-				<!-- <input type="button" value="새로고침" onClick="javascript:location.href='listRecipe.action?currentPage=<s:property value="currentPage" />';">  -->
+				<input type="button" class="btn btn-primary" value="글쓰기" onClick="javascript:location.href='insertRecipeForm.do?currentPage=<s:property value="currentPage" />';">
+				<!-- <input type="button" value="새로고침" onClick="javascript:location.href='listRecipe.do?currentPage=<s:property value="currentPage" />';">  -->
 			</div>
 		</div>
 		<!-- /.버튼 -->
@@ -179,7 +179,7 @@
 		<br />
 
 		<!-- 상세검색 폼 -->
-		<form name="recipe_search" action="searchRecipe.action" enctype="multipart/form-data">
+		<form name="recipe_search" action="searchRecipe.do" enctype="multipart/form-data">
 
 			<!-- 상세검색 시에 나타난다. -->
 			<div id="detailsearch" style="display: none">

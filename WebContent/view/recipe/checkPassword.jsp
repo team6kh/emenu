@@ -31,7 +31,7 @@
 
 		<h3>비밀번호 확인</h3>
 
-		<form action="checkRecipePwAction.action" method="post">
+		<form action="checkRecipePwAction.do" method="post">
 			<s:hidden name="recipe_num" value="%{recipe_num}" />
 			<s:hidden name="currentPage" value="%{currentPage}" />
 

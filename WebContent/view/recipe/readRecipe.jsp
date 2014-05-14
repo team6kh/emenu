@@ -42,7 +42,7 @@
 			<!-- 로그인 후 보이는 추천 버튼 -->
 			<s:if test="#session.session_id != null">
 			<div class="pull-right">
-				<button type="button" class="btn btn-primary" name="list" onClick="javascript:document.getElementById('isRecommend').contentWindow.location.href='recommendRecipe.action?currentPage=<s:property value="currentPage" />&recipe_num=<s:property value="recipe_num" />&session_id=<s:property value="#session.session_id"/>'">
+				<button type="button" class="btn btn-primary" name="list" onClick="javascript:document.getElementById('isRecommend').contentWindow.location.href='recommendRecipe.do?currentPage=<s:property value="currentPage" />&recipe_num=<s:property value="recipe_num" />&session_id=<s:property value="#session.session_id"/>'">
 					<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp;추천
 				</button>
 				<br />
@@ -133,33 +133,33 @@
 				
 				<tr>
 					<td class="text-right" colspan="2">
-						<s:url id="updateRecipeURL" action="updateRecipeForm">
+						<s:url id="updateRecipeURL" action="updateRecipeForm.do">
 							<s:param name="recipe_num">
 								<s:property value="recipe_num" />
 							</s:param>
 						</s:url>
-						<s:url id="deleteRecipeURL" action="deleteRecipe">
+						<s:url id="deleteRecipeURL" action="deleteRecipe.do">
 							<s:param name="recipe_num">
 								<s:property value="recipe_num" />
 							</s:param>
 						</s:url>
 						<s:if test="resultClass.recipe_memberwriter == NULL">
 							<input class="btn btn-default" name="list" type="button" value="수정"
-								onClick="javascript:open_win_noresizable('checkRecipePwForm.action?recipe_num=<s:property value="resultClass.recipe_num" />&currentPage=<s:property value="currentPage" />','update')">
+								onClick="javascript:open_win_noresizable('checkRecipePwForm.do?recipe_num=<s:property value="resultClass.recipe_num" />&currentPage=<s:property value="currentPage" />','update')">
 							<input class="btn btn-default" name="list" type="button" value="삭제"
-								onClick="javascript:open_win_noresizable('checkRecipePwForm.action?recipe_num=<s:property value="resultClass.recipe_num" />&currentPage=<s:property value="currentPage" />','delete')">
+								onClick="javascript:open_win_noresizable('checkRecipePwForm.do?recipe_num=<s:property value="resultClass.recipe_num" />&currentPage=<s:property value="currentPage" />','delete')">
 						</s:if>
 						<s:elseif test="resultClass.recipe_memberwriter != NULL && resultClass.recipe_memberwriter == #session.session_id">
 							<input class="btn btn-default" name="list" type="button" value="수정"
-								onClick="javascript:open_win_noresizable('checkRecipePwForm.action?recipe_num=<s:property value="resultClass.recipe_num" />&currentPage=<s:property value="currentPage" />','update')">
+								onClick="javascript:open_win_noresizable('checkRecipePwForm.do?recipe_num=<s:property value="resultClass.recipe_num" />&currentPage=<s:property value="currentPage" />','update')">
 							<input class="btn btn-default" name="list" type="button" value="삭제"
-								onClick="javascript:open_win_noresizable('checkRecipePwForm.action?recipe_num=<s:property value="resultClass.recipe_num" />&currentPage=<s:property value="currentPage" />','delete')">
+								onClick="javascript:open_win_noresizable('checkRecipePwForm.do?recipe_num=<s:property value="resultClass.recipe_num" />&currentPage=<s:property value="currentPage" />','delete')">
 						</s:elseif>
 							<input class="btn btn-default" name="list" type="button" value="전체 목록"
-								onClick="javascript:location.href='listRecipe.action?currentPage=<s:property value="currentPage" />'">
+								onClick="javascript:location.href='listRecipe.do?currentPage=<s:property value="currentPage" />'">
 						<s:if test="#session.session_id != null">
 						    <input class="btn btn-default" name="list" type="button" value="마이레시피 목록"
-								onClick="javascript:location.href='listMyRecipe.action?session_id=<s:property value="#session.session_id" />'">
+								onClick="javascript:location.href='listMyRecipe.do?session_id=<s:property value="#session.session_id" />'">
 								</s:if>
 					</td>
 				</tr>
