@@ -61,8 +61,8 @@
 				<%-- 로그인 전 --%>
 				<c:when test="${empty session_id}">
 					<form class="navbar-form navbar-right">						
-						<a href="registrationForm.action" class="btn btn-default">회원가입</a>
-						<button type="button" class="btn btn-primary" onclick="goLoginForm(this.form)">로그인</button>
+						<a href="/emenu/user/registrationForm.do" class="btn btn-default">회원가입</a>
+						<button type="button" class="btn btn-primary" onclick="loginForm(this.form)">로그인</button>
 					</form>					
 				</c:when>
 				<%-- 로그인 후 --%>
@@ -80,7 +80,7 @@
 
 <script>
 	// 왜 스크립트로 해야지 로그인 폼으로 넘어가는지 모르겠음...
-	function goLoginForm(form) {
+	function loginForm(form) {
 		form.action = "/emenu/user/loginForm.do";
 		form.submit();
 	}

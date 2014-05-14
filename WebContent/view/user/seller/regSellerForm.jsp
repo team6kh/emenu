@@ -9,16 +9,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="huks">
-<link rel="shortcut icon" href="assets/ico/jogiyo.png">
+<link rel="shortcut icon" href="/emenu/assets/ico/jogiyo.png">
 
 <title>JOGIYO</title>
 
 <!-- Bootstrap core CSS -->
-<link href="dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="/emenu/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="view/jogiyo.css" rel="stylesheet">
-<link href="view/user/registration/registration.css" rel="stylesheet">
+<link href="/emenu/view/jogiyo.css" rel="stylesheet">
+<link href="/emenu/view/user/registration/registration.css" rel="stylesheet">
 
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&key="></script>
 
@@ -27,11 +27,11 @@
 	function selectRegType(){
 	    var option = document.getElementById("reg_type").value;
 	    if(option == "buyer"){
-	    	url = "registrationForm.action?reg_type=" + option;
+	    	url = "/emenu/user/registrationForm.do?reg_type=" + option;
 	    	document.location.href = url;
 	    }
 	    if(option == "seller"){
-	    	url = "registrationForm.action?reg_type=" + option;
+	    	url = "/emenu/user/registrationForm.do?reg_type=" + option;
 			document.location.href = url;
 	    }
 	}
@@ -56,8 +56,7 @@
 				//$('#btnSubmit').prop('disabled', true);
 				return false;
 			} else if (hanchk) {
-				var reg_type = document.getElementById("reg_type").value;
-				url = "checkDup.action?reg_id="+userinput.seller_id.value+"&reg_type="+reg_type;
+				url = "/emenu/user/checkDup.do?reg_id="+userinput.seller_id.value;
 				document.getElementById('checkDup').contentWindow.location.href = url;
 			}
 			regForm.feedbackRegId.value = "1";
@@ -165,12 +164,12 @@
 
 	<!-- header -->
 	<%@ include file="/view/common/header.jsp"%>
-	<!-- end of header -->
+	<!-- /.header -->
 
 	<!-- container -->
 	<div class="container">
 
-		<form class="form-signup" method="post" action="registration.action" name="regForm">
+		<form class="form-signup" name="regForm" method="post" action="/emenu/user/registrationFormPro.do">
 			<input type="hidden" name="feedbackRegId" value="0" />
         	<h2 class="form-signup-heading">계정을 생성합니다.</h2>			
 			<div class="form-group">

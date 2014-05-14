@@ -9,27 +9,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="huks">
-<link rel="shortcut icon" href="assets/ico/jogiyo.png">
+<link rel="shortcut icon" href="/emenu/assets/ico/jogiyo.png">
 
 <title>JOGIYO</title>
 
 <!-- Bootstrap core CSS -->
-<link href="dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="/emenu/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="view/jogiyo.css" rel="stylesheet">
-<link href="view/user/registration/registration.css" rel="stylesheet">
+<link href="/emenu/view/jogiyo.css" rel="stylesheet">
+<link href="/emenu/view/user/registration/registration.css" rel="stylesheet">
 
 <script type="text/javascript">
 	// 선택하는 가입유형에 따라 다른 폼을 로딩합니다.
 	function selectRegType(){
 	    var option = document.getElementById("reg_type").value;
 	    if(option == "buyer"){
-	    	url = "registrationForm.action?reg_type=" + option;
+	    	url = "/emenu/user/registrationForm.do?reg_type=" + option;
 	    	document.location.href = url;
 	    }
 	    if(option == "seller"){
-	    	url = "registrationForm.action?reg_type=" + option;
+	    	url = "/emenu/user/registrationForm.do?reg_type=" + option;
 			document.location.href = url;
 	    }
 	}
@@ -54,9 +54,8 @@
 				//$('#btnSubmit').prop('disabled', true);
 				//okSubmit();
 				return false;
-			} else if (hanchk) {
-				var reg_type = document.getElementById("reg_type").value;
-				url = "checkDup.action?reg_id="+userinput.buyer_id.value+"&reg_type="+reg_type;
+			} else if (hanchk) {				
+				url = "/emenu/user/checkDup.do?reg_id="+userinput.buyer_id.value;
 				document.getElementById('checkDup').contentWindow.location.href = url;
 			}
 			regForm.feedbackRegId.value = "1";
@@ -140,17 +139,17 @@
 
 	<!-- header -->
 	<%@ include file="/view/common/header.jsp"%>
-	<!-- end of header -->
+	<!-- /.header -->
 
 	<!-- container -->
 	<div class="container">
 
-		<form class="form-signup" name="regForm" method="post" action="registration.action">
+		<form class="form-signup" name="regForm" method="post" action="/emenu/user/registrationFormPro.do">
 		    <!-- btnSubmit을 위한 체커. okSubmit 미완성으로 사용되지 않음. -->
 			<input type="hidden" name="feedbackRegId" value="0" />
 			<input type="hidden" name="feedbackBuyerPw" value="0" />
 			<input type="hidden" name="feedbackConfirmPw" value="0" />
-			<!-- /btnSubmit을 위한 체커 -->
+			<!-- /.btnSubmit을 위한 체커 -->
         	<h2 class="form-signup-heading">계정을 생성합니다.</h2>			
 			<div class="form-group">
 			  <label>가입유형을 선택하세요.</label>
@@ -199,7 +198,7 @@
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->	
 	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script src="dist/js/bootstrap.min.js"></script>
+	<script src="/emenu/dist/js/bootstrap.min.js"></script>
 
 	<script type="text/javascript">
 		// disable spaces in input

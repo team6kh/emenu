@@ -5,7 +5,6 @@ import java.io.Reader;
 import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -46,10 +45,17 @@ public class Login {
 	}
 	
 	@RequestMapping(value="/user/loginFormPro.do",method=RequestMethod.POST)
-	public String loginFormPro(HttpSession session, @ModelAttribute LoginDTO login) throws Exception {
+	public String loginFormPro(
+			HttpSession session,
+			@ModelAttribute LoginDTO login,
+			HttpServletRequest request) throws SQLException {
 		
-		/* 로그인 후 이전 페이지로 redirect 기능 구현 필요
-		 * 로그인 후에는 여기를 숨겨야 한다 */		
+		/* 로그인 후에는 여기를 숨겨야 한다 */		
+				
+		// request 파라미터에 login 값이 있으면(회원가입 후 바로 로그인일 시), 그 값으로 로그인 시도한다.
+		if (request.getAttribute("login") != null) {
+			login = (LoginDTO) request.getAttribute("login");	
+		}		
 		
 		// 로그인 타입이 "구매자"
 		if (login.getLogin_type().equals("buyer")) {

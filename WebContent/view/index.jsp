@@ -10,16 +10,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="huks">
-    <link rel="shortcut icon" href="assets/ico/jogiyo.png">
+    <link rel="shortcut icon" href="/emenu/assets/ico/jogiyo.png">
 
     <title>JOGIYO</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/emenu/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="jogiyo.css" rel="stylesheet">
-    <link href="common/common-template.css" rel="stylesheet">
+    <link href="/emenu/view/jogiyo.css" rel="stylesheet">
+    <link href="/emenu/view/common/common-template.css" rel="stylesheet">
     
   </head>
 
@@ -41,6 +41,6 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="dist/js/bootstrap.min.js"></script>
+    <script src="/emenu/dist/js/bootstrap.min.js"></script>
   </body>
 </html>
