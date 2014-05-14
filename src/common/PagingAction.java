@@ -169,7 +169,6 @@ public class PagingAction {
 		this.blockPage = blockPage;
 		this.ccp = ccp;
 		this.totalCount = totalCount;
-
 		this.rest_num = rest_num;
 		this.currentPage = currentPage;
 
@@ -346,5 +345,4 @@ public class PagingAction {
 	public void setCcp(int ccp) {
 		this.ccp = ccp;
 	}
-    
 }
