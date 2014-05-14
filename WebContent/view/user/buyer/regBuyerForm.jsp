@@ -18,18 +18,18 @@
 
 <!-- Custom styles for this template -->
 <link href="/emenu/view/jogiyo.css" rel="stylesheet">
-<link href="/emenu/view/user/registration/registration.css" rel="stylesheet">
+<link href="/emenu/view/user/register/signup.css" rel="stylesheet">
 
 <script type="text/javascript">
 	// 선택하는 가입유형에 따라 다른 폼을 로딩합니다.
 	function selectRegType(){
 	    var option = document.getElementById("reg_type").value;
 	    if(option == "buyer"){
-	    	url = "/emenu/user/registrationForm.do?reg_type=" + option;
+	    	url = "/emenu/user/register/form.do?reg_type=" + option;
 	    	document.location.href = url;
 	    }
 	    if(option == "seller"){
-	    	url = "/emenu/user/registrationForm.do?reg_type=" + option;
+	    	url = "/emenu/user/register/form.do?reg_type=" + option;
 			document.location.href = url;
 	    }
 	}
@@ -144,7 +144,7 @@
 	<!-- container -->
 	<div class="container">
 
-		<form class="form-signup" name="regForm" method="post" action="/emenu/user/registrationFormPro.do">
+		<form class="form-signup" name="regForm" method="post" action="/emenu/user/register.do">
 		    <!-- btnSubmit을 위한 체커. okSubmit 미완성으로 사용되지 않음. -->
 			<input type="hidden" name="feedbackRegId" value="0" />
 			<input type="hidden" name="feedbackBuyerPw" value="0" />

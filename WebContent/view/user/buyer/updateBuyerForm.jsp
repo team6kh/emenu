@@ -19,7 +19,7 @@
 <!-- Custom styles for this template -->
 <link href="view/jogiyo.css" rel="stylesheet">
 <link href="view/user/dashboard.css" rel="stylesheet">
-<link href="view/user/registration/registration.css" rel="stylesheet">
+<link href="view/user/register/signup.css" rel="stylesheet">
 
 <script type="text/javascript">
 	// 비밀번호

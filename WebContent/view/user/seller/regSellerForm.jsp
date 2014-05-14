@@ -18,7 +18,7 @@
 
 <!-- Custom styles for this template -->
 <link href="/emenu/view/jogiyo.css" rel="stylesheet">
-<link href="/emenu/view/user/registration/registration.css" rel="stylesheet">
+<link href="/emenu/view/user/register/signup.css" rel="stylesheet">
 
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&key="></script>
 
@@ -27,11 +27,11 @@
 	function selectRegType(){
 	    var option = document.getElementById("reg_type").value;
 	    if(option == "buyer"){
-	    	url = "/emenu/user/registrationForm.do?reg_type=" + option;
+	    	url = "/emenu/user/register/form.do?reg_type=" + option;
 	    	document.location.href = url;
 	    }
 	    if(option == "seller"){
-	    	url = "/emenu/user/registrationForm.do?reg_type=" + option;
+	    	url = "/emenu/user/register/form.do?reg_type=" + option;
 			document.location.href = url;
 	    }
 	}
@@ -169,7 +169,7 @@
 	<!-- container -->
 	<div class="container">
 
-		<form class="form-signup" name="regForm" method="post" action="/emenu/user/registrationFormPro.do">
+		<form class="form-signup" name="regForm" method="post" action="/emenu/user/register.do">
 			<input type="hidden" name="feedbackRegId" value="0" />
         	<h2 class="form-signup-heading">계정을 생성합니다.</h2>			
 			<div class="form-group">

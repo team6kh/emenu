@@ -1,6 +1,6 @@
-package user.registration.dto;
+package user.register.dto;
 
-public class RegistrationDTO
+public class RegisterDTO
 {
     private String reg_type;
     private String reg_id;

@@ -1,4 +1,4 @@
-package user.registration.controller;
+package user.register.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -6,9 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class Registration {
+public class Register {
 
-	@RequestMapping("/user/registrationForm.do")
+	@RequestMapping("/user/register/form.do")
 	public String regForm(HttpServletRequest request) {
 		
 		String reg_type = request.getParameter("reg_type");
@@ -28,8 +28,8 @@ public class Registration {
 		return "/view/user/buyer/regBuyerForm.jsp";
 	}
 	
-	@RequestMapping("/user/registrationFormPro.do")
-	public String regFormPro(HttpServletRequest request) {
+	@RequestMapping("/user/register.do")
+	public String regFormSubmit(HttpServletRequest request) {
 		
 		String reg_type = (String) request.getParameter("reg_type");
 		System.out.println("reg_type:"+reg_type);

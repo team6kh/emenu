@@ -44,10 +44,8 @@ public class RegisterSeller {
 		sqlMapper.insert("Seller.insertSeller", seller);
 		
 		/*
-		 * 회원가입 후 바로 로그인
-		 * 
-		 * primary : login 값을 request 파라미터에 설정 후 loginFormPro.do로 이동
-		 * 
+		 * 회원가입 후 바로 로그인 
+		 * primary : login 값을 request 객체에 설정 후 loginFormPro.do로 이동 
 		 * alternative : 여기서 바로 세션 생성
 		 */
 		
@@ -56,7 +54,7 @@ public class RegisterSeller {
 		login.setLogin_id(seller.getSeller_id());
 		login.setLogin_pw(seller.getSeller_pw());
 		
-		// request 파라미터에 login 값을 설정한다.
+		// request 객체에 login 값을 설정한다.
 		request.setAttribute("login", login);
 		
 		return "/user/loginFormPro.do";		

@@ -1,4 +1,4 @@
-package user.registration.controller;
+package user.register.controller;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -35,7 +35,6 @@ public class CheckDup {
 	public String checkDup(HttpServletRequest request) throws SQLException {
 		
 		String reg_id = request.getParameter("reg_id");
-        //System.out.println("reg_id:"+reg_id);
 		
 		// Buyer, Seller 객체 생성
 		BuyerDTO buyer = new BuyerDTO();
@@ -52,9 +51,11 @@ public class CheckDup {
         // buyer에 있거나 seller에 있다면 중복
         if (buyer != null || seller != null) {
             isDup = 1;
+            
         // 금지어("admin")으로 가입하려 해도 중복 처리
         } else if (reg_id.equals("admin")) {
         	isDup = 1;
+        	
         // 그렇지 않다면 가입 가능한 아이디
     	} else {
             isDup = 0;
