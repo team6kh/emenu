@@ -565,7 +565,7 @@
 
 		<div class="text-center">
 			<ul class="pagination pagination-sm">
-				<s:property value="pagingHtml" escape="false" />
+				${pagingHtml}
 			</ul>
 		</div>
 

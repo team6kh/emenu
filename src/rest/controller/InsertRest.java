@@ -141,7 +141,6 @@ public class InsertRest {
 		resultClass = (RestDTO) sqlMapper.queryForObject("Rest.selectLastNum");
 		seq_num = (int)(resultClass.getRest_num());
 		
-		
 		restopt_subject1 = request1.getParameter("restopt_subject1");
 		restopt_subject2 = request1.getParameter("restopt_subject2");
 		restopt_subject3 = request1.getParameter("restopt_subject3");
@@ -250,21 +249,14 @@ public class InsertRest {
 		
 		
 		// num, rest_num, 옵션명, 옵션가 insert
-									//  											//
 		if(restopt_subject1 != null && restopt_priceplus1 != 0){
-			
 			paramClass1.setRestopt_rest_num(seq_num);
-																						//
 			paramClass1.setRestopt_subject(restopt_subject1);
-			 																					//
 			paramClass1.setRestopt_priceplus(restopt_priceplus1);
 									
-															//
 			if(request.getFile("optupload1") != null){ 
-																						//
 				MultipartFile file = request.getFile("optupload1"); // 업로드된 원본
 				String orgName = file.getOriginalFilename(); // 업로드되는 실제 파일 이름이다.
-															//
 				String saveName = "menu1_"+orgName;
 																											
 				File restopt_destFile1 = new File(optfileUploadPath+saveName); //이과정을 거치면 saveName의 복사 대상이 생김
@@ -278,6 +270,299 @@ public class InsertRest {
 			sqlMapper.insert("Rest.insertRestopt", paramClass1);
 		}
 		
+		if(restopt_subject2 != null && restopt_priceplus2 != 0){
+			paramClass1.setRestopt_rest_num(seq_num);
+			paramClass1.setRestopt_subject(restopt_subject2);
+			paramClass1.setRestopt_priceplus(restopt_priceplus2);
+					
+			if(request.getFile("optupload2") != null){ 
+				MultipartFile file = request.getFile("optupload2"); // 업로드된 원본
+				String orgName = file.getOriginalFilename(); // 업로드되는 실제 파일 이름이다.
+				String saveName = "menu2_"+orgName;
+																								
+				File restopt_destFile1 = new File(optfileUploadPath+saveName); //이과정을 거치면 saveName의 복사 대상이 생김
+				file.transferTo(restopt_destFile1);  // 위에서 만든 복사대상에 복사본을 만듬. (이걸로 복사 끝)
+				
+				//매인사진파일 DTO에 set
+				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(26));
+				paramClass1.setRestopt_orgname(orgName);
+				paramClass1.setRestopt_savname(saveName);
+			}
+			sqlMapper.insert("Rest.insertRestopt", paramClass1);
+		}
+		
+		if(restopt_subject3 != null && restopt_priceplus3 != 0){
+			paramClass1.setRestopt_rest_num(seq_num);
+			paramClass1.setRestopt_subject(restopt_subject3);
+			paramClass1.setRestopt_priceplus(restopt_priceplus3);
+					
+			if(request.getFile("optupload3") != null){ 
+				MultipartFile file = request.getFile("optupload3"); // 업로드된 원본
+				String orgName = file.getOriginalFilename(); // 업로드되는 실제 파일 이름이다.
+				String saveName = "menu3_"+orgName;
+																								
+				File restopt_destFile1 = new File(optfileUploadPath+saveName); //이과정을 거치면 saveName의 복사 대상이 생김
+				file.transferTo(restopt_destFile1);  // 위에서 만든 복사대상에 복사본을 만듬. (이걸로 복사 끝)
+				
+				//매인사진파일 DTO에 set
+				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(26));
+				paramClass1.setRestopt_orgname(orgName);
+				paramClass1.setRestopt_savname(saveName);
+			}
+			sqlMapper.insert("Rest.insertRestopt", paramClass1);
+		}
+		
+		if(restopt_subject4 != null && restopt_priceplus4 != 0){
+			paramClass1.setRestopt_rest_num(seq_num);
+			paramClass1.setRestopt_subject(restopt_subject4);
+			paramClass1.setRestopt_priceplus(restopt_priceplus4);
+					
+			if(request.getFile("optupload4") != null){ 
+				MultipartFile file = request.getFile("optupload4"); // 업로드된 원본
+				String orgName = file.getOriginalFilename(); // 업로드되는 실제 파일 이름이다.
+				String saveName = "menu4_"+orgName;
+																								
+				File restopt_destFile1 = new File(optfileUploadPath+saveName); //이과정을 거치면 saveName의 복사 대상이 생김
+				file.transferTo(restopt_destFile1);  // 위에서 만든 복사대상에 복사본을 만듬. (이걸로 복사 끝)
+				
+				//매인사진파일 DTO에 set
+				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(26));
+				paramClass1.setRestopt_orgname(orgName);
+				paramClass1.setRestopt_savname(saveName);
+			}
+			sqlMapper.insert("Rest.insertRestopt", paramClass1);
+		}
+		
+		if(restopt_subject5 != null && restopt_priceplus5 != 0){
+			paramClass1.setRestopt_rest_num(seq_num);
+			paramClass1.setRestopt_subject(restopt_subject5);
+			paramClass1.setRestopt_priceplus(restopt_priceplus5);
+					
+			if(request.getFile("optupload5") != null){ 
+				MultipartFile file = request.getFile("optupload5"); // 업로드된 원본
+				String orgName = file.getOriginalFilename(); // 업로드되는 실제 파일 이름이다.
+				String saveName = "menu5_"+orgName;
+																								
+				File restopt_destFile1 = new File(optfileUploadPath+saveName); //이과정을 거치면 saveName의 복사 대상이 생김
+				file.transferTo(restopt_destFile1);  // 위에서 만든 복사대상에 복사본을 만듬. (이걸로 복사 끝)
+				
+				//매인사진파일 DTO에 set
+				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(26));
+				paramClass1.setRestopt_orgname(orgName);
+				paramClass1.setRestopt_savname(saveName);
+			}
+			sqlMapper.insert("Rest.insertRestopt", paramClass1);
+		}
+		
+		if(restopt_subject6 != null && restopt_priceplus6 != 0){
+			paramClass1.setRestopt_rest_num(seq_num);
+			paramClass1.setRestopt_subject(restopt_subject6);
+			paramClass1.setRestopt_priceplus(restopt_priceplus6);
+					
+			if(request.getFile("optupload6") != null){ 
+				MultipartFile file = request.getFile("optupload6"); // 업로드된 원본
+				String orgName = file.getOriginalFilename(); // 업로드되는 실제 파일 이름이다.
+				String saveName = "menu6_"+orgName;
+																								
+				File restopt_destFile1 = new File(optfileUploadPath+saveName); //이과정을 거치면 saveName의 복사 대상이 생김
+				file.transferTo(restopt_destFile1);  // 위에서 만든 복사대상에 복사본을 만듬. (이걸로 복사 끝)
+				
+				//매인사진파일 DTO에 set
+				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(26));
+				paramClass1.setRestopt_orgname(orgName);
+				paramClass1.setRestopt_savname(saveName);
+			}
+			sqlMapper.insert("Rest.insertRestopt", paramClass1);
+		}
+		
+		if(restopt_subject7 != null && restopt_priceplus7 != 0){
+			paramClass1.setRestopt_rest_num(seq_num);
+			paramClass1.setRestopt_subject(restopt_subject7);
+			paramClass1.setRestopt_priceplus(restopt_priceplus7);
+					
+			if(request.getFile("optupload7") != null){ 
+				MultipartFile file = request.getFile("optupload7"); // 업로드된 원본
+				String orgName = file.getOriginalFilename(); // 업로드되는 실제 파일 이름이다.
+				String saveName = "menu7_"+orgName;
+																								
+				File restopt_destFile1 = new File(optfileUploadPath+saveName); //이과정을 거치면 saveName의 복사 대상이 생김
+				file.transferTo(restopt_destFile1);  // 위에서 만든 복사대상에 복사본을 만듬. (이걸로 복사 끝)
+				
+				//매인사진파일 DTO에 set
+				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(26));
+				paramClass1.setRestopt_orgname(orgName);
+				paramClass1.setRestopt_savname(saveName);
+			}
+			sqlMapper.insert("Rest.insertRestopt", paramClass1);
+		}
+		
+		if(restopt_subject8 != null && restopt_priceplus8 != 0){
+			paramClass1.setRestopt_rest_num(seq_num);
+			paramClass1.setRestopt_subject(restopt_subject8);
+			paramClass1.setRestopt_priceplus(restopt_priceplus8);
+					
+			if(request.getFile("optupload8") != null){ 
+				MultipartFile file = request.getFile("optupload8"); // 업로드된 원본
+				String orgName = file.getOriginalFilename(); // 업로드되는 실제 파일 이름이다.
+				String saveName = "menu8_"+orgName;
+																								
+				File restopt_destFile1 = new File(optfileUploadPath+saveName); //이과정을 거치면 saveName의 복사 대상이 생김
+				file.transferTo(restopt_destFile1);  // 위에서 만든 복사대상에 복사본을 만듬. (이걸로 복사 끝)
+				
+				//매인사진파일 DTO에 set
+				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(26));
+				paramClass1.setRestopt_orgname(orgName);
+				paramClass1.setRestopt_savname(saveName);
+			}
+			sqlMapper.insert("Rest.insertRestopt", paramClass1);
+		}
+		
+		if(restopt_subject9 != null && restopt_priceplus9 != 0){
+			paramClass1.setRestopt_rest_num(seq_num);
+			paramClass1.setRestopt_subject(restopt_subject9);
+			paramClass1.setRestopt_priceplus(restopt_priceplus9);
+					
+			if(request.getFile("optupload9") != null){ 
+				MultipartFile file = request.getFile("optupload9"); // 업로드된 원본
+				String orgName = file.getOriginalFilename(); // 업로드되는 실제 파일 이름이다.
+				String saveName = "menu9_"+orgName;
+																								
+				File restopt_destFile1 = new File(optfileUploadPath+saveName); //이과정을 거치면 saveName의 복사 대상이 생김
+				file.transferTo(restopt_destFile1);  // 위에서 만든 복사대상에 복사본을 만듬. (이걸로 복사 끝)
+				
+				//매인사진파일 DTO에 set
+				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(26));
+				paramClass1.setRestopt_orgname(orgName);
+				paramClass1.setRestopt_savname(saveName);
+			}
+			sqlMapper.insert("Rest.insertRestopt", paramClass1);
+		}
+		
+		if(restopt_subject10 != null && restopt_priceplus10 != 0){
+			paramClass1.setRestopt_rest_num(seq_num);
+			paramClass1.setRestopt_subject(restopt_subject10);
+			paramClass1.setRestopt_priceplus(restopt_priceplus10);
+					
+			if(request.getFile("optupload10") != null){ 
+				MultipartFile file = request.getFile("optupload10"); // 업로드된 원본
+				String orgName = file.getOriginalFilename(); // 업로드되는 실제 파일 이름이다.
+				String saveName = "menu10_"+orgName;
+																								
+				File restopt_destFile1 = new File(optfileUploadPath+saveName); //이과정을 거치면 saveName의 복사 대상이 생김
+				file.transferTo(restopt_destFile1);  // 위에서 만든 복사대상에 복사본을 만듬. (이걸로 복사 끝)
+				
+				//매인사진파일 DTO에 set
+				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(26));
+				paramClass1.setRestopt_orgname(orgName);
+				paramClass1.setRestopt_savname(saveName);
+			}
+			sqlMapper.insert("Rest.insertRestopt", paramClass1);
+		}
+		
+		if(restopt_subject11 != null && restopt_priceplus11 != 0){
+			paramClass1.setRestopt_rest_num(seq_num);
+			paramClass1.setRestopt_subject(restopt_subject11);
+			paramClass1.setRestopt_priceplus(restopt_priceplus11);
+					
+			if(request.getFile("optupload11") != null){ 
+				MultipartFile file = request.getFile("optupload11"); // 업로드된 원본
+				String orgName = file.getOriginalFilename(); // 업로드되는 실제 파일 이름이다.
+				String saveName = "menu11_"+orgName;
+																								
+				File restopt_destFile1 = new File(optfileUploadPath+saveName); //이과정을 거치면 saveName의 복사 대상이 생김
+				file.transferTo(restopt_destFile1);  // 위에서 만든 복사대상에 복사본을 만듬. (이걸로 복사 끝)
+				
+				//매인사진파일 DTO에 set
+				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(26));
+				paramClass1.setRestopt_orgname(orgName);
+				paramClass1.setRestopt_savname(saveName);
+			}
+			sqlMapper.insert("Rest.insertRestopt", paramClass1);
+		}
+		
+		if(restopt_subject12 != null && restopt_priceplus12 != 0){
+			paramClass1.setRestopt_rest_num(seq_num);
+			paramClass1.setRestopt_subject(restopt_subject12);
+			paramClass1.setRestopt_priceplus(restopt_priceplus12);
+					
+			if(request.getFile("optupload12") != null){ 
+				MultipartFile file = request.getFile("optupload12"); // 업로드된 원본
+				String orgName = file.getOriginalFilename(); // 업로드되는 실제 파일 이름이다.
+				String saveName = "menu12_"+orgName;
+																								
+				File restopt_destFile1 = new File(optfileUploadPath+saveName); //이과정을 거치면 saveName의 복사 대상이 생김
+				file.transferTo(restopt_destFile1);  // 위에서 만든 복사대상에 복사본을 만듬. (이걸로 복사 끝)
+				
+				//매인사진파일 DTO에 set
+				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(26));
+				paramClass1.setRestopt_orgname(orgName);
+				paramClass1.setRestopt_savname(saveName);
+			}
+			sqlMapper.insert("Rest.insertRestopt", paramClass1);
+		}
+		
+		if(restopt_subject13 != null && restopt_priceplus13 != 0){
+			paramClass1.setRestopt_rest_num(seq_num);
+			paramClass1.setRestopt_subject(restopt_subject13);
+			paramClass1.setRestopt_priceplus(restopt_priceplus13);
+					
+			if(request.getFile("optupload13") != null){ 
+				MultipartFile file = request.getFile("optupload13"); // 업로드된 원본
+				String orgName = file.getOriginalFilename(); // 업로드되는 실제 파일 이름이다.
+				String saveName = "menu13_"+orgName;
+																								
+				File restopt_destFile1 = new File(optfileUploadPath+saveName); //이과정을 거치면 saveName의 복사 대상이 생김
+				file.transferTo(restopt_destFile1);  // 위에서 만든 복사대상에 복사본을 만듬. (이걸로 복사 끝)
+				
+				//매인사진파일 DTO에 set
+				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(26));
+				paramClass1.setRestopt_orgname(orgName);
+				paramClass1.setRestopt_savname(saveName);
+			}
+			sqlMapper.insert("Rest.insertRestopt", paramClass1);
+		}
+		
+		if(restopt_subject14 != null && restopt_priceplus14 != 0){
+			paramClass1.setRestopt_rest_num(seq_num);
+			paramClass1.setRestopt_subject(restopt_subject14);
+			paramClass1.setRestopt_priceplus(restopt_priceplus14);
+					
+			if(request.getFile("optupload14") != null){ 
+				MultipartFile file = request.getFile("optupload14"); // 업로드된 원본
+				String orgName = file.getOriginalFilename(); // 업로드되는 실제 파일 이름이다.
+				String saveName = "menu14_"+orgName;
+																								
+				File restopt_destFile1 = new File(optfileUploadPath+saveName); //이과정을 거치면 saveName의 복사 대상이 생김
+				file.transferTo(restopt_destFile1);  // 위에서 만든 복사대상에 복사본을 만듬. (이걸로 복사 끝)
+				
+				//매인사진파일 DTO에 set
+				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(26));
+				paramClass1.setRestopt_orgname(orgName);
+				paramClass1.setRestopt_savname(saveName);
+			}
+			sqlMapper.insert("Rest.insertRestopt", paramClass1);
+		}
+		
+		if(restopt_subject15 != null && restopt_priceplus15 != 0){
+			paramClass1.setRestopt_rest_num(seq_num);
+			paramClass1.setRestopt_subject(restopt_subject15);
+			paramClass1.setRestopt_priceplus(restopt_priceplus15);
+					
+			if(request.getFile("optupload15") != null){ 
+				MultipartFile file = request.getFile("optupload15"); // 업로드된 원본
+				String orgName = file.getOriginalFilename(); // 업로드되는 실제 파일 이름이다.
+				String saveName = "menu15_"+orgName;
+																								
+				File restopt_destFile1 = new File(optfileUploadPath+saveName); //이과정을 거치면 saveName의 복사 대상이 생김
+				file.transferTo(restopt_destFile1);  // 위에서 만든 복사대상에 복사본을 만듬. (이걸로 복사 끝)
+				
+				//매인사진파일 DTO에 set
+				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(26));
+				paramClass1.setRestopt_orgname(orgName);
+				paramClass1.setRestopt_savname(saveName);
+			}
+			sqlMapper.insert("Rest.insertRestopt", paramClass1);
+		}
 		
 		
 		//매인화면, 컨텐트 사진 업로드 및 DB등록
@@ -313,9 +598,6 @@ public class InsertRest {
 			//파일 정보 업데이트.
 			sqlMapper.update("Rest.updateFile", paramClass);
 		}
-		
-		//setAttribute 하기
-		
 		
 		return "/view/rest/listRest.jsp"; //이전버전 리다이렉트 액션썻음
 	}
