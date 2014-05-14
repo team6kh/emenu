@@ -37,21 +37,32 @@ public class CheckDup {
 		String reg_id = request.getParameter("reg_id");
         //System.out.println("reg_id:"+reg_id);
 		
-		BuyerDTO buyerDTO = new BuyerDTO();
-		SellerDTO sellerDTO = new SellerDTO();
+		// Buyer, Seller 객체 생성
+		BuyerDTO buyer = new BuyerDTO();
+		SellerDTO seller = new SellerDTO();
 		
-		buyerDTO = (BuyerDTO) sqlMapper.queryForObject("Buyer.getBuyerId", buyerDTO);
-        sellerDTO = (SellerDTO) sqlMapper.queryForObject("Seller.getSellerId", sellerDTO);
-
-        if (buyerDTO != null || sellerDTO != null) {
+		// reg_id를 각 회원의 아이디값으로 설정
+		buyer.setBuyer_id(reg_id);
+		seller.setSeller_id(reg_id);
+		
+		// DB에 해당 아이디가 있는지 쿼리 실행
+		buyer = (BuyerDTO) sqlMapper.queryForObject("Buyer.getBuyerId", buyer);
+        seller = (SellerDTO) sqlMapper.queryForObject("Seller.getSellerId", seller);
+        
+        // buyer에 있거나 seller에 있다면 중복
+        if (buyer != null || seller != null) {
             isDup = 1;
+        // 금지어("admin")으로 가입하려 해도 중복 처리
         } else if (reg_id.equals("admin")) {
         	isDup = 1;
+        // 그렇지 않다면 가입 가능한 아이디
     	} else {
             isDup = 0;
         }
         
+        // 결과값 isDup
         request.setAttribute("isDup", isDup);
+        
         //System.out.println("isDup:"+isDup);
         
         return "/view/user/registration/checkDup.jsp";
