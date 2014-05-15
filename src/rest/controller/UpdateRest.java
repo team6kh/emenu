@@ -132,24 +132,24 @@ public class UpdateRest {
 		paramClass.setRest_typecategory(rest_typecategory);
 		sqlMapper.update("Rest.updateRestone", paramClass);
 		
+		
+		
+		//매인사진
+		MultipartFile mainfile = request.getFile("upload1"); // 업로드된 원본
+		orgName = mainfile.getOriginalFilename(); // 업로드되는 실제 파일 이름이다.
+		//컨텐트사진
+		MultipartFile contentfile = request.getFile("upload2"); // 업로드된 원본
+		orgName1 = contentfile.getOriginalFilename(); // 업로드되는 실제 파일 이름이다.
+		
 		//상품글 파일 업데이트
 		//매인화면, 컨텐트 사진 업로드 및 DB등록
-		System.out.println("null떠야 정상인데.. : "+request.getFile("upload1"));
-		if(request.getFile("upload1") != null && request.getFile("upload2") != null){
-			System.out.println("여기에 들어오면 안됨!!");
+		if(orgName != "" && orgName1 != ""){
 			//매인사진
-			MultipartFile mainfile = request.getFile("upload1"); // 업로드된 원본
-			orgName = mainfile.getOriginalFilename(); // 업로드되는 실제 파일 이름이다.
 			saveName = "main_"+rest_num+"_"+orgName;//main_seq_org.ext
-			
 			File rest_destFile1 = new File(fileUploadPath1+saveName); //이과정을 거치면 saveName의 복사 대상이 생김
 			mainfile.transferTo(rest_destFile1);  // 위에서 만든 복사대상에 복사본을 만듬. (이걸로 복사 끝)
-			
 			//컨텐트사진
-			MultipartFile contentfile = request.getFile("upload2"); // 업로드된 원본
-			orgName1 = contentfile.getOriginalFilename(); // 업로드되는 실제 파일 이름이다.
 			saveName1 = "content_"+rest_num+"_"+orgName1;//content_seq_org.ext
-			
 			File rest_destFile2 = new File(fileUploadPath2+saveName1); //이과정을 거치면 saveName의 복사 대상이 생김
 			contentfile.transferTo(rest_destFile2);  // 위에서 만든 복사대상에 복사본을 만듬. (이걸로 복사 끝)
 
@@ -294,9 +294,10 @@ public class UpdateRest {
 		//옵션 감소시 제거 유지 및 추가시 레코드 유지.
 		
 		//이전 옵션의 개수 이내의 인덱스를 판단.
+		//listsize는 업데이트전 기존 옵션개수를 의미함
 		if(0<listsize){
 			//사용자가 입력한 옵션이 없으면, 
-			if(restopt_subject1 != null && restopt_priceplus1 != 0){
+			if(restopt_subject1 == null && restopt_priceplus1 == 0){
 				paramClass1.setRestopt_rest_num(rest_num);
 				//수정시에 사용자가 옵션을 감소시킨것으로 판단
 				//즉, 있을 필요가 없는 레코드이니 해당 레코드 삭제처리
@@ -308,7 +309,7 @@ public class UpdateRest {
 		}
 		if(1<listsize){
 			//사용자가 입력한 옵션이 없으면, 
-			if(restopt_subject2 != null && restopt_priceplus2 != 0){
+			if(restopt_subject2 == null && restopt_priceplus2 == 0){
 				paramClass1.setRestopt_rest_num(rest_num);
 				//수정시에 사용자가 옵션을 감소시킨것으로 판단
 				//즉, 있을 필요가 없는 레코드이니 해당 레코드 삭제처리
@@ -320,7 +321,7 @@ public class UpdateRest {
 		}
 		if(2<listsize){
 			//사용자가 입력한 옵션이 없으면, 
-			if(restopt_subject3 != null && restopt_priceplus3 != 0){
+			if(restopt_subject3 == null && restopt_priceplus3 == 0){
 				paramClass1.setRestopt_rest_num(rest_num);
 				//수정시에 사용자가 옵션을 감소시킨것으로 판단
 				//즉, 있을 필요가 없는 레코드이니 해당 레코드 삭제처리
@@ -332,7 +333,7 @@ public class UpdateRest {
 		}
 		if(3<listsize){
 			//사용자가 입력한 옵션이 없으면, 
-			if(restopt_subject4 != null && restopt_priceplus4 != 0){
+			if(restopt_subject4 == null && restopt_priceplus4 == 0){
 				paramClass1.setRestopt_rest_num(rest_num);
 				//수정시에 사용자가 옵션을 감소시킨것으로 판단
 				//즉, 있을 필요가 없는 레코드이니 해당 레코드 삭제처리
@@ -344,7 +345,7 @@ public class UpdateRest {
 		}
 		if(4<listsize){
 			//사용자가 입력한 옵션이 없으면, 
-			if(restopt_subject5 != null && restopt_priceplus5 != 0){
+			if(restopt_subject5 == null && restopt_priceplus5 == 0){
 				paramClass1.setRestopt_rest_num(rest_num);
 				//수정시에 사용자가 옵션을 감소시킨것으로 판단
 				//즉, 있을 필요가 없는 레코드이니 해당 레코드 삭제처리
@@ -356,7 +357,7 @@ public class UpdateRest {
 		}
 		if(5<listsize){
 			//사용자가 입력한 옵션이 없으면, 
-			if(restopt_subject6 != null && restopt_priceplus6 != 0){
+			if(restopt_subject6 == null && restopt_priceplus6 == 0){
 				paramClass1.setRestopt_rest_num(rest_num);
 				//수정시에 사용자가 옵션을 감소시킨것으로 판단
 				//즉, 있을 필요가 없는 레코드이니 해당 레코드 삭제처리
@@ -368,7 +369,7 @@ public class UpdateRest {
 		}
 		if(6<listsize){
 			//사용자가 입력한 옵션이 없으면, 
-			if(restopt_subject7 != null && restopt_priceplus7 != 0){
+			if(restopt_subject7 == null && restopt_priceplus7 == 0){
 				paramClass1.setRestopt_rest_num(rest_num);
 				//수정시에 사용자가 옵션을 감소시킨것으로 판단
 				//즉, 있을 필요가 없는 레코드이니 해당 레코드 삭제처리
@@ -380,7 +381,7 @@ public class UpdateRest {
 		}
 		if(7<listsize){
 			//사용자가 입력한 옵션이 없으면, 
-			if(restopt_subject8 != null && restopt_priceplus8 != 0){
+			if(restopt_subject8 == null && restopt_priceplus8 == 0){
 				paramClass1.setRestopt_rest_num(rest_num);
 				//수정시에 사용자가 옵션을 감소시킨것으로 판단
 				//즉, 있을 필요가 없는 레코드이니 해당 레코드 삭제처리
@@ -392,7 +393,7 @@ public class UpdateRest {
 		}
 		if(8<listsize){
 			//사용자가 입력한 옵션이 없으면, 
-			if(restopt_subject9 != null && restopt_priceplus9 != 0){
+			if(restopt_subject9 == null && restopt_priceplus9 == 0){
 				paramClass1.setRestopt_rest_num(rest_num);
 				//수정시에 사용자가 옵션을 감소시킨것으로 판단
 				//즉, 있을 필요가 없는 레코드이니 해당 레코드 삭제처리
@@ -404,7 +405,7 @@ public class UpdateRest {
 		}
 		if(9<listsize){
 			//사용자가 입력한 옵션이 없으면, 
-			if(restopt_subject10 != null && restopt_priceplus10 != 0){
+			if(restopt_subject10 == null && restopt_priceplus10 == 0){
 				paramClass1.setRestopt_rest_num(rest_num);
 				//수정시에 사용자가 옵션을 감소시킨것으로 판단
 				//즉, 있을 필요가 없는 레코드이니 해당 레코드 삭제처리
@@ -416,7 +417,7 @@ public class UpdateRest {
 		}
 		if(10<listsize){
 			//사용자가 입력한 옵션이 없으면, 
-			if(restopt_subject11 != null && restopt_priceplus11 != 0){
+			if(restopt_subject11 == null && restopt_priceplus11 == 0){
 				paramClass1.setRestopt_rest_num(rest_num);
 				//수정시에 사용자가 옵션을 감소시킨것으로 판단
 				//즉, 있을 필요가 없는 레코드이니 해당 레코드 삭제처리
@@ -428,7 +429,7 @@ public class UpdateRest {
 		}
 		if(11<listsize){
 			//사용자가 입력한 옵션이 없으면, 
-			if(restopt_subject12 != null && restopt_priceplus12 != 0){
+			if(restopt_subject12 == null && restopt_priceplus12 == 0){
 				paramClass1.setRestopt_rest_num(rest_num);
 				//수정시에 사용자가 옵션을 감소시킨것으로 판단
 				//즉, 있을 필요가 없는 레코드이니 해당 레코드 삭제처리
@@ -440,7 +441,7 @@ public class UpdateRest {
 		}
 		if(12<listsize){
 			//사용자가 입력한 옵션이 없으면, 
-			if(restopt_subject13 != null && restopt_priceplus13 != 0){
+			if(restopt_subject13 == null && restopt_priceplus13 == 0){
 				paramClass1.setRestopt_rest_num(rest_num);
 				//수정시에 사용자가 옵션을 감소시킨것으로 판단
 				//즉, 있을 필요가 없는 레코드이니 해당 레코드 삭제처리
@@ -452,7 +453,7 @@ public class UpdateRest {
 		}
 		if(13<listsize){
 			//사용자가 입력한 옵션이 없으면, 
-			if(restopt_subject14 != null && restopt_priceplus14 != 0){
+			if(restopt_subject14 == null && restopt_priceplus14 == 0){
 				paramClass1.setRestopt_rest_num(rest_num);
 				//수정시에 사용자가 옵션을 감소시킨것으로 판단
 				//즉, 있을 필요가 없는 레코드이니 해당 레코드 삭제처리
@@ -464,7 +465,7 @@ public class UpdateRest {
 		}
 		if(14<listsize){
 			//사용자가 입력한 옵션이 없으면, 
-			if(restopt_subject15 != null && restopt_priceplus15 != 0){
+			if(restopt_subject15 == null && restopt_priceplus15 == 0){
 				paramClass1.setRestopt_rest_num(rest_num);
 				//수정시에 사용자가 옵션을 감소시킨것으로 판단
 				//즉, 있을 필요가 없는 레코드이니 해당 레코드 삭제처리
@@ -479,13 +480,16 @@ public class UpdateRest {
 		//사용자가 옵션을 수정했을 경우 레코드 update
 		//else// 사용자가 옵션을 추가했을 경우 insert
 		
+		//1
 		if(restopt_subject1 != null && restopt_priceplus1 != 0){
 			paramClass1.setRestopt_rest_num(rest_num);
 			paramClass1.setRestopt_subject(restopt_subject1);
 			paramClass1.setRestopt_priceplus(restopt_priceplus1);
 			
-			//수정시에 파일 업로드 했을경우를 판단
-			if(request.getFile("optupload1") != null){ 
+			MultipartFile file = request.getFile("optupload1"); // 업로드된 원본
+			String orgName = file.getOriginalFilename(); // 업로드되는 실제 파일 이름이다.
+			
+			if(orgName != ""){ //수정시에 파일 업로드 했을경우
 				if(0<listsize){//기존파일 삭제를 위해 레코드를 인덱스 단위로 판단
 					if (list.get(0).getRestopt_savname() != null) {
 						String filesName = list.get(0).getRestopt_savname(); //기존 파일명을 가져옴
@@ -494,10 +498,7 @@ public class UpdateRest {
 				}
 				//새롭게 업로드된 것 저장
 				//옵션 사진 파일 이름과 확장자 설정.
-				MultipartFile file = request.getFile("optupload1"); // 업로드된 원본
-				String orgName = file.getOriginalFilename(); // 업로드되는 실제 파일 이름이다.
-				String saveName = "menu1_" + orgName+Integer.toString((int)(Math.random() * 999999));
-																											
+				String saveName = "menu1_" + Integer.toString((int)(Math.random() * 999999)) + orgName;
 				File restopt_destFile1 = new File(optfileUploadPath+saveName); //이과정을 거치면 saveName의 복사 대상이 생김
 				file.transferTo(restopt_destFile1);  // 위에서 만든 복사대상에 복사본을 만듬. (이걸로 복사 끝)
 				
@@ -520,10 +521,609 @@ public class UpdateRest {
 			}else{ //옵션을 새로 추가하가한 경우 insert
 				sqlMapper.insert("Rest.insertRestopt", paramClass1);
 			}
-			
 		}
 			
+		//2
+		if(restopt_subject2 != null && restopt_priceplus2 != 0){
+			paramClass1.setRestopt_rest_num(rest_num);
+			paramClass1.setRestopt_subject(restopt_subject2);
+			paramClass1.setRestopt_priceplus(restopt_priceplus2);
+			
+			MultipartFile file = request.getFile("optupload2"); // 업로드된 원본
+			String orgName = file.getOriginalFilename(); // 업로드되는 실제 파일 이름이다.
+			
+			if(orgName != ""){ //수정시에 파일 업로드 했을경우
+				if(1<listsize){//기존파일 삭제를 위해 레코드를 인덱스 단위로 판단
+					if (list.get(1).getRestopt_savname() != null) {
+						String filesName = list.get(1).getRestopt_savname(); //기존 파일명을 가져옴
+						//fileUpload.deleteFiles(filesName, optfileUploadPath1); //해당경로, 기존파일명을 삭제함.
+					}
+				}
+				//새롭게 업로드된 것 저장
+				//옵션 사진 파일 이름과 확장자 설정.
+				String saveName = "menu2_" + Integer.toString((int)(Math.random() * 999999)) + orgName;
+				File restopt_destFile1 = new File(optfileUploadPath+saveName); //이과정을 거치면 saveName의 복사 대상이 생김
+				file.transferTo(restopt_destFile1);  // 위에서 만든 복사대상에 복사본을 만듬. (이걸로 복사 끝)
+				
+				//매인사진파일 DTO에 set
+				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(26));
+				paramClass1.setRestopt_orgname(orgName);
+				paramClass1.setRestopt_savname(saveName);
+			}else{//수정시에 파일 업로드 하지 않았을 경우
+				if(1<listsize){
+					paramClass1.setRestopt_destFile1(list.get(1).getRestopt_destFile1());
+					paramClass1.setRestopt_orgname(list.get(1).getRestopt_orgname());
+					paramClass1.setRestopt_savname(list.get(1).getRestopt_savname());
+				}
+			}
+			if(1<listsize){ 
+				// 기존 옵션레코드가 있었을 경우 update
+				if(list.get(1).getRestopt_num() != 0){
+					sqlMapper.update("Rest.updateRestopt", paramClass1);
+				}
+			}else{ //옵션을 새로 추가하가한 경우 insert
+				sqlMapper.insert("Rest.insertRestopt", paramClass1);
+			}
+		}
 		
+		//3
+		if(restopt_subject3 != null && restopt_priceplus3 != 0){
+			paramClass1.setRestopt_rest_num(rest_num);
+			paramClass1.setRestopt_subject(restopt_subject3);
+			paramClass1.setRestopt_priceplus(restopt_priceplus3);
+			
+			MultipartFile file = request.getFile("optupload3"); // 업로드된 원본
+			String orgName = file.getOriginalFilename(); // 업로드되는 실제 파일 이름이다.
+			
+			if(orgName != ""){ //수정시에 파일 업로드 했을경우
+				if(2<listsize){//기존파일 삭제를 위해 레코드를 인덱스 단위로 판단
+					if (list.get(2).getRestopt_savname() != null) {
+						String filesName = list.get(2).getRestopt_savname(); //기존 파일명을 가져옴
+						//fileUpload.deleteFiles(filesName, optfileUploadPath1); //해당경로, 기존파일명을 삭제함.
+					}
+				}
+				//새롭게 업로드된 것 저장
+				//옵션 사진 파일 이름과 확장자 설정.
+				String saveName = "menu3_" + Integer.toString((int)(Math.random() * 999999)) + orgName;
+				File restopt_destFile1 = new File(optfileUploadPath+saveName); //이과정을 거치면 saveName의 복사 대상이 생김
+				file.transferTo(restopt_destFile1);  // 위에서 만든 복사대상에 복사본을 만듬. (이걸로 복사 끝)
+				
+				//매인사진파일 DTO에 set
+				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(26));
+				paramClass1.setRestopt_orgname(orgName);
+				paramClass1.setRestopt_savname(saveName);
+			}else{//수정시에 파일 업로드 하지 않았을 경우
+				if(2<listsize){
+					paramClass1.setRestopt_destFile1(list.get(2).getRestopt_destFile1());
+					paramClass1.setRestopt_orgname(list.get(2).getRestopt_orgname());
+					paramClass1.setRestopt_savname(list.get(2).getRestopt_savname());
+				}
+			}
+			if(2<listsize){ 
+				// 기존 옵션레코드가 있었을 경우 update
+				if(list.get(2).getRestopt_num() != 0){
+					sqlMapper.update("Rest.updateRestopt", paramClass1);
+				}
+			}else{ //옵션을 새로 추가하가한 경우 insert
+				sqlMapper.insert("Rest.insertRestopt", paramClass1);
+			}
+		}
+		
+		//4
+		if(restopt_subject4 != null && restopt_priceplus4 != 0){
+			paramClass1.setRestopt_rest_num(rest_num);
+			paramClass1.setRestopt_subject(restopt_subject4);
+			paramClass1.setRestopt_priceplus(restopt_priceplus4);
+			
+			MultipartFile file = request.getFile("optupload4"); // 업로드된 원본
+			String orgName = file.getOriginalFilename(); // 업로드되는 실제 파일 이름이다.
+			
+			if(orgName != ""){ //수정시에 파일 업로드 했을경우
+				if(3<listsize){//기존파일 삭제를 위해 레코드를 인덱스 단위로 판단
+					if (list.get(3).getRestopt_savname() != null) {
+						String filesName = list.get(3).getRestopt_savname(); //기존 파일명을 가져옴
+						//fileUpload.deleteFiles(filesName, optfileUploadPath1); //해당경로, 기존파일명을 삭제함.
+					}
+				}
+				//새롭게 업로드된 것 저장
+				//옵션 사진 파일 이름과 확장자 설정.
+				String saveName = "menu4_" + Integer.toString((int)(Math.random() * 999999)) + orgName;
+				File restopt_destFile1 = new File(optfileUploadPath+saveName); //이과정을 거치면 saveName의 복사 대상이 생김
+				file.transferTo(restopt_destFile1);  // 위에서 만든 복사대상에 복사본을 만듬. (이걸로 복사 끝)
+				
+				//매인사진파일 DTO에 set
+				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(26));
+				paramClass1.setRestopt_orgname(orgName);
+				paramClass1.setRestopt_savname(saveName);
+			}else{//수정시에 파일 업로드 하지 않았을 경우
+				if(3<listsize){
+					paramClass1.setRestopt_destFile1(list.get(3).getRestopt_destFile1());
+					paramClass1.setRestopt_orgname(list.get(3).getRestopt_orgname());
+					paramClass1.setRestopt_savname(list.get(3).getRestopt_savname());
+				}
+			}
+			if(3<listsize){ 
+				// 기존 옵션레코드가 있었을 경우 update
+				if(list.get(3).getRestopt_num() != 0){
+					sqlMapper.update("Rest.updateRestopt", paramClass1);
+				}
+			}else{ //옵션을 새로 추가하가한 경우 insert
+				sqlMapper.insert("Rest.insertRestopt", paramClass1);
+			}
+		}
+		
+		//5
+		if(restopt_subject5 != null && restopt_priceplus5 != 0){
+			paramClass1.setRestopt_rest_num(rest_num);
+			paramClass1.setRestopt_subject(restopt_subject5);
+			paramClass1.setRestopt_priceplus(restopt_priceplus5);
+			
+			MultipartFile file = request.getFile("optupload5"); // 업로드된 원본
+			String orgName = file.getOriginalFilename(); // 업로드되는 실제 파일 이름이다.
+			
+			if(orgName != ""){ //수정시에 파일 업로드 했을경우
+				if(4<listsize){//기존파일 삭제를 위해 레코드를 인덱스 단위로 판단
+					if (list.get(4).getRestopt_savname() != null) {
+						String filesName = list.get(4).getRestopt_savname(); //기존 파일명을 가져옴
+						//fileUpload.deleteFiles(filesName, optfileUploadPath1); //해당경로, 기존파일명을 삭제함.
+					}
+				}
+				//새롭게 업로드된 것 저장
+				//옵션 사진 파일 이름과 확장자 설정.
+				String saveName = "menu5_" + Integer.toString((int)(Math.random() * 999999)) + orgName;
+				File restopt_destFile1 = new File(optfileUploadPath+saveName); //이과정을 거치면 saveName의 복사 대상이 생김
+				file.transferTo(restopt_destFile1);  // 위에서 만든 복사대상에 복사본을 만듬. (이걸로 복사 끝)
+				
+				//매인사진파일 DTO에 set
+				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(26));
+				paramClass1.setRestopt_orgname(orgName);
+				paramClass1.setRestopt_savname(saveName);
+			}else{//수정시에 파일 업로드 하지 않았을 경우
+				if(4<listsize){
+					paramClass1.setRestopt_destFile1(list.get(4).getRestopt_destFile1());
+					paramClass1.setRestopt_orgname(list.get(4).getRestopt_orgname());
+					paramClass1.setRestopt_savname(list.get(4).getRestopt_savname());
+				}
+			}
+			if(4<listsize){ 
+				// 기존 옵션레코드가 있었을 경우 update
+				if(list.get(4).getRestopt_num() != 0){
+					sqlMapper.update("Rest.updateRestopt", paramClass1);
+				}
+			}else{ //옵션을 새로 추가하가한 경우 insert
+				sqlMapper.insert("Rest.insertRestopt", paramClass1);
+			}
+		}
+		
+		//6
+		if(restopt_subject6 != null && restopt_priceplus6 != 0){
+			paramClass1.setRestopt_rest_num(rest_num);
+			paramClass1.setRestopt_subject(restopt_subject6);
+			paramClass1.setRestopt_priceplus(restopt_priceplus6);
+			
+			MultipartFile file = request.getFile("optupload6"); // 업로드된 원본
+			String orgName = file.getOriginalFilename(); // 업로드되는 실제 파일 이름이다.
+			
+			if(orgName != ""){ //수정시에 파일 업로드 했을경우
+				if(5<listsize){//기존파일 삭제를 위해 레코드를 인덱스 단위로 판단
+					if (list.get(5).getRestopt_savname() != null) {
+						String filesName = list.get(5).getRestopt_savname(); //기존 파일명을 가져옴
+						//fileUpload.deleteFiles(filesName, optfileUploadPath1); //해당경로, 기존파일명을 삭제함.
+					}
+				}
+				//새롭게 업로드된 것 저장
+				//옵션 사진 파일 이름과 확장자 설정.
+				String saveName = "menu6_" + Integer.toString((int)(Math.random() * 999999)) + orgName;
+				File restopt_destFile1 = new File(optfileUploadPath+saveName); //이과정을 거치면 saveName의 복사 대상이 생김
+				file.transferTo(restopt_destFile1);  // 위에서 만든 복사대상에 복사본을 만듬. (이걸로 복사 끝)
+				
+				//매인사진파일 DTO에 set
+				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(26));
+				paramClass1.setRestopt_orgname(orgName);
+				paramClass1.setRestopt_savname(saveName);
+			}else{//수정시에 파일 업로드 하지 않았을 경우
+				if(5<listsize){
+					paramClass1.setRestopt_destFile1(list.get(5).getRestopt_destFile1());
+					paramClass1.setRestopt_orgname(list.get(5).getRestopt_orgname());
+					paramClass1.setRestopt_savname(list.get(5).getRestopt_savname());
+				}
+			}
+			if(5<listsize){ 
+				// 기존 옵션레코드가 있었을 경우 update
+				if(list.get(5).getRestopt_num() != 0){
+					sqlMapper.update("Rest.updateRestopt", paramClass1);
+				}
+			}else{ //옵션을 새로 추가하가한 경우 insert
+				sqlMapper.insert("Rest.insertRestopt", paramClass1);
+			}
+		}
+		
+		//7
+		if(restopt_subject7 != null && restopt_priceplus7 != 0){
+			paramClass1.setRestopt_rest_num(rest_num);
+			paramClass1.setRestopt_subject(restopt_subject7);
+			paramClass1.setRestopt_priceplus(restopt_priceplus7);
+			
+			MultipartFile file = request.getFile("optupload7"); // 업로드된 원본
+			String orgName = file.getOriginalFilename(); // 업로드되는 실제 파일 이름이다.
+			
+			if(orgName != ""){ //수정시에 파일 업로드 했을경우
+				if(6<listsize){//기존파일 삭제를 위해 레코드를 인덱스 단위로 판단
+					if (list.get(6).getRestopt_savname() != null) {
+						String filesName = list.get(6).getRestopt_savname(); //기존 파일명을 가져옴
+						//fileUpload.deleteFiles(filesName, optfileUploadPath1); //해당경로, 기존파일명을 삭제함.
+					}
+				}
+				//새롭게 업로드된 것 저장
+				//옵션 사진 파일 이름과 확장자 설정.
+				String saveName = "menu7_" + Integer.toString((int)(Math.random() * 999999)) + orgName;
+				File restopt_destFile1 = new File(optfileUploadPath+saveName); //이과정을 거치면 saveName의 복사 대상이 생김
+				file.transferTo(restopt_destFile1);  // 위에서 만든 복사대상에 복사본을 만듬. (이걸로 복사 끝)
+				
+				//매인사진파일 DTO에 set
+				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(26));
+				paramClass1.setRestopt_orgname(orgName);
+				paramClass1.setRestopt_savname(saveName);
+			}else{//수정시에 파일 업로드 하지 않았을 경우
+				if(6<listsize){
+					paramClass1.setRestopt_destFile1(list.get(6).getRestopt_destFile1());
+					paramClass1.setRestopt_orgname(list.get(6).getRestopt_orgname());
+					paramClass1.setRestopt_savname(list.get(6).getRestopt_savname());
+				}
+			}
+			if(6<listsize){ 
+				// 기존 옵션레코드가 있었을 경우 update
+				if(list.get(6).getRestopt_num() != 0){
+					sqlMapper.update("Rest.updateRestopt", paramClass1);
+				}
+			}else{ //옵션을 새로 추가하가한 경우 insert
+				sqlMapper.insert("Rest.insertRestopt", paramClass1);
+			}
+		}
+		
+		//8
+		if(restopt_subject8 != null && restopt_priceplus8 != 0){
+			paramClass1.setRestopt_rest_num(rest_num);
+			paramClass1.setRestopt_subject(restopt_subject8);
+			paramClass1.setRestopt_priceplus(restopt_priceplus8);
+			
+			MultipartFile file = request.getFile("optupload8"); // 업로드된 원본
+			String orgName = file.getOriginalFilename(); // 업로드되는 실제 파일 이름이다.
+			
+			if(orgName != ""){ //수정시에 파일 업로드 했을경우
+				if(7<listsize){//기존파일 삭제를 위해 레코드를 인덱스 단위로 판단
+					if (list.get(7).getRestopt_savname() != null) {
+						String filesName = list.get(7).getRestopt_savname(); //기존 파일명을 가져옴
+						//fileUpload.deleteFiles(filesName, optfileUploadPath1); //해당경로, 기존파일명을 삭제함.
+					}
+				}
+				//새롭게 업로드된 것 저장
+				//옵션 사진 파일 이름과 확장자 설정.
+				String saveName = "menu8_" + Integer.toString((int)(Math.random() * 999999)) + orgName;
+				File restopt_destFile1 = new File(optfileUploadPath+saveName); //이과정을 거치면 saveName의 복사 대상이 생김
+				file.transferTo(restopt_destFile1);  // 위에서 만든 복사대상에 복사본을 만듬. (이걸로 복사 끝)
+				
+				//매인사진파일 DTO에 set
+				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(26));
+				paramClass1.setRestopt_orgname(orgName);
+				paramClass1.setRestopt_savname(saveName);
+			}else{//수정시에 파일 업로드 하지 않았을 경우
+				if(7<listsize){
+					paramClass1.setRestopt_destFile1(list.get(7).getRestopt_destFile1());
+					paramClass1.setRestopt_orgname(list.get(7).getRestopt_orgname());
+					paramClass1.setRestopt_savname(list.get(7).getRestopt_savname());
+				}
+			}
+			if(7<listsize){ 
+				// 기존 옵션레코드가 있었을 경우 update
+				if(list.get(7).getRestopt_num() != 0){
+					sqlMapper.update("Rest.updateRestopt", paramClass1);
+				}
+			}else{ //옵션을 새로 추가하가한 경우 insert
+				sqlMapper.insert("Rest.insertRestopt", paramClass1);
+			}
+		}
+		
+		//9
+		if(restopt_subject9 != null && restopt_priceplus9 != 0){
+			paramClass1.setRestopt_rest_num(rest_num);
+			paramClass1.setRestopt_subject(restopt_subject9);
+			paramClass1.setRestopt_priceplus(restopt_priceplus9);
+			
+			MultipartFile file = request.getFile("optupload9"); // 업로드된 원본
+			String orgName = file.getOriginalFilename(); // 업로드되는 실제 파일 이름이다.
+			
+			if(orgName != ""){ //수정시에 파일 업로드 했을경우
+				if(8<listsize){//기존파일 삭제를 위해 레코드를 인덱스 단위로 판단
+					if (list.get(8).getRestopt_savname() != null) {
+						String filesName = list.get(8).getRestopt_savname(); //기존 파일명을 가져옴
+						//fileUpload.deleteFiles(filesName, optfileUploadPath1); //해당경로, 기존파일명을 삭제함.
+					}
+				}
+				//새롭게 업로드된 것 저장
+				//옵션 사진 파일 이름과 확장자 설정.
+				String saveName = "menu9_" + Integer.toString((int)(Math.random() * 999999)) + orgName;
+				File restopt_destFile1 = new File(optfileUploadPath+saveName); //이과정을 거치면 saveName의 복사 대상이 생김
+				file.transferTo(restopt_destFile1);  // 위에서 만든 복사대상에 복사본을 만듬. (이걸로 복사 끝)
+				
+				//매인사진파일 DTO에 set
+				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(26));
+				paramClass1.setRestopt_orgname(orgName);
+				paramClass1.setRestopt_savname(saveName);
+			}else{//수정시에 파일 업로드 하지 않았을 경우
+				if(8<listsize){
+					paramClass1.setRestopt_destFile1(list.get(8).getRestopt_destFile1());
+					paramClass1.setRestopt_orgname(list.get(8).getRestopt_orgname());
+					paramClass1.setRestopt_savname(list.get(8).getRestopt_savname());
+				}
+			}
+			if(8<listsize){ 
+				// 기존 옵션레코드가 있었을 경우 update
+				if(list.get(8).getRestopt_num() != 0){
+					sqlMapper.update("Rest.updateRestopt", paramClass1);
+				}
+			}else{ //옵션을 새로 추가하가한 경우 insert
+				sqlMapper.insert("Rest.insertRestopt", paramClass1);
+			}
+		}
+		
+		//10
+		if(restopt_subject10 != null && restopt_priceplus10 != 0){
+			paramClass1.setRestopt_rest_num(rest_num);
+			paramClass1.setRestopt_subject(restopt_subject10);
+			paramClass1.setRestopt_priceplus(restopt_priceplus10);
+			
+			MultipartFile file = request.getFile("optupload10"); // 업로드된 원본
+			String orgName = file.getOriginalFilename(); // 업로드되는 실제 파일 이름이다.
+			
+			if(orgName != ""){ //수정시에 파일 업로드 했을경우
+				if(9<listsize){//기존파일 삭제를 위해 레코드를 인덱스 단위로 판단
+					if (list.get(9).getRestopt_savname() != null) {
+						String filesName = list.get(9).getRestopt_savname(); //기존 파일명을 가져옴
+						//fileUpload.deleteFiles(filesName, optfileUploadPath1); //해당경로, 기존파일명을 삭제함.
+					}
+				}
+				//새롭게 업로드된 것 저장
+				//옵션 사진 파일 이름과 확장자 설정.
+				String saveName = "menu10_" + Integer.toString((int)(Math.random() * 999999)) + orgName;
+				File restopt_destFile1 = new File(optfileUploadPath+saveName); //이과정을 거치면 saveName의 복사 대상이 생김
+				file.transferTo(restopt_destFile1);  // 위에서 만든 복사대상에 복사본을 만듬. (이걸로 복사 끝)
+				
+				//매인사진파일 DTO에 set
+				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(26));
+				paramClass1.setRestopt_orgname(orgName);
+				paramClass1.setRestopt_savname(saveName);
+			}else{//수정시에 파일 업로드 하지 않았을 경우
+				if(9<listsize){
+					paramClass1.setRestopt_destFile1(list.get(9).getRestopt_destFile1());
+					paramClass1.setRestopt_orgname(list.get(9).getRestopt_orgname());
+					paramClass1.setRestopt_savname(list.get(9).getRestopt_savname());
+				}
+			}
+			if(9<listsize){ 
+				// 기존 옵션레코드가 있었을 경우 update
+				if(list.get(9).getRestopt_num() != 0){
+					sqlMapper.update("Rest.updateRestopt", paramClass1);
+				}
+			}else{ //옵션을 새로 추가하가한 경우 insert
+				sqlMapper.insert("Rest.insertRestopt", paramClass1);
+			}
+		}
+		
+		//11
+		if(restopt_subject11 != null && restopt_priceplus11 != 0){
+			paramClass1.setRestopt_rest_num(rest_num);
+			paramClass1.setRestopt_subject(restopt_subject11);
+			paramClass1.setRestopt_priceplus(restopt_priceplus11);
+			
+			MultipartFile file = request.getFile("optupload11"); // 업로드된 원본
+			String orgName = file.getOriginalFilename(); // 업로드되는 실제 파일 이름이다.
+			
+			if(orgName != ""){ //수정시에 파일 업로드 했을경우
+				if(10<listsize){//기존파일 삭제를 위해 레코드를 인덱스 단위로 판단
+					if (list.get(10).getRestopt_savname() != null) {
+						String filesName = list.get(10).getRestopt_savname(); //기존 파일명을 가져옴
+						//fileUpload.deleteFiles(filesName, optfileUploadPath1); //해당경로, 기존파일명을 삭제함.
+					}
+				}
+				//새롭게 업로드된 것 저장
+				//옵션 사진 파일 이름과 확장자 설정.
+				String saveName = "menu11_" + Integer.toString((int)(Math.random() * 999999)) + orgName;
+				File restopt_destFile1 = new File(optfileUploadPath+saveName); //이과정을 거치면 saveName의 복사 대상이 생김
+				file.transferTo(restopt_destFile1);  // 위에서 만든 복사대상에 복사본을 만듬. (이걸로 복사 끝)
+				
+				//매인사진파일 DTO에 set
+				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(26));
+				paramClass1.setRestopt_orgname(orgName);
+				paramClass1.setRestopt_savname(saveName);
+			}else{//수정시에 파일 업로드 하지 않았을 경우
+				if(10<listsize){
+					paramClass1.setRestopt_destFile1(list.get(10).getRestopt_destFile1());
+					paramClass1.setRestopt_orgname(list.get(10).getRestopt_orgname());
+					paramClass1.setRestopt_savname(list.get(10).getRestopt_savname());
+				}
+			}
+			if(10<listsize){ 
+				// 기존 옵션레코드가 있었을 경우 update
+				if(list.get(10).getRestopt_num() != 0){
+					sqlMapper.update("Rest.updateRestopt", paramClass1);
+				}
+			}else{ //옵션을 새로 추가하가한 경우 insert
+				sqlMapper.insert("Rest.insertRestopt", paramClass1);
+			}
+		}
+		
+		//12
+		if(restopt_subject12 != null && restopt_priceplus12 != 0){
+			paramClass1.setRestopt_rest_num(rest_num);
+			paramClass1.setRestopt_subject(restopt_subject12);
+			paramClass1.setRestopt_priceplus(restopt_priceplus12);
+			
+			MultipartFile file = request.getFile("optupload12"); // 업로드된 원본
+			String orgName = file.getOriginalFilename(); // 업로드되는 실제 파일 이름이다.
+			
+			if(orgName != ""){ //수정시에 파일 업로드 했을경우
+				if(11<listsize){//기존파일 삭제를 위해 레코드를 인덱스 단위로 판단
+					if (list.get(11).getRestopt_savname() != null) {
+						String filesName = list.get(11).getRestopt_savname(); //기존 파일명을 가져옴
+						//fileUpload.deleteFiles(filesName, optfileUploadPath1); //해당경로, 기존파일명을 삭제함.
+					}
+				}
+				//새롭게 업로드된 것 저장
+				//옵션 사진 파일 이름과 확장자 설정.
+				String saveName = "menu12_" + Integer.toString((int)(Math.random() * 999999)) + orgName;
+				File restopt_destFile1 = new File(optfileUploadPath+saveName); //이과정을 거치면 saveName의 복사 대상이 생김
+				file.transferTo(restopt_destFile1);  // 위에서 만든 복사대상에 복사본을 만듬. (이걸로 복사 끝)
+				
+				//매인사진파일 DTO에 set
+				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(26));
+				paramClass1.setRestopt_orgname(orgName);
+				paramClass1.setRestopt_savname(saveName);
+			}else{//수정시에 파일 업로드 하지 않았을 경우
+				if(11<listsize){
+					paramClass1.setRestopt_destFile1(list.get(11).getRestopt_destFile1());
+					paramClass1.setRestopt_orgname(list.get(11).getRestopt_orgname());
+					paramClass1.setRestopt_savname(list.get(11).getRestopt_savname());
+				}
+			}
+			if(11<listsize){ 
+				// 기존 옵션레코드가 있었을 경우 update
+				if(list.get(11).getRestopt_num() != 0){
+					sqlMapper.update("Rest.updateRestopt", paramClass1);
+				}
+			}else{ //옵션을 새로 추가하가한 경우 insert
+				sqlMapper.insert("Rest.insertRestopt", paramClass1);
+			}
+		}
+		
+		//13
+		if(restopt_subject13 != null && restopt_priceplus13 != 0){
+			paramClass1.setRestopt_rest_num(rest_num);
+			paramClass1.setRestopt_subject(restopt_subject13);
+			paramClass1.setRestopt_priceplus(restopt_priceplus13);
+			
+			MultipartFile file = request.getFile("optupload13"); // 업로드된 원본
+			String orgName = file.getOriginalFilename(); // 업로드되는 실제 파일 이름이다.
+			
+			if(orgName != ""){ //수정시에 파일 업로드 했을경우
+				if(12<listsize){//기존파일 삭제를 위해 레코드를 인덱스 단위로 판단
+					if (list.get(12).getRestopt_savname() != null) {
+						String filesName = list.get(12).getRestopt_savname(); //기존 파일명을 가져옴
+						//fileUpload.deleteFiles(filesName, optfileUploadPath1); //해당경로, 기존파일명을 삭제함.
+					}
+				}
+				//새롭게 업로드된 것 저장
+				//옵션 사진 파일 이름과 확장자 설정.
+				String saveName = "menu13_" + Integer.toString((int)(Math.random() * 999999)) + orgName;
+				File restopt_destFile1 = new File(optfileUploadPath+saveName); //이과정을 거치면 saveName의 복사 대상이 생김
+				file.transferTo(restopt_destFile1);  // 위에서 만든 복사대상에 복사본을 만듬. (이걸로 복사 끝)
+				
+				//매인사진파일 DTO에 set
+				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(26));
+				paramClass1.setRestopt_orgname(orgName);
+				paramClass1.setRestopt_savname(saveName);
+			}else{//수정시에 파일 업로드 하지 않았을 경우
+				if(12<listsize){
+					paramClass1.setRestopt_destFile1(list.get(12).getRestopt_destFile1());
+					paramClass1.setRestopt_orgname(list.get(12).getRestopt_orgname());
+					paramClass1.setRestopt_savname(list.get(12).getRestopt_savname());
+				}
+			}
+			if(12<listsize){ 
+				// 기존 옵션레코드가 있었을 경우 update
+				if(list.get(12).getRestopt_num() != 0){
+					sqlMapper.update("Rest.updateRestopt", paramClass1);
+				}
+			}else{ //옵션을 새로 추가하가한 경우 insert
+				sqlMapper.insert("Rest.insertRestopt", paramClass1);
+			}
+		}
+		
+		//14
+		if(restopt_subject14 != null && restopt_priceplus14 != 0){
+			paramClass1.setRestopt_rest_num(rest_num);
+			paramClass1.setRestopt_subject(restopt_subject14);
+			paramClass1.setRestopt_priceplus(restopt_priceplus14);
+			
+			MultipartFile file = request.getFile("optupload14"); // 업로드된 원본
+			String orgName = file.getOriginalFilename(); // 업로드되는 실제 파일 이름이다.
+			
+			if(orgName != ""){ //수정시에 파일 업로드 했을경우
+				if(13<listsize){//기존파일 삭제를 위해 레코드를 인덱스 단위로 판단
+					if (list.get(13).getRestopt_savname() != null) {
+						String filesName = list.get(13).getRestopt_savname(); //기존 파일명을 가져옴
+						//fileUpload.deleteFiles(filesName, optfileUploadPath1); //해당경로, 기존파일명을 삭제함.
+					}
+				}
+				//새롭게 업로드된 것 저장
+				//옵션 사진 파일 이름과 확장자 설정.
+				String saveName = "menu14_" + Integer.toString((int)(Math.random() * 999999)) + orgName;
+				File restopt_destFile1 = new File(optfileUploadPath+saveName); //이과정을 거치면 saveName의 복사 대상이 생김
+				file.transferTo(restopt_destFile1);  // 위에서 만든 복사대상에 복사본을 만듬. (이걸로 복사 끝)
+				
+				//매인사진파일 DTO에 set
+				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(26));
+				paramClass1.setRestopt_orgname(orgName);
+				paramClass1.setRestopt_savname(saveName);
+			}else{//수정시에 파일 업로드 하지 않았을 경우
+				if(13<listsize){
+					paramClass1.setRestopt_destFile1(list.get(13).getRestopt_destFile1());
+					paramClass1.setRestopt_orgname(list.get(13).getRestopt_orgname());
+					paramClass1.setRestopt_savname(list.get(13).getRestopt_savname());
+				}
+			}
+			if(13<listsize){ 
+				// 기존 옵션레코드가 있었을 경우 update
+				if(list.get(13).getRestopt_num() != 0){
+					sqlMapper.update("Rest.updateRestopt", paramClass1);
+				}
+			}else{ //옵션을 새로 추가하가한 경우 insert
+				sqlMapper.insert("Rest.insertRestopt", paramClass1);
+			}
+		}
+		
+		//15
+		if(restopt_subject15 != null && restopt_priceplus15 != 0){
+			paramClass1.setRestopt_rest_num(rest_num);
+			paramClass1.setRestopt_subject(restopt_subject15);
+			paramClass1.setRestopt_priceplus(restopt_priceplus15);
+			
+			MultipartFile file = request.getFile("optupload15"); // 업로드된 원본
+			String orgName = file.getOriginalFilename(); // 업로드되는 실제 파일 이름이다.
+			
+			if(orgName != ""){ //수정시에 파일 업로드 했을경우
+				if(14<listsize){//기존파일 삭제를 위해 레코드를 인덱스 단위로 판단
+					if (list.get(14).getRestopt_savname() != null) {
+						String filesName = list.get(14).getRestopt_savname(); //기존 파일명을 가져옴
+						//fileUpload.deleteFiles(filesName, optfileUploadPath1); //해당경로, 기존파일명을 삭제함.
+					}
+				}
+				//새롭게 업로드된 것 저장
+				//옵션 사진 파일 이름과 확장자 설정.
+				String saveName = "menu15_" + Integer.toString((int)(Math.random() * 999999)) + orgName;
+				File restopt_destFile1 = new File(optfileUploadPath+saveName); //이과정을 거치면 saveName의 복사 대상이 생김
+				file.transferTo(restopt_destFile1);  // 위에서 만든 복사대상에 복사본을 만듬. (이걸로 복사 끝)
+				
+				//매인사진파일 DTO에 set
+				paramClass1.setRestopt_destFile1(restopt_destFile1.getPath().replace('\\', '/').substring(26));
+				paramClass1.setRestopt_orgname(orgName);
+				paramClass1.setRestopt_savname(saveName);
+			}else{//수정시에 파일 업로드 하지 않았을 경우
+				if(14<listsize){
+					paramClass1.setRestopt_destFile1(list.get(14).getRestopt_destFile1());
+					paramClass1.setRestopt_orgname(list.get(14).getRestopt_orgname());
+					paramClass1.setRestopt_savname(list.get(14).getRestopt_savname());
+				}
+			}
+			if(14<listsize){ 
+				// 기존 옵션레코드가 있었을 경우 update
+				if(list.get(14).getRestopt_num() != 0){
+					sqlMapper.update("Rest.updateRestopt", paramClass1);
+				}
+			}else{ //옵션을 새로 추가하가한 경우 insert
+				sqlMapper.insert("Rest.insertRestopt", paramClass1);
+			}
+		}
 		
 		return "redirect:readRest.do?rest_num="+rest_num+"&currentPage="+currentPage;
 	}

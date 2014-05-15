@@ -132,16 +132,6 @@
 					<!-- 임시 히든값 -->
 					<input type="hidden" name="session_id" value="${sessionScope.session_id}" />
 			</c:if>
-			
-			<!-- 수정 입력시에 -->
-			<c:if test="${rest_num == 'update'}">
-				<form name="updateRestForm" action="updateRest.action" method="post" enctype="multipart/form-data">
-					<input type="rest_num" name="session_id" value="${resultClass.rest_num}" />
-					<input type="currentPage" name="session_id" value="${currentPage}" />
-					<input type="old_file1" name="session_id" value="${resultClass.file_savname1}" />
-					<input type="old_file2" name="session_id" value="${resultClass.file_savname2}" />
-			</c:if>
-
 					<table width=75% border="0" cellspacing="0" cellpadding="0" align="center">
 						<tr bgcolor="#777777">
 							<td height="1" colspan="2"></td>
