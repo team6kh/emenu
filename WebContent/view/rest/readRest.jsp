@@ -292,7 +292,7 @@
 			<!-- 글 작성자와 현재 로그인한 세션이 일치할 경우, 수정 및 삭제 버튼을 출력 시킴 -->
 			<c:if test="${sessionScope.session_id==resultClass.rest_writer_id}">
 				<div class="forSeller" align="right">
-					<a href="updateRestForm.action?rest_num=${resultClass.rest_num}&currentPage=${currentPage}&session_id=${sessionScope.session_id}" class="btn btn-success">수정</a>
+					<a href="updateRestForm.do?rest_num=${resultClass.rest_num}&currentPage=${currentPage}&session_id=${sessionScope.session_id}" class="btn btn-success">수정</a>
 					<a href="deleteRest.do?rest_num=${resultClass.rest_num}&session_id=${sessionScope.session_id}" class="btn btn-danger">삭제</a>
 				</div>
 			</c:if>	
