@@ -62,7 +62,7 @@ public class RegisterBuyer {
 		// request 객체에 login 값을 설정한다.
 		request.setAttribute("login", login);
 		
-		return "/user/loginFormPro.do";
+		return "/user/login.do";
 		
 	}
 	

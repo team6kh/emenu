@@ -66,7 +66,7 @@ public class CheckDup {
         
         //System.out.println("isDup:"+isDup);
         
-        return "/view/user/registration/checkDup.jsp";
+        return "/view/user/register/checkDup.jsp";
 		
 	}
 

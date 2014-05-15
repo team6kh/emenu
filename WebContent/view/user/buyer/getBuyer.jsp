@@ -30,7 +30,7 @@
 		$('#alert_div').addClass('alert-warning');
 		document.getElementById('alert_placeholder').innerHTML = "Loading..."; // 상태창은 Loading으로 바꾼다.
 		form = document.getElementById('form-signup');
-		form.action = "emailer.action";
+		form.action = "/emenu/email/verificationSend.do";
 		form.submit();
 		
 		return false;
