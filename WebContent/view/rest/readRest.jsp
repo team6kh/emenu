@@ -384,7 +384,7 @@
 		<c:if test="${sessionScope.session_type eq 'buyer'}">
 
 			<div class="text-center">
-				<form name="insertReviewForm" method="post" action="insertReviewPro.action" enctype="multipart/form-data" style="display: none">
+				<form name="insertReviewForm" method="post" action="insertReviewPro.do" enctype="multipart/form-data" style="display: none">
 					<table class="table table-striped">
 						<tr>
 							<th>별점</th>
@@ -406,7 +406,7 @@
 						<!--  이미지 파일 첨부 : 첨부 개수 제한/ 용량 제한 필요  -->
 						<tr>
 							<td class="text-center" colspan="2">
-							<input type="file" id="review_file_element" name="review_files" multiple="multiple" />
+							<input type="file" class="multi" maxlength="2" name="review_files" accept="gif|jpg|png|jpeg" multiple="multiple" />
 						</tr>
 
 					</table>
@@ -415,6 +415,7 @@
 					<input type="hidden" name="review_rest_currentPage" value="${currentPage}" />
 					<input type="hidden" name="review_rest" value="${rest_num}" />
 					<input type="hidden" name="rest_num" value="${rest_num}" />
+					<input type="hidden" name="ccp" value="${ccp}" /> 
 					<input type="hidden" name="review_writer" value="${sessionScope.session_id }" />
 
 				</form>
@@ -482,7 +483,7 @@
 										<c:if test="${reviewDTO.review_writer == sessionScope.session_id}">
 											&nbsp;&nbsp;&nbsp;&nbsp;
 											<button class="btn btn-default" onclick="return updateRV_form('${reviewDTO.review_num}')">수정</button>
-											<button class="btn btn-default" onclick="javascript:open('deleteReviewForm.action?rest_num=${rest_num}&review_rest_currentPage=${currentPage}&ccp=${ccp}&review_num=${reviewDTO.review_num}','confirm','toolbar=no, location=no, status= no, menubar=no, scrollbars=no, resizeable=no, width=300, height=135')">삭제</button>
+											<button class="btn btn-default" onclick="javascript:open('deleteReviewForm.do?rest_num=${rest_num}&review_rest_currentPage=${currentPage}&ccp=${ccp}&review_num=${reviewDTO.review_num}','confirm','toolbar=no, location=no, status= no, menubar=no, scrollbars=no, resizeable=no, width=300, height=135')">삭제</button>
 										</c:if>
 									</td>
 							</tr>
@@ -512,10 +513,10 @@
 			<!-- 리뷰 수정 폼(review) -->
 			<div id="updateRV_${reviewDTO.review_num }" style="display:none; margin: 20px">
 				
-					<form method="post" name="updateReviewForm" id="updateReviewForm" action="updateReviewPro.action" enctype="multipart/form-data" >
+					<form method="post" name="updateReviewForm" id="updateReviewForm" action="updateReviewPro.do" enctype="multipart/form-data" >
 				
 						<input type="hidden" name="rest_num" value="${rest_num}" />
-						<input type="hidden"  name="review_rest_currentPage" value="${review_rest_currentPage}" />
+						<input type="hidden"  name="review_rest_currentPage" value="${currentPage}" />
 						<input type="hidden"  name="ccp" value="${ccp}" /> 
 						<input type="hidden"  name="review_num" value="${reviewDTO.review_num}" />
 						
