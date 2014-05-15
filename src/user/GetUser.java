@@ -17,7 +17,9 @@ public class GetUser {
 		//String user_id = "";
 		
 		user_type = request.getParameter("user_type");
-		//user_id = request.getParameter("user_id");		
+		//user_id = request.getParameter("user_id");
+		
+		//System.out.println("actionStatus:"+request.getAttribute("actionStatus"));
 		
 		// 구매자
 		if (user_type.equals("buyer")) {

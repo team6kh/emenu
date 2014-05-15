@@ -61,7 +61,8 @@ public class SendEmail {
 	public String VerificationSend(HttpServletRequest request) {	
 		
 		String user_type = "";
-		String user_id = "";
+		String user_id = "";		
+		String ev_code = ""; // 인증코드
 		
 		user_type = request.getParameter("user_type");
 		user_id = request.getParameter("user_id");
@@ -76,7 +77,7 @@ public class SendEmail {
             
             /* RNG */
             RNG rng = new RNG();
-            String ev_code = rng.generateEvCode();
+            ev_code = rng.generateEvCode();
             
             /* 메시지 작성 */
             Message message = new MimeMessage(session);              
@@ -151,9 +152,13 @@ public class SendEmail {
             e.printStackTrace();
         }
         
-        return "/welcome.do";
+        // 발송 내역을 DB에 저장하러 간다.
+        request.setAttribute("ev_requested", to);
+        request.setAttribute("ev_code", ev_code);
+        return "/verification/insert.do";
         
 	}
+	
 	
 	@RequestMapping("/email/customerServiceSend.do")
 	public String CustomerServiceSend(HttpServletRequest request, HttpSession httpSession) {
