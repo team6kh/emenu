@@ -26,7 +26,7 @@
 
 <script type="text/javascript">
 	function goPayment(form) {
-		form.action = "payRest.action";
+		form.action = "payRest.do";
 		form.submit();
 		return false;
 	}
