@@ -36,7 +36,7 @@
 		var rest_num = document.getElementById("rest_num").value;
 		var rest_subject = document.getElementById("rest_subject").value;
 		var session_id = document.getElementById("session_id").value;
-		var url = "deleteCart.action?rest_num="+rest_num+"&rest_subject="+rest_subject+"&session_id="+session_id;
+		var url = "deleteCart.do?rest_num="+rest_num+"&rest_subject="+rest_subject+"&session_id="+session_id;
 		document.location.href=url;
 		return false;
 	}

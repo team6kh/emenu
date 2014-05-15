@@ -3,7 +3,9 @@ package rest.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +21,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import rest.dto.RestDTO;
 import restopt.dto.RestOptDTO;
 import user.seller.dto.SellerDTO;
+import cart.dto.CartDTO;
 
 import com.ibatis.common.resources.Resources;
 import com.ibatis.sqlmap.client.SqlMapClient;
@@ -28,12 +31,12 @@ import common.Constants;
 
 @Controller
 public class InsertRest {
+	//상품관련
 	private RestDTO paramClass = new RestDTO();
 	private RestDTO resultClass = new RestDTO();
 	private RestOptDTO paramClass1 = new RestOptDTO(); //private RestOptDTO resultClass1 = new RestOptDTO();
 	private SellerDTO sellerDTO = new SellerDTO();
-	
-	private int seq_num;
+	private int seq_num; //insert시 마지막 시퀀스 넘버로 쓰임
 	Calendar today = Calendar.getInstance();
 
 	//insertRest.jsp에서 사용자가 입력한 옵션명 파라미터
@@ -86,6 +89,11 @@ public class InsertRest {
 	//판매자가 글을 썻는지 안썻는지 판단하기 위한 변수
 	//판매자 1명당 1개의 상품글을 올릴 수 있도록 하기 위함.
 	Integer count;
+	
+	
+	//장바구니관련
+	private CartDTO paramClass2 = new CartDTO();
+	private List<CartDTO> list = new ArrayList<CartDTO>();
 	
 	//iBatis관련
 	SqlMapClientTemplate ibatis = null;
@@ -599,4 +607,39 @@ public class InsertRest {
 		
 		return "redirect:/listRest.do"; //이전버전 리다이렉트 액션썻음
 	}
+	
+	
+	//insertCart.do
+	@RequestMapping("/insertCart.do")
+	public String insertCart(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception{
+		String session_id = (String) session.getAttribute("session_id");
+		
+		int cart_rest_num = Integer.parseInt(request.getParameter("cart_rest_num"));
+		String cart_rest_subject = request.getParameter("cart_rest_subject");
+		int cart_restopt_num = Integer.parseInt(request.getParameter("cart_restopt_num"));
+		String cart_restopt_destFile1 = request.getParameter("cart_restopt_destFile1");
+		String cart_restopt_subject = request.getParameter("cart_restopt_subject");
+		int cart_restopt_priceplus = Integer.parseInt(request.getParameter("cart_restopt_priceplus"));
+		
+		paramClass2.setCart_rest_num(cart_rest_num);
+		paramClass2.setCart_rest_subject(cart_rest_subject);
+		paramClass2.setCart_restopt_num(cart_restopt_num);
+		paramClass2.setCart_restopt_destFile1(cart_restopt_destFile1);
+		paramClass2.setCart_restopt_subject(cart_restopt_subject);
+		paramClass2.setCart_restopt_priceplus(cart_restopt_priceplus);
+		paramClass2.setSession_id(session_id);
+		
+		//장바구니 데이터 insert
+		sqlMapper.insert("Cart.insertCart", paramClass2);
+		//장바구니 레코드를 가져옴
+		list = sqlMapper.queryForList("Cart.selectCartAll", paramClass2);
+		
+		request.setAttribute("list", list);
+
+		return "/view/rest/listCart.jsp";
+	}
+	
+	
+	
+	
 }

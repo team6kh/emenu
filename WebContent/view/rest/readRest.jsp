@@ -169,7 +169,7 @@
 		var restopt_subject = form.restopt_subject.value;
 		var restopt_priceplus = form.restopt_priceplus.value;
 
-		var url = "insertCart.action?cart_rest_num="+rest_num+"&cart_rest_subject="+rest_subject+"&cart_restopt_destFile1="+restopt_destFile1+"&cart_restopt_num="+restopt_num+"&cart_restopt_subject="+restopt_subject+"&cart_restopt_priceplus="+restopt_priceplus+"&session_id="+session_id;
+		var url = "insertCart.do?cart_rest_num="+rest_num+"&cart_rest_subject="+rest_subject+"&cart_restopt_destFile1="+restopt_destFile1+"&cart_restopt_num="+restopt_num+"&cart_restopt_subject="+restopt_subject+"&cart_restopt_priceplus="+restopt_priceplus+"&session_id="+session_id;
 		document.getElementById("cartFrame").contentWindow.location.href=url;
 		return false;
 	}
@@ -360,7 +360,7 @@
 				<h2><strong>장바구니</strong></small></h2>
 			</div>
 			<!-- iframe -->
-			<iframe id="cartFrame" src="listCart.action?rest_num=${rest_num}&rest_subject=${resultClass.rest_subject}&session_id=${sessionScope.session_id}" frameborder="0" style="overflow:hidden;height:500px;width:100%" height="100%" width="100%"></iframe>
+			<iframe id="cartFrame" src="listCart.do?rest_num=${rest_num}&rest_subject=${resultClass.rest_subject}&session_id=${sessionScope.session_id}" frameborder="0" style="overflow:hidden;height:500px;width:100%" height="100%" width="100%"></iframe>
 		</c:if>	
 		<!-- /장바구니 col-md-3 -->
 	</div>

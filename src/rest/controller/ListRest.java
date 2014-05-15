@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import rest.dto.RestDTO;
 import restopt.dto.RestOptDTO;
 import review.dto.ReviewDTO;
+import cart.dto.CartDTO;
 
 import com.ibatis.common.resources.Resources;
 import com.ibatis.sqlmap.client.SqlMapClient;
@@ -27,13 +28,18 @@ import common.PagingAction;
 
 @Controller
 public class ListRest {
-	//필요인스턴스변수
+	//상품관련
 	private List<RestDTO> list = new ArrayList<RestDTO>();
-	private List<RestOptDTO> list1 = new ArrayList<RestOptDTO>();
 	private RestDTO paramClass = new RestDTO();
 	private RestDTO resultClass = new RestDTO();
 	private int permission; // 판매자가 글 작성여부 판단
 	private int rest_num; // 글 읽기시 필요 변수
+	
+	//옵션관련
+	private List<RestOptDTO> list1 = new ArrayList<RestOptDTO>();
+	
+	//장바구니관련
+	private CartDTO paramClass1 = new CartDTO();
 	
 	//후기관련
 	private List<ReviewDTO> reviewRes = new ArrayList<ReviewDTO>();
@@ -180,4 +186,22 @@ public class ListRest {
         
 		return "/view/rest/readRest.jsp";
 	}
+	
+	
+	
+	//listCart.do
+	@RequestMapping("/listCart.do")
+	public String listCart(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception{
+		String session_id = (String) session.getAttribute("session_id");
+		int rest_num = Integer.parseInt(request.getParameter("rest_num"));
+		
+		paramClass1.setCart_rest_num(rest_num);
+		paramClass1.setSession_id(session_id);
+		//카트리스트
+		list = sqlMapper.queryForList("Cart.selectCartAll", paramClass1);
+
+		return "/view/rest/listCart.jsp";
+	}
+	
+	
 }
