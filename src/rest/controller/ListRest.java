@@ -38,9 +38,6 @@ public class ListRest {
 	//옵션관련
 	private List<RestOptDTO> list1 = new ArrayList<RestOptDTO>();
 	
-	//장바구니관련
-	private CartDTO paramClass1 = new CartDTO();
-	
 	//후기관련
 	private List<ReviewDTO> reviewRes = new ArrayList<ReviewDTO>();
 	//private String reviewFile_Path = Constants.COMMON_FILE_PATH+ Constants.REVIEW_FILE_PATH;
@@ -186,22 +183,5 @@ public class ListRest {
         
 		return "/view/rest/readRest.jsp";
 	}
-	
-	
-	
-	//listCart.do
-	@RequestMapping("/listCart.do")
-	public String listCart(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception{
-		String session_id = (String) session.getAttribute("session_id");
-		int rest_num = Integer.parseInt(request.getParameter("rest_num"));
-		
-		paramClass1.setCart_rest_num(rest_num);
-		paramClass1.setSession_id(session_id);
-		//카트리스트
-		list = sqlMapper.queryForList("Cart.selectCartAll", paramClass1);
-
-		return "/view/rest/listCart.jsp";
-	}
-	
 	
 }

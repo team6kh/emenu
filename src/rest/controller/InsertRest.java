@@ -91,10 +91,6 @@ public class InsertRest {
 	Integer count;
 	
 	
-	//장바구니관련
-	private CartDTO paramClass2 = new CartDTO();
-	private List<CartDTO> list = new ArrayList<CartDTO>();
-	
 	//iBatis관련
 	SqlMapClientTemplate ibatis = null;
 	public static Reader reader;
@@ -607,39 +603,5 @@ public class InsertRest {
 		
 		return "redirect:/listRest.do"; //이전버전 리다이렉트 액션썻음
 	}
-	
-	
-	//insertCart.do
-	@RequestMapping("/insertCart.do")
-	public String insertCart(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception{
-		String session_id = (String) session.getAttribute("session_id");
-		
-		int cart_rest_num = Integer.parseInt(request.getParameter("cart_rest_num"));
-		String cart_rest_subject = request.getParameter("cart_rest_subject");
-		int cart_restopt_num = Integer.parseInt(request.getParameter("cart_restopt_num"));
-		String cart_restopt_destFile1 = request.getParameter("cart_restopt_destFile1");
-		String cart_restopt_subject = request.getParameter("cart_restopt_subject");
-		int cart_restopt_priceplus = Integer.parseInt(request.getParameter("cart_restopt_priceplus"));
-		
-		paramClass2.setCart_rest_num(cart_rest_num);
-		paramClass2.setCart_rest_subject(cart_rest_subject);
-		paramClass2.setCart_restopt_num(cart_restopt_num);
-		paramClass2.setCart_restopt_destFile1(cart_restopt_destFile1);
-		paramClass2.setCart_restopt_subject(cart_restopt_subject);
-		paramClass2.setCart_restopt_priceplus(cart_restopt_priceplus);
-		paramClass2.setSession_id(session_id);
-		
-		//장바구니 데이터 insert
-		sqlMapper.insert("Cart.insertCart", paramClass2);
-		//장바구니 레코드를 가져옴
-		list = sqlMapper.queryForList("Cart.selectCartAll", paramClass2);
-		
-		request.setAttribute("list", list);
-
-		return "/view/rest/listCart.jsp";
-	}
-	
-	
-	
 	
 }
