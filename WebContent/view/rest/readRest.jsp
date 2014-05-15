@@ -282,7 +282,7 @@
 	    	</c:if>
 	    	<!-- 판매자가 아닐 시 -->
 	    	<c:if test="${sessionScope.session_type!='buyer'}">
-	    		<h2><strong>메뉴 리스트</strong> <small>구매하시려면 판매자로 로그인해주세요.</small></h2>
+	    		<h2><strong>메뉴 리스트</strong> <small>구매하시려면 구매자로 로그인해주세요.</small></h2>
 	    	</c:if>			
 			<input type="hidden" id="rest_num" name="rest_num" value="${resultClass.rest_num}" />
 			<input type="hidden" id="rest_subject" name="rest_subject" value="${resultClass.rest_subject}" />

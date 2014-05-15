@@ -106,7 +106,7 @@
 			</table>
 			
 			
-			<form name="updateRestForm" action="updateRest.action" method="post" enctype="multipart/form-data">
+			<form name="updateRestForm" action="updateRest.do" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="rest_num" value="${rest_num}" />
 				<input type="hidden" name="currentPage" value="${currentPage}" />
 				
