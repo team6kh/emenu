@@ -26,7 +26,7 @@
 <!-- masonry -->
 <link rel="stylesheet" type="text/css" href="assets/plugins/masonry/css/component.css" />
 <script src="/emenu/assets/plugins/masonry/js/modernizr.custom.js"></script>
-<!-- /masonry -->
+<!-- /.masonry -->
 
 <style type="text/css">
 .masonry {
@@ -86,6 +86,7 @@
 
 	</div>
 	<!-- /.container -->
+	
 
 	<!-- Bootstrap core JavaScript
     ================================================== -->

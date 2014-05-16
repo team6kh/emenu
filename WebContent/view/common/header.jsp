@@ -61,14 +61,14 @@
 				<%-- 로그인 전 --%>
 				<c:when test="${empty session_id}">
 					<form class="navbar-form navbar-right">						
-						<a href="registrationForm.action" class="btn btn-default">회원가입</a>
-						<button type="button" class="btn btn-primary" onclick="goLoginForm(this.form)">로그인</button>
+						<a href="/emenu/user/register/form.do" class="btn btn-default">회원가입</a>
+						<button type="button" class="btn btn-primary" onclick="loginForm(this.form)">로그인</button>
 					</form>					
 				</c:when>
 				<%-- 로그인 후 --%>
 				<c:when test="${not empty session_id}">
-					<form class="navbar-form navbar-right" action="/emenu/user/logout.do">
-						<a href="readUser.action?user_type=${session_type}&user_id=${session_id}" class="btn btn-link">${session_name} (${session_id}) 님 환영합니다.</a>&nbsp;&nbsp;&nbsp;&nbsp;
+					<form class="navbar-form navbar-right" action="/emenu/user/logout.do" method="post">
+						<a href="/emenu/user/get.do?user_type=${session_type}&user_id=${session_id}" class="btn btn-link">${session_name} (${session_id}) 님 환영합니다.</a>&nbsp;&nbsp;&nbsp;&nbsp;
 						<button type="submit" class="btn btn-warning">로그아웃</button>
 					</form>
 				</c:when>				
@@ -80,8 +80,8 @@
 
 <script>
 	// 왜 스크립트로 해야지 로그인 폼으로 넘어가는지 모르겠음...
-	function goLoginForm(form) {
-		form.action = "/emenu/user/loginForm.do";
+	function loginForm(form) {
+		form.action = "/emenu/user/login/form.do";
 		form.submit();
 	}
 </script>

@@ -5,7 +5,6 @@ import java.io.Reader;
 import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -33,23 +32,33 @@ public class Login {
 		reader.close();
 	}
 
-	@RequestMapping("/user/loginForm.do")
+	@RequestMapping("/user/login/form.do")
 	public String loginForm(HttpServletRequest request) {
 		
-		// 로그인 폼으로 요청이 올 때, 세션에 referer를 저장합니다.
-		String referer = request.getHeader("Referer");
-		if (referer != null) {
-			request.getSession().setAttribute("url_prior_login", referer);
-		}
+		// save "referer" in session
+		String referer = "";
+		referer = request.getHeader("Referer");		
+		request.getSession().setAttribute("url_prior_login", referer);
+		System.out.println("url_prior_login:"+referer);
 		
 		return "/view/user/login/loginForm.jsp";
 	}
 	
-	@RequestMapping(value="/user/loginFormPro.do",method=RequestMethod.POST)
-	public String loginFormPro(HttpSession session, @ModelAttribute LoginDTO login) throws Exception {
+	@RequestMapping(value="/user/login.do",method=RequestMethod.POST)
+	public String loginFormSubmit(
+			HttpSession session,
+			@ModelAttribute LoginDTO login,
+			HttpServletRequest request) throws SQLException {
 		
-		/* 로그인 후 이전 페이지로 redirect 기능 구현 필요
-		 * 로그인 후에는 여기를 숨겨야 한다 */		
+		/*
+		 * HTTP Status 405 - Request method 'GET' not supported
+		 * Disable "loginFormPro" after logged in
+		 */		
+				
+		// request 객체에 login 값이 있으면(회원가입 후 바로 로그인일 시), 그 값으로 로그인 시도한다.
+		if (request.getAttribute("login") != null) {
+			login = (LoginDTO) request.getAttribute("login");	
+		}		
 		
 		// 로그인 타입이 "구매자"
 		if (login.getLogin_type().equals("buyer")) {
@@ -90,12 +99,8 @@ public class Login {
 			param.setSeller_pw(login.getLogin_pw());
 			
 			// param으로 쿼리 실행해 result를 구한다.
-			try {
-				result = (SellerDTO) sqlMapper.queryForObject("Seller.getSellerPw", param);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			
+			result = (SellerDTO) sqlMapper.queryForObject("Seller.getSellerPw", param);
+						
 			// result가 있다면 로그인 성공. 세션을 생성한다.
 			if (result != null) {
 				session.setAttribute("session_type", login.getLogin_type());

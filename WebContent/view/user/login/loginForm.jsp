@@ -19,7 +19,7 @@
 
 <!-- Custom styles for this template -->
 <link href="/emenu/view/jogiyo.css" rel="stylesheet">
-<link href="/emenu/view/user/login/login.css" rel="stylesheet">
+<link href="/emenu/view/user/login/signin.css" rel="stylesheet">
 
 </head>
 
@@ -32,7 +32,7 @@
 	<!-- container -->
 	<div class="container">
 
-		<form class="form-signin" action="/emenu/user/loginFormPro.do" method="post">
+		<form class="form-signin" action="/emenu/user/login.do" method="post">
 		
 			<h2 class="form-signin-heading">조기요...</h2>
 			

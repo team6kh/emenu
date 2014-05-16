@@ -9,17 +9,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="huks">
-<link rel="shortcut icon" href="assets/ico/jogiyo.png">
+<link rel="shortcut icon" href="/emenu/assets/ico/jogiyo.png">
 
 <title>JOGIYO</title>
 
 <!-- Bootstrap core CSS -->
-<link href="dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="/emenu/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="view/jogiyo.css" rel="stylesheet">
-<link href="view/user/dashboard.css" rel="stylesheet">
-<link href="view/user/registration/registration.css" rel="stylesheet">
+<link href="/emenu/view/jogiyo.css" rel="stylesheet">
+<link href="/emenu/view/user/dashboard.css" rel="stylesheet">
+<link href="/emenu/view/user/register/signup.css" rel="stylesheet">
 
 <script type="text/javascript">
 	// "이메일을 인증해주세요" 메시지를 클릭 시 실행
@@ -30,7 +30,7 @@
 		$('#alert_div').addClass('alert-warning');
 		document.getElementById('alert_placeholder').innerHTML = "Loading..."; // 상태창은 Loading으로 바꾼다.
 		form = document.getElementById('form-signup');
-		form.action = "emailer.action";
+		form.action = "/emenu/email/verificationSend.do";
 		form.submit();
 		
 		return false;
@@ -236,7 +236,7 @@
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->	
 	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script src="dist/js/bootstrap.min.js"></script>
+	<script src="/emenu/dist/js/bootstrap.min.js"></script>
 	
 	<script>
 		// user_type의 값을 buyer로 설정. select의 값이 설정된다.
