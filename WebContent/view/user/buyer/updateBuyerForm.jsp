@@ -9,17 +9,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="huks">
-<link rel="shortcut icon" href="assets/ico/jogiyo.png">
+<link rel="shortcut icon" href="/emenu/assets/ico/jogiyo.png">
 
 <title>JOGIYO</title>
 
 <!-- Bootstrap core CSS -->
-<link href="dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="/emenu/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="view/jogiyo.css" rel="stylesheet">
-<link href="view/user/dashboard.css" rel="stylesheet">
-<link href="view/user/register/signup.css" rel="stylesheet">
+<link href="/emenu/view/jogiyo.css" rel="stylesheet">
+<link href="/emenu/view/user/dashboard.css" rel="stylesheet">
+<link href="/emenu/view/user/register/signup.css" rel="stylesheet">
 
 <script type="text/javascript">
 	// 비밀번호
@@ -68,7 +68,7 @@
         <!-- sidebar -->
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="readUser.action?user_type=${session_type}&user_id=${session_id}">회원정보</a></li>
+            <li class="active"><a href="/emenu/user/get.do?user_type=${session_type}&user_id=${session_id}">회원정보</a></li>
 			<li><a href="dashBuyer.action?session_id=${session_id}">구매목록</a></li>
 			<li><a href="listMyRecipe.action?session_id=${session_id}">마이 레시피</a></li>
 			<li><a href="listMyQna.action?session_id=${session_id}">마이 문의하기</a></li>
@@ -78,7 +78,7 @@
         <!-- main -->
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">		
 
-			<form class="form-signup" name="regForm" method="post" action="updateBuyer.action">
+			<form class="form-signup" name="regForm" method="post" action="/emenu/user/buyer/update.do">
 	        	<h2 class="form-signup-heading">계정을 수정합니다.</h2>			
 				<div class="form-group">
 				  <label>가입유형</label>
@@ -120,7 +120,7 @@
 	    </div>
 	    <!-- /.main -->
 	  </div>
-	  <!-- /.row	-->	      	
+	  <!-- /.row -->	      	
 	</div>
 	<!-- /.container -->
 

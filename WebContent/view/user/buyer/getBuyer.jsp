@@ -56,10 +56,10 @@
 	// 공통 비밀번호 체커
 	function checkPass(form)
 	{
-		//var modalParam = document.getElementById("modalParam").value;
+		//var modalParam_id = document.getElementById("modalParam_id").value;
 		//var modalParam_key = document.getElementById("modalParam_key").value;
-		//var modalParam_pw = document.getElementById("modalParam-pw").value;		
-		form.action = "checkPass.action";
+		//var modalParam_pass = document.getElementById("modalParam_pass").value;		
+		form.action = "/emenu/checkPass.do";
 		form.submit();
 		
 		return true;
@@ -82,7 +82,7 @@
         	<!-- sidebar -->
         	<div class="col-sm-3 col-md-2 sidebar">
           		<ul class="nav nav-sidebar">
-            		<li class="active"><a href="readUser.action?user_type=${session_type}&user_id=${session_id}">회원정보</a></li>
+            		<li class="active"><a href="/emenu/user/get.do?user_type=${session_type}&user_id=${session_id}">회원정보</a></li>
 					<li><a href="dashBuyer.action?session_id=${session_id}">구매목록</a></li>
 					<li><a href="listMyRecipe.action?session_id=${session_id}">마이 레시피</a></li>
 					<li><a href="listMyQna.action?session_id=${session_id}">마이 문의하기</a></li>
@@ -186,30 +186,30 @@
 					
 						<!-- Button trigger modal : 수정 -->
 						<button class="btn btn-default insertModalParam" data-toggle="modal"
-							data-target="#checkModal" data-id="updateBuyerForm">수정</button>
+							data-target="#checkPassModal" data-id="updateBuyerForm">수정</button>
 							
 						<!-- Button trigger modal : 탈퇴 -->
 						<button class="btn btn-default insertModalParam" data-toggle="modal"
-							data-target="#checkModal" data-id="deleteBuyer">탈퇴</button>					
+							data-target="#checkPassModal" data-id="deleteBuyer">탈퇴</button>					
 						
 						<!-- Modal -->
-						<div class="modal fade" id="checkModal" tabindex="-1" role="dialog" aria-labelledby="checkModalLabel" aria-hidden="true">
+						<div class="modal fade" id="checkPassModal" tabindex="-1" role="dialog" aria-labelledby="checkPassModalLabel" aria-hidden="true">
 							<div class="modal-dialog">
 								<form id="checkPass" method="post">
 									<div class="modal-content">							
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-											<h4 class="modal-title" id="checkModalLabel">비밀번호를 입력하세요.</h4>
+											<h4 class="modal-title" id="checkPassModalLabel">비밀번호를 입력하세요.</h4>
 										</div>
 										<div class="modal-body">
 											<div class="form-group">
 												<label>비밀번호</label>
-												<input type="password" class="form-control" id="modalParam_pw" name="modalParam_pw">										
+												<input type="password" class="form-control" id="modalParam_pass" name="modalParam_pass">										
 											</div>
 										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>		
-											<input type="hidden" id="modalParam" name="modalParam">						
+											<input type="hidden" id="modalParam_id" name="modalParam_id">						
 											<input type="hidden" id="modalParam_key" name="modalParam_key" value="${buyerDTO.buyer_id}">								
 											<button class="btn btn-primary" onclick="checkPass(this.form)">입력</button>
 										</div>							
@@ -225,7 +225,7 @@
 		    </div>
 		    <!-- /.main -->
 		</div>
-		<!-- /.row	-->
+		<!-- /.row -->
 	</div>
 	<!-- /.container -->
 
@@ -241,8 +241,8 @@
 		
 		// insertModalParam 버튼 클릭 시 data-id값을 파라미터로 넘긴다.
 		$(document).on("click", ".insertModalParam", function() {
-			var thisModalParam = $(this).data('id');
-			$(".modal-footer #modalParam").val(thisModalParam);
+			var thisModalParamId = $(this).data('id');
+			$(".modal-footer #modalParam_id").val(thisModalParamId);
 		});
 	</script>
 </body>
