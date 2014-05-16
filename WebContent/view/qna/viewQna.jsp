@@ -41,15 +41,15 @@
 		<c:set var="textName"/>
 		<c:if test="${resultClass.qna_num ne 0}">
 
-			<c:set var="actionName" value="updateQna.action"/>
+			<c:set var="actionName" value="updateQnaForm.do"/>
 			<c:set var="textName" value="수정"/>
 		</c:if>
 		<c:if test="${resultClass.qna_num eq 0}">
-			<c:set var="actionName" value="insertQna.action"/>
+			<c:set var="actionName" value="insertQna.do"/>
 			<c:set var="textName" value="등록"/>
 		</c:if>
 		<div class="col-md-12 well">
-		<form action="updateQnaForm.action" method="post" enctype="multipart/form-data">
+		<form action="updateQnaForm.do" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="qna_num" value="${resultClass.qna_num }"/>
 		<div class="form-group">
 				<label for="qna_category"><font size="4" color="blue">카테고리:</label></font>
@@ -84,11 +84,11 @@
 			<div class="pull-right">				
 				<c:if test="${session_id == resultClass.qna_id}">
 					<button type="submit" class="btn btn-default">수정</button>
-					<a href="deleteQna.action?qna_num=${resultClass.qna_num }" class="btn btn-default">삭제</a>
+					<a href="deleteQna.do?qna_num=${resultClass.qna_num }" class="btn btn-default">삭제</a>
 				</c:if>
-				<a href="listQna.action" class="btn btn-default">목록</a>
+				<a href="listQna.do" class="btn btn-default">목록</a>
 				<c:if test="${session_id eq 'admin'}">
-					<a href="deleteQna.action?qna_num=${resultClass.qna_num }" class="btn btn-default">삭제</a>
+					<a href="deleteQna.do?qna_num=${resultClass.qna_num }" class="btn btn-default">삭제</a>
 					<button type="submit" class="btn btn-primary">답변</button>					
 				</c:if>	
 			</div>
