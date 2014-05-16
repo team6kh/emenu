@@ -22,7 +22,7 @@
 		SELECT * FROM
 			(SELECT * FROM 
 				(SELECT * FROM ev_table
-				ORDER BY ev_reg_date DESC)
+				ORDER BY ev_seq DESC)
 			WHERE ROWNUM = 1)
 	</sql>
 

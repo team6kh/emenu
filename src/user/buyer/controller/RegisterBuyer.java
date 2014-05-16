@@ -37,16 +37,16 @@ public class RegisterBuyer {
 
 	@RequestMapping("/user/buyer/register.do")
 	public String regBuyer(
-			@ModelAttribute BuyerDTO buyer,
-			@ModelAttribute LoginDTO login,
+			@ModelAttribute BuyerDTO buyerDTO,
+			@ModelAttribute LoginDTO loginDTO,
 			HttpServletRequest request) throws SQLException {
 		
 		//System.out.println("regBuyer()");
 		
-		buyer.setBuyer_reg_date(today.getTime());
-		buyer.setBuyer_verification("no"); // 가입시 인증값 default는 no
+		buyerDTO.setBuyer_reg_date(today.getTime());
+		buyerDTO.setBuyer_verification("no"); // 가입시 인증값 default는 no
 		
-		sqlMapper.insert("Buyer.insertBuyer", buyer);
+		sqlMapper.insert("Buyer.insertBuyer", buyerDTO);
 		
 		/*
 		 * 회원가입 후 바로 로그인
@@ -55,12 +55,12 @@ public class RegisterBuyer {
 		 */
 		
 		// login 모델의 값을 설정한다.
-		login.setLogin_type("buyer");
-		login.setLogin_id(buyer.getBuyer_id());
-		login.setLogin_pw(buyer.getBuyer_pw());
+		loginDTO.setLogin_type("buyer");
+		loginDTO.setLogin_id(buyerDTO.getBuyer_id());
+		loginDTO.setLogin_pw(buyerDTO.getBuyer_pw());
 				
 		// request 객체에 login 값을 설정한다.
-		request.setAttribute("login", login);
+		request.setAttribute("login", loginDTO);
 		
 		return "/user/login.do";
 		

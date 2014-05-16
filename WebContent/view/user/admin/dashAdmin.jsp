@@ -11,17 +11,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="huks">
-<link rel="shortcut icon" href="assets/ico/jogiyo.png">
+<link rel="shortcut icon" href="/emenu/assets/ico/jogiyo.png">
 
 <title>JOGIYO</title>
 
 <!-- Bootstrap core CSS -->
-<link href="dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="/emenu/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="view/jogiyo.css" rel="stylesheet">
-<link href="view/common/common-template.css" rel="stylesheet">
-<link href="view/user/dashboard.css" rel="stylesheet">
+<link href="/emenu/view/jogiyo.css" rel="stylesheet">
+<link href="/emenu/view/common/common-template.css" rel="stylesheet">
+<link href="/emenu/view/user/dashboard.css" rel="stylesheet">
 
 </head>
 
@@ -43,47 +43,47 @@
           <div class="row placeholders">
             	<!-- 상품 개수 -->
 				<div class="col-xs-6 col-sm-3 placeholder">
-					<h1>${countRest}</h1>
+					<h1>${dashAdmin.countRest}</h1>
 					<span class="text-muted">상품 개수</span>
 				</div>
 				<!-- 메뉴 개수 -->
 				<div class="col-xs-6 col-sm-3 placeholder">
-					<h1>${countRestopt}</h1>
+					<h1>${dashAdmin.countRestOpt}</h1>
 					<span class="text-muted">메뉴 개수</span>
 				</div>
 				<!-- 결재 건수 -->
 				<div class="col-xs-6 col-sm-3 placeholder">
-					<h1>${countPaid}</h1>
+					<h1>${dashAdmin.countPaid}</h1>
 					<span class="text-muted">결재 건수</span>
 				</div>
 				<!-- 리뷰 개수 -->
 				<div class="col-xs-6 col-sm-3 placeholder">
-					<h1>${countReview}</h1>
+					<h1>${dashAdmin.countReview}</h1>
 					<span class="text-muted">리뷰 개수</span>
 				</div>
 				<!-- 레시피 개수 -->
 				<div class="col-xs-6 col-sm-3 placeholder">
-					<h1>${countRecipe}</h1>
+					<h1>${dashAdmin.countRecipe}</h1>
 					<span class="text-muted">레시피 개수</span>
 				</div>
 				<!-- 공지사항 글 개수 -->
 				<div class="col-xs-6 col-sm-3 placeholder">
-					<h1>${countNotice}</h1>
+					<h1>${dashAdmin.countNotice}</h1>
 					<span class="text-muted">공지사항 글 개수</span>
 				</div>
 				<!-- 문의하기 글 개수 -->
 				<div class="col-xs-6 col-sm-3 placeholder">
-					<h1>${countQna}</h1>
+					<h1>${dashAdmin.countQna}</h1>
 					<span class="text-muted">문의하기 글 개수</span>
 				</div>
 				<!-- 구매자 수 -->
 				<div class="col-xs-6 col-sm-3 placeholder">
-					<h1>${countBuyer}</h1>
+					<h1>${dashAdmin.countBuyer}</h1>
 					<span class="text-muted">구매자 수</span>
 				</div>
 				<!-- 판매자 수 -->
 				<div class="col-xs-6 col-sm-3 placeholder">
-					<h1>${countSeller}</h1>
+					<h1>${dashAdmin.countSeller}</h1>
 					<span class="text-muted">판매자 수</span>
 				</div>
           </div>
@@ -105,7 +105,7 @@
                 </tr>
               </thead>
               <tbody>
-                <c:forEach var="listBuyer" items="${listBuyer}">
+                <c:forEach var="listBuyer" items="${dashAdmin.listBuyer}">
                 <tr>
                   <td>${listBuyer.user_seq}</td>
                   <td>${listBuyer.buyer_id}</td>
@@ -139,7 +139,7 @@
                 </tr>
               </thead>
               <tbody>
-                <c:forEach var="listSeller" items="${listSeller}">
+                <c:forEach var="listSeller" items="${dashAdmin.listSeller}">
                 <tr>
                   <td>${listSeller.user_seq}</td>
                   <td>${listSeller.seller_id}</td>
@@ -168,6 +168,6 @@
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script src="dist/js/bootstrap.min.js"></script>
+	<script src="/emenu/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
