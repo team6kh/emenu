@@ -14,10 +14,10 @@
 		<link rel="shortcut icon" href="assets/ico/jogiyo.png">
 
 		<!-- Bootstrap core CSS -->
-		<link href="dist/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/emenu/dist/css/bootstrap.min.css" rel="stylesheet">
 		<!-- Custom styles for this template -->
-		<link href="view/jogiyo.css" rel="stylesheet">
-		<link href="view/common/common-template.css" rel="stylesheet">
+		<link href="/emenu/view/jogiyo.css" rel="stylesheet">
+		<link href="/emenu/view/common/common-template.css" rel="stylesheet">
 		<title>상품 등록 페이지</title>
 
 		<script type="text/javascript">

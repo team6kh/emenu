@@ -155,9 +155,21 @@ public class SendEmail {
 	}
 	
 	
+	@RequestMapping("/email/customerService.do")
+	public String CustomerService(HttpServletRequest request){
+		String rest_writer_email = request.getParameter("rest_writer_email");
+		int rest_num = Integer.parseInt(request.getParameter("rest_num"));
+		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		
+		request.setAttribute("rest_writer_email", rest_writer_email);
+		request.setAttribute("rest_num", rest_num);
+		request.setAttribute("currentPage", currentPage);
+		return "/view/rest/mailer.jsp";
+	}
+	
+	
 	@RequestMapping("/email/customerServiceSend.do")
 	public String CustomerServiceSend(HttpServletRequest request, HttpSession httpSession) {
-		
 		String enquirer_id = ""; // 문의자 아이디
 		String enquirer_email = ""; // 문의자 이메일
 		String enquiry = ""; // 문의 내용
@@ -218,8 +230,7 @@ public class SendEmail {
             e.printStackTrace();
         }
         
-        return "/welcome.do";
-		
+        return "/view/rest/mailerPro.jsp";
 	}	
 	
 }

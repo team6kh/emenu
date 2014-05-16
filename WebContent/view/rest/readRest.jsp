@@ -347,7 +347,7 @@
 				${resultClass.rest_writer_address} <br/>
 
 				<span class="glyphicon glyphicon-envelope"></span>
-				<a href="sendMail.do?rest_writer_email=${resultClass.rest_writer_email}&rest_num=${rest_num}&currentPage=${currentPage}" >${resultClass.rest_writer_email}</a> <br/>
+				<a href="/emenu/email/customerService.do?rest_writer_email=${resultClass.rest_writer_email}&rest_num=${rest_num}&currentPage=${currentPage}" >${resultClass.rest_writer_email}</a> <br/>
 
 				<span class="glyphicon glyphicon-print"></span>
 				<a href="javascript:printWindow()">프린트하기</a> <br/><br/>
