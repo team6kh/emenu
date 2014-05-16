@@ -39,9 +39,6 @@
 	// 인증 버튼 클릭 시 실행
 	function checkEv()
 	{
-		//form = document.getElementById('form-signup');
-		//form.action = "checkEv.action";
-		//form.submit();
 		var ev_requested = document.getElementById("buyer_email").value; // 요청자 이메일
 		var ev_code_input = document.getElementById("ev_code_input").value; // 입력한 인증 코드
 		
@@ -50,7 +47,7 @@
 		var user_id = document.getElementById("user_id").value;
 		
 		// 이렇게 4개의 파라미터가 담긴 url 생성 후 checkEv라는 이름의 숨겨진 iframe에서 페이지 이동
-		url = "checkEv.action?ev_requested="+ev_requested+"&ev_code_input="+ev_code_input+"&user_type="+user_type+"&user_id="+user_id;
+		url = "/emenu/verification/check.do?ev_requested="+ev_requested+"&ev_code_input="+ev_code_input+"&user_type="+user_type+"&user_id="+user_id;
 		document.getElementById('checkEv').contentWindow.location.href = url;
 		
 		return true;
