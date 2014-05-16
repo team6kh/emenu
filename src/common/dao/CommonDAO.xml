@@ -42,8 +42,8 @@
 		SELECT COUNT(*) FROM Notice_Board
 	</select>
 
-	<select id="getQnACount" resultClass="int">
-		SELECT COUNT(*) FROM QnA_board
+	<select id="getQnaCount" resultClass="int">
+		SELECT COUNT(*) FROM Qna_Board
 	</select>
 	
 	<select id="listRestOpt" resultMap="restOptRes">
