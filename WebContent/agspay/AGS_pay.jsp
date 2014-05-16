@@ -346,7 +346,7 @@ function Display(form){
 							<font color=red>*</font> <b>상품명</b>
 						</td>
 						<td align="center" width=200>
-							<font color=red>*</font> <b>상품옵션</b>;
+							<font color=red>*</font> <b>상품옵션</b>
 						</td>
 						<td align="center" width=150>
 							<font color=red>*</font> <b>가격</b>
