@@ -53,11 +53,14 @@ public class InsertReview
   
         // 후기글의 작성일값 세팅
         reviewDTO.setReview_reg_date(today.getTime());
+        
         // 첨부파일을 제외한 나머지 프로퍼티들 DB에 insert
         sqlMapper.insert("Review.insertReview", reviewDTO);
         
+        // 업로드된 첨부파일 꺼내오기
         review_files = request.getFiles("review_files");
         
+        // 첨부파일이 있으면, 서버의 지정된 경로로 첨부파일 복사하기
         if (!review_files.isEmpty())
         {
             // 첨부파일 저장할 경로

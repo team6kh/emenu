@@ -406,7 +406,9 @@
 						<!--  이미지 파일 첨부 : 첨부 개수 제한/ 용량 제한 필요  -->
 						<tr>
 							<td class="text-center" colspan="2">
+                            <label> gif, jpg, jpeg, png 확장자인 이미지 파일만 업로드 가능합니다.    </label>
 							<input type="file" class="multi" maxlength="2" name="review_files" accept="gif|jpg|png|jpeg" multiple="multiple" />
+                            </td>
 						</tr>
 
 					</table>
@@ -549,7 +551,7 @@
 						<!-- 이미지 파일 첨부 -->
 							<div class="form-group text-center">
 							 	<label> 새로 파일을 첨부하시면 기존에 첨부하신 파일은 삭제됩니다. <br/>
-							 				  gif, jpg, jpen, png 확장자인 이미지 파일만 업로드 가능합니다.	 </label>
+							 				  gif, jpg, jpeg, png 확장자인 이미지 파일만 업로드 가능합니다.	 </label>
 			                    <input type="file" name="review_files" class="multi" maxlength="2" accept="gif|jpg|png|jpeg" multiple="multiple"/>        
 							</div>
 							<!-- 리뷰 작성 완료 버튼 -->
