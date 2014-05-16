@@ -47,11 +47,11 @@
 		<c:set var="actionName"/>
 		<c:set var="textName"/>
 		<c:if test="${resultClass.qna_num ne 0}">
-			<c:set var="actionName" value="updateQna.action"/>
+			<c:set var="actionName" value="updateQna.do"/>
 			<c:set var="textName" value="수정"/>
 		</c:if>
 		<c:if test="${resultClass.qna_num eq 0}">
-			<c:set var="actionName" value="insertQna.action"/>
+			<c:set var="actionName" value="insertQna.do"/>
 			<c:set var="textName" value="등록"/>
 		</c:if>
 		<div class="col-md-12 well">
@@ -87,7 +87,7 @@
 				<textarea class="form-control" rows="3" id="qna_reply" name="qna_reply" maxlength="2000" placeholder="2000자 이하로 작성해 주세요" required>${resultClass.qna_reply }</textarea>
 			</div></c:if>
 			<div class="pull-right">
-				<a href="listQna.action" class="btn btn-default">글목록</a>
+				<a href="listQna.do" class="btn btn-default">글목록</a>
 				<button type="submit" class="btn btn-primary">${textName }</button>				
 			</div>
 		</form>
