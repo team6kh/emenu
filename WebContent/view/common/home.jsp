@@ -65,7 +65,7 @@
 			<c:forEach var="listRestOpt" items="${listRestOpt}">
 				<li>
 					<div class="masonry">
-						<a href="readRest.action?rest_num=${listRestOpt.restopt_rest_num}">
+						<a href="/emenu/readRest.do?rest_num=${listRestOpt.restopt_rest_num}">
 						<img src="${listRestOpt.restopt_destFile1}" alt="N/A"></a>
 						<div class='hoverdetail'>${listRestOpt.restopt_subject}</div>
 					</div>
