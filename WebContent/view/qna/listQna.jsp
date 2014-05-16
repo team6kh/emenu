@@ -41,7 +41,7 @@
     	}
     	
     	function fn_search(){
-    		document.searchForm.action = "listQna.action";
+    		document.searchForm.action = "listQna.do";
     		document.searchForm.submit();
     	
     	}
@@ -50,7 +50,7 @@
 		function checkId() {
 
 			if("${session_id}" != '') {
-				window.location.href= "insertQnaForm.action";
+				window.location.href= "insertQnaForm.do";
 			}else {
 			alert("!로그인 하셔야 글을 쓰실 수 있습니다.");
 
@@ -66,7 +66,7 @@
     		
     		var qna_checkreply = document.getElementById("qna_checkreply").value;
     		
-    		window.location.href = "listQna.action?qna_checkreply=" + qna_checkreply;
+    		window.location.href = "listQna.do?qna_checkreply=" + qna_checkreply;
     		
     	}    	
     </script>
@@ -190,7 +190,7 @@
 							</c:choose>
 						</td>
 							<td class="text-left">
-								<a href="detailQna.action?qna_num=${list.qna_num }">
+								<a href="getQna.do?qna_num=${list.qna_num }">
 								<c:out value="${list.qna_subject }" />
 								</a>
 							</td>
@@ -210,7 +210,7 @@
 
 			<div class="text-center">
 				<ul class="pagination pagination-sm">
-					<s:property value="pagingHtml" escape="false" />
+					 ${pagingHtml }
 				</ul>
 			</div>
 

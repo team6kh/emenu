@@ -9,30 +9,14 @@
 		<result property="qna_num" column="qna_num" />
 		<result property="qna_id" column="qna_id" />
 		<result property="qna_subject" column="qna_subject" />
-		<result property="qna_content" column="qna_content" />
-		<result property="qna_readcount" column="qna_readcount" />
-		<result property="qna_reg_date" column="qna_reg_date" />
-		<result property="qna_reply" column="qna_reply"/>
-	</resultMap>
-
-	<resultMap id="qnaRes2" class="qnaDTO">
-		<result property="qna_num" column="qna_num" />
 		<result property="qna_category" column="qna_category" />
-		<result property="qna_subject" column="qna_subject" />
-		<result property="qna_content" column="qna_content" />		
-		<result property="qna_readcount" column="qna_readcount" />
-		<result property="qna_reg_date" column="qna_reg_date" />
-		<result property="qna_id" column="qna_id"/>
-		<result property="qna_reply" column="qna_reply"/>
-	</resultMap>
-
-	<resultMap id="topQnaRes" class="qnaDTO">
-		<result property="qna_num" column="qna_num" />
-		<result property="qna_category" column="qna_category" />		
-		<result property="qna_subject" column="qna_subject" />
 		<result property="qna_content" column="qna_content" />
 		<result property="qna_reply" column="qna_reply"/>
+		<result property="qna_readcount" column="qna_readcount" />
+		<result property="qna_reg_date" column="qna_reg_date" />
 	</resultMap>
+
+
 
 	<select id="listQna" resultClass="qnaDTO" parameterClass="java.util.HashMap">
 		select 
@@ -71,7 +55,7 @@
 		WHERE ROWNUM <![CDATA[ < ]]> 11
 	</select>
 
-	<select id="getQna" parameterClass="int" resultMap="qnaRes2">
+	<select id="getQna" parameterClass="int" resultMap="qnaRes">
 		select * from qna_board
 		where qna_num = #qna_num#	
 	</select>
@@ -106,5 +90,5 @@
 	<delete id="deleteQna" parameterClass="qnaDTO">
 		delete qna_board where qna_num = #qna_num#
 	</delete>
-
+	
 </sqlMap>
