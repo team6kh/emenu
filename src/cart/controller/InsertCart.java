@@ -66,7 +66,7 @@ public class InsertCart {
 		
 		request.setAttribute("list", list);
 
-		return "/view/rest/listCart.jsp";
+		return "redirect:listCart.do?rest_num="+cart_rest_num+"&rest_subject="+cart_rest_subject;
 	}
 
 }

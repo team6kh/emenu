@@ -54,6 +54,7 @@ public class ListCart {
 			
 			request.setAttribute("rest_num", rest_num);
 			request.setAttribute("rest_subject", rest_subject);
+			
 			request.setAttribute("list", list);
 
 			return "/view/rest/listCart.jsp";//"redirect:listCart.do?rest_num="+rest_num+"&rest_subject="+rest_subject;

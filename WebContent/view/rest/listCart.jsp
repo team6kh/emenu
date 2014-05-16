@@ -65,8 +65,14 @@
 
 	<!-- 장바구니 결제 버튼 -->
 	<div align="center">
-		<button type="button" class="btn btn-primary" onclick="goPayment(this.form)">구매하기</button>		
-		<button type="button" class="btn btn-danger" onclick="goDelete()">비우기</button>
+		<c:if test="${list == '[]'}">
+			<button type="button" class="btn btn-primary" disabled onclick="goPayment(this.form)">구매하기</button>
+			<button type="button" class="btn btn-danger" disabled onclick="goDelete()">비우기</button>
+		</c:if>
+		<c:if test="${list != '[]'}">
+			<button type="button" class="btn btn-primary" onclick="goPayment(this.form)">구매하기</button>		
+			<button type="button" class="btn btn-danger" onclick="goDelete()">비우기</button>
+		</c:if>
 	</div>
 	
 </form>
