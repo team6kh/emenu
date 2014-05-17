@@ -144,6 +144,8 @@ public class InsertRest {
 		resultClass = (RestDTO) sqlMapper.queryForObject("Rest.selectLastNum");
 		seq_num = (int)(resultClass.getRest_num());
 		
+		
+		//옵션 insert 변수 선언
 		restopt_subject1 = request1.getParameter("restopt_subject1");
 		restopt_subject2 = request1.getParameter("restopt_subject2");
 		restopt_subject3 = request1.getParameter("restopt_subject3");
@@ -603,5 +605,4 @@ public class InsertRest {
 		
 		return "redirect:/listRest.do"; //이전버전 리다이렉트 액션썻음
 	}
-	
 }

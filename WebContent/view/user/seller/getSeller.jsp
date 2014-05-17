@@ -9,19 +9,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="huks">
-<link rel="shortcut icon" href="assets/ico/jogiyo.png">
+<link rel="shortcut icon" href="/emenu/assets/ico/jogiyo.png">
 
 <title>JOGIYO</title>
 
 <!-- Bootstrap core CSS -->
-<link href="dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="/emenu/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="view/jogiyo.css" rel="stylesheet">
-<link href="view/user/dashboard.css" rel="stylesheet">
-<link href="view/user/register/signup.css" rel="stylesheet">
+<link href="/emenu/view/jogiyo.css" rel="stylesheet">
+<link href="/emenu/view/user/dashboard.css" rel="stylesheet">
+<link href="/emenu/view/user/register/signup.css" rel="stylesheet">
 
 <script type="text/javascript">
+	//"이메일을 인증해주세요" 메시지를 클릭 시 실행
 	function requestEv()
 	{	
 		//alert("requstEv");
@@ -29,37 +30,36 @@
 		$('#alert_div').addClass('alert-warning');
 		document.getElementById('alert_placeholder').innerHTML = "Loading...";
 		form=document.getElementById('form-signup');
-		form.action="emailer.action";
+		form.action="/emenu/email/verificationSend.do";
 		form.submit();
 		
 		return false;
 	}
 	
+	// 인증 버튼 클릭 시 실행
 	function checkEv()
 	{
-		//document.getElementById('btnCheckEv').innerHTML = "인증 중";		
-		//form=document.getElementById('form-signup');
-		//form.action="checkEv.action";
-		//form.submit();
 		var ev_requested = document.getElementById("seller_email").value;
 		var ev_code_input = document.getElementById("ev_code_input").value;
 		
 		// verification update를 위해 필요하다.
 		var user_type = document.getElementById("user_type").value;
 		var user_id = document.getElementById("user_id").value;
-		
-		url = "checkEv.action?ev_requested="+ev_requested+"&ev_code_input="+ev_code_input+"&user_type="+user_type+"&user_id="+user_id;
+
+		// 이렇게 4개의 파라미터가 담긴 url 생성 후 checkEv라는 이름의 숨겨진 iframe에서 페이지 이동
+		url = "/emenu/verification/check.do?ev_requested="+ev_requested+"&ev_code_input="+ev_code_input+"&user_type="+user_type+"&user_id="+user_id;
 		document.getElementById('checkEv').contentWindow.location.href = url;
 		
 		return true;
 	}
 	
+	// 공통 비밀번호 체커
 	function checkPass(form)
 	{
-		//var modalParam = document.getElementById("modalParam").value;
+		//var modalParam_id = document.getElementById("modalParam_id").value;
 		//var modalParam_key = document.getElementById("modalParam_key").value;
-		//var modalParam_pw = document.getElementById("modalParam_pw").value;		
-		form.action="checkPass.action";
+		//var modalParam_pass = document.getElementById("modalParam_pass").value;		
+		form.action="/emenu/checkPass.do";
 		form.submit();
 		
 		return true;
@@ -82,7 +82,7 @@
         	<!-- sidebar -->
         	<div class="col-sm-3 col-md-2 sidebar">
           		<ul class="nav nav-sidebar">
-            		<li class="active"><a href="readUser.action?user_type=${session_type}&user_id=${session_id}">회원정보</a></li>
+            		<li class="active"><a href="/emenu/user/get.do?user_type=${session_type}&user_id=${session_id}">회원정보</a></li>
             		<li><a href="dashSeller.action?sesssion_id=${session_id}">판매목록</a></li>
           		</ul>
         	</div>
@@ -136,7 +136,7 @@
 								<option value="buyer">구매자</option>
 								<option value="seller">판매자</option>
 							</select>
-							<!-- 이메일작성을 위해 필요한 히든 파라미터 user_type -->
+							<!-- 이메일 발송을 위해 필요한 히든 파라미터 user_type -->
 							<input type="hidden" id="user_type" name="user_type" value="${session_type}">			  
 					</div>			
 					<div class="form-group">
@@ -154,13 +154,13 @@
 					<div class="form-group">
 						<label>아이디</label>
 						<input type="text" class="form-control" value="${sellerDTO.seller_id}" disabled>
-						<!-- 이메일작성을 위해 필요한 히든 파라미터 user_id -->
+						<!-- 이메일 발송을 위해 필요한 히든 파라미터 user_id -->
 						<input type="hidden" id="user_id" name="user_id" value="${sellerDTO.seller_id}">		  
 					</div>						
 					<div class="form-group">
 						<label>이름</label>
 						<input type="text" class="form-control" value="${sellerDTO.seller_name}" disabled>
-						<!-- 이메일작성을 위해 필요한 히든 파라미터 seller_name -->
+						<!-- 이메일 발송을 위해 필요한 히든 파라미터 seller_name -->
 						<input type="hidden" name="seller_name" value="${sellerDTO.seller_name}">
 					</div>
 					<!-- 
@@ -175,11 +175,11 @@
 					<div class="form-group">
 						<label>이메일</label>
 						<input type="text" class="form-control" value="${sellerDTO.seller_email}" disabled>
-						<!-- 이메일작성을 위해 필요한 히든 파라미터 seller_email -->
+						<!-- 이메일 발송을 위해 필요한 히든 파라미터 seller_email -->
 						<input type="hidden" id="seller_email" name="seller_email" value="${sellerDTO.seller_email}">
 					</div>
 					
-					<!-- 인증이 되지 않았을 입력폼이 뜬다. -->
+					<!-- 인증이 되지 않았을 시 입력폼이 뜬다. -->
 					<c:if test="${sellerDTO.seller_verification eq 'no'}">
 					<div class="form-group">
 						<label>인증번호</label>
@@ -189,7 +189,7 @@
 							</div>
 					</div>
 					</c:if>
-					<!-- /.인증이 되지 않았을 입력폼이 뜬다. -->	
+					<!-- /.인증이 되지 않았을 시 입력폼이 뜬다. -->	
 										
 				</form>
 				<!-- /.form-signup -->
@@ -200,30 +200,30 @@
 					
 						<!-- Button trigger modal : 수정 -->
 						<button class="btn btn-default insertModalParam" data-toggle="modal"
-							data-target="#checkModal" data-id="updateSellerForm">수정</button>
+							data-target="#checkPassModal" data-id="updateSellerForm">수정</button>
 							
 						<!-- Button trigger modal : 탈퇴 -->
 						<button class="btn btn-default insertModalParam" data-toggle="modal"
-							data-target="#checkModal" data-id="deleteSeller">탈퇴</button>					
+							data-target="#checkPassModal" data-id="deleteSeller">탈퇴</button>					
 						
 						<!-- Modal -->
-						<div class="modal fade" id="checkModal" tabindex="-1" role="dialog" aria-labelledby="checkModalLabel" aria-hidden="true">
+						<div class="modal fade" id="checkPassModal" tabindex="-1" role="dialog" aria-labelledby="checkPassModalLabel" aria-hidden="true">
 							<div class="modal-dialog">
 								<form id="checkPass" method="post">
 									<div class="modal-content">							
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-											<h4 class="modal-title" id="checkModalLabel">비밀번호를 입력하세요.</h4>
+											<h4 class="modal-title" id="checkPassModalLabel">비밀번호를 입력하세요.</h4>
 										</div>
 										<div class="modal-body">
 											<div class="form-group">
 												<label>비밀번호</label>
-												<input type="password" class="form-control" id="modalParam_pw" name="modalParam_pw">										
+												<input type="password" class="form-control" id="modalParam_pass" name="modalParam_pass">										
 											</div>
 										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>		
-											<input type="hidden" id="modalParam" name="modalParam">						
+											<input type="hidden" id="modalParam_id" name="modalParam_id">						
 											<input type="hidden" id="modalParam_key" name="modalParam_key" value="${sellerDTO.seller_id}">								
 											<button class="btn btn-primary" onclick="checkPass(this.form)">입력</button>
 										</div>							
@@ -247,13 +247,15 @@
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->	
 	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script src="dist/js/bootstrap.min.js"></script>
+	<script src="/emenu/dist/js/bootstrap.min.js"></script>
 	<script>
+		// user_type의 값을 seller로 설정. select의 값이 설정된다.
 		$("#user_type").val("seller");
 		
+		// insertModalParam 버튼 클릭 시 data-id값을 파라미터로 넘긴다.
 		$(document).on("click", ".insertModalParam", function() {
-			var thisModalParam = $(this).data('id');
-			$(".modal-footer #modalParam").val(thisModalParam);
+			var thisModalParamId = $(this).data('id');
+			$(".modal-footer #modalParam_id").val(thisModalParamId);
 		});
 	</script>
 </body>

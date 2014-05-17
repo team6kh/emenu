@@ -59,7 +59,7 @@
 
 	<!-- header -->
 	<%@ include file="/view/common/header.jsp"%>
-	<!-- ./header -->
+	<!-- /.header -->
 
 	<!-- container -->
 	<div class="container-fluid">
@@ -78,7 +78,7 @@
         <!-- main -->
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">		
 
-			<form class="form-signup" name="regForm" method="post" action="/emenu/user/buyer/update.do">
+			<form class="form-signup" name="regForm" action="/emenu/user/buyer/update.do" method="post">
 	        	<h2 class="form-signup-heading">계정을 수정합니다.</h2>			
 				<div class="form-group">
 				  <label>가입유형</label>
@@ -129,7 +129,7 @@
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->	
 	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script src="dist/js/bootstrap.min.js"></script>
+	<script src="/emenu/dist/js/bootstrap.min.js"></script>
 	
 	<script>
 		$("#user_type").val("buyer");
