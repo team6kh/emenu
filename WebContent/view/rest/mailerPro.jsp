@@ -8,23 +8,23 @@
 <html lang="en">
 
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="">
-<meta name="author" content="">
-<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-<meta http-equiv="Refresh" content="3; URL=http://localhost:8000/jogiyo/home.action"/>
-<link rel="shortcut icon" href="assets/ico/jogiyo.png">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<meta http-equiv="Refresh" content="3; URL=http://localhost:8000/emenu/home.do"/>
+	<link rel="shortcut icon" href="assets/ico/jogiyo.png">
 
-
-<title>JOGIYO</title>
-
-<!-- Bootstrap core CSS -->
-<link href="dist/css/bootstrap.min.css" rel="stylesheet">
-<!-- Custom styles for this template -->
-<link href="view/jogiyo.css" rel="stylesheet">
-<link href="view/common/common-template.css" rel="stylesheet">
+	<title>JOGIYO</title>
+	
+	<!-- Bootstrap core CSS -->
+	<link href="/emenu/dist/css/bootstrap.min.css" rel="stylesheet">
+	
+	<!-- Custom styles for this template -->
+	<link href="/emenu/view/jogiyo.css" rel="stylesheet">
+	<link href="/emenu/view/common/common-template.css" rel="stylesheet">
 
 <style type="text/css">
 	html {

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import rest.dto.RestDTO;
 import restopt.dto.RestOptDTO;
 import review.dto.ReviewDTO;
+import cart.dto.CartDTO;
 
 import com.ibatis.common.resources.Resources;
 import com.ibatis.sqlmap.client.SqlMapClient;
@@ -27,18 +28,21 @@ import common.PagingAction;
 
 @Controller
 public class ListRest {
-	//필요인스턴스변수
+	//상품관련
 	private List<RestDTO> list = new ArrayList<RestDTO>();
-	private List<RestOptDTO> list1 = new ArrayList<RestOptDTO>();
 	private RestDTO paramClass = new RestDTO();
 	private RestDTO resultClass = new RestDTO();
 	private int permission; // 판매자가 글 작성여부 판단
 	private int rest_num; // 글 읽기시 필요 변수
 	
+	//옵션관련
+	private List<RestOptDTO> list1 = new ArrayList<RestOptDTO>();
+	
 	//후기관련
 	private List<ReviewDTO> reviewRes = new ArrayList<ReviewDTO>();
-	//private String reviewFile_Path = Constants.COMMON_FILE_PATH+ Constants.REVIEW_FILE_PATH;
-	
+	private String reviewFile_Path = (Constants.COMMON_FILE_PATH+ Constants.REVIEW_FILE_PATH).replace("\\", "/").substring(26); 
+	        
+	       
 	//페이지관련
 	private int totalCount;// 총 게시물의 수
 	private int blockCount;// 한 페이지의 게시물의 수
@@ -95,7 +99,7 @@ public class ListRest {
 		}else{
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-		page = new PagingAction(actionName, currentPage, totalCount, blockCount, blockPage); // pagingAction 객체 생성.
+		page = new PagingAction(actionName, currentPage, totalCount, blockCount, blockPage, rest_localcategory, rest_typecategory); // pagingAction 객체 생성.
 		pagingHtml = page.getPagingHtml().toString(); // 페이지 HTML 생성.
 
 		int lastCount = totalCount;
@@ -148,36 +152,48 @@ public class ListRest {
 		list1 = (List<RestOptDTO>) sqlMapper.queryForList("Rest.selectRestoptOne", rest_num);
 		
 		//후기리스트
-        reviewRes = sqlMapper.queryForList("Review.selectReviewList", rest_num);
-       // reviewFile_Path = reviewFile_Path.replace("\\", "/").substring(27); //파일경로 재정의
-        
-        // 페이징 관련 코드
-        ccp = 1; // 현재 페이지
-        blockCount = 5; // 한 페이지의 게시물의 수
-        blockPage = 5; // 한 화면에 보여줄 페이지 수
-        actionName = "readRest"; // 페이징액션과 로그인액션에서 쓰인다...
-        totalCount = reviewRes.size();
-        page = new PagingAction(actionName, ccp, totalCount, blockCount, blockPage, rest_num, currentPage);
-        pagingHtml = page.getPagingHtml().toString();
-        
-        // 현재 페이지에서 보여줄 마지막 글의 번호 설정
-        int lastCount = totalCount;
-
-        // 현재 페이지의 마지막 글의 번호가 전체의 마지막 글 번호보다 작으면 lastCount를 +1 번호로 설정.
-        if (page.getEndCount() < totalCount)
-            lastCount = page.getEndCount() + 1;
-
-        // 전체 리스트에서 현재 페이지만큼의 리스트만 가져온다.
-        reviewRes = reviewRes.subList(page.getStartCount(), lastCount);
-				
-        request.setAttribute("resultClass", resultClass); //상품
-        request.setAttribute("list1", list1); // 옵션
-        request.setAttribute("reviewRes", reviewRes); // 리뷰
-        
-        request.setAttribute("rest_num", rest_num);
-        request.setAttribute("currentPage", currentPage);
-        request.setAttribute("pagingHtml", pagingHtml);
-        
+                reviewRes = sqlMapper.queryForList("Review.selectReviewList", rest_num);
+                
+                
+                // 후기 페이징 관련 
+                if(request.getParameter("ccp") == null) 
+                {
+                    ccp = 1; // 현재 페이지
+                } 
+                else 
+                {
+                    ccp = Integer.parseInt(request.getParameter("ccp"));
+                }
+                
+                blockCount = 5; // 한 페이지의 게시물의 수
+                blockPage = 5; // 한 화면에 보여줄 페이지 수
+                actionName = "readRest"; // 페이징액션과 로그인액션에서 쓰인다...
+                totalCount = reviewRes.size();
+                
+                
+                page = new PagingAction(actionName, ccp, totalCount, blockCount, blockPage, rest_num, currentPage);
+                pagingHtml = page.getPagingHtml().toString();
+            
+            // 현재 페이지에서 보여줄 마지막 글의 번호 설정
+            int lastCount = totalCount;
+    
+            // 현재 페이지의 마지막 글의 번호가 전체의 마지막 글 번호보다 작으면 lastCount를 +1 번호로 설정.
+            if (page.getEndCount() < totalCount)
+                lastCount = page.getEndCount() + 1;
+    
+            // 전체 리스트에서 현재 페이지만큼의 리스트만 가져온다.
+            reviewRes = reviewRes.subList(page.getStartCount(), lastCount);
+    				
+            request.setAttribute("resultClass", resultClass); //상품
+            request.setAttribute("list1", list1); // 옵션
+            request.setAttribute("reviewRes", reviewRes); // 리뷰
+            request.setAttribute("reviewFile_Path", reviewFile_Path); // 리뷰 이미지파일 경로
+            request.setAttribute("rest_num", rest_num);
+            request.setAttribute("currentPage", currentPage);
+            request.setAttribute("ccp", ccp);
+            request.setAttribute("pagingHtml", pagingHtml);
+            
 		return "/view/rest/readRest.jsp";
 	}
+	
 }

@@ -3,7 +3,6 @@ package common.controller;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.Properties;
-
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
@@ -13,17 +12,13 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import user.buyer.dto.BuyerDTO;
 import user.seller.dto.SellerDTO;
-
 import com.ibatis.common.resources.Resources;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.ibatis.sqlmap.client.SqlMapClientBuilder;
-
 import common.RNG;
 
 @Controller
@@ -160,9 +155,21 @@ public class SendEmail {
 	}
 	
 	
+	@RequestMapping("/email/customerService.do")
+	public String CustomerService(HttpServletRequest request){
+		String rest_writer_email = request.getParameter("rest_writer_email");
+		int rest_num = Integer.parseInt(request.getParameter("rest_num"));
+		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		
+		request.setAttribute("rest_writer_email", rest_writer_email);
+		request.setAttribute("rest_num", rest_num);
+		request.setAttribute("currentPage", currentPage);
+		return "/view/rest/mailer.jsp";
+	}
+	
+	
 	@RequestMapping("/email/customerServiceSend.do")
 	public String CustomerServiceSend(HttpServletRequest request, HttpSession httpSession) {
-		
 		String enquirer_id = ""; // 문의자 아이디
 		String enquirer_email = ""; // 문의자 이메일
 		String enquiry = ""; // 문의 내용
@@ -223,8 +230,7 @@ public class SendEmail {
             e.printStackTrace();
         }
         
-        return "/welcome.do";
-		
+        return "/view/rest/mailerPro.jsp";
 	}	
 	
 }

@@ -10,9 +10,10 @@
 
 <%
 	String rest_num = request.getParameter("rest_num");
-	String review_rest_currentPage = request.getParameter("review_rest");
+	String review_rest_currentPage = request.getParameter("review_rest_currentPage");
 	String session_id = (String)session.getAttribute("session_id");
-	response.sendRedirect("readRest.action?rest_num="+rest_num+"&currentPage="+review_rest_currentPage);
+	String ccp = request.getAttribute("ccp").toString();
+	response.sendRedirect("readRest.do?rest_num="+rest_num+"&currentPage="+review_rest_currentPage+"&ccp="+ccp);
 %>
 
 </head>

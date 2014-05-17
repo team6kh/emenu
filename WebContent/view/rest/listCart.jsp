@@ -26,7 +26,7 @@
 
 <script type="text/javascript">
 	function goPayment(form) {
-		form.action = "payRest.action";
+		form.action = "payRest.do";
 		form.submit();
 		return false;
 	}
@@ -36,7 +36,7 @@
 		var rest_num = document.getElementById("rest_num").value;
 		var rest_subject = document.getElementById("rest_subject").value;
 		var session_id = document.getElementById("session_id").value;
-		var url = "deleteCart.action?rest_num="+rest_num+"&rest_subject="+rest_subject+"&session_id="+session_id;
+		var url = "deleteCart.do?rest_num="+rest_num+"&rest_subject="+rest_subject+"&session_id="+session_id;
 		document.location.href=url;
 		return false;
 	}
@@ -65,8 +65,14 @@
 
 	<!-- 장바구니 결제 버튼 -->
 	<div align="center">
-		<button type="button" class="btn btn-primary" onclick="goPayment(this.form)">구매하기</button>		
-		<button type="button" class="btn btn-danger" onclick="goDelete()">비우기</button>
+		<c:if test="${list == '[]'}">
+			<button type="button" class="btn btn-primary" disabled onclick="goPayment(this.form)">구매하기</button>
+			<button type="button" class="btn btn-danger" disabled onclick="goDelete()">비우기</button>
+		</c:if>
+		<c:if test="${list != '[]'}">
+			<button type="button" class="btn btn-primary" onclick="goPayment(this.form)">구매하기</button>		
+			<button type="button" class="btn btn-danger" onclick="goDelete()">비우기</button>
+		</c:if>
 	</div>
 	
 </form>

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%-- <%@ page isELIgnored="false" %> --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html>
 
 	<head>
@@ -107,7 +106,7 @@
 			</table>
 			
 			
-			<form name="updateRestForm" action="updateRest.action" method="post" enctype="multipart/form-data">
+			<form name="updateRestForm" action="updateRest.do" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="rest_num" value="${rest_num}" />
 				<input type="hidden" name="currentPage" value="${currentPage}" />
 				
@@ -122,7 +121,7 @@
 					<tr align="center">
 						<td align="right" ><font size=3><b>상품명</b></font>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 						<td align="left">
-							<s:textfield name="rest_subject" theme="simple" value="%{resultClass.rest_subject}" maxlength="50"/>
+							<input type="text" name="rest_subject" value="${resultClass.rest_subject}"  />
 						</td>
 					</tr>
 					<tr>
@@ -203,10 +202,10 @@
 							<font size=3><b>매인 사진 업로드</b></font>&nbsp;&nbsp;&nbsp;&nbsp;<br/><br/><br/>
 						</td>
 						<td align="left">
-							<s:file name="upload1" theme="simple"/>
-							<s:if test="resultClass.rest_main_orgname != NULL">
-								&nbsp; * <s:property value="resultClass.rest_main_orgname" /> 재업로드시 기존파일은 삭제됩니다.
-							</s:if>
+							<input type="file" name="upload1"/>
+							<c:if test="${resultClass.rest_main_orgname != NULL}">
+								&nbsp; * ${resultClass.rest_main_orgname} 재업로드시 기존파일은 삭제됩니다.
+							</c:if>
 							<font color="grey">상품이 매인리스트에 노출될 이미지를 업로드 해주세요. <br/> 최적 이미지 크기 125x125 </font>
 						</td>
 					</tr>
@@ -218,10 +217,10 @@
 							<font size=3><b>상세 사진 업로드</b></font>&nbsp;&nbsp;&nbsp;&nbsp;<br/><br/><br/>
 						</td>
 						<td align="left">
-							<s:file name="upload2" theme="simple"/>
-							<s:if test="resultClass.rest_content_orgname != NULL">
-								&nbsp; * <s:property value="resultClass.rest_content_orgname" /> 재업로드시 기존파일은 삭제됩니다.
-							</s:if>
+							<input type="file" name="upload2"/>
+							<c:if test="${resultClass.rest_content_orgname != NULL}">
+								&nbsp; * ${resultClass.rest_content_orgname} 재업로드시 기존파일은 삭제됩니다.
+							</c:if>
 							<font color="grey">상품의 배경에 노출될 이미지를 업로드 해주세요. <br/> 최적 이미지 크기 1280x200 </font>
 						</td>
 					</tr>

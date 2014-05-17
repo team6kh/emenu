@@ -14,10 +14,10 @@
 		<link rel="shortcut icon" href="assets/ico/jogiyo.png">
 
 		<!-- Bootstrap core CSS -->
-		<link href="dist/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/emenu/dist/css/bootstrap.min.css" rel="stylesheet">
 		<!-- Custom styles for this template -->
-		<link href="view/jogiyo.css" rel="stylesheet">
-		<link href="view/common/common-template.css" rel="stylesheet">
+		<link href="/emenu/view/jogiyo.css" rel="stylesheet">
+		<link href="/emenu/view/common/common-template.css" rel="stylesheet">
 		<title>상품 등록 페이지</title>
 
 		<script type="text/javascript">
@@ -127,21 +127,11 @@
 			</table>
 
 			<!-- 최초 입력시에 -->
-			<s:if test="rest_num == 0">
-				<form name="insertRestForm" action="insertRest.action" method="post" enctype="multipart/form-data" onsubmit="return validation();">
+			<c:if test="${rest_num =='insert'}">
+				<form name="insertRestForm" action="insertRest.do" method="post" enctype="multipart/form-data" onsubmit="return validation();">
 					<!-- 임시 히든값 -->
 					<input type="hidden" name="session_id" value="${sessionScope.session_id}" />
-
-			</s:if>
-			<s:else>	<!-- 수정 입력시에 -->
-				<form name="updateRestForm" action="updateRest.action" method="post" enctype="multipart/form-data">
-					<s:hidden name="rest_num" value="%{resultClass.rest_num}" />
-					<s:hidden name="currentPage" value="%{currentPage}" />
-
-					<s:hidden name="old_file1" value="%{resultClass.file_savname1}" />
-					<s:hidden name="old_file2" value="%{resultClass.file_savname2}" />
-			</s:else>
-
+			</c:if>
 					<table width=75% border="0" cellspacing="0" cellpadding="0" align="center">
 						<tr bgcolor="#777777">
 							<td height="1" colspan="2"></td>
@@ -177,7 +167,7 @@
 						<tr align="center">
 							<td align="right" ><font size=3><b>상품명</b></font>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 							<td align="left">
-								<s:textfield name="rest_subject" theme="simple" value="%{resultClass.rest_subject}" maxlength="50"/>
+								<input type="text" name="rest_subject"  value="${resultClass.rest_subject}" maxlength="50"/>
 							</td>
 						</tr>
 						<tr>
@@ -251,10 +241,10 @@
 								<font size=3><b>매인 사진 업로드</b></font>&nbsp;&nbsp;&nbsp;&nbsp;<br/><br/><br/>
 							</td>
 							<td align="left">
-								<s:file name="upload1" theme="simple"/>
-								<s:if test="resultClass.file_orgname1 != NULL">
-									&nbsp; * <s:property value="resultClass.file_orgname1" /> 재업로드시 기존파일은 삭제됩니다.
-								</s:if>
+								<input type="file" name="upload1"  />
+								<c:if test="resultClass.file_orgname1 != NULL">
+									&nbsp; *${resultClass.file_orgname1} 재업로드시 기존파일은 삭제됩니다.
+								</c:if>
 								<font color="grey">상품이 매인리스트에 노출될 이미지를 업로드 해주세요. <br/> 최적 이미지 크기 125x125 </font>
 							</td>
 						</tr>
@@ -266,10 +256,10 @@
 								<font size=3><b>상세 사진 업로드</b></font>&nbsp;&nbsp;&nbsp;&nbsp;<br/><br/><br/>
 							</td>
 							<td align="left">
-								<s:file name="upload2" theme="simple"/>
-								<s:if test="resultClass.file_orgname2 != NULL">
-									&nbsp; * <s:property value="resultClass.file_orgname2" /> 재업로드시 기존파일은 삭제됩니다.
-								</s:if>
+								<input type="file" name="upload2"  />
+								<c:if test="resultClass.file_orgname2 != NULL">
+									&nbsp; * ${resultClass.file_orgname2} 재업로드시 기존파일은 삭제됩니다.
+								</c:if>
 								<font color="grey">상품의 배경에 노출될 이미지를 업로드 해주세요. <br/> 최적 이미지 크기 1280x200 </font>
 							</td>
 						</tr>
@@ -281,7 +271,7 @@
 						<tr>
 							<td align="right" colspan="2">
 								<input name="submit" type="submit" value="상품 등록" disabled/>
-								<input name="cancel" type="button" value="상품 등록 취소" onClick="javascript:location.href='insertCancelRestForm.action'" />
+								<input name="cancel" type="button" value="상품 등록 취소" onClick="javascript:location.href='/emenu/listRest.do?rest_localcategory=1&rest_typecategory=1'" />
 							</td>
 						</tr>
 

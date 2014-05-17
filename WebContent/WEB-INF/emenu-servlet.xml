@@ -14,7 +14,7 @@
 	<!-- 파일업로드 -->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="-1" /> <!-- -1은 업로드의 크기 제한이 없음을 의미함 -->
-		<property name="defaultEncoding" value="euc-kr" />
+		<property name="defaultEncoding" value="utf-8" />
 	</bean>
 	
 </beans>

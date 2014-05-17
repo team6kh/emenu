@@ -23,10 +23,10 @@
 
 	<form method="post" onsubmit="confirm()">
 	
-		<input type="hidden" id="rest_num" name="rest_num" value="${rest_num}" />
-		<input type="hidden" id="review_rest_currentPage" name="review_rest_currentPage" value="${review_rest_currentPage}" />
-		<input type="hidden" id="ccp" name="ccp" value="${ccp}" /> 
-		<input type="hidden" id="review_num" name="review_num" value="${review_num}" />
+		<input type="hidden" id="rest_num" name="rest_num" value="${pagingReviewDTO.rest_num}" />
+		<input type="hidden" id="review_rest_currentPage" name="review_rest_currentPage" value="${pagingReviewDTO.review_rest_currentPage}" />
+		<input type="hidden" id="ccp" name="ccp" value="${pagingReviewDTO.ccp}" /> 
+		<input type="hidden" id="review_num" name="review_num" value="${pagingReviewDTO.review_num}" />
 					
 		<table class="table table-striped table-forum" style="text-align: center">
 			<tr>
@@ -52,7 +52,7 @@
 			var ccp = document.getElementById("ccp").value;
 			var review_num = document.getElementById("review_num").value;
 			
-			opener.window.location.href = "deleteReviewPro.action?rest_num="+rest_num+"&review_rest_currentPage="+review_rest_currentPage+"&ccp="+ccp+"&review_num="+review_num;
+			opener.window.location.href = "deleteReviewPro.do?rest_num="+rest_num+"&review_rest_currentPage="+review_rest_currentPage+"&ccp="+ccp+"&review_num="+review_num;
 			self.close();
 		}
 	</script>

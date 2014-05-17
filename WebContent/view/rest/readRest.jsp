@@ -123,7 +123,6 @@
 			geocodemarker.length = 0;
 		}
 
-		//var address = "대한민국 서울특별시 영등포구 당산로49길"; // rest_writer_address 변수(판매자 테이블의 주소 컬럼)
 		var address = document.getElementById("rest_writer_address").value;
 
 		geocoder.geocode({
@@ -143,9 +142,7 @@
 				alert("Geocode was not successful for the following reason: "
 						+ status);
 			}
-
 		});
-
 	}
 
 	function codeCoordinate(event) {
@@ -172,7 +169,7 @@
 		var restopt_subject = form.restopt_subject.value;
 		var restopt_priceplus = form.restopt_priceplus.value;
 
-		var url = "insertCart.action?cart_rest_num="+rest_num+"&cart_rest_subject="+rest_subject+"&cart_restopt_destFile1="+restopt_destFile1+"&cart_restopt_num="+restopt_num+"&cart_restopt_subject="+restopt_subject+"&cart_restopt_priceplus="+restopt_priceplus+"&session_id="+session_id;
+		var url = "insertCart.do?cart_rest_num="+rest_num+"&cart_rest_subject="+rest_subject+"&cart_restopt_destFile1="+restopt_destFile1+"&cart_restopt_num="+restopt_num+"&cart_restopt_subject="+restopt_subject+"&cart_restopt_priceplus="+restopt_priceplus+"&session_id="+session_id;
 		document.getElementById("cartFrame").contentWindow.location.href=url;
 		return false;
 	}
@@ -285,7 +282,7 @@
 	    	</c:if>
 	    	<!-- 판매자가 아닐 시 -->
 	    	<c:if test="${sessionScope.session_type!='buyer'}">
-	    		<h2><strong>메뉴 리스트</strong> <small>구매하시려면 판매자로 로그인해주세요.</small></h2>
+	    		<h2><strong>메뉴 리스트</strong> <small>구매하시려면 구매자로 로그인해주세요.</small></h2>
 	    	</c:if>			
 			<input type="hidden" id="rest_num" name="rest_num" value="${resultClass.rest_num}" />
 			<input type="hidden" id="rest_subject" name="rest_subject" value="${resultClass.rest_subject}" />
@@ -295,8 +292,8 @@
 			<!-- 글 작성자와 현재 로그인한 세션이 일치할 경우, 수정 및 삭제 버튼을 출력 시킴 -->
 			<c:if test="${sessionScope.session_id==resultClass.rest_writer_id}">
 				<div class="forSeller" align="right">
-					<a href="updateRestForm.action?rest_num=${resultClass.rest_num}&currentPage=${currentPage}&session_id=${sessionScope.session_id}" class="btn btn-success">수정</a>
-					<a href="deleteRest.action?rest_num=${resultClass.rest_num}&session_id=${sessionScope.session_id}" class="btn btn-danger">삭제</a>
+					<a href="updateRestForm.do?rest_num=${resultClass.rest_num}&currentPage=${currentPage}&session_id=${sessionScope.session_id}" class="btn btn-success">수정</a>
+					<a href="deleteRest.do?rest_num=${resultClass.rest_num}&session_id=${sessionScope.session_id}" class="btn btn-danger">삭제</a>
 				</div>
 			</c:if>	
 		</div>
@@ -350,7 +347,7 @@
 				${resultClass.rest_writer_address} <br/>
 
 				<span class="glyphicon glyphicon-envelope"></span>
-				<a href="sendMail.action?rest_writer_email=${resultClass.rest_writer_email}&rest_num=${rest_num}&currentPage=${currentPage}" >${resultClass.rest_writer_email}</a> <br/>
+				<a href="/emenu/email/customerService.do?rest_writer_email=${resultClass.rest_writer_email}&rest_num=${rest_num}&currentPage=${currentPage}" >${resultClass.rest_writer_email}</a> <br/>
 
 				<span class="glyphicon glyphicon-print"></span>
 				<a href="javascript:printWindow()">프린트하기</a> <br/><br/>
@@ -363,7 +360,7 @@
 				<h2><strong>장바구니</strong></small></h2>
 			</div>
 			<!-- iframe -->
-			<iframe id="cartFrame" src="listCart.action?rest_num=${rest_num}&rest_subject=${resultClass.rest_subject}&session_id=${sessionScope.session_id}" frameborder="0" style="overflow:hidden;height:500px;width:100%" height="100%" width="100%"></iframe>
+			<iframe id="cartFrame" src="listCart.do?rest_num=${rest_num}&rest_subject=${resultClass.rest_subject}&session_id=${sessionScope.session_id}" frameborder="0" style="overflow:hidden;height:500px;width:100%" height="100%" width="100%"></iframe>
 		</c:if>	
 		<!-- /장바구니 col-md-3 -->
 	</div>
@@ -387,7 +384,7 @@
 		<c:if test="${sessionScope.session_type eq 'buyer'}">
 
 			<div class="text-center">
-				<form name="insertReviewForm" method="post" action="insertReviewPro.action" enctype="multipart/form-data" style="display: none">
+				<form name="insertReviewForm" method="post" action="insertReviewPro.do" enctype="multipart/form-data" style="display: none">
 					<table class="table table-striped">
 						<tr>
 							<th>별점</th>
@@ -409,7 +406,9 @@
 						<!--  이미지 파일 첨부 : 첨부 개수 제한/ 용량 제한 필요  -->
 						<tr>
 							<td class="text-center" colspan="2">
-							<input type="file" id="review_file_element" name="review_files" multiple="multiple" />
+                            <label> gif, jpg, jpeg, png 확장자인 이미지 파일만 업로드 가능합니다.    </label>
+							<input type="file" class="multi" maxlength="2" name="review_files" accept="gif|jpg|png|jpeg" multiple="multiple" />
+                            </td>
 						</tr>
 
 					</table>
@@ -418,6 +417,7 @@
 					<input type="hidden" name="review_rest_currentPage" value="${currentPage}" />
 					<input type="hidden" name="review_rest" value="${rest_num}" />
 					<input type="hidden" name="rest_num" value="${rest_num}" />
+					<input type="hidden" name="ccp" value="${ccp}" /> 
 					<input type="hidden" name="review_writer" value="${sessionScope.session_id }" />
 
 				</form>
@@ -485,7 +485,7 @@
 										<c:if test="${reviewDTO.review_writer == sessionScope.session_id}">
 											&nbsp;&nbsp;&nbsp;&nbsp;
 											<button class="btn btn-default" onclick="return updateRV_form('${reviewDTO.review_num}')">수정</button>
-											<button class="btn btn-default" onclick="javascript:open('deleteReviewForm.action?rest_num=${rest_num}&review_rest_currentPage=${currentPage}&ccp=${ccp}&review_num=${reviewDTO.review_num}','confirm','toolbar=no, location=no, status= no, menubar=no, scrollbars=no, resizeable=no, width=300, height=135')">삭제</button>
+											<button class="btn btn-default" onclick="javascript:open('deleteReviewForm.do?rest_num=${rest_num}&review_rest_currentPage=${currentPage}&ccp=${ccp}&review_num=${reviewDTO.review_num}','confirm','toolbar=no, location=no, status= no, menubar=no, scrollbars=no, resizeable=no, width=300, height=135')">삭제</button>
 										</c:if>
 									</td>
 							</tr>
@@ -515,10 +515,10 @@
 			<!-- 리뷰 수정 폼(review) -->
 			<div id="updateRV_${reviewDTO.review_num }" style="display:none; margin: 20px">
 				
-					<form method="post" name="updateReviewForm" id="updateReviewForm" action="updateReviewPro.action" enctype="multipart/form-data" >
+					<form method="post" name="updateReviewForm" id="updateReviewForm" action="updateReviewPro.do" enctype="multipart/form-data" >
 				
 						<input type="hidden" name="rest_num" value="${rest_num}" />
-						<input type="hidden"  name="review_rest_currentPage" value="${review_rest_currentPage}" />
+						<input type="hidden"  name="review_rest_currentPage" value="${currentPage}" />
 						<input type="hidden"  name="ccp" value="${ccp}" /> 
 						<input type="hidden"  name="review_num" value="${reviewDTO.review_num}" />
 						
@@ -551,7 +551,7 @@
 						<!-- 이미지 파일 첨부 -->
 							<div class="form-group text-center">
 							 	<label> 새로 파일을 첨부하시면 기존에 첨부하신 파일은 삭제됩니다. <br/>
-							 				  gif, jpg, jpen, png 확장자인 이미지 파일만 업로드 가능합니다.	 </label>
+							 				  gif, jpg, jpeg, png 확장자인 이미지 파일만 업로드 가능합니다.	 </label>
 			                    <input type="file" name="review_files" class="multi" maxlength="2" accept="gif|jpg|png|jpeg" multiple="multiple"/>        
 							</div>
 							<!-- 리뷰 작성 완료 버튼 -->
@@ -568,7 +568,7 @@
 
 		<div class="text-center">
 			<ul class="pagination pagination-sm">
-				<s:property value="pagingHtml" escape="false" />
+				${pagingHtml}
 			</ul>
 		</div>
 

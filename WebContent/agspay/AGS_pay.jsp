@@ -1,16 +1,15 @@
 <%@ page import="java.security.MessageDigest"  contentType="text/html; charset=UTF-8" 
 		import="java.util.ArrayList"
 		import="java.util.List"
-		import="board.cart.dto.CartDTO"
+		import="cart.dto.CartDTO"
 %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 		<!-- Bootstrap core CSS -->
 		<link href="dist/css/bootstrap.min.css" rel="stylesheet">
-
 		<!-- Custom styles for this template -->
-		<link href="jogiyo.css" rel="stylesheet">
-		<link href="common/common-template.css" rel="stylesheet">
+		<link href="view/jogiyo.css" rel="stylesheet">
+		<link href="view/common/common-template.css" rel="stylesheet">
 
 <%
 	request.setCharacterEncoding("UTF-8");
@@ -65,7 +64,7 @@
 
 <html>
 <head>
-<title>Jogiyo 상품 주문 페이지</title>
+<title>eMenu 상품 주문 페이지</title>
 <style type="text/css">
 <!--
 body { font-family:"돋움"; font-size:9pt; color:#333333; font-weight:normal; letter-spacing:0pt; line-height:180%; }
@@ -212,7 +211,7 @@ function Pay(form){
 				if(MakePayMessage(form) == true){
 					Disable_Flag(form);
 					
-					var openwin = window.open("/jogiyo/agspay/AGS_progress.html","popup","width=300,height=160"); //"지불처리중"이라는 팝업창연결 부분
+					var openwin = window.open("/emenu/agspay/AGS_progress.html","popup","width=300,height=160"); //"지불처리중"이라는 팝업창연결 부분
 					
 					form.submit();
 				}else{
@@ -299,7 +298,7 @@ function Display(form){
 <!-- end of header -->
 
 
-<form name=frmAGS_pay method=post action=/jogiyo/agspay/AGS_pay_ing.jsp>
+<form name=frmAGS_pay method=post action=/emenu/agspay/AGS_pay_ing.jsp>
 <table border=0 width=100% height=100% cellpadding=0 cellspacing=0>
 	<tr>
 		<td align=center>
@@ -347,7 +346,7 @@ function Display(form){
 							<font color=red>*</font> <b>상품명</b>
 						</td>
 						<td align="center" width=200>
-							<font color=red>*</font> <b>상품옵션</b>;
+							<font color=red>*</font> <b>상품옵션</b>
 						</td>
 						<td align="center" width=150>
 							<font color=red>*</font> <b>가격</b>

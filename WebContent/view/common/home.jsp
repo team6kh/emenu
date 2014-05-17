@@ -13,7 +13,7 @@
 <meta name="author" content="huks">
 <link rel="shortcut icon" href="/emenu/assets/ico/jogiyo.png">
 
-<title>JOGIYO</title>
+<title>eMenu</title>
 
 <!-- Bootstrap core CSS -->
 <link href="/emenu/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -56,7 +56,6 @@
 	<%@ include file="/view/common/header.jsp"%>
 
 	<div class="container">
-
 		<!-- Home Dashboard -->
 		<div class="home-template">
 		

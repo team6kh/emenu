@@ -19,17 +19,6 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
-	<!-- struts 필터 -->
-	<filter>
-		<filter-name>struts2</filter-name>
-		<filter-class>org.apache.struts2.dispatcher.FilterDispatcher</filter-class>
-	</filter>
-
-	<filter-mapping>
-		<filter-name>struts2</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-
 	<!-- servlet -->
 	<servlet>
 		<servlet-name>emenu</servlet-name>

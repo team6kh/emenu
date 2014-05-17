@@ -20,11 +20,11 @@
 	<title>JOGIYO</title>
 	
 	<!-- Bootstrap core CSS -->
-	<link href="dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/emenu/dist/css/bootstrap.min.css" rel="stylesheet">
 	
 	<!-- Custom styles for this template -->
-	<link href="view/jogiyo.css" rel="stylesheet">
-	<link href="view/common/common-template.css" rel="stylesheet">
+	<link href="/emenu/view/jogiyo.css" rel="stylesheet">
+	<link href="/emenu/view/common/common-template.css" rel="stylesheet">
 
 	<style type="text/css">
 	.progress {
@@ -142,7 +142,7 @@
 		<div class="col-md-12">
 			<br/><br/>
 			<h3>문의하기</h3>
-			<img src="assets/img/common/Jogiyo_main.png" width="250px" height="100px">
+			<img src="/emenu/assets/img/common/Jogiyo_main.png" width="250px" height="100px">
 		</div>
 		
 		<div class="col-md-12" align="center">
@@ -150,7 +150,7 @@
 		</div>
 		
 		<div class="col-md-12 well">
-			<form id="sendMail" action="sendMailPro.action" method="POST" > 
+			<form id="sendMail" action="/emenu/email/customerServiceSend.do"> 
 				<input type="hidden" name="rest_writer_email" value="${rest_writer_email}" />
 				<input type="hidden" name="session_id" value="${sessionScope.session_id}" />
 				
@@ -186,7 +186,7 @@
 						<td></td>
 						<td>
 							<button class="btn btn-primary" name="btnSubmit" onclick="return btnSubmit()">문의메일 보내기</button>
-							<a href="readRest.action?rest_num=${rest_num}&currentPage=${currentPage}" class="btn btn-danger">취소</a>
+							<a href="readRest.do?rest_num=${rest_num}&currentPage=${currentPage}" class="btn btn-danger">취소</a>
 						</td>
 					</tr> 
 				</table>

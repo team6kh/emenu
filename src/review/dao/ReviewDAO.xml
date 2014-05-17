@@ -37,7 +37,7 @@
 	<select id="selectReviewList" resultMap="reviewRes" parameterClass="int">
 		<include refid="select-all" />
 		<include refid="where-review_rest"/>
-		ORDER BY review_reg_date DESC 
+		ORDER BY review_num DESC
 	</select>
 
 	<!-- review_num으로 리뷰글 하나만 추출하는 쿼리문 -->
