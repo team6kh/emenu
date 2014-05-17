@@ -58,6 +58,10 @@ public class CheckPass {
 		// 판매자 정보 수정/탈퇴
 		} else if (mp.getModalParam_id().equals("updateSellerForm") || mp.getModalParam_id().equals("deleteSeller")) {
 			
+			System.out.println("판매자 정보 수정/탈퇴");
+			System.out.println(mp.getModalParam_key());
+			System.out.println(mp.getModalParam_pass());
+			
 			SellerDTO sellerDTO = new SellerDTO();
 			sellerDTO.setSeller_id(mp.getModalParam_key());
 			sellerDTO.setSeller_pw(mp.getModalParam_pass());
@@ -65,6 +69,9 @@ public class CheckPass {
 			sellerDTO = (SellerDTO) sqlMapper.queryForObject("Seller.getSellerPw", sellerDTO);
 			
 			if (sellerDTO != null) {
+				
+				request.setAttribute("sellerDTO", sellerDTO);
+				
 				if (mp.getModalParam_id().equals("updateSellerForm")) {
 					return "/user/seller/update/form.do";
 				} else if (mp.getModalParam_id().equals("deleteSeller")) {
@@ -75,6 +82,5 @@ public class CheckPass {
 		
 		return "redirect:/error.do";
 		
-	}
-	
+	}	
 }

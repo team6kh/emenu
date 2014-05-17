@@ -65,8 +65,8 @@
 							COUNT(*) AS paid_sales_volume, 
 							SUM(paid_restopt_priceplus) AS paid_sales_price
   										
-   				FROM 		paid_board 	
-   				WHERE 		paid_rest_num = #rest_num# AND <include refid="paidDate"/> 
+   				<include refid="fromRPBoard"/> 	
+   				<include refid="whereRest"/> AND <include refid="paidDate"/> 
    				GROUP BY	paid_restopt_subject
    				ORDER BY	paid_sales_volume DESC) 
    				

@@ -1,4 +1,4 @@
-package user.buyer.controller;
+package user.seller.controller;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -9,36 +9,30 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import user.buyer.dto.BuyerDTO;
+import user.seller.dto.SellerDTO;
 
 import com.ibatis.common.resources.Resources;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.ibatis.sqlmap.client.SqlMapClientBuilder;
 
 @Controller
-public class GetBuyer {
-	
+public class DeleteSeller {
+
 	private Reader reader;
 	private SqlMapClient sqlMapper;
 	
-	public GetBuyer() throws IOException {
+	public DeleteSeller() throws IOException {
 		reader = Resources.getResourceAsReader("sqlMapConfig.xml");
 		sqlMapper = SqlMapClientBuilder.buildSqlMapClient(reader);
 		reader.close();
 	}
 	
-	@RequestMapping("/user/buyer/get.do")
-	public String getBuyer(HttpServletRequest request) throws SQLException {
+	@RequestMapping("/user/seller/delete.do")
+	public String deleteSeller(HttpServletRequest request) throws SQLException {
 		
-		String user_id = "";
-		user_id = request.getParameter("user_id");
+		SellerDTO sellerDTO = (SellerDTO) request.getAttribute("sellerDTO");
+		sqlMapper.delete("Seller.deleteSeller", sellerDTO);
 		
-		BuyerDTO buyerDTO = new BuyerDTO();
-		buyerDTO.setBuyer_id(user_id);
-		buyerDTO = (BuyerDTO) sqlMapper.queryForObject("Buyer.getBuyerId", buyerDTO);
-		
-		request.setAttribute("buyerDTO", buyerDTO);
-		
-		return "/view/user/buyer/getBuyer.jsp";	
-	}	
+		return "/user/logout.do";		
+	}
 }

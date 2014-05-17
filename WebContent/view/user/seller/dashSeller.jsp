@@ -14,16 +14,16 @@
         <link rel="shortcut icon" href="assets/ico/jogiyo.png">
         <title>JOGIYO</title>
         <!-- Bootstrap core CSS -->
-        <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/emenu/dist/css/bootstrap.min.css" rel="stylesheet">
         
         <!--  Datepicker CSS -->
-        <link href="assets/css/jquery-ui-1.10.4.custom.min.css" rel="stylesheet">
+        <link href="/emenu/assets/css/jquery-ui-1.10.4.custom.min.css" rel="stylesheet">
         
         
         <!-- Custom styles for this template -->
-        <link href="view/jogiyo.css" rel="stylesheet">
-        <link href="view/common/common-template.css" rel="stylesheet">
-        <link href="view/user/dashboard.css" rel="stylesheet">
+        <link href="/emenu/view/jogiyo.css" rel="stylesheet">
+        <link href="/emenu/view/common/common-template.css" rel="stylesheet">
+        <link href="/emenu/view/user/dashboard.css" rel="stylesheet">
         <script type="text/javascript">
        			// 오늘 버튼 눌렀을 때 날짜 설정
 		       function setToday() {
@@ -112,8 +112,8 @@
 	        <!-- sidebar -->
 	        <div class="col-sm-3 col-md-2 sidebar">
 	          <ul class="nav nav-sidebar">
-	            <li><a href="readUser.action?user_type=${session_type}&user_id=${session_id}">회원정보</a></li>
-	            <li class="active"><a href="dashSeller.action?sesssion_id=${session_id}">판매목록</a></li>
+	            <li><a href="/emenu/user/get.do?user_type=${session_type}&user_id=${session_id}">회원정보</a></li>
+	            <li class="active"><a href="/emenu/user/dashSeller.do?sesssion_id=${session_id}">판매목록</a></li>
 	          </ul>
 	        </div>
 	        <!-- /.sidebar -->
@@ -123,7 +123,7 @@
             
                 <div class="col-md-12" style="margin-top: 20px">
                 <!--  기간 검색조건 폼  -->
-                    <form name="searchDate" method="post" action="dashSeller.action">
+                    <form name="searchDate" method="post" action="/emenu/user/dashSeller.do">
                           <table class="table" >
                             <tr>
                                 <th colspan="2">  기간별 검색 </th>
@@ -160,9 +160,10 @@
                             </table>
                     </form>
                 </div>
+                <!-- /.상단 : 기간 검색  -->
             <!-- 중단 :  쿠폰 사용 요청 내역 -->
                 <div class="col-md-12">
-                <form method="post" action="responseCpn.action" >
+                <form method="post" action="/emenu/user/responseCPN.do" >
                     <div class="col-md-12">
                         <table class="table table-hover text-center">
                             <tr>
@@ -193,8 +194,10 @@
                 </form>
                 
                 </div>
+             <!-- /.중단 : 쿠폰 사용 요청 내역 -->   
+             
             <!--  하단  -->
-            <!-- 하단 좌측 : 결제 내역 -->
+           	<!-- 하단 좌측 : 결제 내역 -->
                 <div class="col-md-6">
                     <table class="table table-bordered table-hover">
                         <caption class="text-left">
@@ -219,7 +222,8 @@
                         </c:forEach>
                     </table>
                 </div>
-            <!-- 하단 우측 : 인기 메뉴 -->
+                <!-- /.하단 좌측 : 결제 내역 -->
+                <!-- 하단 우측 : 인기 메뉴 -->
                 <div class="col-md-6">
                     <table class="table table-bordered table-hover">
                         <caption class="text-left">
@@ -239,6 +243,7 @@
                         </c:forEach>
                     </table>
                 </div>
+                <!-- /. 하단 우측 : 인기 메뉴 -->
             </div>
             </div>
         </div>
@@ -248,11 +253,11 @@
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-        <script src="dist/js/bootstrap.min.js"></script>
+        <script src="/emenu/dist/js/bootstrap.min.js"></script>
         
          <!--  Datepicker JS -->
-        <script type="text/javascript" src="assets/js/jquery-ui-1.10.4.custom.min.js"></script>
-        <script type="text/javascript" src="assets/js/jquery.ui.datepicker-ko.js"></script>
+        <script type="text/javascript" src="/emenu/assets/js/jquery-ui-1.10.4.custom.min.js"></script>
+        <script type="text/javascript" src="/emenu/assets/js/jquery.ui.datepicker-ko.js"></script>
         <script>
              $(function() {
               	$( "#startDate" ).datepicker({
