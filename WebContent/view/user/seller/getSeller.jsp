@@ -83,7 +83,7 @@
         	<div class="col-sm-3 col-md-2 sidebar">
           		<ul class="nav nav-sidebar">
             		<li class="active"><a href="/emenu/user/get.do?user_type=${session_type}&user_id=${session_id}">회원정보</a></li>
-            		<li><a href="dashSeller.action?sesssion_id=${session_id}">판매목록</a></li>
+            		<li><a href="/emenu/user/dashSeller.do?sesssion_id=${session_id}">판매목록</a></li>
           		</ul>
         	</div>
         	<!-- /.sidebar -->
