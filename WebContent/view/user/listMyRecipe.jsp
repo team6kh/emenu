@@ -91,7 +91,7 @@
 					<li><a href="dashBuyer.action?session_id=${session_id}">구매목록</a></li>
 					<!-- 판매자일시 미구현 -->
 					<!-- <li><a href="dashSeller.action?session_id=${session_id}">판매목록</a></li> -->
-					<li class="active"><a href="listMyRecipe.action?session_id=${session_id}">마이 레시피</a></li>
+					<li class="active"><a href="listMyRecipe.do">마이 레시피</a></li>
 					<li><a href="listMyQna.action?session_id=${session_id}">마이 문의하기</a></li>
 				</ul>
 			</div>
@@ -122,19 +122,18 @@
 							<td><strong><a href="javascript:return false;"onClick="recipe_recommendarray()">추천수</a></strong></td>
 						</tr>
 
-						
-						<c:forEach var="dto" items="${list}" >
+						<c:forEach var="list" items="${list}" >
 							<tr bgcolor="#FFFFFF" align="center">
-								<td>${recipe_num}</td>
-								<td align="center">${recipe_foodkind}</td>
-								<td align="center">&nbsp; <a href="readRecipe.do?recipe_num=${recipe_num}&currentPage=${currentPage}" >${recipe_subject}</a></td>
-								<td align="center">${recipe_foodsubject}</td>
-								<td align="center">${recipe_writer}></td>
-								<td align="center">${recipe_reg_date}</td>
-								<td align="center">${recipe_time}cipe_time" /></td>
-								<td align="center">${recipe_price}</td>
-								<td align="center">${recipe_readcount}</td>
-								<td align="center">${recipe_recommend}</td>
+								<td>${list.recipe_num}</td>
+								<td align="center">${list.recipe_foodkind}</td>
+								<td align="center">&nbsp; <a href="readRecipe.do?recipe_num=${list.recipe_num}&currentPage=${currentPage}" >${list.recipe_subject}</a></td>
+								<td align="center">${list.recipe_foodsubject}</td>
+								<td align="center">${list.recipe_writer}></td>
+								<td align="center">${list.recipe_reg_date}</td>
+								<td align="center">${list.recipe_time}</td>
+								<td align="center">${list.recipe_price}</td>
+								<td align="center">${list.recipe_readcount}</td>
+								<td align="center">${list.recipe_recommend}</td>
 							</tr>
 						</c:forEach>
 
@@ -176,7 +175,7 @@
 		<br />
 
 		<!-- 상세검색 폼 -->
-		<form name="recipe_search" method="post" action="searchMyRecipe.action?session_id=${session_id}" enctype="multipart/form-data">
+		<form name="recipe_search" method="post" action="searchMyRecipe.do?session_id=${session_id}" enctype="multipart/form-data">
              
 			<!-- 상세검색 시에 나타난다. -->
 			<div id="detailsearch" style="display: none">

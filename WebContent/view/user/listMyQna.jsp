@@ -92,7 +92,7 @@
 					<li><a href="dashBuyer.action?session_id=${session_id}">구매목록</a></li>
 					<!-- 판매자일시 미구현 -->
 					<!-- <li><a href="dashSeller.action?session_id=${session_id}">판매목록</a></li> -->
-					<li><a href="listMyRecipe.action?session_id=${session_id}">마이 레시피</a></li>
+					<li><a href="listMyRecipe.do">마이 레시피</a></li>
 					<li class="active"><a href="listMyQna.action?session_id=${session_id}">마이 문의하기</a></li>
 				</ul>
 			</div>

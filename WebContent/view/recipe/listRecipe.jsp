@@ -166,7 +166,7 @@
 				<!-- /.검색[선택] -->
 				<!-- 내가 쓴 글 -->
 				<s:if test="#session.session_id != null">
-					<input name="mylist" type="button" class="btn btn-default" value="마이 레시피" onClick="javascript:location.href='listMyRecipe.action?session_id=<s:property value="#session.session_id" />';">
+					<input name="mylist" type="button" class="btn btn-default" value="마이 레시피" onClick="javascript:location.href='listMyRecipe.do';">
 				</s:if>
 				<!-- /.내가 쓴 글 -->
 				<input type="button" class="btn btn-primary" value="글쓰기" onClick="javascript:location.href='insertRecipeForm.action?currentPage=<s:property value="currentPage" />';">
