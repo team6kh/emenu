@@ -47,8 +47,7 @@ public class GetQna {
 		sqlMapper.update("Qna.updateReadCount", Integer.parseInt(request.getParameter("qna_num")));		
 		// 상세보기 조회
 		resultClass = (QnaDTO) sqlMapper.queryForObject("Qna.getQna",Integer.parseInt(request.getParameter("qna_num")));
-		// resultClass.setQna_content(resultClass.getQna_content().replaceAll("\n",
-		// "<br/>"));
+		// resultClass.setQna_content(resultClass.getQna_content().replaceAll("\n","<br/>"));
 		request.setAttribute("resultClass", resultClass);
 		return "/view/qna/viewQna.jsp";
 	}

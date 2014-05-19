@@ -11,33 +11,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="shortcut icon" href="assets/ico/jogiyo.png">
+<link rel="shortcut icon" href="/emenu/assets/ico/jogiyo.png">
 
 <title>JOGIYO</title>
 
 <!-- Bootstrap core CSS -->
-<link href="dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="/emenu/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="view/jogiyo.css" rel="stylesheet">
-<link href="view/user/dashboard.css" rel="stylesheet">
-<link href="view/common/common-template.css" rel="stylesheet">
+<link href="/emenu/view/jogiyo.css" rel="stylesheet">
+<link href="/emenu/view/user/dashboard.css" rel="stylesheet">
+<link href="/emenu/view/common/common-template.css" rel="stylesheet">
 
-<!-- 스크립트 -->
+<!--스크립트 -->
 <script type="text/javascript">
-	function searchtype() {
-		var sel = document.getElementById("recipe_search_target").value;
-		var frm = document.getElementById("recipe_search_input");
-
-		if ((sel == "recipe_time" || sel == "recipe_price")) {
-			frm.innerHTML = "<input type=text name=key1>~<input type=text name=key2><input type=submit value=검색>";
-		} else if ((sel == "recipe_subject,content" || sel == "recipe_foodkind")) {
-			frm.innerHTML = "<input type=text name=key1><input type=submit value=검색>";
-		} else if ((sel == "recipe_searchselect")) {
-			frm.innerHTML = "<input type=submit value=검색>";
-		}
-
-	}
 
 	function detailsearch() {
 		var sel = document.getElementById("recipe_search_target").value;
@@ -49,25 +36,7 @@
 		}
 	}
 
-	function recipe_readcountarray() {
-		//var click = false;
-		//if(click==false){
 
-		//click = true;
-		document.location.href = 'readcountRecipeDesc.action';
-		//}if(click==true){
-		//	click = false;
-		//	window.location.href='readcountRecipeAsc.action';
-		//}
-	}
-
-	function recipe_timearray() {
-		document.location.href = 'timeRecipeDesc.action';
-	}
-
-	function recipe_pricearray() {
-		document.location.href = 'priceRecipeDesc.action';
-	}
 </script>
 <!-- 스크립트 끝 -->
 
@@ -87,13 +56,13 @@
 			<!-- sidebar -->
 			<div class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
-					<li><a href="readUser.action?user_type=${session_type}&user_id=${session_id}">회원정보</a></li>
+					<li><a href="/emenu/user/readUser.do?user_type=${session_type}&user_id=${session_id}">회원정보</a></li>
 					<!-- 구매자일시 -->
-					<li><a href="dashBuyer.action?session_id=${session_id}">구매목록</a></li>
+					<li><a href="/emenu/user/dashBuyer.do?session_id=${session_id}">구매목록</a></li>
 					<!-- 판매자일시 미구현 -->
 					<!-- <li><a href="dashSeller.action?session_id=${session_id}">판매목록</a></li> -->
-					<li><a href="listMyRecipe.action?session_id=${session_id}">마이 레시피</a></li>
-					<li class="active"><a href="listMyQna.action?session_id=${session_id}">마이 문의하기</a></li>
+					<li><a href="/emenu/user/listMyRecipe.do?session_id=${session_id}">마이 레시피</a></li>
+					<li class="active"><a href="/emenu/user/listMyQna.do?session_id=${session_id}">마이 문의하기</a></li>
 				</ul>
 			</div>
 			<!-- /.sidebar -->
@@ -131,9 +100,10 @@
 											<c:when test="${list.qna_category eq '06' }">기타</c:when>
 											<c:otherwise>전체</c:otherwise>
 										</c:choose></td>
-									<td class="text-left"><a
-										href="detailQna.action?qna_num=${list.qna_num }"> <c:out
-												value="${list.qna_subject }" />
+									<td class="text-left">
+									
+									<a href="/emenu/getQna.do?qna_num=${list.qna_num }"> 
+										<c:out value="${list.qna_subject }" />
 									</a></td>
 									<td class="text-center"><c:out
 											value="${list.qna_reg_date }" /></td>
@@ -151,7 +121,7 @@
 
 					<div class="text-center">
 						<ul class="pagination pagination-sm">
-							<s:property value="pagingHtml" escape="false" />
+							${pagingHtml }
 						</ul>
 					</div>
 
@@ -176,6 +146,6 @@
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script src="dist/js/bootstrap.min.js"></script>
+	<script src="/emenu/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
