@@ -25,7 +25,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="/emenu/home.do"><font face="Comic Sans MS">e</font><font><b>Menu</b></font></a>
+			<a class="navbar-brand" href="/emenu/home.do"><font face="Comic Sans MS">e</font><b>Menu</b></a>
 		</div>
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
