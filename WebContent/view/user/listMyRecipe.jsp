@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%-- <%@ page isELIgnored="false" %> --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -86,13 +87,13 @@
 			<!-- sidebar -->
 			<div class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
-					<li><a href="readUser.action?user_type=${session_type}&user_id=${session_id}">회원정보</a></li>
+					<li><a href="/emenu/user/get.do?user_type=${session_type}&user_id=${session_id}">회원정보</a></li>
 					<!-- 구매자일시 -->
-					<li><a href="dashBuyer.action?session_id=${session_id}">구매목록</a></li>
+					<li><a href="/emenu/user/buyer/dashboard.do?session_id=${session_id}">구매목록</a></li>
 					<!-- 판매자일시 미구현 -->
 					<!-- <li><a href="dashSeller.action?session_id=${session_id}">판매목록</a></li> -->
 					<li class="active"><a href="listMyRecipe.do">마이 레시피</a></li>
-					<li><a href="listMyQna.action?session_id=${session_id}">마이 문의하기</a></li>
+					<li><a href="/emenu/user/listMyQna.do?session_id=${session_id}">마이 문의하기</a></li>
 				</ul>
 			</div>
 			<!-- /.sidebar -->
@@ -128,8 +129,9 @@
 								<td align="center">${list.recipe_foodkind}</td>
 								<td align="center">&nbsp; <a href="readRecipe.do?recipe_num=${list.recipe_num}&currentPage=${currentPage}" >${list.recipe_subject}</a></td>
 								<td align="center">${list.recipe_foodsubject}</td>
-								<td align="center">${list.recipe_writer}></td>
-								<td align="center">${list.recipe_reg_date}</td>
+								<td align="center">${list.recipe_writer}</td>
+								<td align="center"><fmt:formatDate value="${list.recipe_reg_date}" pattern="yyyy-MM-dd HH:mm:ss"/> 
+                                </td>
 								<td align="center">${list.recipe_time}</td>
 								<td align="center">${list.recipe_price}</td>
 								<td align="center">${list.recipe_readcount}</td>
@@ -140,6 +142,7 @@
 
 						<c:if test="list.size() <= 0">
 							<tr bgcolor="#FFFFFF" align="center">
+                            
 								<td colspan="10">등록된 게시물이 없습니다.</td>
 							</tr>
 							<tr bgcolor="#777777">

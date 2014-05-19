@@ -83,9 +83,9 @@
         	<div class="col-sm-3 col-md-2 sidebar">
           		<ul class="nav nav-sidebar">
             		<li class="active"><a href="/emenu/user/get.do?user_type=${session_type}&user_id=${session_id}">회원정보</a></li>
-					<li><a href="dashBuyer.action?session_id=${session_id}">구매목록</a></li>
-					<li><a href="/emenu/user/listMyRecipe.do">마이 레시피</a></li>
-					<li><a href="listMyQna.action?session_id=${session_id}">마이 문의하기</a></li>
+					<li><a href="/emenu/user/buyer/dashboard.do?session_id=${session_id}">구매목록</a></li>
+					<li><a href="listMyRecipe.do">마이 레시피</a></li>
+					<li><a href="/emenu/user/listMyQna.do?session_id=${session_id}">마이 문의하기</a></li>
           		</ul>
         	</div>
         	<!-- /.sidebar -->

@@ -90,5 +90,9 @@
 	<delete id="deleteQna" parameterClass="qnaDTO">
 		delete qna_board where qna_num = #qna_num#
 	</delete>
+	<!-- myListQ&A 쿼리문 정의 -->
+	<select id="selectMyQnaList" resultMap="qnaRes" parameterClass="java.lang.String">
+		SELECT * FROM QNA_BOARD WHERE QNA_ID = #qna_id#
+	</select>
 	
 </sqlMap>
