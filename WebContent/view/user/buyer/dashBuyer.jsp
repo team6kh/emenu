@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib prefix="s" uri="/struts-tags"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,96 +11,90 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="huks">
-<link rel="shortcut icon" href="assets/ico/jogiyo.png">
+<link rel="shortcut icon" href="/emenu/assets/ico/jogiyo.png">
 
 <title>JOGIYO</title>
 
 <!-- Bootstrap core CSS -->
-<link href="dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="/emenu/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <!--  Datepicker CSS -->
-<link href="assets/css/jquery-ui-1.10.4.custom.min.css" rel="stylesheet">
-
+<link href="/emenu/assets/css/jquery-ui-1.10.4.custom.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="view/jogiyo.css" rel="stylesheet">
-<link href="view/user/dashboard.css" rel="stylesheet">
-
+<link href="/emenu/view/jogiyo.css" rel="stylesheet">
+<link href="/emenu/view/user/dashboard.css" rel="stylesheet">
 
 <script type="text/javascript">
-       			// 오늘 버튼 눌렀을 때 날짜 설정
-		       function setToday() {
-		    	   var now = new Date();
+	// 오늘 버튼 눌렀을 때 날짜 설정
+	function setToday() {
+		var now = new Date();
+		
+		var day = ("0" + now.getDate()).slice(-2);
+		var month = ("0" + (now.getMonth() + 1)).slice(-2);
+		var today = now.getFullYear() + "-" + (month) + "-" + (day);
+		$('#startDate').val(today);
+		$('#endDate').val(today);
+	}
+	
+	// 이번 주 버튼 눌렀을 때 날짜 설정
+	function setThisWeek() {
+		var now = new Date();
 
-		           var day = ("0" + now.getDate()).slice(-2);
-		           var month = ("0" + (now.getMonth() + 1)).slice(-2);
-		           var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
-		           $('#startDate').val(today);
-              	   $('#endDate').val(today);
+		var oneWeekAgo = new Date();
+		oneWeekAgo.setDate(now.getDate() - 7);
 
-				}
-       			// 이번 주 버튼 눌렀을 때 날짜 설정
-		       function setThisWeek() {
-		    	   var now = new Date();
+		var day = ("0" + oneWeekAgo.getDate()).slice(-2);
+		var month = ("0" + (oneWeekAgo.getMonth() + 1)).slice(-2);
 
+		var week = oneWeekAgo.getFullYear() + "-" + (month) + "-" + (day);
 
-		           var oneWeekAgo = new Date();
-		           oneWeekAgo.setDate(now.getDate() - 7);
+		$('#startDate').val(week);
+		setEndDate();
+	}
+	
+	// 이번 달 버튼 눌렀을 때 날짜 설정
+	function setThisMon() {
+		var now = new Date();
+		var oneMonthAgo = new Date();
+		oneMonthAgo.setMonth(now.getMonth() - 1);
 
-		           var day = ("0" + oneWeekAgo.getDate()).slice(-2);
-		           var month = ("0" + (oneWeekAgo.getMonth() + 1)).slice(-2);
+		var day = ("0" + oneMonthAgo.getDate()).slice(-2);
+		var month = ("0" + (oneMonthAgo.getMonth() + 1)).slice(-2);
 
-		           var week = oneWeekAgo.getFullYear() + "-" + (month) + "-" + (day);
+		var oneMon = oneMonthAgo.getFullYear() + "-" + (month) + "-" + (day);
 
-		           $('#startDate').val(week);
-		           setEndDate();
+		$('#startDate').val(oneMon);
+		setEndDate();
+	}
+	
+	// 최근 6개월 버튼 눌렀을 때 날짜 설정
+	function setLastSixMon() {
+		var now = new Date();
+		var sixMonthAgo = new Date();
+		sixMonthAgo.setMonth(now.getMonth() - 6);
 
-				}
-		       // 이번 달 버튼 눌렀을 때 날짜 설정
-		       function setThisMon() {
-		    	   var now = new Date();
-		           var oneMonthAgo = new Date();
-		           oneMonthAgo.setMonth(now.getMonth() -1);
+		var day = ("0" + sixMonthAgo.getDate()).slice(-2);
+		var month = ("0" + (sixMonthAgo.getMonth() + 1)).slice(-2);
 
+		var sixMon = sixMonthAgo.getFullYear() + "-" + (month) + "-" + (day);
 
-		           var day = ("0" + oneMonthAgo.getDate()).slice(-2);
-		           var month = ("0" + (oneMonthAgo.getMonth() + 1)).slice(-2);
+		$('#startDate').val(sixMon);
+		setEndDate();
+	}
+	
+	// 마지막 날짜 값 설정
+	function setEndDate() {
+		var now = new Date();
 
-		           var oneMon = oneMonthAgo.getFullYear() + "-" + (month) + "-" + (day);
+		var day = ("0" + now.getDate()).slice(-2);
+		var month = ("0" + (now.getMonth() + 1)).slice(-2);
+		var today = now.getFullYear() + "-" + (month) + "-" + (day);
 
-		           $('#startDate').val(oneMon);
-		           setEndDate();
-				}
-		       // 최근 6개월 버튼 눌렀을 때 날짜 설정
-		       function setLastSixMon() {
-		    	   var now = new Date();
-		           var sixMonthAgo = new Date();
-		           sixMonthAgo.setMonth(now.getMonth() - 6);
+		$('#endDate').val(today);
+	}
+</script>
 
-
-		           var day = ("0" + sixMonthAgo.getDate()).slice(-2);
-		           var month = ("0" + (sixMonthAgo.getMonth() + 1)).slice(-2);
-
-		           var sixMon = sixMonthAgo.getFullYear() + "-" + (month) + "-" + (day);
-
-		           $('#startDate').val(sixMon);
-		           setEndDate();
-				}
-		       // 마지막 날짜 값 설정
-		       function setEndDate() {
-		    	   var now = new Date();
-
-		           var day = ("0" + now.getDate()).slice(-2);
-		           var month = ("0" + (now.getMonth() + 1)).slice(-2);
-		           var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
-
-		           $('#endDate').val(today);
-
-			}
-
-
-       </script> 
-         
 </head>
 
 <body>
@@ -117,8 +110,8 @@
 			<!-- sidebar -->
 			<div class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
-					<li><a href="readUser.action?user_type=${session_type}&user_id=${session_id}">회원정보</a></li>
-					<li class="active"><a href="dashBuyer.action?session_id=${session_id}">구매목록</a></li>
+					<li><a href="/emenu/user/get.do?user_type=${session_type}&user_id=${session_id}">회원정보</a></li>
+					<li class="active"><a href="/emenu/user/buyer/dashboard.do?session_id=${session_id}">구매목록</a></li>
 					<li><a href="listMyRecipe.action?session_id=${session_id}">마이 레시피</a></li>
 					<li><a href="listMyQna.action?session_id=${session_id}">마이 문의하기</a></li>
 				</ul>
@@ -133,7 +126,7 @@
 				<div class="col-md-12" style="margin-top: 20px">
                 
                 	<!--  기간 검색조건 폼  -->
-                    <form name="searchDate" method="post" action="listMyCoupon.action">
+                    <form name="searchDate" method="post" action="/emenu/user/buyer/searchMyCpn.do">
                           <table class="table" >
                             <tr>
                                 <th colspan="2">  기간별 검색 </th>
@@ -199,7 +192,7 @@
 									<!-- <td>${list.paid_cpn_used} </td> -->
 									<!-- 사용요청 -->
 									<c:if test="${list.paid_cpn_used eq 0 }">
-									<td><a href="requestCpn.action?paid_num=${list.paid_num}&session_id=${session_id}" class="btn btn-primary">사용요청</a></td>
+									<td><a href="/emenu/user/buyer/requestCpn.do?paid_num=${list.paid_num}&session_id=${session_id}" class="btn btn-primary">사용요청</a></td>
 									</c:if>
 									<!-- 요청대기 -->	
 									<c:if test="${list.paid_cpn_used eq 1 }">
@@ -238,7 +231,7 @@
 								</tr>
 							</s:iterator> --%>
 	
-							<s:if test="list.size() <= 0">
+							<c:if test="${list eq null}">
 	
 								<tr bgcolor="#FFFFFF" align="center">
 									<td colspan="10">등록된 게시물이 없습니다.</td>
@@ -247,7 +240,7 @@
 									<td height="1" colspan="10"></td>
 								</tr>
 	
-							</s:if>
+							</c:if>
 						</table>
 					</div>
 					<!-- /.테이블 div -->
@@ -257,7 +250,7 @@
 				<!-- 페이징 -->
 				<div class="text-center">
 					<ul class="pagination pagination-sm">
-						<s:property value="pagingHtml" escape="false" />
+						${pagingHtml}
 					</ul>
 				</div>
 				<!-- /페이징 -->
@@ -275,27 +268,26 @@
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script src="dist/js/bootstrap.min.js"></script>
+	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="/emenu/dist/js/bootstrap.min.js"></script>
     <!--  Datepicker JS -->
-        <script type="text/javascript" src="assets/js/jquery-ui-1.10.4.custom.min.js"></script>
-        <script type="text/javascript" src="assets/js/jquery.ui.datepicker-ko.js"></script>
-        <script>
-             $(function() {
-                $( "#startDate" ).datepicker({
-                    changeYear: true,
-                    showButtonPanel: true,   //달력아래 닫기 버튼 오늘가기 버튼 출력
-                    dateFormat: "yy-mm-dd", //날짜 출력 형식
-                    maxDate : '+0'   
-                });
-                $("#endDate").datepicker({   //달력 2개가 필요하기 때문에 추가
-                    changeYear: true,
-                    showButtonPanel: true,   
-                    dateFormat: "yy-mm-dd", //날짜 출력 형식
-                    maxDate : '+0'       
-                });
-             });
- </script>        
+	<script type="text/javascript" src="/emenu/assets/js/jquery-ui-1.10.4.custom.min.js"></script>
+	<script type="text/javascript" src="/emenu/assets/js/jquery.ui.datepicker-ko.js"></script>
+	<script>
+		$(function() {
+			$("#startDate").datepicker({
+				changeYear : true,
+				showButtonPanel : true, //달력아래 닫기 버튼 오늘가기 버튼 출력
+				dateFormat : "yy-mm-dd", //날짜 출력 형식
+				maxDate : '+0'
+			});
+			$("#endDate").datepicker({ //달력 2개가 필요하기 때문에 추가
+				changeYear : true,
+				showButtonPanel : true,
+				dateFormat : "yy-mm-dd", //날짜 출력 형식
+				maxDate : '+0'
+			});
+		});
+	</script>
 </body>
 </html>

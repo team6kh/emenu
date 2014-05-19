@@ -1,4 +1,5 @@
 package user;
+package user.controller;
 
 import java.sql.SQLException;
 
