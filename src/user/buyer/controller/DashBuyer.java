@@ -74,6 +74,7 @@ public class DashBuyer {
 		
 		request.setAttribute("list", list);
 		request.setAttribute("pagingHtml", pagingHtml);
+		request.setAttribute("currentPage", currentPage);
 		
 		return "/view/user/buyer/dashBuyer.jsp";		
 	}
@@ -84,9 +85,16 @@ public class DashBuyer {
 			
 		String session_id = (String) session.getAttribute("session_id");		
 		String startDate = (String) request.getParameter("startDate");
-		String endDate = (String) request.getParameter("endDate");
+		String endDate = (String) request.getParameter("endDate");		
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
+		try {
+			sdf.parse(startDate);
+			sdf.parse(endDate);
+		} catch (Exception e) {
+			return "redirect:/error.do";
+		}
 		
 		searchDTO.setSession_id(session_id);
 		searchDTO.setStartDate(sdf.format(sdf.parse(startDate)));
@@ -103,11 +111,12 @@ public class DashBuyer {
 	@RequestMapping("/user/buyer/requestCpn")
 	public String requestCpn(HttpServletRequest request) throws SQLException {
 		
-		int paid_num = Integer.parseInt(request.getParameter("paid_num"));				
+		int paid_num = Integer.parseInt(request.getParameter("paid_num"));
+		String currentPage = request.getParameter("currentPage");
 		
 		sqlMapper.update("Paid.updateRequestCpn", paid_num);
 		
-		return "/user/buyer/dashboard.do";
+		return "/user/buyer/dashboard.do?currentPage="+currentPage;
 	}
 	
 }

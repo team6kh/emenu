@@ -192,7 +192,7 @@
 									<!-- <td>${list.paid_cpn_used} </td> -->
 									<!-- 사용요청 -->
 									<c:if test="${list.paid_cpn_used eq 0 }">
-									<td><a href="/emenu/user/buyer/requestCpn.do?paid_num=${list.paid_num}&session_id=${session_id}" class="btn btn-primary">사용요청</a></td>
+									<td><a href="/emenu/user/buyer/requestCpn.do?paid_num=${list.paid_num}&session_id=${session_id}&currentPage=${currentPage}" class="btn btn-primary">사용요청</a></td>
 									</c:if>
 									<!-- 요청대기 -->	
 									<c:if test="${list.paid_cpn_used eq 1 }">
