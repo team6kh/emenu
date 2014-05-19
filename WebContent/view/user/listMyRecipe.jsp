@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%-- <%@ page isELIgnored="false" %> --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,12 +15,12 @@
 <title>JOGIYO</title>
 
 <!-- Bootstrap core CSS -->
-<link href="dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="/emenu/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="view/jogiyo.css" rel="stylesheet">
-<link href="view/user/dashboard.css" rel="stylesheet">
-<link href="view/common/common-template.css" rel="stylesheet">
+<link href="/emenu/view/jogiyo.css" rel="stylesheet">
+<link href="/emenu/view/user/dashboard.css" rel="stylesheet">
+<link href="/emenu/view/common/common-template.css" rel="stylesheet">
 
 <!-- 스크립트 -->
 <script type="text/javascript">
@@ -117,54 +116,37 @@
 							<td><strong>요리명</strong></td>
 							<td><strong>작성자</strong></td>
 							<td><strong>작성일</strong></td>
-							<td><strong><a href="javascript:return false;"
-									onClick="recipe_timearray()">소비시간</strong></td>
-							<td><strong><a href="javascript:return false;"
-									onClick="recipe_pricearray()">비용</strong></td>
-							<td><strong><a href="javascript:return false;"
-									onClick="recipe_readcountarray()">조회수</a></strong></td>
-							<td><strong><a href="javascript:return false;"
-									onClick="recipe_recommendarray()">추천수</strong></td>
+							<td><strong><a href="javascript:return false;" onClick="recipe_timearray()">소비시간</a></strong></td>
+							<td><strong><a href="javascript:return false;"onClick="recipe_pricearray()">비용</a></strong></td>
+							<td><strong><a href="javascript:return false;"onClick="recipe_readcountarray()">조회수</a></strong></td>
+							<td><strong><a href="javascript:return false;"onClick="recipe_recommendarray()">추천수</a></strong></td>
 						</tr>
 
-						<s:iterator value="list" status="stat">
-
-							<s:url id="viewURL" action="readRecipe">
-								<s:param name="recipe_num">
-									<s:property value="recipe_num" />
-								</s:param>
-								<s:param name="currentPage">
-									<s:property value="currentPage" />
-								</s:param>
-							</s:url>
-
+						
+						<c:forEach var="dto" items="${list}" >
 							<tr bgcolor="#FFFFFF" align="center">
-								<td><s:property value="recipe_num" /></td>
-								<td align="center"><s:property value="recipe_foodkind" /></td>
-								<td align="center">&nbsp;<s:a href="%{viewURL}">
-										<s:property value="recipe_subject" />
-									</s:a></td>
-								<td align="center"><s:property value="recipe_foodsubject" /></td>
-								<td align="center"><s:property value="recipe_writer" /></td>
-								<td align="center"><s:property value="recipe_reg_date" /></td>
-								<td align="center"><s:property value="recipe_time" /></td>
-								<td align="center"><s:property value="recipe_price" /></td>
-								<td align="center"><s:property value="recipe_readcount" /></td>
-								<td align="center"><s:property value="recipe_recommend" /></td>
+								<td>${recipe_num}</td>
+								<td align="center">${recipe_foodkind}</td>
+								<td align="center">&nbsp; <a href="readRecipe.do?recipe_num=${recipe_num}&currentPage=${currentPage}" >${recipe_subject}</a></td>
+								<td align="center">${recipe_foodsubject}</td>
+								<td align="center">${recipe_writer}></td>
+								<td align="center">${recipe_reg_date}</td>
+								<td align="center">${recipe_time}cipe_time" /></td>
+								<td align="center">${recipe_price}</td>
+								<td align="center">${recipe_readcount}</td>
+								<td align="center">${recipe_recommend}</td>
 							</tr>
+						</c:forEach>
 
-						</s:iterator>
 
-						<s:if test="list.size() <= 0">
-
+						<c:if test="list.size() <= 0">
 							<tr bgcolor="#FFFFFF" align="center">
 								<td colspan="10">등록된 게시물이 없습니다.</td>
 							</tr>
 							<tr bgcolor="#777777">
 								<td height="1" colspan="10"></td>
 							</tr>
-
-						</s:if>
+						</c:if>
 					</table>
 				</div>
 				<!-- /.게시판 바디 -->
@@ -172,7 +154,7 @@
 				<!-- 페이징 -->
 		<div class="text-center">
 			<ul class="pagination pagination-sm">
-				<s:property value="pagingHtml" escape="false" />
+				${pagingHtml}
 			</ul>
 		</div>
 		<!-- /페이징 -->
@@ -194,7 +176,7 @@
 		<br />
 
 		<!-- 상세검색 폼 -->
-		<form name="recipe_search" method="post" action="searchMyRecipe.action?session_id=<s:property value="#session.session_id" />" enctype="multipart/form-data">
+		<form name="recipe_search" method="post" action="searchMyRecipe.action?session_id=${session_id}" enctype="multipart/form-data">
              
 			<!-- 상세검색 시에 나타난다. -->
 			<div id="detailsearch" style="display: none">
