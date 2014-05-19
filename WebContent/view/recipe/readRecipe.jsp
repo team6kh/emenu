@@ -159,7 +159,7 @@
 								onClick="javascript:location.href='listRecipe.action?currentPage=<s:property value="currentPage" />'">
 						<s:if test="#session.session_id != null">
 						    <input class="btn btn-default" name="list" type="button" value="마이레시피 목록"
-								onClick="javascript:location.href='listMyRecipe.action?session_id=<s:property value="#session.session_id" />'">
+								onClick="javascript:location.href='listMyRecipe.do'">
 								</s:if>
 					</td>
 				</tr>
