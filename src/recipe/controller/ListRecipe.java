@@ -61,32 +61,46 @@ public class ListRecipe {
 
 			list = sqlMapper.queryForList("Recipe.selectAll");
 			totalCount = list.size(); //전체 글 갯수를 구한다.
+			if(request.getParameter("currentPage")==null){
+				currentPage=1;
+			}else{
+				currentPage=Integer.parseInt(request.getParameter("currentPage"));
+			}
 			page = new PagingAction(actionName, currentPage, totalCount, blockCount, blockPage); //PagingAction 객체 생성
 			pagingHtml = page.getPagingHtml().toString();  //페이지 HTML 생성.
 			
 			
 			// 현재 페이지에서 보여줄 마지막 글의 번호 설정.
-					int lastCount = totalCount;
+			int lastCount = totalCount;
 
-					// 현재 페이지의 마지막 글의 번호가 전체의 마지막 글 번호보다 작으면 lastCount를 +1 번호로 설정.
-					if (page.getEndCount() < totalCount)
-						lastCount = page.getEndCount() + 1;
+			// 현재 페이지의 마지막 글의 번호가 전체의 마지막 글 번호보다 작으면 lastCount를 +1 번호로 설정.
+			if (page.getEndCount() < totalCount)
+				lastCount = page.getEndCount() + 1;
 
-					// 전체 리스트에서 현재 페이지만큼의 리스트만 가져온다.
-					list = list.subList(page.getStartCount(), lastCount);
-					request.setAttribute("list", list);
-	                return "/view/recipe/listRecipe.jsp";
+			// 전체 리스트에서 현재 페이지만큼의 리스트만 가져온다.
+			list = list.subList(page.getStartCount(), lastCount);
+			request.setAttribute("list", list);
+			request.setAttribute("pagingHtml", pagingHtml);
+			request.setAttribute("currentPage", currentPage);
+			return "/view/recipe/listRecipe.jsp";
 	
 		}
 		
-		//myListRecipe.do
-				@RequestMapping(value="/myListRecipe.do")
-				public String myListRecipe(HttpServletRequest request, HttpServletResponse response1, HttpSession session, @ModelAttribute("RecipeDTO") RecipeDTO dto) throws Exception{
-										//파라미터 request1				//파라미터 response1			 //세션용				//파라미터 DTO로 자동 set(), get()
+		//listMyRecipe.do
+				@RequestMapping(value="/listMyRecipe.do")
+				public String listMyRecipe(HttpServletRequest request, HttpSession session, @ModelAttribute("RecipeDTO") RecipeDTO paramClass) throws Exception{
+										//파라미터 request1				//세션용				//파라미터 DTO로 자동 set(), get()
 					String session_id = request.getParameter("session_id");
 					list = sqlMapper.queryForList("Recipe.myListRecipe", session_id);
 
 					totalCount = list.size(); // 전체 글 갯수를 구한다.
+					
+					if(request.getParameter("currentPage")==null){
+						currentPage=1;
+					}else{
+						currentPage=Integer.parseInt(request.getParameter("currentPage"));
+					}
+					
 					page = new PagingAction(myactionName, currentPage, totalCount, blockCount, blockPage, session_id); // PagingAction 객체 생성
 					pagingHtml = page.getPagingHtml().toString(); // 페이지 HTML 생성.
 
@@ -99,7 +113,8 @@ public class ListRecipe {
 
 					// 전체 리스트에서 현재 페이지만큼의 리스트만 가져온다.
 					list = list.subList(page.getStartCount(), lastCount);
-					
+					request.setAttribute("lastCount", lastCount);
+					request.setAttribute("pagingHtml", pagingHtml);
 					request.setAttribute("list", list);
 
 					return "/view/user/listMyRecipe.jsp";

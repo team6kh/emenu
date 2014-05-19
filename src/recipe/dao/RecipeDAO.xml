@@ -142,7 +142,7 @@
 		<include refid="where-recipe_num" />
 	</update>
 
-	<update id="updateRecommend" parameterClass="recipeDTO">
+	<update id="updateRecommand" parameterClass="recipeDTO">
 		UPDATE RECIPE_BOARD SET recipe_recommend = recipe_recommend + 1
 		<include refid="where-recipe_num" />
 	</update>

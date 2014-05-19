@@ -32,16 +32,16 @@
 		<h3>비밀번호 확인</h3>
 
 		<form action="checkRecipePwAction.do" method="post">
-			<s:hidden name="recipe_num" value="%{recipe_num}" />
-			<s:hidden name="currentPage" value="%{currentPage}" />
-
+			<input type="hidden" id="recipe_num" name="recipe_num" value="${recipe_num}" />
+			<input type="hidden" id="currentPage" name="currentPage" value="${currentPage}" />
+              글번호 :${recipe_num}   ,   현재 페이지: ${currentPage}
 			<table class="table">
 
 				<tr>
 					<td width="100">비밀번호 입력</td>
 					<td width="150">
-						&nbsp;&nbsp;<s:textfield name="recipe_password" theme="simple" cssStyle="width:100px" maxlength="20" />
-						&nbsp;&nbsp;<input name="submit" type="submit" value="확인" class="inputb">
+						&nbsp;&nbsp;<input name="recipe_password" maxlength="20" />
+						&nbsp;&nbsp;<input name="submit" type="submit" value="확인"/>
 					</td>
 				</tr>
 

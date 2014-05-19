@@ -53,11 +53,12 @@ public class SortRecipe {
 	//.DB커넥트 생성자 버전 끝
 	
 	
-	//readcountRecipeDesc.do
-	@RequestMapping(value="/readcountRecipe.do",method=RequestMethod.POST)
-	public String readcountRecipeDesc(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("RecipeDTO") RecipeDTO dto) throws Exception{
-									  //파라미터 request				//파라미터 response			//파라미터 DTO로
-		list = sqlMapper.queryForList("Recipe.readcountDesc");
+	//selectReadcountDesc.do
+	@RequestMapping(value="/selectReadcountDesc.do")
+	public String selectReadcountDesc(HttpServletRequest request) throws Exception{
+									  //파라미터 request			//파라미터 DTO로
+		
+		list = sqlMapper.queryForList("Recipe.selectReadcountDesc");
 		
 		
 		
@@ -76,14 +77,16 @@ public class SortRecipe {
                 // 전체 리스트에서 현재 페이지만큼의 리스트만 가져온다.
                 list = list.subList(page.getStartCount(), lastCount);
                 request.setAttribute("list", list);
+                request.setAttribute("pagingHtml", pagingHtml);
+                request.setAttribute("lastCount", lastCount);
                 return "/view/recipe/listRecipe.jsp";
 	}
 	
-	//recommandDesc.do
-		@RequestMapping(value="/recommandDesc.do",method=RequestMethod.POST)
-		public String recommandDesc(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("RecipeDTO") RecipeDTO dto) throws Exception{
+	//selectRecommendDesc.do
+		@RequestMapping(value="/selectRecommendDesc.do")
+		public String selectRecommendDesc(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("RecipeDTO") RecipeDTO dto) throws Exception{
 										  //파라미터 request				//파라미터 response
-			list = sqlMapper.queryForList("Recipe.recommandDesc");
+			list = sqlMapper.queryForList("Recipe.selectRecommendDesc");
 		       
 			   
 	        totalCount = list.size(); //전체 글 갯수를 구한다.
@@ -100,14 +103,16 @@ public class SortRecipe {
 	                // 전체 리스트에서 현재 페이지만큼의 리스트만 가져온다.
 	                list = list.subList(page.getStartCount(), lastCount);
 	                request.setAttribute("list", list);
+	                request.setAttribute("pagingHtml", pagingHtml);
+	                request.setAttribute("lastCount", lastCount);
 	                return "/view/recipe/listRecipe.jsp";
 		}
 		
-		//priceDesc.do
-				@RequestMapping(value="/priceDesc.do",method=RequestMethod.POST)
-				public String priceDesc(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("RecipeDTO") RecipeDTO dto) throws Exception{
+		//selectPriceDesc.do
+				@RequestMapping(value="/selectPriceDesc.do")
+				public String selectPriceDesc(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("RecipeDTO") RecipeDTO dto) throws Exception{
 												  //파라미터 request				//파라미터 response
-					list = sqlMapper.queryForList("Recipe.priceDesc");
+					list = sqlMapper.queryForList("Recipe.selectPriceDesc");
 				       
 					   
 			        totalCount = list.size(); //전체 글 갯수를 구한다.
@@ -124,15 +129,17 @@ public class SortRecipe {
 			                // 전체 리스트에서 현재 페이지만큼의 리스트만 가져온다.
 			                list = list.subList(page.getStartCount(), lastCount);
 			                request.setAttribute("list", list);
+			                request.setAttribute("pagingHtml", pagingHtml);
+			                request.setAttribute("lastCount", lastCount);
 			                return "/view/recipe/listRecipe.jsp";
 				
 				}
 				
-				//timeDesc.do
-				@RequestMapping(value="/timeDesc.do",method=RequestMethod.POST)
-				public String timeDesc(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("RecipeDTO") RecipeDTO dto) throws Exception{
+				//selectTimeDesc.do
+				@RequestMapping(value="/selectTimeDesc.do")
+				public String selectTimeDesc(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("RecipeDTO") RecipeDTO dto) throws Exception{
 												  //파라미터 request				//파라미터 response
-					list = sqlMapper.queryForList("Recipe.timeDesc");
+					list = sqlMapper.queryForList("Recipe.selectTimeDesc");
 				       
 			        totalCount = list.size(); //전체 글 갯수를 구한다.
 			        page = new PagingAction(actionName, currentPage, totalCount, blockCount, blockPage); //PagingAction 객체 생성
@@ -148,6 +155,8 @@ public class SortRecipe {
 			                // 전체 리스트에서 현재 페이지만큼의 리스트만 가져온다.
 			                list = list.subList(page.getStartCount(), lastCount);
 			                request.setAttribute("list", list);
+			                request.setAttribute("pagingHtml", pagingHtml);
+			                request.setAttribute("lastCount", lastCount);
 			                return "/view/recipe/listRecipe.jsp";
 				
 				}

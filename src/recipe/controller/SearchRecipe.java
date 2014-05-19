@@ -21,6 +21,7 @@ import recipe.dto.RecipeSearchDTO;
 
 
 
+
 import com.ibatis.common.resources.Resources;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.ibatis.sqlmap.client.SqlMapClientBuilder;
@@ -29,11 +30,11 @@ import common.PagingAction;
 
 @Controller
 public class SearchRecipe {
-	recipe.dto.RecipeSearchDTO paramClass;
+	RecipeSearchDTO paramClass = new RecipeSearchDTO();
 	SqlMapClientTemplate ibatis = null;
 	public static Reader reader;
 	public static SqlMapClient sqlMapper;
-	private List<recipe.dto.RecipeDTO> list = new ArrayList<recipe.dto.RecipeDTO>();
+	private List<RecipeDTO> list = new ArrayList<RecipeDTO>();
     private int currentPage = 1; //현재 페이지
     private int totalCount;      //총 게시물의 수
     private int blockCount = 10; //한 페이지의 게시물의 수
@@ -45,6 +46,12 @@ public class SearchRecipe {
     private String myListactionName = "listMyRecipe" ;
     private String session_id;
 
+    private int recipe_timeinput1;
+    private int recipe_timeinput2;
+    private int recipe_priceinput1;
+    private int recipe_priceinput2;
+    
+    
 	
 	//DB커넥트 생성자 버전
 	public SearchRecipe() throws IOException{
@@ -55,15 +62,52 @@ public class SearchRecipe {
 	//.DB커넥트 생성자 버전 끝
 	
 	//searchRecipe.do
-		@RequestMapping(value="/searchRecipe.do",method=RequestMethod.POST)
-		public String searchRecipe(HttpServletRequest request, HttpServletResponse response, HttpSession session, @ModelAttribute("RecipeSearchDTO") recipe.dto.RecipeSearchDTO dto) throws Exception{
-							//파라미터 request1				//파라미터 response1			 //세션용				//파라미터 DTO로 자동 set(), get()
+		@RequestMapping("/searchRecipe.do")
+		public String searchRecipe(HttpServletRequest request, HttpServletRequest response, HttpSession session) throws Exception{
+							//파라미터 request		   	  	      //세션용				//파라미터 DTO로 자동 set(), get()
+			String recipe_foodkind=request.getParameter("recipe_foodkind");
+			String recipe_writerinput=request.getParameter("recipe_writerinput");
+			String recipe_foodnameinput=request.getParameter("recipe_foodnameinput");
+			String recipe_subjectinput=request.getParameter("recipe_subjectinput");
 			
-			if(paramClass.getRecipe_priceinput1()==0 && paramClass.getRecipe_priceinput2()==0 && paramClass.getRecipe_timeinput1()==0 && paramClass.getRecipe_timeinput2()==0){
-	        	list = sqlMapper.queryForList("Recipe.detailSearchRecipeEmpty", paramClass);
-	        }else if(paramClass.getRecipe_timeinput1()==0 && paramClass.getRecipe_timeinput2()==0){
+			if(request.getParameter("recipe_timeinput1") ==""){
+				recipe_timeinput1=0;
+			}else{
+				recipe_timeinput1=Integer.parseInt(request.getParameter("recipe_timeinput1"));
+			}
+			
+			if(request.getParameter("recipe_timeinput2") ==""){
+				recipe_timeinput2=10000;
+			}else{
+				recipe_timeinput2=Integer.parseInt(request.getParameter("recipe_timeinput2"));
+			}
+			
+			if(request.getParameter("recipe_priceinput1") ==""){
+				recipe_priceinput1=0;
+			}else{
+				recipe_priceinput1=Integer.parseInt(request.getParameter("recipe_priceinput1"));
+			}
+			
+			if(request.getParameter("recipe_priceinput2") ==""){
+				recipe_priceinput2=10000;
+			}else{
+				recipe_priceinput1=Integer.parseInt(request.getParameter("recipe_priceinput2"));
+			}
+			
+			paramClass.setRecipe_foodkind(recipe_foodkind);
+			paramClass.setRecipe_writerinput(recipe_writerinput);
+			paramClass.setRecipe_foodnameinput(recipe_foodnameinput);
+			paramClass.setRecipe_subjectinput(recipe_subjectinput);
+			paramClass.setRecipe_timeinput1(recipe_timeinput1);
+			paramClass.setRecipe_timeinput2(recipe_timeinput2);
+			paramClass.setRecipe_priceinput1(recipe_priceinput1);
+			paramClass.setRecipe_priceinput2(recipe_priceinput2);
+			
+			if(recipe_priceinput1==0 && recipe_priceinput2==0 && recipe_timeinput1==0 && recipe_timeinput2==0){
+				list = sqlMapper.queryForList("Recipe.detailSearchRecipeEmpty", paramClass);
+	        }else if(recipe_timeinput1==0 && recipe_timeinput2==0){
 	        	list = sqlMapper.queryForList("Recipe.detailSearchRecipePrice", paramClass);
-	        }else if(paramClass.getRecipe_priceinput1()==0 && paramClass.getRecipe_priceinput2()==0){
+	        }else if(recipe_priceinput1==0 && recipe_priceinput2==0){
 	        	list = sqlMapper.queryForList("Recipe.detailSearchRecipeTime", paramClass);
 	        }else{//모두 기입했을때
 	        	list = sqlMapper.queryForList("Recipe.detailSearchRecipeAll", paramClass);
@@ -74,24 +118,62 @@ public class SearchRecipe {
 	        pagingHtml = page.getPagingHtml().toString();  //페이지 HTML 생성.
 	        
 	        // 현재 페이지에서 보여줄 마지막 글의 번호 설정.
-	                int lastCount = totalCount;
-
-	                // 현재 페이지의 마지막 글의 번호가 전체의 마지막 글 번호보다 작으면 lastCount를 +1 번호로 설정.
-	                if (page.getEndCount() < totalCount)
-	                    lastCount = page.getEndCount() + 1;
-
-	                // 전체 리스트에서 현재 페이지만큼의 리스트만 가져온다.
-	                list = list.subList(page.getStartCount(), lastCount);
-	                request.setAttribute("list", list);
-					return "/view/recipe/listRecipe.jsp";
-
-
+	        int lastCount = totalCount;
+	
+	        // 현재 페이지의 마지막 글의 번호가 전체의 마지막 글 번호보다 작으면 lastCount를 +1 번호로 설정.
+	        if (page.getEndCount() < totalCount)
+	            lastCount = page.getEndCount() + 1;
+	
+	        // 전체 리스트에서 현재 페이지만큼의 리스트만 가져온다.
+	        list = list.subList(page.getStartCount(), lastCount);
+	        request.setAttribute("list", list);
+	        request.setAttribute(" pagingHtml",  pagingHtml);
+	        request.setAttribute("lastCount", lastCount);
+	        return "/view/recipe/listRecipe.jsp";
 		}
 		
 		//myrecipe_search.do
-		@RequestMapping(value="/myrecipe_search.do",method=RequestMethod.POST)
-		public String myrecipe_search(HttpServletRequest request, HttpServletResponse response, HttpSession session, @ModelAttribute("RecipeSearchDTO") recipe.dto.RecipeSearchDTO dto) throws Exception{
-										//파라미터 request1				//파라미터 response1			 //세션용				//파라미터 DTO로 자동 set(), get()
+		@RequestMapping(value="/myrecipe_search.do")
+		public String myrecipe_search(HttpServletRequest request, HttpSession session) throws Exception{
+										//파라미터 request			 //세션용				
+			String recipe_foodkind=request.getParameter("recipe_foodkind");
+			String recipe_writerinput=request.getParameter("recipe_writerinput");
+			String recipe_foodnameinput=request.getParameter("recipe_foodnameinput");
+			String recipe_subjectinput=request.getParameter("recipe_subjectinput");
+			
+			if(request.getParameter("recipe_timeinput1") ==""){
+				recipe_timeinput1=0;
+			}else{
+				recipe_timeinput1=Integer.parseInt(request.getParameter("recipe_timeinput1"));
+			}
+			
+			if(request.getParameter("recipe_timeinput2") ==""){
+				recipe_timeinput2=10000;
+			}else{
+				recipe_timeinput2=Integer.parseInt(request.getParameter("recipe_timeinput2"));
+			}
+			
+			if(request.getParameter("recipe_priceinput1") ==""){
+				recipe_priceinput1=0;
+			}else{
+				recipe_priceinput1=Integer.parseInt(request.getParameter("recipe_priceinput1"));
+			}
+			
+			if(request.getParameter("recipe_priceinput2") ==""){
+				recipe_priceinput2=10000;
+			}else{
+				recipe_priceinput1=Integer.parseInt(request.getParameter("recipe_priceinput2"));
+			}
+			
+			paramClass.setRecipe_foodkind(recipe_foodkind);
+			paramClass.setRecipe_writerinput(recipe_writerinput);
+			paramClass.setRecipe_foodnameinput(recipe_foodnameinput);
+			paramClass.setRecipe_subjectinput(recipe_subjectinput);
+			paramClass.setRecipe_timeinput1(recipe_timeinput1);
+			paramClass.setRecipe_timeinput2(recipe_timeinput2);
+			paramClass.setRecipe_priceinput1(recipe_priceinput1);
+			paramClass.setRecipe_priceinput2(recipe_priceinput2);
+			
 			
 			if(paramClass.getRecipe_priceinput1()==0 && paramClass.getRecipe_priceinput2()==0 && paramClass.getRecipe_timeinput1()==0 && paramClass.getRecipe_timeinput2()==0){
 	         	list = sqlMapper.queryForList("Recipe.detailSearchRecipeEmpty", paramClass);
@@ -117,6 +199,8 @@ public class SearchRecipe {
 	                 // 전체 리스트에서 현재 페이지만큼의 리스트만 가져온다.
 	                 list = list.subList(page.getStartCount(), lastCount);
 	                 request.setAttribute("list", list);
+	                 request.setAttribute("pagingHtml", pagingHtml);
+	                 request.setAttribute("lastCount", lastCount);
 
 			return "/view/user/listMyRecipe.jsp";
 		}		
