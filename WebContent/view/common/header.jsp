@@ -52,9 +52,9 @@
 	              </ul>
 	            </li>
 				<!-- <li><a href="listReview.action">후기</a></li>  -->
-				<li><a href="listRecipe.action">레시피</a></li>
-				<li><a href="listNotice.action">공지사항</a></li>
-				<li><a href="listQna.action">문의하기</a></li>
+				<li><a href="listRecipe.do">레시피</a></li>
+				<li><a href="listNotice.do">공지사항</a></li>
+				<li><a href="listQna.do">문의하기</a></li>
 				<!-- 테스트 메뉴 삭제하였습니다. -->
 			</ul>
 			<c:choose>

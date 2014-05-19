@@ -12,12 +12,10 @@ public class NoticeDTO {
 	private int notice_readcount;
 	private int rnum;	
 
-    public int getRnum()
-    {
+    public int getRnum() {
         return rnum;
     }
-    public void setRnum(int rnum)
-    {
+    public void setRnum(int rnum) {
         this.rnum = rnum;
     }
     public int getNotice_num() {
@@ -56,5 +54,4 @@ public class NoticeDTO {
 	public void setNotice_readcount(int notice_readcount) {
 		this.notice_readcount = notice_readcount;
 	}
-	
 }
