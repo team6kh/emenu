@@ -84,6 +84,7 @@
 	
 	// 비밀번호
 	function sellerPw() {
+		confirmPw();
 		if (document.regForm.seller_pw.value.length < 2) {
 			feedbackSellerPw.innerHTML = "2자리 이상 입력하셔야 합니다.";
 			$('#divSellerPw').addClass('has-error'); // bootstrap validation
@@ -110,6 +111,20 @@
 			$('#divConfirmPw').addClass('has-success'); // bootstrap validation
 			//$('#btnSubmit').prop('disabled', false);
 		}		
+	}
+	
+	function validateSumbit() {		
+		if ($('#divRegId').hasClass('has-error')) {
+			alert("아이디를 확인해주세요!");
+			return false;
+		} else if ($('#divSellerPw').hasClass('has-error')) {
+			alert("비밀번호를 확인해주세요!");
+			return false;
+		} else if ($('#divConfirmPw').hasClass('has-error')) {
+			alert("비밀번호가 동일하지 않습니다!");
+			return false;
+		}
+		return true;
 	}
 	
 	//
@@ -169,7 +184,7 @@
 	<!-- container -->
 	<div class="container">
 
-		<form class="form-signup" name="regForm" method="post" action="/emenu/user/register.do">
+		<form class="form-signup" name="regForm" method="post" action="/emenu/user/register.do" onsubmit="return validateSumbit();">
 			<input type="hidden" name="feedbackRegId" value="0" />
         	<h2 class="form-signup-heading">계정을 생성합니다.</h2>			
 			<div class="form-group">

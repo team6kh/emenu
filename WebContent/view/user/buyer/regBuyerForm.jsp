@@ -84,6 +84,7 @@
 	
 	// 비밀번호
 	function buyerPw() {
+		confirmPw();
 		if (document.regForm.buyer_pw.value.length < 2) {
 			feedbackBuyerPw.innerHTML = "2자리 이상 입력하셔야 합니다.";
 			regForm.feedbackBuyerPw.value = "0";
@@ -131,6 +132,21 @@
 		}
 		$('#btnSubmit').prop('disabled', true);
 	}
+	
+	function validateSumbit() {		
+		if ($('#divRegId').hasClass('has-error')) {
+			alert("아이디를 확인해주세요!");
+			return false;
+		} else if ($('#divBuyerPw').hasClass('has-error')) {
+			alert("비밀번호를 확인해주세요!");
+			return false;
+		} else if ($('#divConfirmPw').hasClass('has-error')) {
+			alert("비밀번호가 동일하지 않습니다!");
+			return false;
+		}
+		return true;
+	}
+	
 </script>
 
 </head>
@@ -144,7 +160,7 @@
 	<!-- container -->
 	<div class="container">
 
-		<form class="form-signup" name="regForm" method="post" action="/emenu/user/register.do">
+		<form class="form-signup" name="regForm" method="post" action="/emenu/user/register.do" onsubmit="return validateSumbit();">
 		    <!-- btnSubmit을 위한 체커. okSubmit 미완성으로 사용되지 않음. -->
 			<input type="hidden" name="feedbackRegId" value="0" />
 			<input type="hidden" name="feedbackBuyerPw" value="0" />
