@@ -99,7 +99,7 @@
 	        				<a href="readNotice.do?notice_num=${resultClass.notice_num}&currentPage=${currentPage}&rnum=${rnum+1}">
 	        				<c:if test="${resultClass.notice_headtag == '-----------------' }">
 	        					${aClass.notice_subject }
-	        				</c:if>
+	        				</c:if> 
 	        				<c:if test="${resultClass.notice_headtag != '-----------------' }">
 	        					${aClass.notice_headtag } ${aClass.notice_subject }
 	        				</c:if></a><br/>
