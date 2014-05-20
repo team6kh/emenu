@@ -17,7 +17,7 @@
 	<meta http-equiv="Refresh" content="3; URL=http://localhost:8000/emenu/home.do"/>
 	<link rel="shortcut icon" href="assets/ico/jogiyo.png">
 
-	<title>JOGIYO</title>
+	<title>eMenu</title>
 	
 	<!-- Bootstrap core CSS -->
 	<link href="/emenu/dist/css/bootstrap.min.css" rel="stylesheet">
