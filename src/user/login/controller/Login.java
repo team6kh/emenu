@@ -39,7 +39,7 @@ public class Login {
 		String referer = "";
 		referer = request.getHeader("Referer");		
 		request.getSession().setAttribute("url_prior_login", referer);
-		System.out.println("url_prior_login:"+referer);
+		//System.out.println("url_prior_login:"+referer);
 		
 		return "/view/user/login/loginForm.jsp";
 	}
