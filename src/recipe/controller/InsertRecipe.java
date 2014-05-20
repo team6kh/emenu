@@ -50,7 +50,7 @@ public class InsertRecipe {
 		@RequestMapping(value="/insertRecipe.do")
 		public String insertRecipe(HttpServletRequest request, HttpSession session, @ModelAttribute("RecipeDTO") RecipeDTO paramClass) throws Exception{
 									//파라미터 request				//세션용				//파라미터 DTO로 자동 set(), get()
-			System.out.println("쓰기");
+			
 			paramClass.setRecipe_reg_date(today.getTime());
 
 			// 등록 쿼리 수행.

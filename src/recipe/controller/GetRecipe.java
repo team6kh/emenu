@@ -68,7 +68,6 @@ public class GetRecipe {
 												//파라미터 request		 //파라미터 DTO로 자동 set(), get()
 			recipe_num = paramClass.getRecipe_num();
 			recipe_password = paramClass.getRecipe_password();
-			System.out.println("비밀번호 체크 폼 " + request.getParameter("currentPage"));
 			int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 			
 			
@@ -139,7 +138,7 @@ public class GetRecipe {
 			RecipeDTO resultClass = new RecipeDTO();
 			RecipeCommandDTO paramRC = new RecipeCommandDTO();
 			RecipeCommandDTO resultRC = new RecipeCommandDTO();
-			System.out.println("페이지 : " + request.getParameter("currentPage"));
+			
 			
 			recipe_num = paramClass.getRecipe_num();
 						
@@ -149,7 +148,7 @@ public class GetRecipe {
 				currentPage=Integer.parseInt(request.getParameter("currentPage"));
 			}
 
-			System.out.println("currentPage 값:" + currentPage);
+			
 			
 			paramClass.setRecipe_num(recipe_num);
 			paramRC.setRecipeCommand_num(recipe_num);
