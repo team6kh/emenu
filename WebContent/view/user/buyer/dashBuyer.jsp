@@ -128,7 +128,12 @@
 			<div class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
 					<li><a href="/emenu/user/get.do?user_type=${session_type}&user_id=${session_id}">회원정보</a></li>
-					<li class="active"><a href="/emenu/user/buyer/dashboard.do?session_id=${session_id}">구매목록</a></li>
+					<li class="active">
+						<c:if test="${sessionScope.session_type=='buyer'}"><!-- 구매자일시 -->
+							<a href="/emenu/user/buyer/dashboard.do?session_id=${session_id}">구매목록</a>
+						</c:if>
+					</li>
+					<li><a href="/emenu/cartboard.do">장바구니</a></li>
 					<li><a href="/emenu/user/listMyRecipe.do">마이 레시피</a></li>
 					<li><a href="/emenu/user/listMyQna.do?session_id=${session_id}">마이 문의하기</a></li>
 				</ul>
@@ -138,7 +143,6 @@
 	   <!-- main -->
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-                <!-- 여기에 작성해주시면 됩니다. -->
                 <!-- col-md-12 -->
                 <div class="col-md-12" style="margin-top: 20px">
                 

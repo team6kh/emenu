@@ -44,6 +44,12 @@
 		WHERE cart_rest_num = #cart_rest_num#
 		AND session_id = #session_id#
 	</select>
+	
+	<select id="selectCartBoard" resultMap="cartRes" parameterClass="java.lang.String">
+		SELECT * FROM cart_board
+		WHERE session_id = #session_id#
+	</select>
+	
 
 	<select id="selectForPayment" resultMap="cartRes" parameterClass="cartDTO">
 		SELECT * FROM cart_board
