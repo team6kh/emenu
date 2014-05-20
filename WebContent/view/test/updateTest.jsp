@@ -12,7 +12,7 @@
 <meta name="author" content="huks">
 <link rel="shortcut icon" href="assets/ico/jogiyo.png">
 
-<title>JOGIYO</title>
+<title>eMenu</title>
 
 <!-- Bootstrap core CSS -->
 <link href="dist/css/bootstrap.min.css" rel="stylesheet">
