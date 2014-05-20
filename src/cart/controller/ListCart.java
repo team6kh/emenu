@@ -23,7 +23,7 @@ import cart.dto.CartDTO;
 
 @Controller
 public class ListCart {
-	//장바구니관련
+		//장바구니관련
 		private CartDTO paramClass1 = new CartDTO();
 		private List<CartDTO> list = new ArrayList<CartDTO>();
 		
@@ -56,9 +56,7 @@ public class ListCart {
 			request.setAttribute("rest_subject", rest_subject);
 			
 			request.setAttribute("list", list);
-
+	
 			return "/view/rest/listCart.jsp";//"redirect:listCart.do?rest_num="+rest_num+"&rest_subject="+rest_subject;
 		}
-		
-
 }
