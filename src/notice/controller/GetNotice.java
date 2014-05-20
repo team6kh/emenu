@@ -59,7 +59,6 @@ public class GetNotice {
 			// 게시글의 총 갯수를 가져온다
 			resultClass = (NoticeDTO) sqlMapper.queryForObject("Notice.selectNCount");
 	        n_count = resultClass.getNotice_num();
-	        //System.out.println("n_count="+n_count);
 			
 	        if(request1.getParameter("currentPage") == null) {
 				currentPage = 1;
@@ -71,13 +70,13 @@ public class GetNotice {
 			// 해당 번호의 글을 가져온다
 			resultClass = (NoticeDTO) sqlMapper.queryForObject("Notice.selectOne", dto.getNotice_num());
 			StringBuffer pagingHtml = new StringBuffer();
-			pagingHtml.append(resultClass.getNotice_content());
 			
 			List<NoticeDTO> list = ListNotice.all_list;
-			//System.out.println("size=="+list.size());
+			
 			for(NoticeDTO dto1 : list){
 					if(dto1.getRnum() == dto.getRnum()){
 						resultClass = dto1;
+						pagingHtml.append(resultClass.getNotice_content());
 					}
 		            if(dto1.getRnum() == dto.getRnum()+1){
 		                aClass = dto1;
