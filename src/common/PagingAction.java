@@ -1,7 +1,7 @@
 package common;
 
 public class PagingAction {
-	
+
     private String actionName; // 액션 이름...
     private int currentPage; // 현재페이지
     private int totalCount; // 전체 게시물 수
@@ -21,7 +21,7 @@ public class PagingAction {
 
     // 생성자1: String actionName 파라미터 추가
     public PagingAction(String actionName, int currentPage, int totalCount, int blockCount, int blockPage) {
-		
+
     	this.actionName = actionName;
 		this.blockCount = blockCount;
 		this.blockPage = blockPage;
@@ -93,7 +93,7 @@ public class PagingAction {
     
     // 생성자2: 구매내역 페이지
     public PagingAction(String actionName, int currentPage, int totalCount, int blockCount, int blockPage, String session_id) {
-		
+
     	this.actionName = actionName;
 		this.blockCount = blockCount;
 		this.blockPage = blockPage;
@@ -171,7 +171,6 @@ public class PagingAction {
 		this.blockPage = blockPage;
 		this.ccp = ccp;
 		this.totalCount = totalCount;
-		
 		this.rest_num = rest_num;
 		this.currentPage = currentPage;
 
@@ -202,7 +201,7 @@ public class PagingAction {
 		// 이전 block 페이지
 		pagingHtml = new StringBuffer();
 		if (ccp > blockPage) {
-		    
+
 			pagingHtml.append("<li><a href=" + actionName + ".do?rest_num="+rest_num+"&currentPage="+currentPage+"&ccp="+ (startPage - 1) + ">");
 			pagingHtml.append("이전");
 			pagingHtml.append("</a></li>");
@@ -422,5 +421,4 @@ public class PagingAction {
 	public void setCcp(int ccp) {
 		this.ccp = ccp;
 	}
-    
 }

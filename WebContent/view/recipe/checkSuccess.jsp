@@ -29,13 +29,14 @@
 	<script type="text/javascript">
 //		function locationURL() {
 		
-		if ( window.name == 'update' ) 
-			window.opener.parent.location.href='updateRecipeForm.action?recipe_num=<s:property value="recipe_num" />&currentPage=<s:property value="currentPage" />';
-				
+		if ( window.name == 'update' ) {
+			alert('수정합니다.');
+			window.opener.parent.location.href='updateRecipeForm.do?recipe_num=${recipe_num}&currentPage=${currentPage}';
+		}		
 		else if ( window.name == 'delete' ) 
 		{
 			alert('삭제되었습니다.');
-			window.opener.parent.location.href='deleteRecipe.action?recipe_num=<s:property value="recipe_num" />&currentPage=<s:property value="currentPage" />';
+			window.opener.parent.location.href='deleteRecipe.do?recipe_num=${recipe_num}&currentPage=${currentPage}';
 		}
 			
 		window.close();

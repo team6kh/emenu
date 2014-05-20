@@ -38,30 +38,32 @@
 		<div class="col-md-12">
 			<h3>RECIPE 게시판</h3>
 		</div>
-
+		
 		<!-- insert 게시판 body -->
 		<!-- 게시판 바디 -->
 		<div class="col-md-12">
-		
-			<s:if test="resultClass == NULL && #session.session_id == null">
-			<form name="inputWarning" action="insertRecipe.action" method="post" enctype="multipart/form-data"  onSubmit="return submitContents(this);">
-			</s:if>
+			<c:if test="${resultClass == null && session_id == null}">
+			<form name="inputWarning" action="insertRecipe.do" method="post" enctype="multipart/form-data"  onSubmit="return submitContents(this);">
+			</c:if>
 			
-			<s:elseif test="resultClass == NULL && #session.session_id != null">
-			<form name="inputWarning" action="insertRecipe.action" method="post" enctype="multipart/form-data"  onSubmit="return submitContents(this);">
-			</s:elseif>
+			<c:if test="${resultClass == NULL && session_id != null}">
+			<form name="inputWarning" action="insertRecipe.do" method="post" enctype="multipart/form-data"  onSubmit="return submitContents(this);">
+			</c:if>
 			
-			<s:elseif test="resultClass != NULL && #session.session_id == null">
-			<form name="inputWarning" action="updateRecipe.action" method="post" enctype="multipart/form-data"  onSubmit="return submitContents(this);">
-				<s:hidden name="recipe_num" value="%{resultClass.recipe_num}" />
-				<s:hidden name="currentPage" value="%{currentPage}" />
-			</s:elseif>
+			<c:if test="${resultClass != NULL && session_id == null}">
+			<form name="inputWarning" action="updateRecipe.do" method="post" enctype="multipart/form-data"  onSubmit="return submitContents(this);">
+				<input type="hidden" id="recipe_num" name="recipe_num" value="${resultClass.recipe_num}" />
+				페이지 값 : ${currentPage}
+				<input type="hidden" id="currentPage" name="currentPage" value="${currentPage}" />
+			</c:if>
 			
-			<s:elseif test="resultClass != NULL && session.session_id != null">
-		    <form name="inputWarning" action="updateRecipe.action" method="post" enctype="multipart/form-data"  onSubmit="return submitContents(this);">
-				<s:hidden name="recipe_num" value="%{resultClass.recipe_num}" />
-				<s:hidden name="currentPage" value="%{currentPage}" />
-			</s:elseif>
+			<c:if test="${resultClass != NULL && pagingHtml != NULL && session_id != null}">
+		    <form name="inputWarning" action="updateRecipe.do" method="post" enctype="multipart/form-data"  onSubmit="return submitContents(this);">
+				<input type="hidden" id="recipe_num" name="recipe_num" value="${resultClass.recipe_num}" />
+				페이지 값 : ${currentPage}
+				<input type="hidden" id="currentPage" name="currentPage" value="${currentPage}" />
+				<input type="hidden" id="pagingHtml" name="pagingHtml" value="${pagingHtml}" />
+			</c:if>
 			
 				<!-- table -->
 				<table class="table table-striped">
@@ -125,16 +127,17 @@
 							<input type="text" name="recipe_price" value="${resultClass.recipe_price}" required />&nbsp;&nbsp;원</td>
 					</tr>
 					<tr>
+					
 						<td style="width: 20%;" align="center">방법 및 상세내용</td>
-						<td colspan="3" align="left">
-							<!-- s:textarea에는 required 안먹힘! -->
-							<s:textarea name="recipe_content" id="recipe_content" theme="simple" value="%{resultClass.recipe_content}" cssStyle="width:800px" required="true" /></td>
+						<td colspan="3">
+					    	<textarea name="recipe_content" id="recipe_content" value="${pagingHtml}" Style="width:850px" >${pagingHtml}</textarea>
+					    </td>
 					</tr>
 	
 					<tr>
 						<td colspan="4" align="right">		
 							<input class="btn btn-default" type="reset" value="다시작성">	
-							<input class="btn btn-default" name="list" type="button" value="목록보기" OnClick="javascript:location.href='listRecipe.action?currentPage=<s:property value="currentPage" />'">				    
+							<input class="btn btn-default" name="list" type="button" value="목록보기" OnClick="javascript:location.href='listRecipe.do?currentPage=<s:property value="currentPage" />'">				    
 						    <input class="btn btn-primary" name="submit" type="submit" value="등록"> 
 						</td>
 					</tr>
