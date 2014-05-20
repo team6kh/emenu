@@ -93,7 +93,7 @@
 							<c:param name="rnum">
 								${rnum }
 							</c:param>
-						</c:url> 
+						</c:url>
 	        			<c:if test="${rnum == 1 }">
 	        				<img  src="view/notice/img/ico-btn-pre2_.gif"> 다음글&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	        				<a href="readNotice.do?notice_num=${resultClass.notice_num}&currentPage=${currentPage}&rnum=${rnum+1}">
