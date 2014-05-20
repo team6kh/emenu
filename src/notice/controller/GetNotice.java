@@ -86,15 +86,6 @@ public class GetNotice {
 		                bClass = dto1;
 		            }
 			}
-			System.out.println("rnum="+dto.getRnum());
-			System.out.println("aClass="+aClass);
-			System.out.println("bClass="+bClass);
-			System.out.println("currentPage="+currentPage);
-			System.out.println("헤드="+resultClass.getNotice_headtag());
-			System.out.println("제목="+resultClass.getNotice_subject());
-			System.out.println("다음글제목="+aClass.getNotice_subject());
-			System.out.println("이전글제목="+bClass.getNotice_subject());
-			
 			
 			request1.setAttribute("resultClass", resultClass);
 			request1.setAttribute("pagingHtml", pagingHtml);
