@@ -51,10 +51,12 @@
 	                <li><a href="/emenu/listRest.do?rest_localcategory=0&rest_typecategory=25">기타</a></li>
 	              </ul>
 	            </li>
+
 				<!-- <li><a href="listReview.do">후기</a></li>  -->
 				<li><a href="/emenu/listRecipe.do">레시피</a></li>
 				<li><a href="/emenu/listNotice.do">공지사항</a></li>
 				<li><a href="/emenu/listQna.do">문의하기</a></li>
+
 				<!-- 테스트 메뉴 삭제하였습니다. -->
 			</ul>
 			<c:choose>

@@ -49,65 +49,55 @@
 					</thead>
 
 					<tbody>
-						<s:iterator value="list" status="stat">
-							<s:url id="readNoticeURL" action="readNoticeAction">
-								<s:param name="notice_num">
-									<s:property value="notice_num" />
-								</s:param>
-								<s:param name="currentPage">
-									<s:property value="currentPage" />
-								</s:param>
-								<s:param name="rnum">
-									<s:property value="rnum" />
-								</s:param>
-							</s:url>
+						<c:forEach var="list" items="${list }">
+							<c:url var="readNoticeURL" value="readNotice.do">
+								<c:param name="notice_num" value="${list.notice_num }" />
+								<c:param name="currentPage" value="${currentPage }" />
+								<c:param name="rnum" value="${list.rnum }" />
+							</c:url>
 
 							<tr bgcolor="#FFFFFF" align="center">
-								<td><s:property value="rnum" /></td>
-								<td align="left">&nbsp;<s:a href="%{readNoticeURL}">
-										<s:if test="notice_headtag == '-----------------'">
-											<font color="orange" size="3"><s:property
-													value="notice_subject" /></font>
-										</s:if>
-										<s:elseif test="notice_headtag == '[공지]'">
-											<font color="blue" size="3"> <s:property
-													value="notice_headtag" />&nbsp; <s:property
-													value="notice_subject" /></font>
-										</s:elseif>
-										<s:elseif test="notice_headtag == '[이벤트]'">
-											<font color="green" size="3"> <s:property
-													value="notice_headtag" />&nbsp; <s:property
-													value="notice_subject" /></font>
-										</s:elseif>
-										<s:elseif test="notice_headtag == '[스마트팁]'">
-											<font color="red" size="3"> <s:property
-													value="notice_headtag" />&nbsp; <s:property
-													value="notice_subject" /></font>
-										</s:elseif>
-									</s:a></td>
-								<td align="center"><s:property value="notice_reg_date" /></td>
-								<td><s:property value="notice_readcount" /></td>
+								<td>${list.rnum }</td>
+								<td align="left">&nbsp;<a href=${readNoticeURL}>
+										<c:if test="${list.notice_headtag == '-----------------' }">
+											<font color="orange" size="3">${list.notice_subject }</font>
+										</c:if>
+										<c:if test="${list.notice_headtag == '[공지]' }">
+											<font color="blue" size="3"> ${list.notice_headtag }&nbsp; 
+												${list.notice_subject }</font>
+										</c:if>
+										<c:if test="${list.notice_headtag == '[이벤트]' }">
+											<font color="green" size="3"> ${list.notice_headtag }&nbsp;
+												${list.notice_subject }</font>
+										</c:if>
+										<c:if test="${list.notice_headtag == '[스마트팁]' }">
+											<font color="red" size="3"> ${list.notice_headtag }&nbsp;
+												${list.notice_subject }</font>
+										</c:if>
+									</a></td>
+								<td align="center">${list.notice_reg_date }</td>
+								<td>${list.notice_readcount }</td>
 							</tr>
-						</s:iterator>
+						</c:forEach>
 
-						<s:if test="list.size() <= 0">
+						<c:if test="list.size() <= 0">
 							<tr bgcolor="#FFFFFF" align="center">
 								<td colspan="4">등록된 게시물이 없습니다.</td>
 							</tr>
-						</s:if>
+						</c:if>
 					</tbody>
 				</table>
 
 				<div class="text-center">
 					<ul class="pagination pagination-sm">
-						<s:property value="pagingHtml" escape="false" />
+						${pagingHtml }
 					</ul>
 				</div>
 
 				<div id="gotop"></div>
 				<c:if test="${session_id eq 'admin'}">
 					<div class="pull-right">
-						<a href="insertNoticeForm.action?currentPage=<s:property value="currentPage"/>"
+						<a href="insertNoticeForm.do?currentPage=${currentPage }"
 							class="btn btn-primary">글쓰기</a>
 					</div>
 				</c:if>

@@ -25,7 +25,16 @@
 </head>
 
 <body>
-
+<script type="text/javascript">
+	function deleteCheck(){
+		 check1=confirm('삭제하시겠습니까?');
+         if(check1){
+        	 location = "deleteNotice.do?notice_num=${resultClass.notice_num}&currentPage=${currentPage}";
+         }else{
+			return false;
+         }
+	}
+</script>
 	<!-- header -->
 	<%@ include file="/view/common/header.jsp"%>
 	<!-- end of header -->
@@ -42,98 +51,97 @@
 		<table class="table table-striped">
 			<thead>
 	  			<tr>
-      				<th class="text-center" width="50"><strong><s:property value="rnum" /></strong></th>
+      				<th class="text-center" width="50"><strong>${rnum }</strong></th>
 					<th class="text-center"><strong>&nbsp;&nbsp;
-						<s:if test="resultClass.notice_headtag == '-----------------'" >
-							<s:property value="resultClass.notice_subject" />
-						</s:if>
-						<s:else>
-							<s:property value="resultClass.notice_headtag" />&nbsp;
-							<s:property value="resultClass.notice_subject" />
-						</s:else></strong>
+						<c:if test="${resultClass.notice_headtag == '-----------------' }" >
+							${resultClass.notice_subject }
+						</c:if>
+						<c:if test="${resultClass.notice_headtag != '-----------------' }" >
+							${resultClass.notice_headtag }&nbsp;${resultClass.notice_subject }
+						</c:if></strong>
 					</th>
-        			<th width="100" class="text-center"><strong><s:property value="resultClass.notice_reg_date" /></strong></th>
+        			<th width="100" class="text-center"><strong>${resultClass.notice_reg_date }</strong></th>
       			</tr>
       	    </thead>
       	    <tbody>
       			<tr>
         			<td bgcolor="#FFFFFF" height="600" colspan="3" align="left">
-          			&nbsp;&nbsp;<s:property value="pagingHtml" escape="false" />
+          			&nbsp;&nbsp;${pagingHtml }
         			</td>
       			</tr>
       			<tr>
         			<td align="right" colspan="3">
-        				<s:url id="updateNoticeURL" action="UpdateNoticeAction" >
-						<s:param name="notice_num">
-						<s:property value="notice_num" />
-						</s:param>
-	        			</s:url>
+        				<c:url var="updateNoticeURL" value="UpdateNotice.do" >
+						<c:param name="notice_num">
+						${notice_num }
+						</c:param>
+	        			</c:url>
 					
-	        			<s:url id="deleteNoticeURL" action="DeleteNoticeAction" >
-						<s:param name="notice_num">
-						<s:property value="notice_num" />
-						</s:param>
-	        			</s:url>
+	        			<c:url var="deleteNoticeURL" value="DeleteNotice.do" >
+						<c:param name="notice_num">
+						${notice_num }
+						</c:param>
+	        			</c:url>
 	        			<div style="float:left;" align="left">
-	        			<s:url id="readNoticeURL" action="readNoticeAction">
-							<s:param name="notice_num">
-								<s:property value="notice_num" />
-							</s:param>
-							<s:param name="currentPage">
-								<s:property value="currentPage" />
-							</s:param>
-							<s:param name="rnum">
-								<s:property value="rnum" />
-							</s:param>
-						</s:url>
-	        			<s:if test="rnum == 1">
-	        				<img  src="board/notice/img/ico-btn-pre2_.gif"> 다음글&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	        				<a href="rnumNoticeAction.action?notice_num=${resultClass.notice_num}&currentPage=${currentPage}&rnum=${rnum+1}">
-	        				<s:if test="resultClass.notice_headtag == '-----------------'">
+	        			<c:url var="readNoticeURL" value="readNotice.do">
+							<c:param name="notice_num">
+								${notice_num }
+							</c:param>
+							<c:param name="currentPage">
+								${currentPage }
+							</c:param>
+							<c:param name="rnum">
+								${rnum }
+							</c:param>
+						</c:url> 
+	        			<c:if test="${rnum == 1 }">
+	        				<img  src="view/notice/img/ico-btn-pre2_.gif"> 다음글&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	        				<a href="readNotice.do?notice_num=${resultClass.notice_num}&currentPage=${currentPage}&rnum=${rnum+1}">
+	        				<c:if test="${resultClass.notice_headtag == '-----------------' }">
 	        					${aClass.notice_subject }
-	        				</s:if>
-	        				<s:else>
+	        				</c:if> 
+	        				<c:if test="${resultClass.notice_headtag != '-----------------' }">
 	        					${aClass.notice_headtag } ${aClass.notice_subject }
-	        				</s:else></a><br/>
-	        				<img  src="board/notice/img/ico-btn-net2_.gif"> 이전글&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	        				</c:if></a><br/>
+	        				<img  src="view/notice/img/ico-btn-net2_.gif"> 이전글&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	        				<a href="javascript:alert('이전글이 없습니다.')">이전글이 없습니다.</a> 
-						</s:if>
-						<s:elseif test="rnum == n_count">
-							<img  src="board/notice/img/ico-btn-pre2_.gif"> 다음글&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</c:if>
+						<c:if test="${rnum == n_count }">
+							<img  src="view/notice/img/ico-btn-pre2_.gif"> 다음글&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<a href="javascript:alert('다음글이 없습니다.')">다음글이 없습니다.</a><br/>
-							<img  src="board/notice/img/ico-btn-net2_.gif"> 이전글&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	        				<a href="rnumNoticeAction.action?notice_num=${resultClass.notice_num}&currentPage=${currentPage}&rnum=${rnum-1}">
-	        				<s:if test="resultClass.notice_headtag == '-----------------'">
-	        					${bClass.notice_subject }
-	        				</s:if>
-	        				<s:else>
+							<img  src="view/notice/img/ico-btn-net2_.gif"> 이전글&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	        				<a href="readNotice.do?notice_num=${resultClass.notice_num}&currentPage=${currentPage}&rnum=${rnum-1}">
+	        				<c:if test="${resultClass.notice_headtag == '-----------------' }">
+	        					${bClass.notice_subject } 
+	        				</c:if>
+	        				<c:if test="${resultClass.notice_headtag != '-----------------' }">
 	        					${bClass.notice_headtag } ${bClass.notice_subject }
-	        				</s:else></a>
-						</s:elseif>
-						<s:else>
-							<img  src="board/notice/img/ico-btn-pre2_.gif"> 다음글&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	        				<a href="rnumNoticeAction.action?notice_num=${resultClass.notice_num}&currentPage=${currentPage}&rnum=${rnum+1}">
-	        				<s:if test="aClass.notice_headtag == '-----------------'">
+	        				</c:if></a>
+						</c:if>
+						<c:if test="${rnum != 1 && rnum != n_count }">
+							<img  src="view/notice/img/ico-btn-pre2_.gif"> 다음글&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	        				<a href="readNotice.do?notice_num=${resultClass.notice_num}&currentPage=${currentPage}&rnum=${rnum+1}">
+	        				<c:if test="${aClass.notice_headtag == '-----------------' }">
 	        					${aClass.notice_subject }
-	        				</s:if>
-	        				<s:else>
+	        				</c:if>
+	        				<c:if test="${aClass.notice_headtag != '-----------------' }">
 	        					${aClass.notice_headtag } ${aClass.notice_subject }
-	        				</s:else></a><br/>
-	        				<img  src="board/notice/img/ico-btn-net2_.gif"> 이전글&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	        				<a href="rnumNoticeAction.action?notice_num=${resultClass.notice_num}&currentPage=${currentPage}&rnum=${rnum-1}">
-	        				<s:if test="bClass.notice_headtag == '-----------------'">
+	        				</c:if></a><br/>
+	        				<img  src="view/notice/img/ico-btn-net2_.gif"> 이전글&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	        				<a href="readNotice.do?notice_num=${resultClass.notice_num}&currentPage=${currentPage}&rnum=${rnum-1}">
+	        				<c:if test="${bClass.notice_headtag == '-----------------' }">
 	        					${bClass.notice_subject }
-	        				</s:if>
-	        				<s:else>
+	        				</c:if>
+	        				<c:if test="${bClass.notice_headtag != '-----------------' }">
 	        					${bClass.notice_headtag } ${bClass.notice_subject }
-	        				</s:else></a>
-						</s:else>
+	        				</c:if></a>
+						</c:if>
 						</div>
 						<c:if test="${session_id eq 'admin'}">
-	        			<a href="updateNoticeForm.action?notice_num=${resultClass.notice_num}&currentPage=${currentPage}" class="btn btn-default">수정</a>
-	        			<a href="deleteNoticeAction.action?notice_num=${resultClass.notice_num}&currentPage=${currentPage}" class="btn btn-default">삭제</a>
+	        			<a href="updateNoticeForm.do?notice_num=${resultClass.notice_num}" class="btn btn-default">수정</a>
+	        			<a href="#" onclick="deleteCheck()" class="btn btn-default">삭제</a>
 	        			</c:if>
-	        			<a href="listNotice.action?currentPage=${currentPage}" class="btn btn-default">목록</a>
+	        			<a href="listNotice.do?currentPage=${currentPage}" class="btn btn-default">목록</a>
 					</td>
       			</tr>
       		</tbody>
