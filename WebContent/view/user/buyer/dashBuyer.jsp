@@ -38,13 +38,11 @@
 		           var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
 		           $('#startDate').val(today);
               	   $('#endDate').val(today);
-
 				}
+       			
        			// 이번 주 버튼 눌렀을 때 날짜 설정
 		       function setThisWeek() {
 		    	   var now = new Date();
-
-
 		           var oneWeekAgo = new Date();
 		           oneWeekAgo.setDate(now.getDate() - 7);
 
@@ -55,14 +53,13 @@
 
 		           $('#startDate').val(week);
 		           setEndDate();
-
 				}
+       			
 		       // 이번 달 버튼 눌렀을 때 날짜 설정
 		       function setThisMon() {
 		    	   var now = new Date();
 		           var oneMonthAgo = new Date();
 		           oneMonthAgo.setMonth(now.getMonth() -1);
-
 
 		           var day = ("0" + oneMonthAgo.getDate()).slice(-2);
 		           var month = ("0" + (oneMonthAgo.getMonth() + 1)).slice(-2);
@@ -87,6 +84,7 @@
 		           $('#startDate').val(sixMon);
 		           setEndDate();
 				}
+		       
 		       // 마지막 날짜 값 설정
 		       function setEndDate() {
 		    	   var now = new Date();
@@ -96,11 +94,23 @@
 		           var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
 
 		           $('#endDate').val(today);
-
 			}
-
-
-       </script> 
+		       
+	       
+			function checkDate() {
+				inputForm = eval("document.searchDate");
+				if (!inputForm.startDate.value) {
+					alert("기간을 입력하세요.");
+					inputForm.startDate.focus();
+					return false;
+				}
+				if (!inputForm.endDate.value) {
+					alert("기간을 입력하세요.");
+					inputForm.endDate.focus();
+					return false;
+				}
+			}
+</script> 
          
 </head>
 
@@ -133,7 +143,7 @@
                 <div class="col-md-12" style="margin-top: 20px">
                 
                     <!--  기간 검색조건 폼  -->
-                    <form name="searchDate" method="post" action="/emenu/user/buyer/searchMyCpn.do">
+                    <form name="searchDate" method="post" action="/emenu/user/buyer/searchMyCpn.do" onSubmit="return checkDate(this);">
                           <table class="table" >
                             <tr>
                                 <th colspan="2">  기간별 검색 </th>
@@ -164,8 +174,8 @@
                             <tr>
                                 <td class="text-right" colspan="2"> 
                                     <input type="hidden" name="session_id" value="${session_id}" />
-                                        <button type="reset" class="btn btn-default">지우기</button>
-                                        <button type="submit" class="btn btn-primary">검 색</button>
+                                    <button type="reset" class="btn btn-default">지우기</button>
+                                    <button type="submit" class="btn btn-primary" >검 색</button>
                                 </td>
                             </tr>
                             </table>
@@ -180,7 +190,7 @@
                                 <td><strong>매장</strong></td>
                                 <td><strong>품목</strong></td>
                                 <td><strong>가격</strong></td>
-                                <!-- <td><strong>품목이미지</strong></td> -->
+                                <td><strong>품목이미지</strong></td>
                                 <td><strong>쿠폰</strong></td>
                                 <!--<td><strong>사용식별코드</strong></td> -->
                                 <td><strong>사용현황</strong></td>
@@ -190,11 +200,11 @@
 
                             <c:forEach var="list" items="${list}">
                                 <tr>
-                                    <td>${list.paid_num} </td>
-                                    <td>${list.paid_rest_subject} </td>
-                                    <td>${list.paid_restopt_subject} </td>
+                                    <td>${list.paid_num}</td>
+                                    <td><a href="http://localhost:8000/emenu/readRest.do?rest_num=${list.paid_rest_num}">${list.paid_rest_subject}</a> </td>
+                                    <td><a href="http://localhost:8000/emenu/readRest.do?rest_num=${list.paid_rest_num}">${list.paid_restopt_subject}</a> </td>
                                     <td>${list.paid_restopt_priceplus}&nbsp;원 </td>
-                                    <!-- <td>이미지 사진뜨는곳. </td> -->
+                                    <td><a href="http://localhost:8000/emenu/readRest.do?rest_num=${list.paid_rest_num}"><img src="/emenu/${list.paid_restopt_destFile1}" alt="N/A" class="img-responsive" style="min-height:40px;height:40px;"></a></td>
                                     <td>${list.paid_cpn} </td>
                                     <!-- <td>${list.paid_cpn_used} </td> -->
                                     <!-- 사용요청 -->
