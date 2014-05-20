@@ -72,7 +72,7 @@ public class UpdateRecipe {
 
 			// 수정이 끝나면 view 페이지로 이동.
 			resultClass = (RecipeDTO) sqlMapper.queryForObject("Recipe.selectOne", paramClass.getRecipe_num());
-			System.out.println("update 컨트롤러에서 페이지 : " + request.getParameter("currentPage"));
+			
 			request.setAttribute("currentPage", request.getParameter("currentPage"));
 			request.setAttribute("resultClass", resultClass);
 			return "/readRecipe.do";

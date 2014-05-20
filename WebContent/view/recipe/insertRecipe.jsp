@@ -53,14 +53,12 @@
 			<c:if test="${resultClass != NULL && session_id == null}">
 			<form name="inputWarning" action="updateRecipe.do" method="post" enctype="multipart/form-data"  onSubmit="return submitContents(this);">
 				<input type="hidden" id="recipe_num" name="recipe_num" value="${resultClass.recipe_num}" />
-				페이지 값 : ${currentPage}
 				<input type="hidden" id="currentPage" name="currentPage" value="${currentPage}" />
 			</c:if>
 			
 			<c:if test="${resultClass != NULL && pagingHtml != NULL && session_id != null}">
 		    <form name="inputWarning" action="updateRecipe.do" method="post" enctype="multipart/form-data"  onSubmit="return submitContents(this);">
 				<input type="hidden" id="recipe_num" name="recipe_num" value="${resultClass.recipe_num}" />
-				페이지 값 : ${currentPage}
 				<input type="hidden" id="currentPage" name="currentPage" value="${currentPage}" />
 				<input type="hidden" id="pagingHtml" name="pagingHtml" value="${pagingHtml}" />
 			</c:if>

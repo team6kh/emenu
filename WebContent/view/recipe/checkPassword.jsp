@@ -34,7 +34,7 @@
 		<form action="checkRecipePwAction.do" method="post">
 			<input type="hidden" id="recipe_num" name="recipe_num" value="${recipe_num}" />
 			<input type="hidden" id="currentPage" name="currentPage" value="${currentPage}" />
-              글번호 :${recipe_num}   ,   현재 페이지: ${currentPage}
+             
 			<table class="table">
 
 				<tr>
