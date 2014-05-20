@@ -37,17 +37,17 @@ public class Register {
 		if (reg_type != null) {
 			// 구매자 가입 요청
 			if (reg_type.equals("buyer")) {
-				System.out.println("buyer reg requested");
+				//System.out.println("buyer reg requested");
 				return "/user/buyer/register.do";
 			// 판매자 가입 요청
 			} else if (reg_type.equals("seller")) {
-				System.out.println("seller reg requested");
+				//System.out.println("seller reg requested");
 				return "/user/seller/register.do";
 			}
-			System.out.println("reg_type error");
+			//System.out.println("reg_type error");
 			return "redirect:/error.do";
 		}		
-		System.out.println("reg_type null");
+		//System.out.println("reg_type null");
 		return "redirect:/error.do";
 	}
 		

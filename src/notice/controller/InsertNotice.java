@@ -51,7 +51,7 @@ public class InsertNotice {
 						currentPage = Integer.parseInt(request1.getParameter("currentPage"));
 					}
 					
-					System.out.println(currentPage);
+					//System.out.println(currentPage);
 					request1.setAttribute("currentPage", currentPage);
 					
 					return "/view/notice/insertNoticeForm.jsp";
