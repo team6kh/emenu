@@ -57,6 +57,7 @@ public class ListNotice {
 								//파라미터 request1				//파라미터 response1			 //세션용				//파라미터 DTO로 자동 set(), get()
 
 			list = sqlMapper.queryForList("Notice.selectAll");
+			all_list = list;
 			totalCount = list.size(); //전체 글 갯수를 구한다.
 			
 			if(request.getParameter("currentPage") == null) {

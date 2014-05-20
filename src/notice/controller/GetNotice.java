@@ -74,22 +74,27 @@ public class GetNotice {
 			pagingHtml.append(resultClass.getNotice_content());
 			
 			List<NoticeDTO> list = ListNotice.all_list;
+			System.out.println("size=="+list.size());
 			for(NoticeDTO dto1 : list){
-					if(dto1.getRnum() == noticeDTO.getRnum()){
+					if(dto1.getRnum() == dto.getRnum()){
 						resultClass = dto1;
 					}
-		            if(dto1.getRnum() == noticeDTO.getRnum()+1){
+		            if(dto1.getRnum() == dto.getRnum()+1){
 		                aClass = dto1;
 		            }
-		            if(dto1.getRnum() == noticeDTO.getRnum()-1){
+		            if(dto1.getRnum() == dto.getRnum()-1){
 		                bClass = dto1;
 		            }
 			}
-			System.out.println("rnum="+rnum);
-			
+			System.out.println("rnum="+dto.getRnum());
 			System.out.println("aClass="+aClass);
 			System.out.println("bClass="+bClass);
 			System.out.println("currentPage="+currentPage);
+			System.out.println("헤드="+resultClass.getNotice_headtag());
+			System.out.println("제목="+resultClass.getNotice_subject());
+			System.out.println("다음글제목="+aClass.getNotice_subject());
+			System.out.println("이전글제목="+bClass.getNotice_subject());
+			
 			
 			request1.setAttribute("resultClass", resultClass);
 			request1.setAttribute("pagingHtml", pagingHtml);
@@ -97,7 +102,7 @@ public class GetNotice {
 			request1.setAttribute("bClass", bClass);
 			request1.setAttribute("n_count", n_count);
 			request1.setAttribute("currentPage", currentPage);
-			request1.setAttribute("rnum", rnum);
+			request1.setAttribute("rnum", dto.getRnum());
 			
 			return "/view/notice/readNotice.jsp";
 		}
