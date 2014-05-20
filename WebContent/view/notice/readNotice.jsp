@@ -59,7 +59,7 @@
 						<c:if test="${resultClass.notice_headtag != '-----------------' }" >
 							${resultClass.notice_headtag }&nbsp;${resultClass.notice_subject }
 						</c:if></strong>
-					</th>
+					 </th>
         			<th width="100" class="text-center"><strong>${resultClass.notice_reg_date }</strong></th>
       			</tr>
       	    </thead>
