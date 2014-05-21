@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%-- <%@ page isELIgnored="false" %> --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -54,7 +53,7 @@
 		//if(click==false){
 
 		//click = true;
-		document.location.href = 'readcountRecipeDesc.action';
+		document.location.href = '/emenu/selectMyListReadcountDesc.do';
 		//}if(click==true){
 		//	click = false;
 		//	window.location.href='readcountRecipeAsc.action';
@@ -62,11 +61,15 @@
 	}
 
 	function recipe_timearray() {
-		document.location.href = 'timeRecipeDesc.action';
+		document.location.href = '/emenu/selectMyListTimeDesc.do';
 	}
 
 	function recipe_pricearray() {
-		document.location.href = 'priceRecipeDesc.action';
+		document.location.href = '/emenu/selectMyListPriceDesc.do';
+	}
+	
+	function recipe_recommendarray(){
+		document.location.href = '/emenu/selectMyListRecommendDesc.do';
 	}
 </script>
 <!-- 스크립트 끝 -->
@@ -87,13 +90,17 @@
 			<!-- sidebar -->
 			<div class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
-					<li><a href="/emenu/user/get.do?user_type=${session_type}&user_id=${session_id}">회원정보</a></li>
+					<li><a
+						href="/emenu/user/get.do?user_type=${session_type}&user_id=${session_id}">회원정보</a></li>
 					<!-- 구매자일시 -->
-					<li><a href="/emenu/user/buyer/dashboard.do?session_id=${session_id}">구매목록</a></li>
+					<li><a
+						href="/emenu/user/buyer/dashboard.do?session_id=${session_id}">구매목록</a></li>
 					<!-- 판매자일시 미구현 -->
 					<!-- <li><a href="dashSeller.action?session_id=${session_id}">판매목록</a></li> -->
 					<li class="active"><a href="listMyRecipe.do">마이 레시피</a></li>
-					<li><a href="/emenu/user/listMyQna.do?session_id=${session_id}">마이 문의하기</a></li>
+					<li><a
+						href="/emenu/user/listMyQna.do?session_id=${session_id}">마이
+							문의하기</a></li>
 				</ul>
 			</div>
 			<!-- /.sidebar -->
@@ -117,23 +124,32 @@
 							<td><strong>요리명</strong></td>
 							<td><strong>작성자</strong></td>
 							<td><strong>작성일</strong></td>
-							<td><strong><a href="javascript:return false;" onClick="recipe_timearray()">소비시간</a></strong></td>
-							<td><strong><a href="javascript:return false;"onClick="recipe_pricearray()">비용</a></strong></td>
-							<td><strong><a href="javascript:return false;"onClick="recipe_readcountarray()">조회수</a></strong></td>
-							<td><strong><a href="javascript:return false;"onClick="recipe_recommendarray()">추천수</a></strong></td>
+							<td><strong><a href="javascript:return false;"
+									onClick="recipe_timearray()">소비시간</a></strong></td>
+							<td><strong><a href="javascript:return false;"
+									onClick="recipe_pricearray()">비용</a></strong></td>
+							<td><strong><a href="javascript:return false;"
+									onClick="recipe_readcountarray()">조회수</a></strong></td>
+							<td><strong><a href="javascript:return false;"
+									onClick="recipe_recommendarray()">추천수</a></strong></td>
 						</tr>
 
-						<c:forEach var="list" items="${list}" >
+						<c:forEach var="list" items="${list}">
+
+							<c:url var="viewURL" value="/readRecipe.do">
+								<c:param name="recipe_num" value="${list.recipe_num}" />
+								<c:param name="currentPage" value="${currentPage}"></c:param>
+							</c:url>
 							<tr bgcolor="#FFFFFF" align="center">
 								<td>${list.recipe_num}</td>
 								<td align="center">${list.recipe_foodkind}</td>
-								<td align="center">&nbsp; <a href="readRecipe.do?recipe_num=${list.recipe_num}&currentPage=${currentPage}" >${list.recipe_subject}</a></td>
+								<td align="center"><a href=${viewURL}>${list.recipe_subject}</a></td>
 								<td align="center">${list.recipe_foodsubject}</td>
 								<td align="center">${list.recipe_writer}</td>
-								<td align="center"><fmt:formatDate value="${list.recipe_reg_date}" pattern="yyyy-MM-dd HH:mm:ss"/> 
-                                </td>
-								<td align="center">${list.recipe_time}</td>
-								<td align="center">${list.recipe_price}</td>
+								<td align="center"><fmt:formatDate value="${list.recipe_reg_date}" pattern="yyyy-MM-dd HH:mm:ss" />
+								</td>
+								<td align="center">${list.recipe_time}&nbsp;분</td>
+								<td align="center">${list.recipe_price}&nbsp;원</td>
 								<td align="center">${list.recipe_readcount}</td>
 								<td align="center">${list.recipe_recommend}</td>
 							</tr>
@@ -142,7 +158,7 @@
 
 						<c:if test="list.size() <= 0">
 							<tr bgcolor="#FFFFFF" align="center">
-                            
+
 								<td colspan="10">등록된 게시물이 없습니다.</td>
 							</tr>
 							<tr bgcolor="#777777">
@@ -154,81 +170,80 @@
 				<!-- /.게시판 바디 -->
 
 				<!-- 페이징 -->
-		<div class="text-center">
-			<ul class="pagination pagination-sm">
-				${pagingHtml}
-			</ul>
-		</div>
-		<!-- /페이징 -->
+				<div class="text-center">
+					<ul class="pagination pagination-sm">${pagingHtml}
+					</ul>
+				</div>
+				<!-- /페이징 -->
 
 				<!-- 버튼 -->
 				<div class="col-md-12">
-			<div class="form-inline pull-right">
-				<!-- 검색[선택] -->
-				<select class="form-control" name="recipe_search_target" id="recipe_search_target" title="검색" onchange="detailsearch()">
-					<option value="null">검색[선택]</option>
-					<option value="recipe_detailsearch">MyRecipe상세검색</option>
-				</select>
-				<!-- /.검색[선택] -->
-				</div>
+					<div class="form-inline pull-right">
+						<!-- 검색[선택] -->
+						<select class="form-control" name="recipe_search_target" id="recipe_search_target" title="검색" onchange="detailsearch()">
+							<option value="null">검색[선택]</option>
+							<option value="recipe_detailsearch">MyRecipe상세검색</option>
+						</select>
+						<!-- /.검색[선택] -->
+					</div>
 				</div>
 				<!-- /.버튼 -->
-				
-				<br />
-		<br />
 
-		<!-- 상세검색 폼 -->
-		<form name="recipe_search" method="post" action="searchMyRecipe.do?session_id=${session_id}" enctype="multipart/form-data">
-             
-			<!-- 상세검색 시에 나타난다. -->
-			<div id="detailsearch" style="display: none">
-				<div class="col-md-12">
-					<table class="table table-condensed">
-						<tr>
-							<td class="text-center">종류</td>
-							<td>
-								<select name="recipe_foodkind" style="width: 120px" id="recipe_foodkind">
-									<option value="">선택하세요</option>
-									<option value="한식">한식</option>
-									<option value="중식">중식</option>
-									<option value="일식">일식</option>
-									<option value="양식">양식</option>
-									<option value="기타">기타</option>
-								</select>
-							</td>
-							
-							<td><input type="hidden" name="recipe_writerinput" value="${session_id }">${session_id }</td>
-						</tr>
-						<tr>
-							<td class="text-center">요리명</td>
-							<td colspan="3"><input type="text" name="recipe_foodnameinput"></td>
-						</tr>
-						<tr>
-							<td class="text-center">제목+내용</td>
-							<td colspan="3"><input type="text" name="recipe_subjectinput"></td>
-						</tr>
-						<tr>
-							<td class="text-center">소요시간</td>
-							<td colspan="3">
-								<input type="text" name="recipe_timeinput1" size="5">&nbsp;~&nbsp;<input type="text" name="recipe_timeinput2" size="5">
-							</td>
-						</tr>
-						<tr>
-							<td class="text-center">비용</td>
-							<td colspan="3">
-								<input type="text" name="recipe_priceinput1" size="5">&nbsp;~&nbsp;<input type="text" name="recipe_priceinput2" size="5">
-							</td>
-						</tr>
-						<tr>
-							<td class="text-right" colspan="4">
-								<input type="reset" class="btn btn-default" value="초기화" />&nbsp;<input type="submit" class="btn btn-primary" value="검색">
-							</td>
-						</tr>
-					</table>
-				</div>
-			</div>
-			<!--/.상세검색 시에 나타난다. -->
-			
+				<br /> <br />
+
+				<!-- 상세검색 폼 -->
+				<form name="recipe_search" method="post" action="myrecipe_search.do?session_id=${session_id}" enctype="multipart/form-data">
+
+					<!-- 상세검색 시에 나타난다. -->
+					<div id="detailsearch" style="display: none">
+						<div class="col-md-12">
+							<table class="table table-condensed">
+								<tr>
+									<td class="text-center">종류</td>
+									<td><select name="recipe_foodkind" style="width: 120px"
+										id="recipe_foodkind">
+											<option value="">선택하세요</option>
+											<option value="한식">한식</option>
+											<option value="중식">중식</option>
+											<option value="일식">일식</option>
+											<option value="양식">양식</option>
+											<option value="기타">기타</option>
+									</select></td>
+
+									<td><input type="hidden" name="recipe_writerinput"
+										value="${session_id }">${session_id }</td>
+								</tr>
+								<tr>
+									<td class="text-center">요리명</td>
+									<td colspan="3"><input type="text"
+										name="recipe_foodnameinput"></td>
+								</tr>
+								<tr>
+									<td class="text-center">제목+내용</td>
+									<td colspan="3"><input type="text"
+										name="recipe_subjectinput"></td>
+								</tr>
+								<tr>
+									<td class="text-center">소요시간</td>
+									<td colspan="3"><input type="text"
+										name="recipe_timeinput1" size="5">&nbsp;~&nbsp;<input
+										type="text" name="recipe_timeinput2" size="5"></td>
+								</tr>
+								<tr>
+									<td class="text-center">비용</td>
+									<td colspan="3"><input type="text"
+										name="recipe_priceinput1" size="5">&nbsp;~&nbsp;<input
+										type="text" name="recipe_priceinput2" size="5"></td>
+								</tr>
+								<tr>
+									<td class="text-right" colspan="4">
+									<input type="reset" class="btn btn-default" value="초기화" />&nbsp;
+									<input type="submit" class="btn btn-primary" value="검색"></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<!--/.상세검색 시에 나타난다. -->
 			</div>
 			<!-- /.main -->
 

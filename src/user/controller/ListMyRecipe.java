@@ -69,6 +69,7 @@ public class ListMyRecipe {
 		list = list.subList(page.getStartCount(), lastCount);
 
 		request.setAttribute("list", list);
+		request.setAttribute("pagingHtml", pagingHtml);
 
 		return "/view/user/listMyRecipe.jsp";
 	}

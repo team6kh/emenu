@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%-- <%@ page isELIgnored="false" %> --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -118,7 +119,7 @@
                         <td><a href=${viewURL}>${list.recipe_subject}</a></td>
                         <td>${list.recipe_foodsubject}</td>
                         <td>${list.recipe_writer}</td>
-                        <td>${list.recipe_reg_date}</td>
+                        <td><fmt:formatDate value="${list.recipe_reg_date}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                         <td>${list.recipe_time}&nbsp;분</td>
                         <td>${list.recipe_price}&nbsp;원</td>
                         <td>${list.recipe_readcount}</td>
