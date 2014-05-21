@@ -137,13 +137,16 @@
 						<c:url var="deleteRecipeURL" value="deleteRecipe.do">
 							<c:param name="recipe_num" value="${recipe_num}" />
 						</c:url>
-						<c:if test="${resultClass.recipe_memberwriter == NULL}">
-							<input class="btn btn-default" name="list" type="button" value="수정" onClick="javascript:open_win_noresizable('checkRecipePwForm.do?recipe_num=${resultClass.recipe_num} &currentPage=${currentPage}','update')">
-							<input class="btn btn-default" name="list" type="button" value="삭제" onClick="javascript:open_win_noresizable('checkRecipePwForm.do?recipe_num=${resultClass.recipe_num} &currentPage=${currentPage}','delete')">
+						<c:if test="${resultClass.recipe_memberwriter == NULL && session_id == null}">
+							<input class="btn btn-default" name="list" type="button" value="수정" onClick="javascript:open_win_noresizable('checkRecipePwForm.do?recipe_num=${resultClass.recipe_num}&currentPage=${currentPage}','update')">
+							<input class="btn btn-default" name="list" type="button" value="삭제" onClick="javascript:open_win_noresizable('checkRecipePwForm.do?recipe_num=${resultClass.recipe_num}&currentPage=${currentPage}','delete')">
 						</c:if>
 						<c:if test="${resultClass.recipe_memberwriter != NULL && resultClass.recipe_memberwriter == session_id}">
-							<input class="btn btn-default" name="list" type="button" value="수정" onClick="javascript:open_win_noresizable('checkRecipePwForm.do?recipe_num=${resultClass.recipe_num} &currentPage=${currentPage}','update')">
-							<input class="btn btn-default" name="list" type="button" value="삭제" onClick="javascript:open_win_noresizable('checkRecipePwForm.do?recipe_num=${resultClass.recipe_num} &currentPage=${currentPage}','delete')">
+							<input class="btn btn-default" name="list" type="button" value="수정" onClick="javascript:open_win_noresizable('checkRecipePwForm.do?recipe_num=${resultClass.recipe_num}&currentPage=${currentPage}','update')">
+							<input class="btn btn-default" name="list" type="button" value="삭제" onClick="javascript:open_win_noresizable('checkRecipePwForm.do?recipe_num=${resultClass.recipe_num}&currentPage=${currentPage}','delete')">
+						</c:if>
+						<c:if test="${session_id eq 'admin'}">
+							<input class="btn btn-default" name="list" type="button" value="삭제" onClick="javascript:location.href='deleteRecipe.do?recipe_num=${resultClass.recipe_num}&currentPage=${currentPage}'">
 						</c:if>
 							<input class="btn btn-default" name="list" type="button" value="전체 목록" onClick="javascript:location.href='listRecipe.do?currentPage=${currentPage}'">
 						<c:if test="${session_id != null}">

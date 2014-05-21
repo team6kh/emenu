@@ -114,16 +114,16 @@
                     </c:url>
 
                     <tr>
-                        <td>${list.recipe_num}</td>
-                        <td>${list.recipe_foodkind}</td>
-                        <td><a href=${viewURL}>${list.recipe_subject}</a></td>
-                        <td>${list.recipe_foodsubject}</td>
-                        <td>${list.recipe_writer}</td>
-                        <td><fmt:formatDate value="${list.recipe_reg_date}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                        <td>${list.recipe_time}&nbsp;분</td>
-                        <td>${list.recipe_price}&nbsp;원</td>
-                        <td>${list.recipe_readcount}</td>
-                        <td>${list.recipe_recommend}</td>
+                        <td align ="center">${list.recipe_num}</td>
+                        <td align ="center">${list.recipe_foodkind}</td>
+                        <td align ="left"><img src="${list.recipe_file}" width="115" height="80" /><a href=${viewURL}>${list.recipe_subject}</a></td>
+                        <td align ="center">${list.recipe_foodsubject}</td>
+                        <td align ="center">${list.recipe_writer}</td>
+                        <td align ="center"><fmt:formatDate value="${list.recipe_reg_date}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                        <td align ="center">${list.recipe_time}&nbsp;분</td>
+                        <td align ="center">${list.recipe_price}&nbsp;원</td>
+                        <td align ="center">${list.recipe_readcount}</td>
+                        <td align ="center">${list.recipe_recommend}</td>
                     </tr>
 
                 </c:forEach>
