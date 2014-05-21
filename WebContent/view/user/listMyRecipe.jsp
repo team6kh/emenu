@@ -185,6 +185,7 @@
 							<option value="recipe_detailsearch">MyRecipe상세검색</option>
 						</select>
 						<!-- /.검색[선택] -->
+						<input class="btn btn-default" name="list" type="button" value="전체 목록" onClick="javascript:location.href='/emenu/listRecipe.do'">
 					</div>
 				</div>
 				<!-- /.버튼 -->

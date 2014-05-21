@@ -163,8 +163,8 @@
                 </select>
                 <!-- /.검색[선택] -->
                 <!-- 내가 쓴 글 -->
-                <c:if test="session_id != null">
-                    <input name="mylist" type="button" class="btn btn-default" value="마이 레시피"   onClick="javascript:location.href='listMyRecipe.do?session_id=${session_id}';">
+                <c:if test="${session_id != null}">
+                    <input name="mylist" type="button" class="btn btn-default" value="마이 레시피"   onClick="javascript:location.href='/emenu/user/listMyRecipe.do?session_id=${session_id}';">
                 </c:if>
                 <!-- /.내가 쓴 글 -->
                 <input type="button" class="btn btn-primary" value="글쓰기" onClick="javascript:location.href='insertRecipeForm.do?currentPage=${currentPage}';">
@@ -218,6 +218,7 @@
                             <input type="reset" class="btn btn-default" value="초기화" />
                             &nbsp;<input type="submit" class="btn btn-primary" value="검색"></td>
                         </tr>
+                        
                     </table>
                 </div>
             </div>
