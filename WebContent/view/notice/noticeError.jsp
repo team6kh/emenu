@@ -22,7 +22,7 @@
         <td>&nbsp;</td>
       </tr>
       <tr>
-        <td>  <a href="listNotice.action">리스트 화면으로 이동</a>.</td>
+        <td>  <a href="listNotice.do">리스트 화면으로 이동</a>.</td>
       </tr>
       
       

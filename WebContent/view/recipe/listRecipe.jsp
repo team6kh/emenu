@@ -116,7 +116,7 @@
                     <tr>
                         <td align ="center">${list.recipe_num}</td>
                         <td align ="center">${list.recipe_foodkind}</td>
-                        <td align ="left"><img src="${list.recipe_file}" width="115" height="80" /><a href=${viewURL}>${list.recipe_subject}</a></td>
+                        <td align ="left"><a href=${viewURL}><img src="${list.recipe_file}" width="130" height="80" />${list.recipe_subject}</a></td>
                         <td align ="center">${list.recipe_foodsubject}</td>
                         <td align ="center">${list.recipe_writer}</td>
                         <td align ="center"><fmt:formatDate value="${list.recipe_reg_date}" pattern="yyyy-MM-dd HH:mm:ss"/></td>

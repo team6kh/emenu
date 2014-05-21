@@ -88,21 +88,22 @@
 						  <input type="text" name="recipe_foodsubject" value="${resultClass.recipe_foodsubject}" required /></td>
 					</tr>
 					
-					<s:if test="#session.session_id != null">
+					<c:if test="${session_id != null}">
 					<tr>
 						<td style="width: 20%;" align="center">작성자</td>
-						<td colspan="3" align="left">${sessionScope.session_id}
-						  <input type="hidden" name="recipe_memberwriter" value="${sessionScope.session_id}" />
-						  <input type="hidden" name="recipe_writer" value="${sessionScope.session_id}"/></td>
-					</s:if>
+						<td colspan="3" align="left">${session_id}
+						  <input type="hidden" name="recipe_memberwriter" value="${session_id}" />
+						  <input type="hidden" name="recipe_writer" value="${session_id}"/></td>
+					</c:if>
 					
-					<s:else>
+					<c:if test="${session_id == null}">
 					<tr>
 						<td style="width: 20%;" align="center">작성자</td>
 						<td colspan="3" align="left">
 							<input type="text" name="recipe_writer" value="${resultClass.recipe_writer}" required />
 						</td>
-					</s:else>
+					</tr>
+					</c:if>
 	
 					<tr>
 						<td style="width: 20%;" align="center">비밀번호</td>
@@ -135,7 +136,7 @@
 					<tr>
 						<td colspan="4" align="right">		
 							<input class="btn btn-default" type="reset" value="다시작성">	
-							<input class="btn btn-default" name="list" type="button" value="목록보기" OnClick="javascript:location.href='listRecipe.do?currentPage=<s:property value="currentPage" />'">				    
+							<input class="btn btn-default" name="list" type="button" value="목록보기" OnClick="javascript:location.href='listRecipe.do?currentPage=${currentPage}'">				    
 						    <input class="btn btn-primary" name="submit" type="submit" value="등록"> 
 						</td>
 					</tr>

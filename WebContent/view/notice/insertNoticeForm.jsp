@@ -39,15 +39,14 @@
 		
 		<!-- 꾸미기 시작 -->
 	  	<div class="col-md-12 well">
-	  		<s:if test="resultClass == NULL">
-				<form name="f" action="insertNoticeAction.action" method="post" enctype="multipart/form-data" onSubmit="submitContents(this);">
-			</s:if>
-			<s:else>
-			  	<form name="u" action="updateNoticeAction.action" method="post" enctype="multipart/form-data" onSubmit="submitContents(this);">
-			  	<s:hidden name="notice_num" value="%{notice_num}" />
-			  	<s:hidden name="currentPage" value="%{currentPage}" />
-			  	<s:hidden name="notice_file" value="%{notice_file}" />
-			</s:else>
+	  		<c:if test="${resultClass == NULL }">
+				<form name="f" action="insertNotice.do" method="post" enctype="multipart/form-data" onSubmit="submitContents(this);">
+			</c:if>
+			<c:if test="${resultClass != NULL }">
+			  	<form name="u" action="updateNotice.do" method="post" enctype="multipart/form-data" onSubmit="submitContents(this);">
+			  	<input type="hidden" name="notice_num" id="notice_num" value="${resultClass.notice_num }" />
+			  	<input type="hidden" name="currentPage" id="currentPage" value="${currentPage }" />
+			</c:if>
 			
 	  		<div class="form-group">
 				<label>제목</label>
@@ -65,11 +64,11 @@
 	  			
 	  		<div class="form-group">
 				<label for="test_content">내용</label>
-	  			<s:textarea name="notice_content" id="notice_content" theme="simple" value="%{resultClass.notice_content}" cssStyle="width:1098px" />
+	  			<textarea name="notice_content" id="notice_content" Style="width:1098px">${resultClass.notice_content}</textarea>
 	  		</div>
 	      	    
 	  		<div class="pull-right">
-	  			<a href="listNotice.action?currentPage=${currentPage}" class="btn btn-default">목록</a>
+	  			<a href="listNotice.do?currentPage=${currentPage }" class="btn btn-default">목록</a>
 	  			<button type="submit" class="btn btn-primary">완료</button>	  			
 	  		</div>  	  		
 		
