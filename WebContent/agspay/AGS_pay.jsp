@@ -340,32 +340,38 @@ function Display(form){
 					
 					<tr>
 						<td align="center" width=100>
-							<font color=red>*</font> <b>상품번호</b>
+							<font size=3><b>상품번호</b></font>
+						</td>
+						<td align="center" width=120>
+							<font size=3><b>상품이미지</b></font>
 						</td>
 						<td align="center" width=200>
-							<font color=red>*</font> <b>상품명</b>
+							<font size=3><b>상품명</b></font>
 						</td>
 						<td align="center" width=200>
-							<font color=red>*</font> <b>상품옵션</b>
+							<font size=3><b>상품옵션</b></font>
 						</td>
 						<td align="center" width=150>
-							<font color=red>*</font> <b>가격</b>
+							<font size=3><b>가격</b></font>
 						</td>
 					</tr>
 					
 					<c:forEach var="list" items="${list}">
 						<tr>
 							<td align="center">
-								${list.cart_rest_num}
+								<font size=2>${list.cart_rest_num}</font>
 							</td>
 							<td align="center">
-								${list.cart_rest_subject}
+								<img src="/emenu/${list.cart_restopt_destFile1}" alt="N/A" class="img-responsive" style="min-height:30px;height:30px;"> 
 							</td>
 							<td align="center">
-								${list.cart_restopt_subject}
+								<font size=2>${list.cart_rest_subject}</font>
 							</td>
 							<td align="center">
-								${list.cart_restopt_priceplus}
+								<font size=2>${list.cart_restopt_subject}</font>
+							</td>
+							<td align="center">
+								<font size=2>${list.cart_restopt_priceplus}</font>
 							</td>
 						</tr>
 					</c:forEach>
@@ -373,18 +379,18 @@ function Display(form){
 					
 					<tr>
 						<td class=clsleft align="right" colspan=5>
-							<br/><font color=red>*</font> <b>총 합계</b> : ${pay_pricetotal}원
-							
-							<input type=hidden style=width:100px name=OrdNo maxlength=40 value="${pay_num}" />
-							<input type=hidden style=width:300px name=StoreNm value="${pay_rest_subject}"/>
-							<input type=hidden style=width:300px name=ProdNm maxlength=300 value="${pay_restopt_subject}">
-							<input type=hidden style=width:100px name=Amt maxlength=12 value="${pay_pricetotal}"/>
+							<br/><br/><font size=3><b>총 합계 : ${pay_pricetotal}원</b></font>
 						</td>
 					</tr>
 					
 					
 					<tr>
-						<td class=clsleft colspan=3></td>
+						<td class=clsleft colspan=3>
+							<input type=hidden style=width:100px name=OrdNo maxlength=40 value="${pay_num}" />
+							<input type=hidden style=width:300px name=StoreNm value="${pay_rest_subject}"/>
+							<input type=hidden style=width:300px name=ProdNm maxlength=300 value="${pay_restopt_subject}">
+							<input type=hidden style=width:100px name=Amt maxlength=12 value="${pay_pricetotal}"/>
+						</td>
 					</tr>
 					
 					<tr><td>&nbsp;</td></tr>
