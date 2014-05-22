@@ -60,4 +60,18 @@ public class DeleteCart {
 		return "redirect:listCart.do?rest_num="+rest_num+"&rest_subject="+rest_subject;
 	}
 
+	//deleteCheckedCart.do
+	@RequestMapping("/deleteCheckedCart.do")
+	public String deleteCheckedCart(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception{
+		String session_id = (String) session.getAttribute("session_id");
+		int cart_num = Integer.parseInt(request.getParameter("cart_num"));
+		paramClass.setCart_num(cart_num);
+		paramClass.setSession_id(session_id);
+		//장바구니 레코드 삭제
+		sqlMapper.delete("Cart.deleteChecked", paramClass);
+		
+		return "redirect:/cartboard.do";
+	}
+	
+	
 }

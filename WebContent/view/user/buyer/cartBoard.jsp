@@ -145,6 +145,7 @@
 									<td><strong>옵션명</strong></td>
 									<td><strong>가격</strong></td>
 									<td><strong>수량</strong></td>
+									<td><strong>비우기</strong></td>
 								</tr>
 
 								<c:forEach var="list" items="${list}" >
@@ -156,6 +157,7 @@
 										<td align="center"><a href="/emenu/readRest.do?rest_num=${list.cart_rest_num}">${list.cart_restopt_subject}</a></td>
 										<td align="center">${list.cart_restopt_priceplus}</td>
 										<td align="center">${list.cart_amount}</td>
+										<td align="center"> <a href="deleteCheckedCart.do?cart_num=${list.cart_num}"><span class="glyphicon glyphicon-trash"></span></a></td>
 									</tr>
 								</c:forEach>
 
