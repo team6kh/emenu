@@ -58,7 +58,7 @@
 				<div class="caption" align="center">
 					<font color=green size=3><b>${list.cart_restopt_subject}</b></font><br/>
 					<font size=3><b>${list.cart_restopt_priceplus}원</b></font>
-					<font size=2>X ${list.cart_amount}개</font>
+					<font size=2>x ${list.cart_amount}</font>
 					<a href="/emenu/plusAmount.do?cart_rest_num=${list.cart_rest_num}&cart_rest_subject=${list.cart_rest_subject}&cart_restopt_subject=${list.cart_restopt_subject}" ><span class="glyphicon glyphicon-plus-sign"></span></a>
 					<a href="/emenu/minusAmount.do?cart_rest_num=${list.cart_rest_num}&cart_rest_subject=${list.cart_rest_subject}&cart_restopt_subject=${list.cart_restopt_subject}" ><span class="glyphicon glyphicon-minus-sign"></span></a><br />
 					<input type="hidden" name="cart_amount" value="${list.cart_amount}" />
