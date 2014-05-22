@@ -46,10 +46,8 @@ public class UpdateReview
     public String updateReview(@ModelAttribute("reviewDTO")
     ReviewDTO reviewDTO, MultipartHttpServletRequest request) throws Exception
     {
-      
         // 첨부파일 이외의 값들 DB update
         sqlMapper.update("Review.updateReview", reviewDTO);
-        
         review_files = request.getFiles("review_files");
         
         // 새로운 첨부한 파일이 있는 경우, 기존 첨부파일을 삭제하고 새 첨부파일을 서버에 저장한다

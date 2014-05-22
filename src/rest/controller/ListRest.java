@@ -34,6 +34,7 @@ public class ListRest {
 	private RestDTO resultClass = new RestDTO();
 	private int permission; // 판매자가 글 작성여부 판단
 	private int rest_num; // 글 읽기시 필요 변수
+	private String currentCategory;
 	
 	//옵션관련
 	private List<RestOptDTO> list1 = new ArrayList<RestOptDTO>();
@@ -41,7 +42,6 @@ public class ListRest {
 	//후기관련
 	private List<ReviewDTO> reviewRes = new ArrayList<ReviewDTO>();
 	private String reviewFile_Path = (Constants.COMMON_FILE_PATH+ Constants.REVIEW_FILE_PATH).replace("\\", "/").substring(26); 
-	        
 	       
 	//페이지관련
 	private int totalCount;// 총 게시물의 수
@@ -65,7 +65,6 @@ public class ListRest {
 		sqlMapper = SqlMapClientBuilder.buildSqlMapClient(reader);
 		reader.close();
 	}
-
 	
 	//listRest.do
 	@RequestMapping("/listRest.do")
@@ -76,16 +75,45 @@ public class ListRest {
 		//카테고리별 분기
 		if(rest_localcategory==null&&rest_typecategory==null){
 			list = sqlMapper.queryForList("Rest.selectAll");
+			currentCategory = "전체 상품";
 		}else if(rest_localcategory.equals("1")&&rest_typecategory.equals("1")){//지역카테고리 전체글
 			list = sqlMapper.queryForList("Rest.selectLocalAll");
+			currentCategory = "지역 상품";
 		}else if(rest_localcategory.equals("2")&&rest_typecategory.equals("2")){//종류카테고리 전체글
 			list = sqlMapper.queryForList("Rest.selectTypeAll");
+			currentCategory = "종류 상품";
 		}else if(rest_typecategory.equals("0")){//지역카테고리에 속하면
 			paramClass.setRest_localcategory(rest_localcategory);
 			list = sqlMapper.queryForList("Rest.selectLocal", paramClass);
+			if(rest_localcategory.equals("11")){
+				currentCategory = "서울 지역 상품";
+			}else if(rest_localcategory.equals("12")){
+				currentCategory = "경기/인천 상품";
+			}else if(rest_localcategory.equals("13")){
+				currentCategory = "부산/경남 상품";
+			}else if(rest_localcategory.equals("14")){
+				currentCategory = "대구/경북 상품";
+			}else if(rest_localcategory.equals("15")){
+				currentCategory = "대전/전북 상품";
+			}else if(rest_localcategory.equals("16")){
+				currentCategory = "광주/전남 상품";
+			}else if(rest_localcategory.equals("17")){
+				currentCategory = "그외 지역 상품";
+			}
 		}else  if(rest_localcategory.equals("0")){//종류카테고리에 속하면
 			paramClass.setRest_typecategory(rest_typecategory);
 			list = sqlMapper.queryForList("Rest.selectType", paramClass);
+			if(rest_typecategory.equals("21")){
+				currentCategory = "한식 상품";
+			}else if(rest_typecategory.equals("22")){
+				currentCategory = "양식 상품";
+			}else if(rest_typecategory.equals("23")){
+				currentCategory = "중식 상품";
+			}else if(rest_typecategory.equals("24")){
+				currentCategory = "일식 상품";
+			}else if(rest_typecategory.equals("25")){
+				currentCategory = "기타 상품";
+			}
 		}
 		
 		//페이지관련
@@ -123,13 +151,11 @@ public class ListRest {
 		request.setAttribute("pagingHtml", pagingHtml);
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("permission", permission);
+		request.setAttribute("currentCategory", currentCategory);
 		request.setAttribute("list", list);
 		
 		return "/view/rest/listRest.jsp";
 	}
-	
-	
-	
 	
 	//readRest.do
 	@RequestMapping("/readRest.do")
@@ -140,60 +166,46 @@ public class ListRest {
 		}else{
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-		
 		//글 조회수 +1
 		paramClass.setRest_num(rest_num);
 		sqlMapper.update("Rest.updateRest_readcount", paramClass);
-		
 		//해당글번호의 레코드를 가져옴(상품테이블, 옵션테이블)
 		resultClass = (RestDTO)sqlMapper.queryForObject("Rest.selectRestOne", rest_num);
-		
 		//옵션 get
 		list1 = (List<RestOptDTO>) sqlMapper.queryForList("Rest.selectRestoptOne", rest_num);
-		
 		//후기리스트
-                reviewRes = sqlMapper.queryForList("Review.selectReviewList", rest_num);
-                
-                
-                // 후기 페이징 관련 
-                if(request.getParameter("ccp") == null) 
-                {
-                    ccp = 1; // 현재 페이지
-                } 
-                else 
-                {
-                    ccp = Integer.parseInt(request.getParameter("ccp"));
-                }
-                
-                blockCount = 5; // 한 페이지의 게시물의 수
-                blockPage = 5; // 한 화면에 보여줄 페이지 수
-                actionName = "readRest"; // 페이징액션과 로그인액션에서 쓰인다...
-                totalCount = reviewRes.size();
-                
-                
-                page = new PagingAction(actionName, ccp, totalCount, blockCount, blockPage, rest_num, currentPage);
-                pagingHtml = page.getPagingHtml().toString();
+        reviewRes = sqlMapper.queryForList("Review.selectReviewList", rest_num);
+        // 후기 페이징 관련 
+        if(request.getParameter("ccp") == null) {
+            ccp = 1; // 현재 페이지
+        }else{
+            ccp = Integer.parseInt(request.getParameter("ccp"));
+        }
+        blockCount = 5; // 한 페이지의 게시물의 수
+        blockPage = 5; // 한 화면에 보여줄 페이지 수
+        actionName = "readRest"; // 페이징액션과 로그인액션에서 쓰인다...
+        totalCount = reviewRes.size();
+        page = new PagingAction(actionName, ccp, totalCount, blockCount, blockPage, rest_num, currentPage);
+        pagingHtml = page.getPagingHtml().toString();
             
-            // 현재 페이지에서 보여줄 마지막 글의 번호 설정
-            int lastCount = totalCount;
-    
-            // 현재 페이지의 마지막 글의 번호가 전체의 마지막 글 번호보다 작으면 lastCount를 +1 번호로 설정.
-            if (page.getEndCount() < totalCount)
-                lastCount = page.getEndCount() + 1;
-    
-            // 전체 리스트에서 현재 페이지만큼의 리스트만 가져온다.
-            reviewRes = reviewRes.subList(page.getStartCount(), lastCount);
-    				
-            request.setAttribute("resultClass", resultClass); //상품
-            request.setAttribute("list1", list1); // 옵션
-            request.setAttribute("reviewRes", reviewRes); // 리뷰
-            request.setAttribute("reviewFile_Path", reviewFile_Path); // 리뷰 이미지파일 경로
-            request.setAttribute("rest_num", rest_num);
-            request.setAttribute("currentPage", currentPage);
-            request.setAttribute("ccp", ccp);
-            request.setAttribute("pagingHtml", pagingHtml);
+        // 현재 페이지에서 보여줄 마지막 글의 번호 설정
+        int lastCount = totalCount;
+
+        // 현재 페이지의 마지막 글의 번호가 전체의 마지막 글 번호보다 작으면 lastCount를 +1 번호로 설정.
+        if (page.getEndCount() < totalCount)
+            lastCount = page.getEndCount() + 1;
+        // 전체 리스트에서 현재 페이지만큼의 리스트만 가져온다.
+        reviewRes = reviewRes.subList(page.getStartCount(), lastCount);
+				
+        request.setAttribute("resultClass", resultClass); //상품
+        request.setAttribute("list1", list1); // 옵션
+        request.setAttribute("reviewRes", reviewRes); // 리뷰
+        request.setAttribute("reviewFile_Path", reviewFile_Path); // 리뷰 이미지파일 경로
+        request.setAttribute("rest_num", rest_num);
+        request.setAttribute("currentPage", currentPage);
+        request.setAttribute("ccp", ccp);
+        request.setAttribute("pagingHtml", pagingHtml);
             
 		return "/view/rest/readRest.jsp";
 	}
-	
 }

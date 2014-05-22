@@ -59,8 +59,11 @@ public class InsertCart {
 		paramClass.setCart_restopt_priceplus(cart_restopt_priceplus);
 		paramClass.setSession_id(session_id);
 		
-		//장바구니 데이터 insert
+		//새로운옵션일경우 장바구니 데이터 insert
 		sqlMapper.insert("Cart.insertCart", paramClass);
+		//옵션중복시에 장바구니 데이터 수량만 update
+		
+		
 		//장바구니 레코드를 가져옴
 		list = sqlMapper.queryForList("Cart.selectCartAll", paramClass);
 		
