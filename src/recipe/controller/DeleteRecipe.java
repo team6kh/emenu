@@ -43,11 +43,12 @@ public class DeleteRecipe {
 	
 	//deleteRecipe.do
 		@RequestMapping(value="/deleteRecipe.do")
-		public String deleteRecipe(HttpServletRequest request, HttpServletResponse response, HttpSession session, @ModelAttribute("RecipeDTO") recipe.dto.RecipeDTO dto) throws Exception{
+		public String deleteRecipe(HttpServletRequest request, HttpServletResponse response, HttpSession session, @ModelAttribute("RecipeDTO") RecipeDTO dto) throws Exception{
 									//파라미터 request				//파라미터 response			 //세션용							//파라미터 DTO로 자동 set(), get()
+			
 			int Recipe_num = Integer.parseInt(request.getParameter("recipe_num"));
 			// 해당 번호의 글을 가져온다.
-			resultClass = (recipe.dto.RecipeDTO) sqlMapper.queryForObject("Recipe.selectOne", Recipe_num);
+			resultClass = (RecipeDTO) sqlMapper.queryForObject("Recipe.selectOne", Recipe_num);
 
 			// 삭제할 항목 설정.
 			paramClass.setRecipe_num(Recipe_num);

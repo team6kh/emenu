@@ -40,7 +40,7 @@
 				<tr>
 					<td width="100">비밀번호 입력</td>
 					<td width="150">
-						&nbsp;&nbsp;<input name="recipe_password" maxlength="20" />
+						&nbsp;&nbsp;<input type="password" name="recipe_password" maxlength="20" />
 						&nbsp;&nbsp;<input name="submit" type="submit" value="확인"/>
 					</td>
 				</tr>
