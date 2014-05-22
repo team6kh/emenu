@@ -93,6 +93,11 @@ public class ListCart {
 
 			list = list.subList(page.getStartCount(), lastCount);
 
+			int rest_num = list.get(0).getCart_rest_num();
+			String rest_subject =  list.get(0).getCart_rest_subject();
+			
+			request.setAttribute("rest_num", rest_num);
+			request.setAttribute("rest_subject", rest_subject);
 			request.setAttribute("list", list);
 			request.setAttribute("pagingHtml", pagingHtml);
 			request.setAttribute("currentPage", currentPage);

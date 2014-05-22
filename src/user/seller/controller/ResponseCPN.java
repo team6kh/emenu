@@ -31,7 +31,6 @@ public class ResponseCPN
     @RequestMapping("/user/responseCPN.do")
     public String responseCPN(HttpServletRequest request, @RequestParam(value="requestPaid_num", required=false) int[] reqPaid) throws Exception
     {
-        
         for(int i=0; i< reqPaid.length; i++) {
             sqlMapper.update("Paid.updateResponseCpn", reqPaid[i]);
         }
