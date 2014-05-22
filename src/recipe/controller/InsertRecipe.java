@@ -56,7 +56,7 @@ public class InsertRecipe {
 			// 등록 쿼리 수행.
 			sqlMapper.insert("Recipe.insertRecipe", paramClass);
 			
-			return "listRecipe.do";
+			return "redirect:/listRecipe.do";
 
 
 		}

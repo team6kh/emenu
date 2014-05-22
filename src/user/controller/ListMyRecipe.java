@@ -18,12 +18,14 @@ import recipe.dto.RecipeDTO;
 import com.ibatis.common.resources.Resources;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.ibatis.sqlmap.client.SqlMapClientBuilder;
+
 import common.PagingAction;
 
 @Controller
 public class ListMyRecipe {
 	//내글관련
 	private List<RecipeDTO> list = new ArrayList<RecipeDTO>();
+	private recipe.dto.RecipeDTO paramClass = new recipe.dto.RecipeDTO();
 	private int totalCount;
 	private String pagingHtml; 
 	private PagingAction page; 
@@ -54,9 +56,42 @@ public class ListMyRecipe {
 		int blockCount = 10; 
 		int blockPage = 5;
 		String actionName = "listMyRecipe";
-		
+		if(request.getParameter("currentPage")==null){
+			currentPage=1;
+		}else{
+			currentPage=Integer.parseInt(request.getParameter("currentPage"));
+		}
 		page = new PagingAction(actionName, currentPage, totalCount, blockCount, blockPage, session_id); // PagingAction 객체 생성
 		pagingHtml = page.getPagingHtml().toString(); // 페이지 HTML 생성.
+		
+		//이미지 추가
+		String[] imgPath = new String[list.size()];
+
+		for(int i = 0; i<list.size(); i++){
+			String content = list.get(i).getRecipe_content();
+			int isInclude =content.indexOf("src=");
+
+			if(isInclude>-1){
+				int temp1 = content.indexOf("src=");
+				int temp2 = content.indexOf("\">");
+				int start = temp1+5;
+				int end = temp2;
+
+				imgPath[i] = content.substring(start, end);
+				//update
+				paramClass.setRecipe_num(list.get(i).getRecipe_num());
+				paramClass.setRecipe_file(imgPath[i]);
+				sqlMapper.update("Recipe.updateFile", paramClass);
+			}else{
+				imgPath[i] = "no Image in content";
+				//update
+				paramClass.setRecipe_num(list.get(i).getRecipe_num());
+				paramClass.setRecipe_file(imgPath[i]);
+				sqlMapper.update("Recipe.updateFile", paramClass);
+			}
+		}
+		//
+
 
 		// 현재 페이지에서 보여줄 마지막 글의 번호 설정.
 		int lastCount = totalCount;
@@ -69,6 +104,8 @@ public class ListMyRecipe {
 		list = list.subList(page.getStartCount(), lastCount);
 
 		request.setAttribute("list", list);
+		request.setAttribute("pagingHtml", pagingHtml);
+		request.setAttribute("currentPage", currentPage);
 
 		return "/view/user/listMyRecipe.jsp";
 	}

@@ -43,7 +43,6 @@ public class SearchRecipe {
     private common.PagingAction page;  //페이징 클래스
     
     private String actionName = "searchRecipe" ; //페이지 액션과 로그인 액션에서 쓰인다.
-    private String myListactionName = "listMyRecipe" ;
     private String session_id;
 
     private int recipe_timeinput1;
@@ -132,76 +131,6 @@ public class SearchRecipe {
 	        return "/view/recipe/listRecipe.jsp";
 		}
 		
-		//myrecipe_search.do
-		@RequestMapping(value="/myrecipe_search.do")
-		public String myrecipe_search(HttpServletRequest request, HttpSession session) throws Exception{
-										//파라미터 request			 //세션용				
-			String recipe_foodkind=request.getParameter("recipe_foodkind");
-			String recipe_writerinput=request.getParameter("recipe_writerinput");
-			String recipe_foodnameinput=request.getParameter("recipe_foodnameinput");
-			String recipe_subjectinput=request.getParameter("recipe_subjectinput");
-			
-			if(request.getParameter("recipe_timeinput1") ==""){
-				recipe_timeinput1=0;
-			}else{
-				recipe_timeinput1=Integer.parseInt(request.getParameter("recipe_timeinput1"));
-			}
-			
-			if(request.getParameter("recipe_timeinput2") ==""){
-				recipe_timeinput2=10000;
-			}else{
-				recipe_timeinput2=Integer.parseInt(request.getParameter("recipe_timeinput2"));
-			}
-			
-			if(request.getParameter("recipe_priceinput1") ==""){
-				recipe_priceinput1=0;
-			}else{
-				recipe_priceinput1=Integer.parseInt(request.getParameter("recipe_priceinput1"));
-			}
-			
-			if(request.getParameter("recipe_priceinput2") ==""){
-				recipe_priceinput2=10000;
-			}else{
-				recipe_priceinput1=Integer.parseInt(request.getParameter("recipe_priceinput2"));
-			}
-			
-			paramClass.setRecipe_foodkind(recipe_foodkind);
-			paramClass.setRecipe_writerinput(recipe_writerinput);
-			paramClass.setRecipe_foodnameinput(recipe_foodnameinput);
-			paramClass.setRecipe_subjectinput(recipe_subjectinput);
-			paramClass.setRecipe_timeinput1(recipe_timeinput1);
-			paramClass.setRecipe_timeinput2(recipe_timeinput2);
-			paramClass.setRecipe_priceinput1(recipe_priceinput1);
-			paramClass.setRecipe_priceinput2(recipe_priceinput2);
-			
-			
-			if(paramClass.getRecipe_priceinput1()==0 && paramClass.getRecipe_priceinput2()==0 && paramClass.getRecipe_timeinput1()==0 && paramClass.getRecipe_timeinput2()==0){
-	         	list = sqlMapper.queryForList("Recipe.detailSearchRecipeEmpty", paramClass);
-	         }else if(paramClass.getRecipe_timeinput1()==0 && paramClass.getRecipe_timeinput2()==0){
-	         	list = sqlMapper.queryForList("Recipe.detailSearchRecipePrice", paramClass);
-	         }else if(paramClass.getRecipe_priceinput1()==0 && paramClass.getRecipe_priceinput2()==0){
-	         	list = sqlMapper.queryForList("Recipe.detailSearchRecipeTime", paramClass);
-	         }else{//모두 기입했을때
-	         	list = sqlMapper.queryForList("Recipe.detailSearchRecipeAll", paramClass);
-	         }
-	         
-	         totalCount = list.size(); //전체 글 갯수를 구한다.
-	         page = new PagingAction(myListactionName, currentPage, totalCount, blockCount, blockPage, session_id); //PagingAction 객체 생성
-	         pagingHtml = page.getPagingHtml().toString();  //페이지 HTML 생성.
-	         
-	         // 현재 페이지에서 보여줄 마지막 글의 번호 설정.
-	                 int lastCount = totalCount;
-
-	                 // 현재 페이지의 마지막 글의 번호가 전체의 마지막 글 번호보다 작으면 lastCount를 +1 번호로 설정.
-	                 if (page.getEndCount() < totalCount)
-	                     lastCount = page.getEndCount() + 1;
-
-	                 // 전체 리스트에서 현재 페이지만큼의 리스트만 가져온다.
-	                 list = list.subList(page.getStartCount(), lastCount);
-	                 request.setAttribute("list", list);
-	                 request.setAttribute("pagingHtml", pagingHtml);
-	                 request.setAttribute("lastCount", lastCount);
-
-			return "/view/user/listMyRecipe.jsp";
-		}		
-}
+		
+		
+		}
