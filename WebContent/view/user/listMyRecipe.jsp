@@ -90,13 +90,12 @@
 			<!-- sidebar -->
 			<div class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
-					<li><a
-						href="/emenu/user/get.do?user_type=${session_type}&user_id=${session_id}">회원정보</a></li>
+					<li><a href="/emenu/user/get.do?user_type=${session_type}&user_id=${session_id}">회원정보</a></li>
 					<!-- 구매자일시 -->
-					<li><a
-						href="/emenu/user/buyer/dashboard.do?session_id=${session_id}">구매목록</a></li>
+					<li><a href="/emenu/user/buyer/dashboard.do?session_id=${session_id}">구매목록</a></li>
 					<!-- 판매자일시 미구현 -->
 					<!-- <li><a href="dashSeller.action?session_id=${session_id}">판매목록</a></li> -->
+					<li><a href="/emenu/cartboard.do">장바구니</a></li>
 					<li class="active"><a href="listMyRecipe.do">마이 레시피</a></li>
 					<li><a
 						href="/emenu/user/listMyQna.do?session_id=${session_id}">마이

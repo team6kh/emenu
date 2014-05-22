@@ -82,11 +82,18 @@ public class UpdateCart {
 		
 		//해당 리스트의 레코드를 get함
 		list = sqlMapper.queryForList("Cart.getAmount", paramClass);
-		//	cart_rest_num, cart_restopt_subject , session_id
 		
-		paramClass.setCart_amount(list.get(0).getCart_amount());
+		
+		
 		//옵션중복시에 장바구니 데이터 수량만 update
-		sqlMapper.update("Cart.minusAmount", paramClass);
+		int amount = list.get(0).getCart_amount(); //현재 레코드의 수량이 뭔지 알아봄.
+		if(amount == 1){ //수량이 0일 경우
+			paramClass.setCart_amount(2);
+			sqlMapper.update("Cart.minusAmount", paramClass);
+		}else{ // 0이 아닌 다른 숫자일 경우
+			paramClass.setCart_amount(amount);
+			sqlMapper.update("Cart.minusAmount", paramClass);
+		}
 		
 		return "redirect:listCart.do?rest_num="+cart_rest_num+"&rest_subject="+cart_rest_subject;
 	}
