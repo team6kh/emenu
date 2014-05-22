@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%-- <%@ page isELIgnored="false" %> --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,6 +47,25 @@
 	position: absolute;
 	bottom: -100px;
 }
+
+.grayscale {
+	filter: url(/emenu/view/common/filters.svg#grayscale);
+	/* Firefox 3.5+ */
+	filter: gray; /* IE6-9 */
+	-webkit-filter: grayscale(1);
+	/* Google Chrome, Safari 6+ & Opera 15+ */
+}
+
+.grayscale:hover {
+	filter: none;
+	-webkit-filter: grayscale(0);
+}
+
+.filter {
+	padding: 5px;
+	border: 5px solid #b6991c;
+	background-color: #debb27;
+}
 </style>
 
 </head>
@@ -60,16 +79,42 @@
 		<div class="home-template">
 		
 			<!-- masonry -->
-			<ul class="grid effect-2" id="grid">
-			<c:forEach var="listRestOpt" items="${listRestOpt}">
+			<ul class="grid effect-2" id="grid">				
+				<c:if test="${listCart ne null}">
+					<!-- 장바구니 image -->
+					<li>
+						<div class="masonry">
+							<a href="/emenu/cartboard.do">
+							<img src="/emenu/assets/img/common/home_cart.png" alt="N/A"></a>
+						</div>
+					</li>
+					<!-- end 장바구니 image-->
+					<c:forEach var="listCart" items="${listCart}">
+						<li>
+							<div class="masonry">
+								<a href="/emenu/readRest.do?rest_num=${listCart.cart_rest_num}">
+								<img class="filter" src="/emenu/${listCart.cart_restopt_destFile1}" alt="N/A"></a>
+							</div>
+						</li>
+					</c:forEach>					
+				</c:if>
+				<!-- randomMenu image -->
 				<li>
 					<div class="masonry">
-						<a href="/emenu/readRest.do?rest_num=${listRestOpt.restopt_rest_num}">
-						<img src="${listRestOpt.restopt_destFile1}" alt="N/A"></a>
-						<div class='hoverdetail'>${listRestOpt.restopt_subject}</div>
+						<a href="/emenu/home.do">
+						<img src="/emenu/assets/img/common/home_random_menu.png" alt="N/A"></a>
 					</div>
 				</li>
-			</c:forEach>	
+				<!-- end randomMenu image-->
+				<c:forEach var="listRestOpt" items="${listRestOpt}">
+					<li>
+						<div class="masonry">
+							<a href="/emenu/readRest.do?rest_num=${listRestOpt.restopt_rest_num}">
+							<img src="${listRestOpt.restopt_destFile1}" alt="N/A"></a>
+							<div class='hoverdetail'>${listRestOpt.restopt_subject}</div>
+						</div>
+					</li>
+				</c:forEach>	
 			</ul>			
 			<!-- /.masonry -->
 			

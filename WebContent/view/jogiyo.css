@@ -35,6 +35,35 @@ body {
 	border-color: #398439;
 }
 
+.btn-warning {
+	color: #ffffff;
+	background-color: #debb27;
+	border-color: #debb27
+}
+
+.btn-warning:hover,.btn-warning:focus,.btn-warning:active,.btn-warning.active,.open .dropdown-toggle.btn-warning
+	{
+	color: #ffffff;
+	background-color: #bfa01d;
+	border-color: #ad911a
+}
+
+.btn-warning:active,.btn-warning.active,.open .dropdown-toggle.btn-warning
+	{
+	background-image: none
+}
+
+.btn-warning.disabled,.btn-warning[disabled],fieldset[disabled] .btn-warning,.btn-warning.disabled:hover,.btn-warning[disabled]:hover,fieldset[disabled] .btn-warning:hover,.btn-warning.disabled:focus,.btn-warning[disabled]:focus,fieldset[disabled] .btn-warning:focus,.btn-warning.disabled:active,.btn-warning[disabled]:active,fieldset[disabled] .btn-warning:active,.btn-warning.disabled.active,.btn-warning[disabled].active,fieldset[disabled] .btn-warning.active
+	{
+	background-color: #debb27;
+	border-color: #debb27
+}
+
+.btn-warning .badge {
+	color: #debb27;
+	background-color: #ffffff
+}
+
 .pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus {
 	color: #fff;
 	background-color: #5cb85c;
