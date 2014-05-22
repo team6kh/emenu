@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC '-//ibatis.apache.org//DTD Sql Map 2.0//EN' 'http://ibatis.apache.org/dtd/sql-map-2.dtd'>
+
+<sqlMap namespace="Claim">
+
+    <typeAlias alias="claimDTO" type="claim.dto.ClaimDTO"/>
+    
+    <resultMap id="claimRes" class="claimDTO" >
+        <result property="claim_num" column="claim_num"/>
+        <result property="board_name" column="board_name"/>
+        <result property="article_num" column="article_num"/>
+        <result property="article_writer" column="article_writer"/>
+        <result property="article_viewUrl" column="article_viewUrl"/>
+        <result property="claimer" column="claimer"/>
+        <result property="claim_category" column="claim_category"/>
+        <result property="claim_reason" column="claim_reason"/>
+        <result property="article_delUrl" column="article_delUrl"/>
+        <result property="claim_reg_date" column="claim_reg_date"/>
+        <result property="claim_result" column="claim_result"/>
+    </resultMap>
+
+    <!-- 공통사용절 정의 -->
+    
+
+    <!-- insert -->
+    <insert id="insertClaim" parameterClass="claimDTO">
+        INSERT INTO claim_board
+            (claim_num,
+             board_name,
+             article_num,
+             article_writer,
+             article_viewUrl,
+             claimer,
+             claim_category,
+             claim_reason,
+             article_delUrl,
+             claim_reg_date
+            )
+        VALUES
+            (claim_seq.NextVal,
+            #board_name#,
+            #article_num#,
+            #article_writer#,
+            #article_viewUrl#,
+            #claimer#,
+            #claim_category#,
+            #claim_reason#,
+            #article_delUrl#,
+            sysdate
+            )
+    </insert>
+</sqlMap>

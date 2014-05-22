@@ -62,7 +62,7 @@ public class UpdateReview
             
             // DB에서 해당 글을 가져옴
             reviewDTO = (ReviewDTO) sqlMapper
-                    .queryForObject("Review.selectReviewOne", reviewDTO);
+                    .queryForObject("Review.selectReviewOne", reviewDTO.getReview_num());
             
             // 이전에 업로드된 첨부파일이 있는 경우에 서버에서 삭제
             if (reviewDTO.getReview_file() != null)

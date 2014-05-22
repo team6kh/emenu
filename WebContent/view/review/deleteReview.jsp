@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%-- <%@ page isELIgnored="false" %> --%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib prefix="s" uri="/struts-tags"%>
+
 
 
 <!DOCTYPE html>
@@ -14,7 +14,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="shortcut icon" href="assets/ico/jogiyo.png">
+<link rel="shortcut icon" href="/emenu/assets/ico/jogiyo.png">
+
+<!-- Bootstrap core CSS -->
+<link href="/emenu/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="/emenu/view/jogiyo.css" rel="stylesheet">
+<link href="/emenu/view/common/common-template.css" rel="stylesheet">
+<link href="/emenu/view/user/dashboard.css" rel="stylesheet">
 
 <title>eMenu</title>
 </head>
@@ -38,8 +46,8 @@
 			<tr>
 				<td align="center">
 					<br/>
-					<input type="submit" value="확 인" /> 
-					<input type="button" value="취 소" onclick="javascript:self.close()"> <!-- 파라메터 -->
+                    <button type="submit" class="btn btn-danger">확 인</button>
+                    <button type="button"class="btn btn-default" onclick="javascript:self.close()">취 소</button>
 				</td>
 			</tr>
 		</table>
@@ -57,5 +65,10 @@
 		}
 	</script>
 
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="/emenu/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
