@@ -57,7 +57,7 @@ public class CheckEv {
 		
 		if (evDTO != null) {
 			
-			System.out.println("evDTO not null");
+			//System.out.println("evDTO not null");
 			
 			if (user_type.equals("buyer")) {
 				BuyerDTO buyerDTO = new BuyerDTO();

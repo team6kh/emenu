@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%-- <%@ page isELIgnored="false" %> --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -113,16 +114,16 @@
                     </c:url>
 
                     <tr>
-                        <td>${list.recipe_num}</td>
-                        <td>${list.recipe_foodkind}</td>
-                        <td><a href=${viewURL}>${list.recipe_subject}</a></td>
-                        <td>${list.recipe_foodsubject}</td>
-                        <td>${list.recipe_writer}</td>
-                        <td>${list.recipe_reg_date}</td>
-                        <td>${list.recipe_time}&nbsp;분</td>
-                        <td>${list.recipe_price}&nbsp;원</td>
-                        <td>${list.recipe_readcount}</td>
-                        <td>${list.recipe_recommend}</td>
+                        <td align ="center">${list.recipe_num}</td>
+                        <td align ="center">${list.recipe_foodkind}</td>
+                        <td align ="left"><a href=${viewURL}><img src="${list.recipe_file}" width="130" height="80" />${list.recipe_subject}</a></td>
+                        <td align ="center">${list.recipe_foodsubject}</td>
+                        <td align ="center">${list.recipe_writer}</td>
+                        <td align ="center"><fmt:formatDate value="${list.recipe_reg_date}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                        <td align ="center">${list.recipe_time}&nbsp;분</td>
+                        <td align ="center">${list.recipe_price}&nbsp;원</td>
+                        <td align ="center">${list.recipe_readcount}</td>
+                        <td align ="center">${list.recipe_recommend}</td>
                     </tr>
 
                 </c:forEach>
@@ -162,8 +163,8 @@
                 </select>
                 <!-- /.검색[선택] -->
                 <!-- 내가 쓴 글 -->
-                <c:if test="session_id != null">
-                    <input name="mylist" type="button" class="btn btn-default" value="마이 레시피"   onClick="javascript:location.href='listMyRecipe.do?session_id=${session_id}';">
+                <c:if test="${session_id != null}">
+                    <input name="mylist" type="button" class="btn btn-default" value="마이 레시피"   onClick="javascript:location.href='/emenu/user/listMyRecipe.do?session_id=${session_id}';">
                 </c:if>
                 <!-- /.내가 쓴 글 -->
                 <input type="button" class="btn btn-primary" value="글쓰기" onClick="javascript:location.href='insertRecipeForm.do?currentPage=${currentPage}';">
@@ -217,6 +218,7 @@
                             <input type="reset" class="btn btn-default" value="초기화" />
                             &nbsp;<input type="submit" class="btn btn-primary" value="검색"></td>
                         </tr>
+                        
                     </table>
                 </div>
             </div>

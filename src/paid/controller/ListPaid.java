@@ -79,7 +79,7 @@ public class ListPaid {
 		pay_pricetotal = 0;
 		for(int i=0; i<list.size(); i++){
 			pay_restopt_subject += list.get(i).getCart_restopt_subject()+", ";
-			pay_pricetotal += list.get(i).getCart_restopt_priceplus();
+			pay_pricetotal += list.get(i).getCart_restopt_priceplus() * list.get(i).getCart_amount(); //가격 * 수량 값을 pricetotal에 누적
 		}
 		
 		//회원정보

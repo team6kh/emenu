@@ -183,7 +183,7 @@
                                     <td>${cpnDTO.paid_restopt_priceplus }</td>
                                     <td>${cpnDTO.paid_cpn }</td>
                                     <td>${cpnDTO.session_id }</td>
-                                    <td><fmt:formatDate value="${cpnDTO.paid_reg_date }" pattern="yyyy-MM-dd hh:mm:ss" /></td>
+                                    <td><fmt:formatDate value="${cpnDTO.paid_reg_date}" pattern="yyyy-MM-dd hh:mm:ss" /></td>
                                  </tr> 
                             </c:forEach>
                         </table>

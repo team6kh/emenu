@@ -38,8 +38,8 @@ public class InsertEv {
 		String ev_requested = (String) request.getAttribute("ev_requested");
 		String ev_code = (String) request.getAttribute("ev_code");
 		
-		System.out.println("ev_requested:"+ev_requested);
-		System.out.println("ev_code:"+ev_code);
+		//System.out.println("ev_requested:"+ev_requested);
+		//System.out.println("ev_code:"+ev_code);
 		
 		evDTO.setEv_requested(ev_requested);
 		evDTO.setEv_code(ev_code);

@@ -68,6 +68,30 @@
 	function recipe_pricearray() {
 		document.location.href = 'priceRecipeDesc.action';
 	}
+	
+	var checkobj
+
+	function agreesubmit(el) {
+		checkobj = el
+		if (document.all || document.getElementById) {
+			for (i = 0; i < checkobj.form.length; i++) {
+				var tempobj = checkobj.form.elements[i]
+				if (tempobj.type.toLowerCase() == "submit")
+					tempobj.disabled = !checkobj.checked
+			}
+		}
+	}
+
+	function defaultagree(el) {
+		if (!document.all && !document.getElementById) {
+			if (window.checkobj && checkobj.checked)
+				return true
+			else {
+				alert("구매하실 물품을 체크하세요!")
+				return false
+			}
+		}
+	}
 </script>
 <!-- 스크립트 끝 -->
 
@@ -108,40 +132,52 @@
 						<h3>마이 카트</h3>
 					</div>
 					<!-- /.게시판 윗부분 -->
-		
+
 					<!-- 게시판 바디 -->
-					<div class="col-md-12">
-						<table class="table">
-							<tr align="center" bgcolor="">
-								<td><strong>상품번호</strong></td>
-								<td><strong>상호명</strong></td>
-								<td><strong>옵션사진</strong></td>
-								<td><strong>옵션명</strong></td>
-								<td><strong>가격</strong></td>
-							</tr>
+					 <form method="post" action="/emenu/payment.do" >
+						<div class="col-md-12">
+							<table class="table">
+								<tr align="center" bgcolor="">
+									<td></td>
+									<td><strong>상품번호</strong></td>
+									<td><strong>상호명</strong></td>
+									<td><strong>옵션사진</strong></td>
+									<td><strong>옵션명</strong></td>
+									<td><strong>가격</strong></td>
+									<td><strong>수량</strong></td>
+								</tr>
 	
-							<c:forEach var="list" items="${list}" >
-								<tr bgcolor="#FFFFFF" align="center">
-									<td align="center">${list.cart_rest_num}</td>
-									<td align="center"><a href="http://localhost:8000/emenu/readRest.do?rest_num=${list.cart_rest_num}">${list.cart_rest_subject}</a></td>
-									<td align="center"><a href="http://localhost:8000/emenu/readRest.do?rest_num=${list.cart_rest_num}"><img src="/emenu/${list.cart_restopt_destFile1}" alt="N/A" class="img-responsive" style="min-height:40px;height:40px;"></a></td>
-									<td align="center"><a href="http://localhost:8000/emenu/readRest.do?rest_num=${list.cart_rest_num}">${list.cart_restopt_subject}</a></td>
-									<td align="center">${list.cart_restopt_priceplus}</td>
-								</tr>
-							</c:forEach>
+								<c:forEach var="list" items="${list}" >
+									<tr bgcolor="#FFFFFF" align="center">
+										<td><input type="checkbox" name="requestCart_num" value="${list.cart_num}" onClick="agreesubmit(this)" /></td>
+										<td align="center">${list.cart_rest_num}</td>
+										<td align="center"><a href="/emenu/readRest.do?rest_num=${list.cart_rest_num}">${list.cart_rest_subject}</a></td>
+										<td align="center"><a href="/emenu/readRest.do?rest_num=${list.cart_rest_num}"><img src="/emenu/${list.cart_restopt_destFile1}" alt="N/A" class="img-responsive" style="min-height:40px;height:40px;"></a></td>
+										<td align="center"><a href="/emenu/readRest.do?rest_num=${list.cart_rest_num}">${list.cart_restopt_subject}</a></td>
+										<td align="center">${list.cart_restopt_priceplus}</td>
+										<td align="center">${list.cart_amount}</td>
+									</tr>
+								</c:forEach>
 	
-							<c:if test="list.size() <= 0">
-								<tr bgcolor="#FFFFFF" align="center">
-									<td colspan="10">장바구니에 담은 물품이 없습니다.</td>
-								</tr>
-								<tr bgcolor="#777777">
-									<td height="1" colspan="10"></td>
-								</tr>
-							</c:if>
-						</table>
-					</div>
+								<c:if test="list.size() <= 0">
+									<tr bgcolor="#FFFFFF" align="center">
+										<td colspan="10">장바구니에 담은 물품이 없습니다.</td>
+									</tr>
+									<tr bgcolor="#777777">
+										<td height="1" colspan="10"></td>
+									</tr>
+								</c:if>
+							</table>
+						</div>
+						
+						<div class="col-md-12 text-right">
+							<input type="hidden" name="rest_num" value="${rest_num}" />
+							<input type="hidden" name="rest_subject" value="${rest_subject}" />
+                    	    <button type="submit" class="btn btn-primary" disabled>결제하기</button>
+                  		 </div>
+					</form>
 					<!-- /.게시판 바디 -->
-		
+
 					<!-- 페이징 -->
 					<div class="text-center">
 						<ul class="pagination pagination-sm">

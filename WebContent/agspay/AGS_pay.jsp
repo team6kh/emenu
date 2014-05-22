@@ -339,10 +339,10 @@ function Display(form){
 					</tr>
 					
 					<tr>
-						<td align="center" width=100>
+						<td align="center" width=90>
 							<font size=3><b>상품번호</b></font>
 						</td>
-						<td align="center" width=120>
+						<td align="center" width=100>
 							<font size=3><b>상품이미지</b></font>
 						</td>
 						<td align="center" width=200>
@@ -350,6 +350,9 @@ function Display(form){
 						</td>
 						<td align="center" width=200>
 							<font size=3><b>상품옵션</b></font>
+						</td>
+						<td align="center" width=200>
+							<font size=3><b>상품개수</b></font>
 						</td>
 						<td align="center" width=150>
 							<font size=3><b>가격</b></font>
@@ -362,13 +365,16 @@ function Display(form){
 								<font size=2>${list.cart_rest_num}</font>
 							</td>
 							<td align="center">
-								<img src="/emenu/${list.cart_restopt_destFile1}" alt="N/A" class="img-responsive" style="min-height:30px;height:30px;"> 
+								<img src="/emenu/${list.cart_restopt_destFile1}" alt="N/A" class="img-responsive" style="min-height:35px;height:30px;"> 
 							</td>
 							<td align="center">
 								<font size=2>${list.cart_rest_subject}</font>
 							</td>
 							<td align="center">
 								<font size=2>${list.cart_restopt_subject}</font>
+							</td>
+							<td align="center">
+								<font size=2>${list.cart_amount}</font>
 							</td>
 							<td align="center">
 								<font size=2>${list.cart_restopt_priceplus}</font>
