@@ -118,6 +118,7 @@
 								<td><strong>옵션사진</strong></td>
 								<td><strong>옵션명</strong></td>
 								<td><strong>가격</strong></td>
+								<td><strong>수량</strong></td>
 							</tr>
 
 							<c:forEach var="list" items="${list}" >
@@ -127,6 +128,7 @@
 									<td align="center"><a href="/emenu/readRest.do?rest_num=${list.cart_rest_num}"><img src="/emenu/${list.cart_restopt_destFile1}" alt="N/A" class="img-responsive" style="min-height:40px;height:40px;"></a></td>
 									<td align="center"><a href="/emenu/readRest.do?rest_num=${list.cart_rest_num}">${list.cart_restopt_subject}</a></td>
 									<td align="center">${list.cart_restopt_priceplus}</td>
+									<td align="center">${list.cart_amount}</td>
 								</tr>
 							</c:forEach>
 
