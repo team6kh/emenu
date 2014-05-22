@@ -108,7 +108,7 @@
 						<h3>마이 카트</h3>
 					</div>
 					<!-- /.게시판 윗부분 -->
-		
+
 					<!-- 게시판 바디 -->
 					<div class="col-md-12">
 						<table class="table">
@@ -119,17 +119,17 @@
 								<td><strong>옵션명</strong></td>
 								<td><strong>가격</strong></td>
 							</tr>
-	
+
 							<c:forEach var="list" items="${list}" >
 								<tr bgcolor="#FFFFFF" align="center">
 									<td align="center">${list.cart_rest_num}</td>
-									<td align="center"><a href="http://localhost:8000/emenu/readRest.do?rest_num=${list.cart_rest_num}">${list.cart_rest_subject}</a></td>
-									<td align="center"><a href="http://localhost:8000/emenu/readRest.do?rest_num=${list.cart_rest_num}"><img src="/emenu/${list.cart_restopt_destFile1}" alt="N/A" class="img-responsive" style="min-height:40px;height:40px;"></a></td>
-									<td align="center"><a href="http://localhost:8000/emenu/readRest.do?rest_num=${list.cart_rest_num}">${list.cart_restopt_subject}</a></td>
+									<td align="center"><a href="/emenu/readRest.do?rest_num=${list.cart_rest_num}">${list.cart_rest_subject}</a></td>
+									<td align="center"><a href="/emenu/readRest.do?rest_num=${list.cart_rest_num}"><img src="/emenu/${list.cart_restopt_destFile1}" alt="N/A" class="img-responsive" style="min-height:40px;height:40px;"></a></td>
+									<td align="center"><a href="/emenu/readRest.do?rest_num=${list.cart_rest_num}">${list.cart_restopt_subject}</a></td>
 									<td align="center">${list.cart_restopt_priceplus}</td>
 								</tr>
 							</c:forEach>
-	
+
 							<c:if test="list.size() <= 0">
 								<tr bgcolor="#FFFFFF" align="center">
 									<td colspan="10">장바구니에 담은 물품이 없습니다.</td>
@@ -141,7 +141,7 @@
 						</table>
 					</div>
 					<!-- /.게시판 바디 -->
-		
+
 					<!-- 페이징 -->
 					<div class="text-center">
 						<ul class="pagination pagination-sm">

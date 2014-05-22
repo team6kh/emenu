@@ -10,6 +10,7 @@ public class CartDTO {
 	String cart_restopt_subject;
 	int cart_restopt_priceplus;
 	String session_id;
+	int cart_amount;
 
 	public int getCart_restopt_num() {
 		return cart_restopt_num;
@@ -73,6 +74,14 @@ public class CartDTO {
 
 	public void setSession_id(String session_id) {
 		this.session_id = session_id;
+	}
+
+	public int getCart_amount() {
+		return cart_amount;
+	}
+
+	public void setCart_amount(int cart_amount) {
+		this.cart_amount = cart_amount;
 	}
 	
 }

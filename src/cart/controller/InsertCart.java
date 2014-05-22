@@ -59,16 +59,25 @@ public class InsertCart {
 		paramClass.setCart_restopt_priceplus(cart_restopt_priceplus);
 		paramClass.setSession_id(session_id);
 		
-		//새로운옵션일경우 장바구니 데이터 insert
-		sqlMapper.insert("Cart.insertCart", paramClass);
-		//옵션중복시에 장바구니 데이터 수량만 update
 		
+		Integer count = (Integer) sqlMapper.queryForObject("Cart.getCount", paramClass);
+		if(count == 0){ //해당되는 레코드가 없을 경우
+			//새로운옵션일경우 장바구니 데이터 insert
+			sqlMapper.insert("Cart.insertCart", paramClass);
+		}else{
+			//해당 리스트의 amount를 +1 update하기 위해 레코드를 get함
+			list = sqlMapper.queryForList("Cart.getAmount", paramClass);
+			paramClass.setCart_amount(list.get(0).getCart_amount());
+			//옵션중복시에 장바구니 데이터 수량만 update
+			sqlMapper.update("Cart.plusAmount", paramClass);
+		}
 		
+		/*
 		//장바구니 레코드를 가져옴
 		list = sqlMapper.queryForList("Cart.selectCartAll", paramClass);
-		
 		request.setAttribute("list", list);
-
+	 	*/
+		
 		return "redirect:listCart.do?rest_num="+cart_rest_num+"&rest_subject="+cart_rest_subject;
 	}
 
