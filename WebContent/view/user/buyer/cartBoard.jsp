@@ -159,12 +159,9 @@
 									</tr>
 								</c:forEach>
 
-								<c:if test="list.size() <= 0">
+								<c:if test="${size == 0}">
 									<tr bgcolor="#FFFFFF" align="center">
 										<td colspan="10">장바구니에 담은 물품이 없습니다.</td>
-									</tr>
-									<tr bgcolor="#777777">
-										<td height="1" colspan="10"></td>
 									</tr>
 								</c:if>
 							</table>

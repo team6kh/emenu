@@ -83,8 +83,6 @@ public class UpdateCart {
 		//해당 리스트의 레코드를 get함
 		list = sqlMapper.queryForList("Cart.getAmount", paramClass);
 		
-		
-		
 		//옵션중복시에 장바구니 데이터 수량만 update
 		int amount = list.get(0).getCart_amount(); //현재 레코드의 수량이 뭔지 알아봄.
 		if(amount == 1){ //수량이 0일 경우

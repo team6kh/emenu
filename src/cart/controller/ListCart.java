@@ -36,6 +36,8 @@ public class ListCart {
 		private String actionName = "cartboard";
 		private int currentPage = 1; // 현재 페이지
 		private int totalCount; // 총 게시물의 수
+		private String rest_subject;
+		private int rest_num;
 
 		//iBatis관련
 		SqlMapClientTemplate ibatis = null;
@@ -92,10 +94,17 @@ public class ListCart {
 				lastCount = page.getEndCount() + 1;
 
 			list = list.subList(page.getStartCount(), lastCount);
-
-			int rest_num = list.get(0).getCart_rest_num();
-			String rest_subject =  list.get(0).getCart_rest_subject();
 			
+			int size = list.size();
+			if(size>0){
+				rest_num = list.get(0).getCart_rest_num();
+				rest_subject =  list.get(0).getCart_rest_subject();
+			}else{
+				rest_num = 0;
+				rest_subject = "";
+			}
+			
+			request.setAttribute("size", size);
 			request.setAttribute("rest_num", rest_num);
 			request.setAttribute("rest_subject", rest_subject);
 			request.setAttribute("list", list);
