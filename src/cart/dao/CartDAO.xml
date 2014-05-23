@@ -99,9 +99,16 @@
         WHERE cart_isCheck = 1
     </update>
 	<!-- delete -->
+	
 	<delete id="deleteCartForPaid" parameterClass="cartDTO">
 		DELETE FROM cart_board
 		WHERE cart_rest_num = #cart_rest_num#
+		AND session_id = #session_id#
+	</delete>
+	
+	<delete id="deleteChecked" parameterClass="cartDTO">
+		DELETE FROM cart_board
+		WHERE cart_num = #cart_num#
 		AND session_id = #session_id#
 	</delete>
 

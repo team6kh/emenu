@@ -68,7 +68,7 @@
 	function recipe_pricearray() {
 		document.location.href = 'priceRecipeDesc.action';
 	}
-	
+
 	var checkobj
 
 	function agreesubmit(el) {
@@ -145,8 +145,9 @@
 									<td><strong>옵션명</strong></td>
 									<td><strong>가격</strong></td>
 									<td><strong>수량</strong></td>
+									<td><strong>비우기</strong></td>
 								</tr>
-	
+
 								<c:forEach var="list" items="${list}" >
 									<tr bgcolor="#FFFFFF" align="center">
 										<td><input type="checkbox" name="requestCart_num" value="${list.cart_num}" onClick="agreesubmit(this)" /></td>
@@ -156,20 +157,18 @@
 										<td align="center"><a href="/emenu/readRest.do?rest_num=${list.cart_rest_num}">${list.cart_restopt_subject}</a></td>
 										<td align="center">${list.cart_restopt_priceplus}</td>
 										<td align="center">${list.cart_amount}</td>
+										<td align="center"> <a href="deleteCheckedCart.do?cart_num=${list.cart_num}"><span class="glyphicon glyphicon-trash"></span></a></td>
 									</tr>
 								</c:forEach>
-	
-								<c:if test="list.size() <= 0">
+
+								<c:if test="${size == 0}">
 									<tr bgcolor="#FFFFFF" align="center">
 										<td colspan="10">장바구니에 담은 물품이 없습니다.</td>
-									</tr>
-									<tr bgcolor="#777777">
-										<td height="1" colspan="10"></td>
 									</tr>
 								</c:if>
 							</table>
 						</div>
-						
+
 						<div class="col-md-12 text-right">
 							<input type="hidden" name="rest_num" value="${rest_num}" />
 							<input type="hidden" name="rest_subject" value="${rest_subject}" />
