@@ -22,6 +22,17 @@
     <!-- 공통사용절 정의 -->
     
 
+
+
+
+    <!-- select -->
+    
+    <!--  -->
+    <select id="selectClaimList">
+        SELECT * FROM claim_board
+        
+    
+    </select>
     <!-- insert -->
     <insert id="insertClaim" parameterClass="claimDTO">
         INSERT INTO claim_board

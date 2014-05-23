@@ -1,4 +1,4 @@
-package claim.controller;
+package user.admin.controller;
 
 import java.io.Reader;
 import java.util.ArrayList;
@@ -37,10 +37,10 @@ public class ListClaim
     
     
     @RequestMapping("")
-    public String listReport(HttpServletRequest request) throws Exception
+    public String listClaim (HttpServletRequest request) throws Exception
     {
         
-        reportRes = sqlMapper.queryForList("Report.selectReportList", "");
+        reportRes = sqlMapper.queryForList("Report.selectClaimList");
         
         request.setAttribute("reportRes", reportRes);
         return "";

@@ -28,7 +28,7 @@
 </head>
 
 <body>
-
+    <div class="container">
 	<form method="post" onsubmit="confirm()">
 	
 		<input type="hidden" id="rest_num" name="rest_num" value="${pagingReviewDTO.rest_num}" />
@@ -52,7 +52,7 @@
 			</tr>
 		</table>
 	</form>
-	
+	</div>
 	<script type="text/javascript">
 		function confirm() {
 			var rest_num = document.getElementById("rest_num").value;

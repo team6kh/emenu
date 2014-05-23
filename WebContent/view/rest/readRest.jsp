@@ -487,7 +487,7 @@
 											<button class="btn btn-default" onclick="return updateRV_form('${reviewDTO.review_num}')">수정</button>
                                             <button class="btn btn-default" onclick="javascript:open('deleteReviewForm.do?rest_num=${rest_num}&review_rest_currentPage=${currentPage}&ccp=${ccp}&review_num=${reviewDTO.review_num}','confirm','toolbar=no, location=no, status= no, menubar=no, scrollbars=no, resizeable=no, width=300, height=135')">삭제</button>
 										</c:if>
-                                        <c:if test="${(sessionScope.session_id != null) && (sessionScope.session_id != reviewDTO.review_writer)}">
+                                        <c:if test="${(sessionScope.session_type == 'buyer') && (sessionScope.session_id != reviewDTO.review_writer)}">
                                             <button type="button" class="btn btn-default" onclick="javascript:open('reportReviewForm.do?review_num=${reviewDTO.review_num}','confirm','toolbar=no, location=no, status= no, menubar=no, scrollbars=no, resizeable=no, width=800, height=450')">신고하기</button>
                                         </c:if>
 									</td>
