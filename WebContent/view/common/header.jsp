@@ -329,7 +329,6 @@ document.documentElement.onhelp  = keyboardShowLeftPanel;
 					<form class="navbar-form navbar-right" action="/emenu/user/logout.do" method="post">
 						<%-- 도움말 --%>
 						<div id="dhtmlgoodies_leftPanel">
-						    <a class="closeLink" href="#" onclick="initSlideLeftPanel();return false">닫기</a>
 						    <div id="leftPanelContent">
 						       <table align="center">
 						       		<tr>
@@ -340,19 +339,28 @@ document.documentElement.onhelp  = keyboardShowLeftPanel;
 						       				<c:if test="${sessionScope.session_type=='buyer'}">
 						       				현재 사용가능한 쿠폰이
 						       				<a href="/emenu/user/buyer/dashboard.do?session_id=${session_id}" > <font color="#FF0000">${session_cpn}</font></a>개가 있습니다.
+						       				<br/>지금 바로 확인하세요.&nbsp;&nbsp;&nbsp;<a href="#" onclick="initSlideLeftPanel();return false">닫기</a>
 						       				</c:if>
 						       				<c:if test="${sessionScope.session_type=='seller'}">
-						       				현재 쿠폰 사용요청이
-						       				<a href="/emenu/user/dashSeller.do?session_id=${session_id}" > <font color="#FF0000">${session_cpn}</font></a>건 존재합니다.
+						       					<c:if test="${sessionScope.session_comment==''}">
+								       				현재 쿠폰 사용요청이
+								       				<a href="/emenu/user/dashSeller.do?session_id=${session_id}" > <font color="#FF0000">${session_cpn}</font></a>건 존재합니다.
+								       				<br/>지금 바로 확인하세요.&nbsp;&nbsp;&nbsp;<a href="#" onclick="initSlideLeftPanel();return false">닫기</a>
+							       				</c:if>
+							       				<c:if test="${sessionScope.session_comment!=''}">
+							       					${sessionScope.session_comment}&nbsp;&nbsp;&nbsp;<a href="#" onclick="initSlideLeftPanel();return false">닫기</a>
+							       				</c:if>
 						       				</c:if>
-						       				<br/>지금 바로 확인하세요.
 						       			</td>
 						       		</tr>
 						       </table>
 						    </div>
 						</div>
 						<a href="/emenu/user/get.do?user_type=${session_type}&user_id=${session_id}" class="btn btn-link">${session_name} (${session_id}) 님 환영합니다.</a>
-						<a href="#" class="btn btn-link" onclick="initSlideLeftPanel();return false"> <span class="glyphicon glyphicon-bell"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="#" class="btn btn-link" onclick="initSlideLeftPanel();return false"> 
+							<span class="glyphicon glyphicon-bell"></span>
+							<span class="badge">${session_cpn}</span>
+						</a>&nbsp;&nbsp;&nbsp;&nbsp;
 						<button type="submit" class="btn btn-warning">로그아웃</button>
 					</form>
 				</c:when>				

@@ -132,6 +132,7 @@ public class Login {
 				}else{ //등록된 상품이 있는 경우
 					list1 = sqlMapper.queryForList("Rest.selectSellerGoods", result.getSeller_id());
 					rest_num = list1.get(0).getRest_num();
+					session.setAttribute("session_comment", "");
 				}
 				
 				if(rest_num!=0){ //등록된 상품이 있는 경우 추가적으로 요청된 쿠폰을 구함
