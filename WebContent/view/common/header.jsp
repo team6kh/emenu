@@ -345,7 +345,7 @@ document.documentElement.onhelp  = keyboardShowLeftPanel;
 						       				현재 쿠폰 사용요청이
 						       				<a href="/emenu/user/dashSeller.do?session_id=${session_id}" > <font color="#FF0000">${session_cpn}</font></a>건 존재합니다.
 						       				</c:if>
-						       				지금 바로 확인하세요.
+						       				<br/>지금 바로 확인하세요.
 						       			</td>
 						       		</tr>
 						       </table>

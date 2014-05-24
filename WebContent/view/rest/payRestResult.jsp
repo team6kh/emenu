@@ -26,6 +26,12 @@
 <link href="view/jogiyo.css" rel="stylesheet">
 <link href="view/common/common-template.css" rel="stylesheet">
 
+
+<script language=javascript>
+	var openwin = window.open("AGS_progress.html","popup","width=300,height=160");
+	openwin.close();
+</script>
+
 <style type="text/css">
 	html {
 		height: 100%
