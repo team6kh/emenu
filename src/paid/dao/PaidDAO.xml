@@ -81,6 +81,26 @@
    		ORDER BY paid_reg_date
 	</select>
 
+	<select id="getRequestedCpnInfo"  resultClass="int" parameterClass="int">
+		select count(*) from paid_board
+		where paid_cpn_used = 1 and paid_rest_num = #paid_rest_num#
+	</select>
+
+	<select id="selectRequestedCpnInfo"  resultClass="paidDTO" parameterClass="int">
+		select * from paid_board
+		where paid_cpn_used = 1 and paid_rest_num = #paid_rest_num#
+	</select>
+	
+	<select id="getUnusedCpnInfo"  resultClass="int" parameterClass="java.lang.String">
+		select count(*) from paid_board
+		where paid_cpn_used = 0
+	</select>
+
+	<select id="selectUnusedCpnInfo"  resultClass="paidDTO" parameterClass="java.lang.String">
+		select * from paid_board
+		where paid_cpn_used = 0
+	</select>
+	
 	<select id="selectPaidLastNum" resultClass="paidDTO" parameterClass="int">
 		SELECT MAX(paid_num) AS paid_num FROM paid_board
 	</select>

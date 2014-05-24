@@ -3,6 +3,8 @@ package user.login.controller;
 import java.io.IOException;
 import java.io.Reader;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -11,6 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import paid.dto.PaidDTO;
+import rest.dto.RestDTO;
 
 import com.ibatis.common.resources.Resources;
 import com.ibatis.sqlmap.client.SqlMapClient;
@@ -25,6 +30,9 @@ public class Login {
 	
 	private Reader reader;
 	private SqlMapClient sqlMapper;
+	private List<PaidDTO>list = new ArrayList<PaidDTO>();
+	private List<RestDTO>list1 = new ArrayList<RestDTO>();
+	private int rest_num;
 	
 	public Login() throws IOException {
 		reader = Resources.getResourceAsReader("sqlMapConfig.xml");
@@ -79,6 +87,15 @@ public class Login {
 				session.setAttribute("session_type", login.getLogin_type());
 				session.setAttribute("session_id", result.getBuyer_id());
 				session.setAttribute("session_name", result.getBuyer_name());
+				
+				//쿠폰 사이즈를 구해 세션을 생성한다.
+				int count = (Integer)sqlMapper.queryForObject("Paid.getUnusedCpnInfo", result.getBuyer_id());
+				if(count==0){
+					session.setAttribute("session_cpn", 0);
+				}else{
+					list = sqlMapper.queryForList("Paid.selectUnusedCpnInfo", result.getBuyer_id());
+					session.setAttribute("session_cpn", list.size());
+				}
 								
 				// 구매자 로그인 성공입니다. "redirector"로 갑니다.
 				return "/redirector.do";
@@ -105,7 +122,27 @@ public class Login {
 			if (result != null) {
 				session.setAttribute("session_type", login.getLogin_type());
 				session.setAttribute("session_id", result.getSeller_id());
-				session.setAttribute("session_name", result.getSeller_name());				
+				session.setAttribute("session_name", result.getSeller_name());		
+				
+				//아이디로 등록된 상품을 검색.
+				int count = (Integer)sqlMapper.queryForObject("Rest.selectCountForSeller", result.getSeller_id());
+				if(count==0){ //등록된 상품이 없는경우
+					session.setAttribute("session_comment", "지금 상품을 등록하세요!");
+					rest_num = 0;
+				}else{ //등록된 상품이 있는 경우
+					list1 = sqlMapper.queryForList("Rest.selectSellerGoods", result.getSeller_id());
+					rest_num = list1.get(0).getRest_num();
+				}
+				
+				if(rest_num!=0){ //등록된 상품이 있는 경우 추가적으로 요청된 쿠폰을 구함
+					int count1 = (Integer)sqlMapper.queryForObject("Paid.getRequestedCpnInfo", rest_num);
+					if(count1==0){ //요청된 쿠폰이 없을경우 0으로 초기화
+						session.setAttribute("session_cpn", 0);
+					}else{ //요청된 쿠폰이 있을 경우
+						list = sqlMapper.queryForList("Paid.selectRequestedCpnInfo", rest_num);
+						session.setAttribute("session_cpn", list.size());
+					}
+				}
 								
 				// 판매자 로그인 성공입니다. "redirector"로 갑니다.
 				return "/redirector.do";
