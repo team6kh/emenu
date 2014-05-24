@@ -411,7 +411,7 @@ function Display(form){
 					<tr>
 						<td colspan=1 width=20% align=center bgcolor=f3f3f3><font size=2><b>이&nbsp;&nbsp;&nbsp;름</b></font></td>
 						<td colspan=5 width=80%>
-							<font size=2>${buyerDTO.buyer_name}</font>
+							&nbsp;&nbsp;<font size=2>${buyerDTO.buyer_name}</font>
 							<input type="hidden" style=width:100px name=OrdNm maxlength=40 value="${buyerDTO.buyer_name}">
 						</td>
 					</tr>
@@ -419,7 +419,7 @@ function Display(form){
 					<tr>
 						<td colspan=1 width=20% align=center bgcolor=f3f3f3><font size=2><b>연락처</b></font></td>
 						<td colspan=5>
-							<font size=2>${buyerDTO.buyer_mobilenum}</font>
+							&nbsp;&nbsp;<font size=2>${buyerDTO.buyer_mobilenum}</font>
 							<input type="hidden" style=width:130px name=OrdPhone maxlength=21 value="${buyerDTO.buyer_mobilenum}">
 							<!--<input type=text style=width:300px name=OrdAddr maxlength=100 value="히든 주문자 주소"> -->
 						</td>
@@ -429,7 +429,7 @@ function Display(form){
 						<td colspan=1 width=20% align=center bgcolor=f3f3f3><font size=2><b>아이디</b></font></td>
 						<!-- [신용카드, 핸드폰] 결제와 [현금영수증자동발행]을 사용하시는 경우에 반드시 입력해 주시기 바랍니다. -->
 						<td colspan=5>
-							<font size=2>${sessionScope.session_id}</font>
+							&nbsp;&nbsp;<font size=2>${sessionScope.session_id}</font>
 							<input type="hidden" style=width:100px name=UserId maxlength=20 value="${sessionScope.session_id}">
 						</td>
 					</tr>
@@ -437,7 +437,7 @@ function Display(form){
 					<tr>
 						<td colspan=1 width=20% align=center bgcolor=f3f3f3><font size=2><b>이메일</b></font></td>
 						<td colspan=5>
-							<font size=2>${buyerDTO.buyer_email}</font>
+							&nbsp;&nbsp;<font size=2>${buyerDTO.buyer_email}</font>
 							<input type="hidden" style=width:200px name=UserEmail maxlength=50 value="${buyerDTO.buyer_email}">
 						</td>
 					</tr>
