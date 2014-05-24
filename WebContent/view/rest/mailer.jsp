@@ -141,8 +141,7 @@
 		
 		<div class="col-md-12">
 			<br/><br/>
-			<h3>문의하기</h3>
-			<img src="/emenu/assets/img/common/Jogiyo_main.png" width="250px" height="100px">
+			<img src="/emenu/assets/img/common/eMenu_main.png" width="250px" height="150px">
 		</div>
 		
 		<div class="col-md-12" align="center">

@@ -514,7 +514,7 @@ function Display(form){
 					
 					<tr>
 							<td colspan="6" align=center>
-								<textarea cols=120 rows=6>
+								<textarea cols=120 rows=6 readonly="readonly">
 제1조 (목적)
 이 약관은 주식회사 케이지이니시스(이하 '회사'라 합니다)가 제공하는 전자지급결제대행서비스 및 결제대금예치서비스를 이용자가 이용함에 있어 회사와 이용자 사이의 전자금융거래에 관한 기본적인 사항을 정함을 목적으로 합니다.
 
