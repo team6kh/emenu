@@ -17,10 +17,6 @@
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <link rel="shortcut icon" href="assets/ico/jogiyo.png">
 
-<script language=javascript>
-	var openwin = window.open("AGS_progress.html","popup","width=300,height=160");
-	openwin.close();
-</script>
 
 <title>eMenu</title>
 
