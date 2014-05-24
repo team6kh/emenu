@@ -37,8 +37,8 @@
                 <!-- sidebar -->
                 <div class="col-sm-3 col-md-2 sidebar">
                     <ul class="nav nav-sidebar">
-                        <li class="active"><a href="emenu/user/admin/dashboard.do">dashAdmin</a></li>
-                        <li><a href="/emenu/user/admin/listClaim.do">게시판 신고 내역</a></li>
+                        <li><a href="/emenu/user/admin/dashboard.do">dashAdmin</a></li>
+                        <li class="active"><a href="/emenu/user/admin/listClaim.do">게시판 신고 내역</a></li>
                     </ul>
                 </div>
                 <!-- /.sidebar -->
@@ -64,21 +64,22 @@
                                         <td> ${claimDTO.claim_category} </td>
                                         <td> ${claimDTO.board_name} / ${claimDTO.article_num }</td>
                                         <td> ${claimDTO.article_writer } </td>
-                                        <td> <button type="button" class="btn btn-default" 
-                                                    onclick="javascript:open('${claimDTO.article_viewUrl}','view_article',' location=no')">글 보기</button></td>
+                                        <td> <button type="button" class="btn btn-default btn-block" 
+                                                    onclick="javascript:open('${path}${claimDTO.article_viewUrl}','view_article',' location=no')">글 보기</button></td>
                                         <td> ${claimDTO.claimer } </td>
                                         <td><fmt:formatDate value="${claimDTO.claim_reg_date }" pattern="yyyy-MM-dd HH:mm:ss"/> </td>
                                         <td>
                                             <c:if test="${claimDTO.claim_result == 'receive' }">
                                                 <form method="post" action="updateClaim.do">
                                                     <input type="hidden" name="claim_num" value="${claimDTO.claim_num}"/>
+                                                    <input type="hidden" name="board_name" value="${claimDTO.board_name}"/>
+                                                    <input type="hidden" name="article_num" value="${claimDTO.article_num}"/>
                                                     <input type="hidden" name="article_delUrl" value="${claimDTO.article_delUrl}" />                                                    
-                                                    <select name="take_action">
-                                                        <option>
-                                                        
-                                                        
+                                                    <select name="claim_result">
+                                                        <option value="rejection">신고 기각 </option>
+                                                        <option value="admission">신고 인용 - 글 삭제</option>
                                                     </select>
-                                                    
+                                                  <button type="submit" class="btn btn-danger btn-sm">확 인</button>  
                                                 </form>
                                             </c:if>
                                             <c:if test="${claimDTO.claim_result != 'receive' }">${claimDTO.claim_result}</c:if>
@@ -89,6 +90,13 @@
                         </table>
                     </div>
                 <!-- /.main -->
+                <!-- paging -->
+                <div class="text-center">
+                    <ul class="pagination pagination-sm">
+                        ${pagingHtml} 
+                    </ul>
+                </div>
+                <!--  /. paging -->
             </div>
             <!--  /.row -->
         </div>

@@ -4,6 +4,7 @@
 <sqlMap namespace="Claim">
 
     <typeAlias alias="claimDTO" type="claim.dto.ClaimDTO"/>
+    <typeAlias alias="updateClaimDTO" type="claim.dto.UpdateClaimDTO"/>
     
     <resultMap id="claimRes" class="claimDTO" >
         <result property="claim_num" column="claim_num"/>
@@ -27,9 +28,11 @@
 
     <!-- select -->
     
-    <!--  -->
-    <select id="selectClaimList">
-        SELECT * FROM claim_board
+    <!-- 아직 처리되지 않은 신고내역들만  -->
+    <select id="selectClaimList" resultMap="claimRes">
+        SELECT * 
+        FROM claim_board
+        WHERE claim_result = 'receive'
         
     
     </select>
@@ -60,4 +63,18 @@
             sysdate
             )
     </insert>
+    
+    <!-- update -->
+    <update id="updateClaim_rejection" parameterClass="updateClaimDTO">
+        UPDATE claim_board
+        SET claim_result = #claim_result#
+        WHERE claim_num = #claim_num#
+    </update>
+    
+    <update id="updateClaim_admission" parameterClass="updateClaimDTO">
+        UPDATE claim_board
+        SET claim_result = #claim_result#
+        WHERE board_name = #board_name#  AND article_num = #article_num#
+    </update>
+    
 </sqlMap>
