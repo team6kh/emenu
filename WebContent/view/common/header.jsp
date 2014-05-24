@@ -339,13 +339,12 @@ document.documentElement.onhelp  = keyboardShowLeftPanel;
 						       				<br/>
 						       				<c:if test="${sessionScope.session_type=='buyer'}">
 						       				현재 사용가능한 쿠폰이
-						       				<a href="/emenu/user/buyer/dashboard.do?session_id=${session_id}" > <font color="#FF0000">${session_cpn}</font></a>
+						       				<a href="/emenu/user/buyer/dashboard.do?session_id=${session_id}" > <font color="#FF0000">${session_cpn}</font></a>개가 있습니다.
 						       				</c:if>
 						       				<c:if test="${sessionScope.session_type=='seller'}">
-						       				현재 쿠폰 사용요청건이
-						       				<a href="/emenu/user/dashSeller.do?session_id=${session_id}" > <font color="#FF0000">${session_cpn}</font></a>
+						       				현재 쿠폰 사용요청이
+						       				<a href="/emenu/user/dashSeller.do?session_id=${session_id}" > <font color="#FF0000">${session_cpn}</font></a>건 존재합니다.
 						       				</c:if>
-						       				개가 있습니다. <br/>
 						       				지금 바로 확인하세요.
 						       			</td>
 						       		</tr>
