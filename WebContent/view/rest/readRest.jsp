@@ -255,7 +255,9 @@
         <!-- 슬라이드 메뉴 리스트 -->
         <c:forEach var="list" items="${list1}">
         <div class="da-slide">
-            <h2><i>${list.restopt_subject}</i></h2>
+            <h2>
+            	<i>${list.restopt_subject}</i>
+            </h2>
             <p><i>${list.restopt_priceplus} 원</i></p>
             <div class="da-img"><img src="${list.restopt_destFile1}" alt="" /></div>
         </div>        
@@ -271,7 +273,14 @@
 
 <!--=== Content Part ===-->
 <div class="container">	
-	<br />	
+	<br />
+	
+	<!-- rest_subject -->
+	<div class="col-md-12">
+			<h1><strong>${resultClass.rest_subject}</strong></h1>
+	</div>
+	<!-- /.rest_subject -->	
+		
 	<!-- 메뉴 리스트 col-md-9-->
 	<div class="col-md-9">
 		<!-- 메뉴 리스트 page-header -->
