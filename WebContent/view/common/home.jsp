@@ -80,7 +80,7 @@
 		
 			<!-- masonry -->
 			<ul class="grid effect-2" id="grid">				
-				<c:if test="${listCart ne null}">
+				<c:if test="${fn:length(listCart) ne 0}">
 					<!-- 장바구니 image -->
 					<li>
 						<div class="masonry">

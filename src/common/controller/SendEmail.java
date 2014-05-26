@@ -93,7 +93,7 @@ public class SendEmail {
         		// message에 넣을 값 설정
             	from = "kh.team6@gmail.com";
         		to = buyer.getBuyer_email();
-        		subject = "[JOGIYO] Please verify your email '" + buyer.getBuyer_email() + "'";
+        		subject = "[eMenu] Please verify your email '" + buyer.getBuyer_email() + "'";
         		/* StringBuffer를 사용해 content를 작성한다. */
         		StringBuffer sb = new StringBuffer(); // StringBuffer
         		sb.append("Taz'dingo, we want to verify that you are indeed \"");
@@ -118,7 +118,7 @@ public class SendEmail {
         		// message에 넣을 값 설정
             	from = "kh.team6@gmail.com";
         		to = seller.getSeller_email();
-        		subject = "[JOGIYO] Please verify your email '" + seller.getSeller_email() + "'";
+        		subject = "[eMenu] Please verify your email '" + seller.getSeller_email() + "'";
         		/* StringBuffer를 사용해 content를 작성한다. */
         		StringBuffer sb = new StringBuffer(); // StringBuffer
         		sb.append("Taz'dingo, we want to verify that you are indeed \"");
@@ -209,7 +209,7 @@ public class SendEmail {
     		sb.append(". if you're not ");
     		sb.append("<br/><hr><br/>");
     		sb.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
-    		sb.append("자주 묻는 질문 확인은 <a href='http://localhost:8000/jogiyo/listQna.action'>여기</a>를 클릭하세요.");
+    		sb.append("자주 묻는 질문 확인은 <a href='http://localhost:8000/emenu/listQna.do'>여기</a>를 클릭하세요.");
     		sb.append("빠른 시간내에 답변드리겠습니다. 감사합니다.<br/><hr><br/>");
     		sb.append("<img src='"+content_putter+"'/><br/>");
     		/* END StringBuffer */

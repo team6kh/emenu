@@ -57,6 +57,8 @@ public class CheckEv {
 		
 		if (evDTO != null) {
 			
+			isSuccess = 0;	
+			
 			//System.out.println("evDTO not null");
 			
 			if (user_type.equals("buyer")) {
@@ -79,7 +81,9 @@ public class CheckEv {
 		
 		// 결과값 isSuccess
         request.setAttribute("isSuccess", isSuccess);
-		
+        request.setAttribute("user_type", user_type);
+        request.setAttribute("user_id", user_id);
+        
 		return "/view/user/verification/checkEv.jsp";
 	}
 	
