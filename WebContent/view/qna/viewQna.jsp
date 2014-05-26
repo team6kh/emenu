@@ -82,7 +82,7 @@
 
 
 			<div class="pull-right">				
-				<c:if test="${session_id == resultClass.qna_id}">
+				<c:if test="${session_id == resultClass.qna_id && !(session_id eq 'admin')}) " >
 					<button type="submit" class="btn btn-default">수정</button>
 					<a href="deleteQna.do?qna_num=${resultClass.qna_num }" class="btn btn-default">삭제</a>
 				</c:if>

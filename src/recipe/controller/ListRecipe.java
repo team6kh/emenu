@@ -61,6 +61,7 @@ public class ListRecipe {
 
 			list = sqlMapper.queryForList("Recipe.selectAll");
 			totalCount = list.size(); //전체 글 갯수를 구한다.
+			
 			if(request.getParameter("currentPage")==null){
 				currentPage=1;
 			}else{
