@@ -28,13 +28,18 @@
 
     <!-- select -->
     
-    <!-- 아직 처리되지 않은 신고내역들만  -->
+    <!-- 미처리된 신고내역들만  -->
     <select id="selectClaimList" resultMap="claimRes">
         SELECT * 
         FROM claim_board
         WHERE claim_result = 'receive'
-        
+    </select>
     
+    <!-- 게시판명과 글번호로 검색 -->
+    <select id="selectSearchedClaimList" resultMap="claimRes" parameterClass="claim.dto.SearchClaimDTO">
+        SELECT * 
+        FROM claim_board
+        WHERE board_name = #board_name#  AND article_num = #article_num#
     </select>
     <!-- insert -->
     <insert id="insertClaim" parameterClass="claimDTO">

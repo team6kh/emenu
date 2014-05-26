@@ -20,6 +20,7 @@ public class UpdateClaim
 {
     // ibatis 연동을 위한 변수
     private static Reader reader;
+    
     private static SqlMapClient sqlMapper;
     
     // 생성자 : iBatis 연동
@@ -44,8 +45,11 @@ public class UpdateClaim
             }
             else if (updateClaimDTO.getClaim_result().equals("admission"))
             {
-          
-               
+                if (updateClaimDTO.getBoard_name().equals("review"))
+                {
+                    new DeleteReview().deleteReviewPro(request);
+                }
+                sqlMapper.update("Claim.updateClaim_admission", updateClaimDTO);
             }
             else
             {

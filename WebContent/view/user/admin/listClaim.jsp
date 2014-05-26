@@ -21,6 +21,21 @@
         <link href="/emenu/view/jogiyo.css" rel="stylesheet">
         <link href="/emenu/view/common/common-template.css" rel="stylesheet">
         <link href="/emenu/view/user/dashboard.css" rel="stylesheet">
+        
+        <script type="text/javascript">
+        	function validation() {
+        		var article_num = document.getElementById("search_article_num").value;
+        		if(article_num == "")
+        			{
+        				alert("검색할 글 번호를 입력하세요.");
+        			}
+        		else
+        			{
+        				document.getElementById("searchClaimForm").submit();
+        			}
+				
+			}
+        </script>
     </head>
 
     <body>
@@ -45,12 +60,32 @@
             
                 <!-- main -->
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                    <div class="table-responsive">
+                    <!-- searchClaimForm -->
+                    <div style="margin-bottom: 30px">
+                        <form action="searchClaim.do" method="post" id="searchClaimForm" class="form-inline">
+                            <div class="form-group">
+                                <label>게시판명</label>
+                                    <select name="board_name" class="form-control">
+                                            <option value="review">후기 게시판</option>
+                                            <option value="recipe">레시피 게시판</option>
+                                    </select>
+                            </div>
+                            <div class="form-group">
+                                <label>글 번호</label>
+                               <input type="number" name="article_num" id="search_article_num" class="form-control">
+                            </div>
+                            <button type="button" class="btn btn-success" onclick="return validation()">검 색</button>
+                            </form>
+                      </div>
+                    <!-- /.searchClaimForm -->
+                    <!--  신고내역 list -->
+                    <div class="table-responsive text-center">
                         <table class="table table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th> 신고 번호 </th>
-                                    <th> 신고 사유 </th>
+                                    <th> 신고 분류 </th>
+                                    <th> 상세 사유 </th>
                                     <th> 게시판/글번호 </th>
                                     <th> 글 작성자</th>
                                     <th> 글 보기 </th>
@@ -61,19 +96,28 @@
                                 <c:forEach var="claimDTO" items="${claimRes}">
                                     <tr>
                                         <td> ${claimDTO.claim_num} </td>
-                                        <td> ${claimDTO.claim_category} </td>
+                                        <td> ${claimDTO.claim_category}</td>
+                                        <td> ${claimDTO.claim_reason} </td>
                                         <td> ${claimDTO.board_name} / ${claimDTO.article_num }</td>
                                         <td> ${claimDTO.article_writer } </td>
-                                        <td> <button type="button" class="btn btn-default btn-block" 
-                                                    onclick="javascript:open('${path}${claimDTO.article_viewUrl}','view_article',' location=no')">글 보기</button></td>
+                                        <td> 
+                                                <c:if test="${claimDTO.claim_result == 'admission' }">
+                                                    삭제된 글입니다.
+                                                </c:if>
+                                                <c:if test="${claimDTO.claim_result != 'admission' }">
+                                                    <button type="button" class="btn btn-default btn-block" 
+                                                    onclick="javascript:open('${path}${claimDTO.article_viewUrl}','view_article',' location=no', height=500)">글 보기</button>
+                                                </c:if>
+                                        </td>
                                         <td> ${claimDTO.claimer } </td>
-                                        <td><fmt:formatDate value="${claimDTO.claim_reg_date }" pattern="yyyy-MM-dd HH:mm:ss"/> </td>
+                                        <td><fmt:formatDate value="${claimDTO.claim_reg_date }" pattern="yyyy-MM-dd"/> </td>
                                         <td>
                                             <c:if test="${claimDTO.claim_result == 'receive' }">
                                                 <form method="post" action="updateClaim.do">
                                                     <input type="hidden" name="claim_num" value="${claimDTO.claim_num}"/>
                                                     <input type="hidden" name="board_name" value="${claimDTO.board_name}"/>
                                                     <input type="hidden" name="article_num" value="${claimDTO.article_num}"/>
+                                                    <input type="hidden" name="${claimDTO.board_name}_num" value="${claimDTO.article_num}"/>
                                                     <input type="hidden" name="article_delUrl" value="${claimDTO.article_delUrl}" />                                                    
                                                     <select name="claim_result">
                                                         <option value="rejection">신고 기각 </option>
@@ -89,6 +133,7 @@
                             </thead>
                         </table>
                     </div>
+                    <!-- /. 신고내역 list -->
                 <!-- /.main -->
                 <!-- paging -->
                 <div class="text-center">
@@ -97,6 +142,8 @@
                     </ul>
                 </div>
                 <!--  /. paging -->
+                </div>
+                <!-- /.main -->
             </div>
             <!--  /.row -->
         </div>
