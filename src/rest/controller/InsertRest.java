@@ -118,6 +118,7 @@ public class InsertRest {
 	public String insertRestFromPro(MultipartHttpServletRequest request, HttpServletRequest request1, HttpServletResponse response1, HttpSession session) throws Exception{
 		
 		String session_id = (String) session.getAttribute("session_id");
+		session.setAttribute("session_comment", "");
 		
 		sellerDTO.setSeller_id(session_id);
 		sellerDTO = (SellerDTO) sqlMapper.queryForObject("Seller.getSellerId", sellerDTO);
