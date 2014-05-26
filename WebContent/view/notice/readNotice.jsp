@@ -98,10 +98,10 @@
 	        				<img  src="view/notice/img/ico-btn-pre2_.gif"> 다음글&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	        				<a href="readNotice.do?notice_num=${resultClass.notice_num}&currentPage=${currentPage}&rnum=${rnum+1}">
 	        				<c:if test="${resultClass.notice_headtag == '-----------------' }">
-	        					${rnum+1 }.&nbsp;&nbsp;${aClass.notice_subject }
+	        					${aClass.notice_subject }
 	        				</c:if> 
 	        				<c:if test="${resultClass.notice_headtag != '-----------------' }">
-	        					${rnum+1 }.&nbsp;&nbsp;${aClass.notice_headtag } ${aClass.notice_subject }
+	        					${aClass.notice_headtag } ${aClass.notice_subject }
 	        				</c:if></a><br/>
 	        				<img  src="view/notice/img/ico-btn-net2_.gif"> 이전글&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	        				<a href="javascript:alert('이전글이 없습니다.')">이전글이 없습니다.</a> 
@@ -112,28 +112,28 @@
 							<img  src="view/notice/img/ico-btn-net2_.gif"> 이전글&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	        				<a href="readNotice.do?notice_num=${resultClass.notice_num}&currentPage=${currentPage}&rnum=${rnum-1}">
 	        				<c:if test="${resultClass.notice_headtag == '-----------------' }">
-	        					${rnum-1 }.&nbsp;&nbsp;${bClass.notice_subject } 
+	        					${bClass.notice_subject } 
 	        				</c:if>
 	        				<c:if test="${resultClass.notice_headtag != '-----------------' }">
-	        					${rnum-1 }.&nbsp;&nbsp;${bClass.notice_headtag } ${bClass.notice_subject }
+	        					${bClass.notice_headtag } ${bClass.notice_subject }
 	        				</c:if></a>
 						</c:if>
 						<c:if test="${rnum != 1 && rnum != n_count }">
 							<img  src="view/notice/img/ico-btn-pre2_.gif"> 다음글&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	        				<a href="readNotice.do?notice_num=${resultClass.notice_num}&currentPage=${currentPage}&rnum=${rnum+1}">
 	        				<c:if test="${aClass.notice_headtag == '-----------------' }">
-	        					${rnum+1 }.&nbsp;&nbsp;${aClass.notice_subject }
+	        					${aClass.notice_subject }
 	        				</c:if>
 	        				<c:if test="${aClass.notice_headtag != '-----------------' }">
-	        					${rnum+1 }.&nbsp;&nbsp;${aClass.notice_headtag } ${aClass.notice_subject }
+	        					${aClass.notice_headtag } ${aClass.notice_subject }
 	        				</c:if></a><br/>
 	        				<img  src="view/notice/img/ico-btn-net2_.gif"> 이전글&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	        				<a href="readNotice.do?notice_num=${resultClass.notice_num}&currentPage=${currentPage}&rnum=${rnum-1}">
 	        				<c:if test="${bClass.notice_headtag == '-----------------' }">
-	        					${rnum-1 }.&nbsp;&nbsp;${bClass.notice_subject }
+	        					${bClass.notice_subject }
 	        				</c:if>
 	        				<c:if test="${bClass.notice_headtag != '-----------------' }">
-	        					${rnum-1 }.&nbsp;&nbsp;${bClass.notice_headtag } ${bClass.notice_subject }
+	        					${bClass.notice_headtag } ${bClass.notice_subject }
 	        				</c:if></a>
 						</c:if>
 						</div>
