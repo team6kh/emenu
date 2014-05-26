@@ -85,9 +85,10 @@ public class ListPaid {
 		//회원정보
 		buyerDTO = (BuyerDTO) sqlMapper.queryForObject("Buyer.getBuyerSession", session_id);
 		
+		
 		request.setAttribute("list", list);
 		request.setAttribute("pay_num", pay_num);
-		request.setAttribute("pay_rest_subject", pay_rest_subject);
+		request.setAttribute("pay_rest_subject", "eMenu");
 		request.setAttribute("pay_restopt_subject", pay_restopt_subject);
 		request.setAttribute("pay_pricetotal", pay_pricetotal);
 		request.setAttribute("buyerDTO", buyerDTO);

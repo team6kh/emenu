@@ -82,6 +82,11 @@
 		SELECT COUNT(*) FROM REST_BOARD
 		WHERE rest_writer_id = #session_id#
 	</select>
+	
+	<select id="selectSellerGoods" resultClass ="restDTO" parameterClass="java.lang.String">
+		SELECT * FROM REST_BOARD
+		WHERE rest_writer_id = #session_id#
+	</select>
 
 	<select id="selectAll" resultMap="restRes" parameterClass="int">
 		<include refid="select-all" />

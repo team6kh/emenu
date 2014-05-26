@@ -20,7 +20,7 @@
 	 * Amt      		 : 금액					form.Amt.value
 	 * MD5 해쉬데이터 암호화 검증을 위해
 	 */
-
+	 
 	 /*
 	 String StoreId = request.getParameter("StoreId");
 	 String OrdNo = request.getParameter("OrdNo");
@@ -29,22 +29,22 @@
 	 String StoreId = "aegis";
 	 String OrdNo = "1000000001";
 	 String Amt = "1000";
-
-
+	 
+	 
 	 //List<CartDTO> list = new ArrayList<CartDTO>();
 	 //list = (CartDTO> request.getParameter("list");
-
+	 
 	 //int rest_num =  Integer.parseInt(request.getParameter("rest_num"));
 	 //String rest_subject =  request.getParameter("rest_subject");
 	 //String restopt_subject =  request.getParameter("restopt_subject");
 	 //int restopt_priceplus =  Integer.parseInt(request.getParameter("restopt_priceplus"));
-
-
+	 
+	 
 	 StringBuffer sb = new StringBuffer();
 	 sb.append(StoreId);
 	 sb.append(OrdNo);
 	 sb.append(Amt);
-
+	 
 	 byte[] bNoti = sb.toString().getBytes();
 	 MessageDigest md = MessageDigest.getInstance("MD5");
 	 byte[] digest = md.digest(bNoti);
@@ -67,7 +67,9 @@
 <title>eMenu 상품주문</title>
 <style type="text/css">
 <!--
-body { font-family:"돋움"; font-size:9pt; color:#333333; font-weight:normal; letter-spacing:0pt; line-height:180%; }
+body { 
+	font-family:"돋움"; font-size:9pt; color:#333333; font-weight:normal; letter-spacing:0pt; line-height:180%; 
+}
 td { font-family:"돋움"; font-size:9pt; color:#333333; font-weight:normal; letter-spacing:0pt; line-height:180%; }
 .clsright { padding-right:10px; text-align:right; }
 .clsleft { padding-left:10px; text-align:left; }
@@ -298,8 +300,6 @@ function Display(form){
 <!-- end of header -->
 
 
-
-
 <form name=frmAGS_pay method=post action=/emenu/agspay/AGS_pay_ing.jsp>
 <table border=0 width=100% height=100% cellpadding=0 cellspacing=0>
 	<tr>
@@ -336,14 +336,14 @@ function Display(form){
 				
 				<table width=70% border=0 align="center">
 					<tr><td  colspan=6><hr></td></tr>
-		
+					
 					<tr>
 						<td class=clsleft colspan=6></td>
 					</tr>
 					<tr>
 						<td class=clsleft colspan=6><font color=f46562 size=5><br/><b>주문상품정보</b></font><br/><br/></td>
 					</tr>
-
+					
 					<tr>
 						<td align="center" width=15% bgcolor=f3f3f3>
 							<font size=3><b>상품번호</b></font>
@@ -358,12 +358,12 @@ function Display(form){
 							<font size=3><b>가격</b></font>
 						</td>
 					</tr>
-
+					
 					<c:forEach var="list" items="${list}">
 						<tr>
 							<td align="center">
 								<br/>
-								<font size=2>${list.cart_rest_num+list.cart_num}${list.cart_restopt_num}</font>
+								<font size=2>${list.cart_rest_num}</font>
 							</td>
 							<td align="right">
 								<br/>
@@ -391,19 +391,19 @@ function Display(form){
 							<br/><font size=4 color=f5ad00><b>주문합계 : ${pay_pricetotal}원</b></font>
 						</td>
 					</tr>
-
-					<tr>
-						<td class=clsleft colspan=3>
-							<input type=hidden style=width:100px name=OrdNo maxlength=40 value="${pay_num}" />
-							<input type=hidden style=width:300px name=StoreNm value="${pay_rest_subject}"/>
-							<input type=hidden style=width:300px name=ProdNm maxlength=300 value="${pay_restopt_subject}">
-							<input type=hidden style=width:100px name=Amt maxlength=12 value="${pay_pricetotal}"/>
-						</td>
-					</tr>
-
+					
 					<tr><td>&nbsp;</td></tr>
 					<tr><td class=clsleft colspan=6><hr></td></tr>
-
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
 					<tr>
 						<td class=clsleft colspan=6><font color=f46562 size=5><br/><b>구매자 정보</b></font><br/><br/></td>
 					</tr>
@@ -411,7 +411,7 @@ function Display(form){
 					<tr>
 						<td colspan=1 width=20% align=center bgcolor=f3f3f3><font size=2><b>이&nbsp;&nbsp;&nbsp;름</b></font></td>
 						<td colspan=5 width=80%>
-							&nbsp;&nbsp;<font size=2>${buyerDTO.buyer_name}</font>
+							<font size=2>${buyerDTO.buyer_name}</font>
 							<input type="hidden" style=width:100px name=OrdNm maxlength=40 value="${buyerDTO.buyer_name}">
 						</td>
 					</tr>
@@ -419,7 +419,7 @@ function Display(form){
 					<tr>
 						<td colspan=1 width=20% align=center bgcolor=f3f3f3><font size=2><b>연락처</b></font></td>
 						<td colspan=5>
-							&nbsp;&nbsp;<font size=2>${buyerDTO.buyer_mobilenum}</font>
+							<font size=2>${buyerDTO.buyer_mobilenum}</font>
 							<input type="hidden" style=width:130px name=OrdPhone maxlength=21 value="${buyerDTO.buyer_mobilenum}">
 							<!--<input type=text style=width:300px name=OrdAddr maxlength=100 value="히든 주문자 주소"> -->
 						</td>
@@ -429,7 +429,7 @@ function Display(form){
 						<td colspan=1 width=20% align=center bgcolor=f3f3f3><font size=2><b>아이디</b></font></td>
 						<!-- [신용카드, 핸드폰] 결제와 [현금영수증자동발행]을 사용하시는 경우에 반드시 입력해 주시기 바랍니다. -->
 						<td colspan=5>
-							&nbsp;&nbsp;<font size=2>${sessionScope.session_id}</font>
+							<font size=2>${sessionScope.session_id}</font>
 							<input type="hidden" style=width:100px name=UserId maxlength=20 value="${sessionScope.session_id}">
 						</td>
 					</tr>
@@ -437,7 +437,7 @@ function Display(form){
 					<tr>
 						<td colspan=1 width=20% align=center bgcolor=f3f3f3><font size=2><b>이메일</b></font></td>
 						<td colspan=5>
-							&nbsp;&nbsp;<font size=2>${buyerDTO.buyer_email}</font>
+							<font size=2>${buyerDTO.buyer_email}</font>
 							<input type="hidden" style=width:200px name=UserEmail maxlength=50 value="${buyerDTO.buyer_email}">
 						</td>
 					</tr>
@@ -445,8 +445,8 @@ function Display(form){
 					<tr>
 						<td class=clsleft colspan=6></td>
 					</tr>
-
-
+					
+					
 					<tr>
 						<td colspan=2><input type="hidden" style=width:100px name=RcpNm maxlength=40></td>
 					</tr>
@@ -459,10 +459,10 @@ function Display(form){
 					<tr>
 						<td colspan=2><input type=hidden style=width:300px name=Remark maxlength=350 ></td>
 					</tr>
-
+					
 					<tr><td>&nbsp;</td></tr>
 					<tr><td class=clsleft colspan=6><hr></td></tr>
-
+					
 					<tr>
 						<td class=clsleft colspan=6><font color=f46562 size=5><br/><b>결제 수단</b></font><br/><br/></td>
 					</tr>
@@ -470,8 +470,8 @@ function Display(form){
 						<td colspan=6>
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<input type="radio" name="Job" value="onlycard" checked /> &nbsp;신용카드 결제
-
-
+							
+							
 							<!-- 계좌이체,핸드폰결제를 사용하지 않는 상점은 지불방법을 꼭 신용카드(전용)으로 설정하시기 바랍니다. -->
 							<!-- 신용카드만 사용하도록 연동 <input type=hidden name=Job value="onlycard"> -->
 							<!-- 계좌이체만 사용하도록 연동 <input type=hidden name=Job value="onlyiche"> -->
@@ -514,7 +514,7 @@ function Display(form){
 					
 					<tr>
 							<td colspan="6" align=center>
-								<textarea cols=120 rows=6 readonly="readonly">
+								<textarea cols=120 rows=6>
 제1조 (목적)
 이 약관은 주식회사 케이지이니시스(이하 '회사'라 합니다)가 제공하는 전자지급결제대행서비스 및 결제대금예치서비스를 이용자가 이용함에 있어 회사와 이용자 사이의 전자금융거래에 관한 기본적인 사항을 정함을 목적으로 합니다.
 
@@ -915,7 +915,7 @@ function Display(form){
 							</textarea>
 						</td>
 					</tr>
-				
+						
 					<tr>
 						<td class=clsleft colspan=6>
 							<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -930,7 +930,7 @@ function Display(form){
 					</tr>
 					
 				</table>
-
+				
 				<!--
 				<div id="hp" style="display:'';"> 
 				<table width=650 border=0 cellpadding=0 cellspacing=0>
@@ -993,10 +993,15 @@ function Display(form){
 			</tr>
 			<tr><td>&nbsp;</td></tr>
 			<tr><td><hr></td></tr>
-
+			
 			<tr>
-				<td align=right>
-				<input type="button" value="결제하기" onclick="javascript:Pay(frmAGS_pay);">
+				<td align="right">
+				<input type=hidden style=width:100px name=OrdNo maxlength=40 value="${pay_num}" />
+				<input type=hidden style=width:300px name=StoreNm value="${pay_rest_subject}"/>
+				<input type=hidden style=width:300px name=ProdNm maxlength=300 value="${pay_restopt_subject}">
+				<input type=hidden style=width:100px name=Amt maxlength=12 value="${pay_pricetotal}"/>
+					
+				<input type="button"  value="결제하기" onclick="javascript:Pay(frmAGS_pay);">
 				<!--
 				<a href="javascript:Pay(frmAGS_pay);"><img src="button.gif" border="0"></a>
 				-->
@@ -1099,4 +1104,4 @@ function Display(form){
 
 </form>
 </body>
-</html> 
+</html>   

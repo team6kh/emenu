@@ -79,7 +79,7 @@
 			
 			<c:if test="${sessionScope.session_type=='seller' && permission==0}">
 				<div class="pull-right">
-					<a href="insertRestForm.do" class="btn btn-primary">글쓰기</a>
+					<a href="insertRestForm.do" class="btn btn-primary">상품등록</a>
 				</div>
 			</c:if>
 
