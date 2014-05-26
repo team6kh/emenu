@@ -90,6 +90,7 @@ public class Login {
 				
 				//쿠폰 사이즈를 구해 세션을 생성한다.
 				int count = (Integer)sqlMapper.queryForObject("Paid.getUnusedCpnInfo", result.getBuyer_id());
+				
 				if(count==0){
 					session.setAttribute("session_cpn", 0);
 				}else{
