@@ -52,7 +52,7 @@
                 <!-- sidebar -->
                 <div class="col-sm-3 col-md-2 sidebar">
                     <ul class="nav nav-sidebar">
-                        <li><a href="/emenu/user/admin/dashboard.do">dashAdmin</a></li>
+                        <li><a href="/emenu/user/admin/dashboard.do">대시보드</a></li>
                         <li class="active"><a href="/emenu/user/admin/listClaim.do">게시판 신고 내역</a></li>
                     </ul>
                 </div>

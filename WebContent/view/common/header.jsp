@@ -329,10 +329,20 @@ document.documentElement.onhelp  = keyboardShowLeftPanel;
 					<form class="navbar-form navbar-right" action="/emenu/user/logout.do" method="post">
 						<a href="/emenu/user/get.do?user_type=${session_type}&user_id=${session_id}" class="btn btn-link">${session_name} (${session_id}) 님 환영합니다.</a>
 						
-						<a href="/emenu/user/buyer/dashboard.do?session_id=${session_id}" class="btn btn-link"> 
-							<span class="glyphicon glyphicon-bell"></span>
-							<span class="badge">${session_cpn}</span>
-						</a>&nbsp;&nbsp;&nbsp;&nbsp;
+						<c:if test="${session_type == 'buyer'}" >
+							<a href="/emenu/user/buyer/dashboard.do?session_id=${session_id}" class="btn btn-link"> 
+								<span class="glyphicon glyphicon-bell"></span>
+								<span class="badge">${session_cpn}</span>
+							</a>&nbsp;&nbsp;&nbsp;&nbsp;
+						</c:if>
+						
+						<c:if test="${session_type == 'seller'}" >
+							<a href="/emenu/user/dashSeller.do?sesssion_id=${session_id}" class="btn btn-link"> 
+								<span class="glyphicon glyphicon-bell"></span>
+								<span class="badge">${session_cpn}</span>
+							</a>&nbsp;&nbsp;&nbsp;&nbsp;
+						</c:if>
+						
 						<button type="submit" class="btn btn-warning">로그아웃</button>
 					</form>
 				</c:when>				
