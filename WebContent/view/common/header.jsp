@@ -18,7 +18,7 @@
 
 #dhtmlgoodies_leftPanel{    /* Styling the help panel */
 
-    background-color:#5D5D5D;    /* Blue background color */
+    background-color:#474747;    /* Noti-background color */
     color:#FFF;    /* White text color */
     font-family: verdana;    /* Which font to use */
 
@@ -72,13 +72,13 @@ www.dhtmlgoodies.com
 Alf Magne Kalleland
 
 ************************************************************************************************************/
-var panelWidth = 100;    // Width of help panel
+var panelWidth = 130;    // Width of help panel
 var slideSpeed = 15;        // Higher = quicker slide
 var slideTimer = 10;    // Lower = quicker slide
 var slideActive = true;    // Slide active ?
 var initBodyMargin = 0;    // Left or top margin of your <body> tag (left if panel is at the left, top if panel is on the top)
 var pushMainContentOnSlide = false;    // Push your main content to the right when sliding
-var panelPosition = 1;     // 0 = left , 1 = top
+var panelPosition = 0;     // 0 = left , 1 = top
 
 /*    Don't change these values */
 var slideLeftPanelObj=false;
@@ -327,37 +327,9 @@ document.documentElement.onhelp  = keyboardShowLeftPanel;
 				<%-- 로그인 후 --%>
 				<c:when test="${not empty session_id}">
 					<form class="navbar-form navbar-right" action="/emenu/user/logout.do" method="post">
-						<%-- 도움말 --%>
-						<div id="dhtmlgoodies_leftPanel">
-						    <div id="leftPanelContent">
-						       <table align="center">
-						       		<tr>
-						       			<td>
-						       				<br/>
-						       				<b>${session_name}님 안녕하세요!</b> 
-						       				<br/>
-						       				<c:if test="${sessionScope.session_type=='buyer'}">
-						       				현재 사용가능한 쿠폰이
-						       				<a href="/emenu/user/buyer/dashboard.do?session_id=${session_id}" > <font color="#FF0000">${session_cpn}</font></a>개가 있습니다.
-						       				<br/>지금 바로 확인하세요.&nbsp;&nbsp;&nbsp;<a href="#" onclick="initSlideLeftPanel();return false">닫기</a>
-						       				</c:if>
-						       				<c:if test="${sessionScope.session_type=='seller'}">
-						       					<c:if test="${sessionScope.session_comment==''}">
-								       				현재 쿠폰 사용요청이
-								       				<a href="/emenu/user/dashSeller.do?session_id=${session_id}" > <font color="#FF0000">${session_cpn}</font></a>건 존재합니다.
-								       				<br/>지금 바로 확인하세요.&nbsp;&nbsp;&nbsp;<a href="#" onclick="initSlideLeftPanel();return false">닫기</a>
-							       				</c:if>
-							       				<c:if test="${sessionScope.session_comment!=''}">
-							       					${sessionScope.session_comment}&nbsp;&nbsp;&nbsp;<a href="#" onclick="initSlideLeftPanel();return false">닫기</a>
-							       				</c:if>
-						       				</c:if>
-						       			</td>
-						       		</tr>
-						       </table>
-						    </div>
-						</div>
 						<a href="/emenu/user/get.do?user_type=${session_type}&user_id=${session_id}" class="btn btn-link">${session_name} (${session_id}) 님 환영합니다.</a>
-						<a href="#" class="btn btn-link" onclick="initSlideLeftPanel();return false"> 
+						
+						<a href="/emenu/user/buyer/dashboard.do?session_id=${session_id}" class="btn btn-link"> 
 							<span class="glyphicon glyphicon-bell"></span>
 							<span class="badge">${session_cpn}</span>
 						</a>&nbsp;&nbsp;&nbsp;&nbsp;
