@@ -287,7 +287,7 @@
 	    <div class="page-header">
 	    	<!-- 판매자일 시 -->
 	    	<c:if test="${sessionScope.session_type=='buyer'}">
-	    		<h2><strong><font color ='red'>${resultClass.rest_subject}</font> 메뉴 리스트</strong> <small>장바구니에 담아 구매해주세요.</small></h2>
+	    		<h2><strong>메뉴 리스트</strong> <small>장바구니에 담아 구매해주세요.</small></h2>
 	    	</c:if>
 	    	<!-- 판매자가 아닐 시 -->
 	    	<c:if test="${sessionScope.session_type!='buyer'}">
