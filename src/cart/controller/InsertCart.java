@@ -59,8 +59,9 @@ public class InsertCart {
 		paramClass.setCart_restopt_priceplus(cart_restopt_priceplus);
 		paramClass.setSession_id(session_id);
 		
+		int count = 0;
+		count = (Integer) sqlMapper.queryForObject("Cart.getCount", paramClass);
 		
-		Integer count = (Integer) sqlMapper.queryForObject("Cart.getCount", paramClass);
 		if(count == 0){ //해당되는 레코드가 없을 경우
 			//새로운옵션일경우 장바구니 데이터 insert
 			sqlMapper.insert("Cart.insertCart", paramClass);
