@@ -59,20 +59,13 @@ public class InsertCart {
 		paramClass.setCart_restopt_priceplus(cart_restopt_priceplus);
 		paramClass.setSession_id(session_id);
 		
-		System.out.println("cart_rest_num"+cart_rest_num);
-		System.out.println("cart_restopt_subject"+cart_restopt_subject);
-		System.out.println("session_id"+session_id);
-		
 		int count = 0;
 		count = (Integer) sqlMapper.queryForObject("Cart.getCount", paramClass);
-		System.out.println("count값 : "+count);
 		
 		if(count == 0){ //해당되는 레코드가 없을 경우
-			System.out.println("1번 insert 분기문 진입");
 			//새로운옵션일경우 장바구니 데이터 insert
 			sqlMapper.insert("Cart.insertCart", paramClass);
 		}else{
-			System.out.println("2번 update 분기문 진입");
 			//해당 리스트의 amount를 +1 update하기 위해 레코드를 get함
 			list = sqlMapper.queryForList("Cart.getAmount", paramClass);
 			paramClass.setCart_amount(list.get(0).getCart_amount());
