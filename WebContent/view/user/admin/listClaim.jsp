@@ -106,7 +106,7 @@
                                                 </c:if>
                                                 <c:if test="${claimDTO.claim_result != 'admission' }">
                                                     <button type="button" class="btn btn-default btn-block" 
-                                                    onclick="javascript:open('${path}${claimDTO.article_viewUrl}','view_article',' location=no', height=500)">글 보기</button>
+                                                    onclick="javascript:open('${path}${claimDTO.article_viewUrl}','view_article',' location=no, height=450')">글 보기</button>
                                                 </c:if>
                                         </td>
                                         <td> ${claimDTO.claimer } </td>

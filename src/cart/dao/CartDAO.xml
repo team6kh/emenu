@@ -14,6 +14,8 @@
 		<result property="cart_restopt_subject" column="cart_restopt_subject" />
 		<result property="cart_restopt_priceplus" column="cart_restopt_priceplus" />
 		<result property="session_id" column="session_id" />
+		<result property="cart_amount" column="cart_amount" />
+		<result property="cart_ischeck" column="cart_ischeck" />
 	</resultMap>
 
 	<!-- insert -->
@@ -45,22 +47,68 @@
 		AND session_id = #session_id#
 	</select>
 	
+	<select id="getAmount" resultMap="cartRes" parameterClass="cartDTO">
+		SELECT * FROM cart_board
+		where cart_rest_num=#cart_rest_num# and cart_restopt_subject = #cart_restopt_subject# and session_id = #session_id#
+	</select>
+	
 	<select id="selectCartBoard" resultMap="cartRes" parameterClass="java.lang.String">
 		SELECT * FROM cart_board
 		WHERE session_id = #session_id#
 	</select>
 	
-
 	<select id="selectForPayment" resultMap="cartRes" parameterClass="cartDTO">
 		SELECT * FROM cart_board
 		WHERE cart_rest_num = #cart_rest_num#
 		AND session_id = #session_id#
 	</select>
+	
+	<select id="selectForCheckedPayment" resultMap="cartRes" parameterClass="cartDTO">
+		SELECT * FROM cart_board
+		WHERE session_id = #session_id#
+		AND cart_ischeck = 1
+	</select>
 
+	<select id="getCount" resultClass="int" parameterClass="cartDTO">
+		SELECT count(*) FROM cart_board
+		where cart_rest_num=#cart_rest_num# and cart_restopt_subject = #cart_restopt_subject# and session_id = session_id 
+	</select>
+	
+	<!-- update -->
+	<update id="plusAmount" parameterClass="cartDTO">
+		UPDATE cart_board
+		SET cart_amount = #cart_amount# + 1
+		where cart_rest_num=#cart_rest_num# and cart_restopt_subject = #cart_restopt_subject# and session_id = session_id 
+	</update>
+	
+	<update id="minusAmount" parameterClass="cartDTO">
+		UPDATE cart_board
+		SET cart_amount = #cart_amount# - 1
+		where cart_rest_num=#cart_rest_num# and cart_restopt_subject = #cart_restopt_subject# and session_id = session_id 
+	</update>
+	
+	<update id="updatePayList" parameterClass="int">
+    	UPDATE cart_board
+        SET cart_ischeck = 1
+        WHERE cart_num = #cart_num#
+    </update>
+
+	<update id="rollback" parameterClass="int">
+    	UPDATE cart_board
+        SET cart_ischeck = 0
+        WHERE cart_isCheck = 1
+    </update>
 	<!-- delete -->
+	
 	<delete id="deleteCartForPaid" parameterClass="cartDTO">
 		DELETE FROM cart_board
 		WHERE cart_rest_num = #cart_rest_num#
+		AND session_id = #session_id#
+	</delete>
+	
+	<delete id="deleteChecked" parameterClass="cartDTO">
+		DELETE FROM cart_board
+		WHERE cart_num = #cart_num#
 		AND session_id = #session_id#
 	</delete>
 

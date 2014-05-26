@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import paid.dto.PaidDTO;
 import paid.dto.SearchConditionDTO;
+import user.buyer.dto.BuyerDTO;
 
 import com.ibatis.common.resources.Resources;
 import com.ibatis.sqlmap.client.SqlMapClient;
@@ -109,12 +110,21 @@ public class DashBuyer {
 	
 	
 	@RequestMapping("/user/buyer/requestCpn")
-	public String requestCpn(HttpServletRequest request) throws SQLException {
-		
+	public String requestCpn(HttpServletRequest request, HttpSession session) throws SQLException {
 		int paid_num = Integer.parseInt(request.getParameter("paid_num"));
 		String currentPage = request.getParameter("currentPage");
+		String session_id = (String) session.getAttribute("session_id");	
 		
+		//사용요청
 		sqlMapper.update("Paid.updateRequestCpn", paid_num);
+		
+		int count = (Integer)sqlMapper.queryForObject("Paid.getUnusedCpnInfo", session_id);
+		if(count==0){
+			session.setAttribute("session_cpn", 0);
+		}else{
+			list = sqlMapper.queryForList("Paid.selectUnusedCpnInfo", session_id);
+			session.setAttribute("session_cpn", list.size());
+		}
 		
 		return "/user/buyer/dashboard.do?currentPage="+currentPage;
 	}

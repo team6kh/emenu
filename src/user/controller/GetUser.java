@@ -15,9 +15,14 @@ public class GetUser {
 		
 		String user_type = "";
 		//String user_id = "";
+		String actionStatus = "";
 		
 		user_type = request.getParameter("user_type");
+		//System.out.println("user_type:"+user_type);
 		//user_id = request.getParameter("user_id");
+		
+		actionStatus = request.getParameter("actionStatus");
+		request.setAttribute("actionStatus", actionStatus);
 		
 		//System.out.println("actionStatus:"+request.getAttribute("actionStatus"));
 		

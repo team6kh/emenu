@@ -26,6 +26,12 @@
 <link href="view/jogiyo.css" rel="stylesheet">
 <link href="view/common/common-template.css" rel="stylesheet">
 
+
+<script language=javascript>
+	var openwin = window.open("AGS_progress.html","popup","width=300,height=160");
+	openwin.close();
+</script>
+
 <style type="text/css">
 	html {
 		height: 100%
@@ -46,12 +52,8 @@
 	<!-- container -->
 	<div class="container">
 		
-		<div class="col-md-12">
-			<h3>구매완료 페이지</h3>
-		</div>
-		
 		<div class="col-md-12" align="center">
-			<img src="assets/img/common/Jogiyo_paidResult.png" width="800px" height="200px">
+			<img src="assets/img/common/eMenu_paidResult.png" width="1140px" height="300px">
 		</div>
 		
 		<div class="col-md-12 well">

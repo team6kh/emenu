@@ -48,17 +48,22 @@
 	<input type="hidden" id="rest_num" name="rest_num" value="${rest_num}" />
 	<input type="hidden" id="rest_subject" name="rest_subject" value="${rest_subject}" />
 	<input type="hidden" id="session_id" name="session_id" value="${sessionScope.session_id}" />
-
+	
 	<!-- 장바구니 list -->
 	<c:forEach var="list" items="${list}">
 		<div class="col-sm-3 col-md-2">
 			<div class="thumbnail">
-				<img src="${list.cart_restopt_destFile1}" alt="N/A"
-					style="min-height: 100px; height: 100px;" />
+			
+				<img src="${list.cart_restopt_destFile1}" alt="N/A" style="min-height: 100px; height: 100px;" />
 				<div class="caption" align="center">
-					<font color=green><b>${list.cart_restopt_subject}</b></font>&nbsp;
-					${list.cart_restopt_priceplus} 원 <br />
+					<font color=green size=3><b>${list.cart_restopt_subject}</b></font><br/>
+					<font size=3><b>${list.cart_restopt_priceplus}원</b></font>
+					<font size=2>x ${list.cart_amount}</font>
+					<a href="/emenu/plusAmount.do?cart_rest_num=${list.cart_rest_num}&cart_rest_subject=${list.cart_rest_subject}&cart_restopt_subject=${list.cart_restopt_subject}" ><span class="glyphicon glyphicon-plus-sign"></span></a>
+					<a href="/emenu/minusAmount.do?cart_rest_num=${list.cart_rest_num}&cart_rest_subject=${list.cart_rest_subject}&cart_restopt_subject=${list.cart_restopt_subject}" ><span class="glyphicon glyphicon-minus-sign"></span></a><br />
+					<input type="hidden" name="cart_amount" value="${list.cart_amount}" />
 				</div>
+				
 			</div>
 		</div>
 	</c:forEach>

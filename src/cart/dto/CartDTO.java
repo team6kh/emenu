@@ -2,14 +2,24 @@ package cart.dto;
 
 public class CartDTO {
 	
-	int cart_num;
-	int cart_rest_num;
-	String cart_rest_subject;
-	int cart_restopt_num;
-	String cart_restopt_destFile1;
-	String cart_restopt_subject;
-	int cart_restopt_priceplus;
-	String session_id;
+	private int cart_num;
+	private int cart_rest_num;
+	private String cart_rest_subject;
+	private int cart_restopt_num;
+	private String cart_restopt_destFile1;
+	private String cart_restopt_subject;
+	private int cart_restopt_priceplus;
+	private String session_id;
+	private int cart_amount;
+	private int cart_ischeck;
+
+	public int getCart_ischeck() {
+		return cart_ischeck;
+	}
+
+	public void setCart_ischeck(int cart_ischeck) {
+		this.cart_ischeck = cart_ischeck;
+	}
 
 	public int getCart_restopt_num() {
 		return cart_restopt_num;
@@ -73,6 +83,14 @@ public class CartDTO {
 
 	public void setSession_id(String session_id) {
 		this.session_id = session_id;
+	}
+
+	public int getCart_amount() {
+		return cart_amount;
+	}
+
+	public void setCart_amount(int cart_amount) {
+		this.cart_amount = cart_amount;
 	}
 	
 }

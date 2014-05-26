@@ -79,15 +79,16 @@ public class ListPaid {
 		pay_pricetotal = 0;
 		for(int i=0; i<list.size(); i++){
 			pay_restopt_subject += list.get(i).getCart_restopt_subject()+", ";
-			pay_pricetotal += list.get(i).getCart_restopt_priceplus();
+			pay_pricetotal += list.get(i).getCart_restopt_priceplus() * list.get(i).getCart_amount(); //가격 * 수량 값을 pricetotal에 누적
 		}
 		
 		//회원정보
 		buyerDTO = (BuyerDTO) sqlMapper.queryForObject("Buyer.getBuyerSession", session_id);
 		
+		
 		request.setAttribute("list", list);
 		request.setAttribute("pay_num", pay_num);
-		request.setAttribute("pay_rest_subject", pay_rest_subject);
+		request.setAttribute("pay_rest_subject", "eMenu");
 		request.setAttribute("pay_restopt_subject", pay_restopt_subject);
 		request.setAttribute("pay_pricetotal", pay_pricetotal);
 		request.setAttribute("buyerDTO", buyerDTO);

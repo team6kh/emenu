@@ -33,6 +33,7 @@
         SELECT * 
         FROM claim_board
         WHERE claim_result = 'receive'
+        ORDER BY claim_reg_date
     </select>
     
     <!-- 게시판명과 글번호로 검색 -->

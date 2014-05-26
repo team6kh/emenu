@@ -205,10 +205,10 @@
                             <c:forEach var="list" items="${list}">
                                 <tr>
                                     <td>${list.paid_num}</td>
-                                    <td><a href="http://localhost:8000/emenu/readRest.do?rest_num=${list.paid_rest_num}">${list.paid_rest_subject}</a> </td>
-                                    <td><a href="http://localhost:8000/emenu/readRest.do?rest_num=${list.paid_rest_num}">${list.paid_restopt_subject}</a> </td>
+                                    <td><a href="/emenu/readRest.do?rest_num=${list.paid_rest_num}">${list.paid_rest_subject}</a> </td>
+                                    <td><a href="/emenu/readRest.do?rest_num=${list.paid_rest_num}">${list.paid_restopt_subject}</a> </td>
                                     <td>${list.paid_restopt_priceplus}&nbsp;원 </td>
-                                    <td><a href="http://localhost:8000/emenu/readRest.do?rest_num=${list.paid_rest_num}"><img src="/emenu/${list.paid_restopt_destFile1}" alt="N/A" class="img-responsive" style="min-height:40px;height:40px;"></a></td>
+                                    <td><a href="/emenu/readRest.do?rest_num=${list.paid_rest_num}"><img src="/emenu/${list.paid_restopt_destFile1}" alt="N/A" class="img-responsive" style="min-height:40px;height:40px;"></a></td>
                                     <td>${list.paid_cpn} </td>
                                     <!-- <td>${list.paid_cpn_used} </td> -->
                                     <!-- 사용요청 -->

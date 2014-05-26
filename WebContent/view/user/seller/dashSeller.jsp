@@ -22,20 +22,20 @@
         <link href="/emenu/view/common/common-template.css" rel="stylesheet">
         <link href="/emenu/view/user/dashboard.css" rel="stylesheet">
         <script type="text/javascript">
-                		// 오늘 버튼 눌렀을 때 날짜 설정
+                        // 오늘 버튼 눌렀을 때 날짜 설정
                        function setToday() {
-                    	   var now = new Date();
+                           var now = new Date();
                 
                            var day = ("0" + now.getDate()).slice(-2);
                            var month = ("0" + (now.getMonth() + 1)).slice(-2);
                            var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
                            $('#startDate').val(today);
-                      	   $('#endDate').val(today);
+                           $('#endDate').val(today);
                 
-                		}
-                		// 이번 주 버튼 눌렀을 때 날짜 설정
+                        }
+                        // 이번 주 버튼 눌렀을 때 날짜 설정
                        function setThisWeek() {
-                    	   var now = new Date();
+                           var now = new Date();
                 
                 
                            var oneWeekAgo = new Date();
@@ -49,10 +49,10 @@
                            $('#startDate').val(week);
                            setEndDate();
                 
-                		}
+                        }
                        // 이번 달 버튼 눌렀을 때 날짜 설정
                        function setThisMon() {
-                    	   var now = new Date();
+                           var now = new Date();
                            var oneMonthAgo = new Date();
                            oneMonthAgo.setMonth(now.getMonth() -1);
                 
@@ -64,10 +64,10 @@
                 
                            $('#startDate').val(oneMon);
                            setEndDate();
-                		}
+                        }
                        // 최근 6개월 버튼 눌렀을 때 날짜 설정
                        function setLastSixMon() {
-                    	   var now = new Date();
+                           var now = new Date();
                            var sixMonthAgo = new Date();
                            sixMonthAgo.setMonth(now.getMonth() - 6);
                 
@@ -79,17 +79,17 @@
                 
                            $('#startDate').val(sixMon);
                            setEndDate();
-                		}
+                        }
                        // 마지막 날짜 값 설정
                        function setEndDate() {
-                    	   var now = new Date();
+                           var now = new Date();
                 
                            var day = ("0" + now.getDate()).slice(-2);
                            var month = ("0" + (now.getMonth() + 1)).slice(-2);
                            var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
                 
                            $('#endDate').val(today);
-                		}
+                        }
             </script>
     </head>
     <body>
@@ -151,7 +151,7 @@
                             <form name="searchDate" method="post"  action="/emenu/user/dashSeller.do" >
                                 <table class="table">
                                     <tr>
-                                        <th colspan="2">기간별 검색</th>
+                                        <th colspan="2"> <font size="3px"><B> 기간별 검색 </B></font> </th>
                                     </tr>
                                     <tr>
                                         <td class="text-center" colspan="2">
@@ -244,24 +244,24 @@
             </div>
             <!-- /.container -->
             <!-- Bootstrap core JavaScript
-           	    ================================================== -->
+                ================================================== -->
             <!-- Placed at the end of the document so the pages load faster -->
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
             <script src="/emenu/dist/js/bootstrap.min.js"></script>
-       	    <!--  Datepicker JS -->
+            <!--  Datepicker JS -->
             <script type="text/javascript"  src="/emenu/assets/js/jquery-ui-1.10.4.custom.min.js"></script>
             <script type="text/javascript" src="/emenu/assets/js/jquery.ui.datepicker-ko.js"></script>
             <script>
                 $(function() {
                 $( "#startDate" ).datepicker({
-                	changeYear: true,
+                    changeYear: true,
                     showButtonPanel: true,   //달력아래 닫기 버튼 오늘가기 버튼 출력
                     dateFormat: "yy-mm-dd", //날짜 출력 형식
                     minDate : '-2y',
                     maxDate : '+0'   
                 });
                 $("#endDate").datepicker({   //달력 2개가 필요하기 때문에 추가
-                	changeYear: true,
+                    changeYear: true,
                     showButtonPanel: true,   
                     dateFormat: "yy-mm-dd", //날짜 출력 형식
                     minDate : '-2y',

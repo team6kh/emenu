@@ -27,7 +27,7 @@ public class ListCart {
 		//장바구니관련
 		private CartDTO paramClass1 = new CartDTO();
 		private List<CartDTO> list = new ArrayList<CartDTO>();
-		
+
 		//페이지관련
 		private int blockCount = 10; // 한 페이지의 게시물의 수
 		private int blockPage = 5; // 한 화면에 보여줄 페이지
@@ -36,48 +36,50 @@ public class ListCart {
 		private String actionName = "cartboard";
 		private int currentPage = 1; // 현재 페이지
 		private int totalCount; // 총 게시물의 수
-		
+		private String rest_subject;
+		private int rest_num;
+
 		//iBatis관련
 		SqlMapClientTemplate ibatis = null;
 		public static Reader reader;
 		public static SqlMapClient sqlMapper;
-		
-		
+
+
 		//생성자(연결)
 		public ListCart() throws IOException{
 			reader = Resources.getResourceAsReader("sqlMapConfig.xml");
 			sqlMapper = SqlMapClientBuilder.buildSqlMapClient(reader);
 			reader.close();
 		}
-		
+
 		//listCart.do
 		@RequestMapping("/listCart.do")
 		public String listCart(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception{
 			String session_id = (String) session.getAttribute("session_id");
 			int rest_num = Integer.parseInt(request.getParameter("rest_num"));
 			String rest_subject = request.getParameter("rest_subject");
-			
+
 			paramClass1.setCart_rest_num(rest_num);
 			paramClass1.setSession_id(session_id);
 			//카트리스트
 			list = sqlMapper.queryForList("Cart.selectCartAll", paramClass1);
-			
+
 			request.setAttribute("rest_num", rest_num);
 			request.setAttribute("rest_subject", rest_subject);
 			request.setAttribute("list", list);
-	
+
 			return "/view/rest/listCart.jsp";
 		}
-		
-		
+
+
 		//cartboard.do
 		@RequestMapping("/cartboard.do")
 		public String cartboard(HttpServletRequest request, HttpSession session) throws Exception{
 			String session_id = (String) session.getAttribute("session_id");
-			
+
 			//현재 로그인된 세션의 카트리스트
 			list = sqlMapper.queryForList("Cart.selectCartBoard", session_id);
-			
+
 			totalCount = list.size(); 
 			if (request.getParameter("currentPage") == null){
 				currentPage = 1;
@@ -93,10 +95,22 @@ public class ListCart {
 
 			list = list.subList(page.getStartCount(), lastCount);
 			
+			int size = list.size();
+			if(size>0){
+				rest_num = list.get(0).getCart_rest_num();
+				rest_subject =  list.get(0).getCart_rest_subject();
+			}else{
+				rest_num = 0;
+				rest_subject = "";
+			}
+			
+			request.setAttribute("size", size);
+			request.setAttribute("rest_num", rest_num);
+			request.setAttribute("rest_subject", rest_subject);
 			request.setAttribute("list", list);
 			request.setAttribute("pagingHtml", pagingHtml);
 			request.setAttribute("currentPage", currentPage);
-	
+
 			return "/view/user/buyer/cartBoard.jsp";
 		}
 }
