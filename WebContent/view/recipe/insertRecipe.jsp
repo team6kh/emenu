@@ -60,7 +60,7 @@
 		    <form name="inputWarning" action="updateRecipe.do" method="post" enctype="multipart/form-data"  onSubmit="return submitContents(this);">
 				<input type="hidden" id="recipe_num" name="recipe_num" value="${resultClass.recipe_num}" />
 				<input type="hidden" id="currentPage" name="currentPage" value="${currentPage}" />
-				<input type="hidden" id="pagingHtml" name="pagingHtml" value="${pagingHtml}" />
+				
 			</c:if>
 			
 				<!-- table -->
@@ -129,7 +129,7 @@
 					
 						<td style="width: 20%;" align="center">방법 및 상세내용</td>
 						<td colspan="3">
-					    	<textarea name="recipe_content" id="recipe_content" value="${pagingHtml}" Style="width:850px" >${pagingHtml}</textarea>
+					    	<textarea name="recipe_content" id="recipe_content" Style="width:850px" >${pagingHtml}</textarea>
 					    </td>
 					</tr>
 	
