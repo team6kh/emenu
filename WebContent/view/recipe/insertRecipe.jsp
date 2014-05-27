@@ -129,7 +129,7 @@
 					
 						<td style="width: 20%;" align="center">방법 및 상세내용</td>
 						<td colspan="3">
-					    	<textarea name="recipe_content" id="recipe_content" value="${pagingHtml}" Style="width:850px" >${pagingHtml}</textarea>
+					    	<textarea name="recipe_content" id="recipe_content" Style="width:850px" >${pagingHtml}</textarea>
 					    </td>
 					</tr>
 	

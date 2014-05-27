@@ -53,7 +53,6 @@ public class ResponseCPN
         
         int count = (Integer)sqlMapper.queryForObject("Rest.selectCountForSeller", session_id);
 		if(count==0){ //등록된 상품이 없는경우
-			session.setAttribute("session_comment", "지금 상품을 등록하세요!");
 			rest_num = 0;
 		}else{ //등록된 상품이 있는 경우
 			list1 = sqlMapper.queryForList("Rest.selectSellerGoods", session_id);

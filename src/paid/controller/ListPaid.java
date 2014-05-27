@@ -152,6 +152,16 @@ public class ListPaid {
 		//방금 장바구니로 구매한 레코드 (=방금 결제완료한 레코드)
 		list2 = sqlMapper.queryForList("Paid.selectPaidNow", resultClass);
 		
+		
+		//쿠폰 사이즈를 구해 세션을 생성한다.
+		int count1 = (Integer)sqlMapper.queryForObject("Paid.getUnusedCpnInfo", session_id);
+		if(count1==0){
+			session.setAttribute("session_cpn", 0);
+		}else{
+			list = sqlMapper.queryForList("Paid.selectUnusedCpnInfo", session_id);
+			session.setAttribute("session_cpn", list.size());
+		}
+		
 		request.setAttribute("list2", list2);
 		
 		return "/view/rest/payRestResult.jsp";
