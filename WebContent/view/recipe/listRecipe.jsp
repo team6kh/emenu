@@ -22,6 +22,12 @@
 <link href="view/jogiyo.css" rel="stylesheet">
 <link href="view/common/common-template.css" rel="stylesheet">
 
+<!-- Unify -->        
+<!-- CSS Implementing Plugins -->    
+<link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.css" />
+<link rel="stylesheet" href="assets/plugins/flexslider/flexslider.css" type="text/css" media="screen" />    	
+<link rel="stylesheet" href="assets/plugins/parallax-slider/css/parallax-slider.css" type="text/css" />
+
 <!-- 스크립트 -->
 <SCRIPT type="text/javascript">
     function detailsearch() {
@@ -64,6 +70,38 @@
     }
 </SCRIPT>
 
+<!-- 커스텀 CSS -->
+<style type="text/css">
+	#map_canvas {
+		height: 200px
+	}
+	#cartFrame {
+		height: 450px
+	}
+
+	.da-slider {
+		background: transparent;	
+		height: 200px;			
+	}
+	.da-slider h2 {
+		margin-left: 15%;
+		top: 25px;		
+	}
+	.da-slider p {
+		font-size: 27px;
+		margin-left: 20%;
+		top: 125px;		
+	}
+	.da-slider .da-img {		
+		line-height: 200px;
+		margin-left: -22%;
+		top: 0px;
+	}
+	.da-arrows span {
+		top: 40%;
+	}
+</style>
+
 </head>
 
 <body>
@@ -71,6 +109,28 @@
     <!-- header -->
     <%@ include file="/view/common/header.jsp"%>
     <!-- end of header -->
+    
+    
+    <!--=== Slider ===-->
+	<div class="slider-inner">
+	    <div id="da-slider" class="da-slider" style="background: transparent;">
+	    
+	        <!-- 슬라이드 메뉴 리스트 -->
+	        <c:forEach var="list" items="${list}">
+	        <div class="da-slide">
+	        
+	            <div class="da-img"><img src="${list.recipe_file}" alt="" /></div>
+	        </div>        
+	        </c:forEach>
+	        <!-- 화살표 -->
+	        <nav class="da-arrows">
+	            <span class="da-arrows-prev"></span>
+	            <span class="da-arrows-next"></span>		
+	        </nav>
+	    </div><!--/.da-slider-->
+	</div><!--/.slider-->
+	<!--=== End Slider ===-->
+    
 
     <!-- container -->
     <div class="container">
@@ -230,11 +290,55 @@
     </div>
     <!-- /.container -->
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script
-        src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="dist/js/bootstrap.min.js"></script>
+	<!-- Bootstrap core JavaScript
+   ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<!--  수정해도 괜찮음? -->
+	<script type="text/javascript" src="assets/js/jquery-1.8.2.min.js"></script>
+	<%-- <script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>--%>
+	<script src="dist/js/bootstrap.min.js"></script>
+
+	<!-- Unify -->
+	<!-- JS Global Compulsory -->			
+	
+	<script type="text/javascript" src="assets/js/modernizr.custom.js"></script>		
+	<script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>	
+	<!-- JS Implementing Plugins -->           
+	<script type="text/javascript" src="assets/plugins/flexslider/jquery.flexslider-min.js"></script>
+	<script type="text/javascript" src="assets/plugins/parallax-slider/js/modernizr.js"></script>
+	<script type="text/javascript" src="assets/plugins/parallax-slider/js/jquery.cslider.js"></script> 
+	<script type="text/javascript" src="assets/plugins/back-to-top.js"></script>
+	<!-- JS Page Level -->           
+	<script type="text/javascript" src="assets/js/app.js"></script>
+	<script type="text/javascript" src="assets/js/pages/index.js"></script>
+	<script type="text/javascript">
+	    jQuery(document).ready(function() {
+	      	App.init();
+	        App.initSliders();
+	        Index.initParallaxSlider();
+	    });
+	</script>
+	
+	<!--[if lt IE 9]>
+    <script src="assets/js/respond.js"></script>
+<![endif]-->
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push([ '_setAccount', 'UA-29166220-1' ]);
+	_gaq.push([ '_setDomainName', 'htmlstream.com' ]);
+	_gaq.push([ '_trackPageview' ]);
+
+	(function() {
+		var ga = document.createElement('script');
+		ga.type = 'text/javascript';
+		ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+				: 'http://www')
+				+ '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+	
 </body>
 </html>
