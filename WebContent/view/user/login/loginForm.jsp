@@ -34,7 +34,7 @@
 
 		<form class="form-signin" action="/emenu/user/login.do" method="post">			
 
-			<h2 class="form-signin-heading">조기요...</h2>
+			<h2 class="form-signin-heading">이 메뉴?</h2>
 			
 			<c:if test="${loginFeedback eq 'login_error'}">						
 				<div class="alert alert-danger alert-dismissable" id="alert_div">			  

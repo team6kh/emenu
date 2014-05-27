@@ -94,6 +94,7 @@
 							<div class="masonry">
 								<a href="/emenu/readRest.do?rest_num=${listCart.cart_rest_num}">
 								<img class="filter" src="/emenu/${listCart.cart_restopt_destFile1}" alt="N/A"></a>
+								<div class='hoverdetail'>${listCart.cart_restopt_subject}</div>
 							</div>
 						</li>
 					</c:forEach>					

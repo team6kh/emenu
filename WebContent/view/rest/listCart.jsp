@@ -10,13 +10,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="shortcut icon" href="assets/ico/jogiyo.png">
+<link rel="shortcut icon" href="/emenu/assets/ico/jogiyo.png">
 
 <!-- Bootstrap core CSS -->
-<link href="dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="/emenu/dist/css/bootstrap.min.css" rel="stylesheet">
 <!-- Custom styles for this template -->
-<link href="jogiyo.css" rel="stylesheet">
-<link href="common/common-template.css" rel="stylesheet">
+<!-- <link href="/emenu/view/jogiyo.css" rel="stylesheet">  -->
+<link href="/emenu/view/common/common-template.css" rel="stylesheet">
 
 <style type="text/css">
 	body {

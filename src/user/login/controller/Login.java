@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +28,8 @@ import user.seller.dto.SellerDTO;
 
 @Controller
 public class Login {
+	
+	private Calendar today = Calendar.getInstance();
 	
 	private Reader reader;
 	private SqlMapClient sqlMapper;
@@ -58,13 +61,15 @@ public class Login {
 			@ModelAttribute LoginDTO login,
 			HttpServletRequest request) throws SQLException {
 		
+		System.out.println(login.getLogin_id() + " is attemping to login at " + today.getTime());
+		
 		String loginFeedback = "";
 		
 		/*
 		 * HTTP Status 405 - Request method 'GET' not supported
 		 * Disable "loginFormPro" after logged in
 		 */		
-				
+		
 		// request 객체에 login 값이 있으면(회원가입 후 바로 로그인일 시), 그 값으로 로그인 시도한다.
 		if (request.getAttribute("login") != null) {
 			login = (LoginDTO) request.getAttribute("login");	

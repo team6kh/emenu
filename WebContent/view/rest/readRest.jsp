@@ -14,25 +14,25 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-<link rel="shortcut icon" href="assets/ico/jogiyo.png">
+<link rel="shortcut icon" href="/emenu/assets/ico/jogiyo.png">
 
 <title>eMenu</title>
 
 <!-- Bootstrap core CSS -->
-<link href="dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="/emenu/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="view/jogiyo.css" rel="stylesheet">
-<link href="view/common/common-template.css" rel="stylesheet">
+<link href="/emenu/view/jogiyo.css" rel="stylesheet">
+<link href="/emenu/view/common/common-template.css" rel="stylesheet">
 
 <!-- Unify -->        
 <!-- CSS Implementing Plugins -->    
-<link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.css" />
-<link rel="stylesheet" href="assets/plugins/flexslider/flexslider.css" type="text/css" media="screen" />    	
-<link rel="stylesheet" href="assets/plugins/parallax-slider/css/parallax-slider.css" type="text/css" />
+<link rel="stylesheet" href="/emenu/assets/plugins/font-awesome/css/font-awesome.css" />
+<link rel="stylesheet" href="/emenu/assets/plugins/flexslider/flexslider.css" type="text/css" media="screen" />    	
+<link rel="stylesheet" href="/emenu/assets/plugins/parallax-slider/css/parallax-slider.css" type="text/css" />
 
 <!-- 별점 관련 css -->
-<link rel="stylesheet" href="assets/img/review/css/jquery.rating.css" />
+<link rel="stylesheet" href="/emenu/assets/img/review/css/jquery.rating.css" />
 
 
 <!-- 커스텀 CSS -->
@@ -623,23 +623,23 @@
    ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <!--  수정해도 괜찮음? -->
-<script type="text/javascript" src="assets/js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="/emenu/assets/js/jquery-1.8.2.min.js"></script>
 <%-- <script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>--%>
 <script src="dist/js/bootstrap.min.js"></script>
 
 <!-- Unify -->
 <!-- JS Global Compulsory -->			
 
-<script type="text/javascript" src="assets/js/modernizr.custom.js"></script>		
+<script type="text/javascript" src="/emenu/assets/js/modernizr.custom.js"></script>		
 <!-- <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script> -->	
 <!-- JS Implementing Plugins -->           
-<script type="text/javascript" src="assets/plugins/flexslider/jquery.flexslider-min.js"></script>
-<script type="text/javascript" src="assets/plugins/parallax-slider/js/modernizr.js"></script>
-<script type="text/javascript" src="assets/plugins/parallax-slider/js/jquery.cslider.js"></script> 
-<script type="text/javascript" src="assets/plugins/back-to-top.js"></script>
+<script type="text/javascript" src="/emenu/assets/plugins/flexslider/jquery.flexslider-min.js"></script>
+<script type="text/javascript" src="/emenu/assets/plugins/parallax-slider/js/modernizr.js"></script>
+<script type="text/javascript" src="/emenu/assets/plugins/parallax-slider/js/jquery.cslider.js"></script> 
+<script type="text/javascript" src="/emenu/assets/plugins/back-to-top.js"></script>
 <!-- JS Page Level -->           
-<script type="text/javascript" src="assets/js/app.js"></script>
-<script type="text/javascript" src="assets/js/pages/index.js"></script>
+<script type="text/javascript" src="/emenu/assets/js/app.js"></script>
+<script type="text/javascript" src="/emenu/assets/js/pages/index.js"></script>
 <script type="text/javascript">
     jQuery(document).ready(function() {
       	App.init();
@@ -649,10 +649,10 @@
 </script>
 
 <!-- 별점 관련 js -->
-<script type="text/javascript" src="assets/img/review/js/jquery.rating.js"></script>
+<script type="text/javascript" src="/emenu/assets/img/review/js/jquery.rating.js"></script>
 <!-- 파일업로드 관련 js -->
-<script type="text/javascript" src="assets/img/review/js/jquery.form.js"></script>
-<script type="text/javascript" src="assets/img/review/js/jquery.MultiFile.js"></script>
+<script type="text/javascript" src="/emenu/assets/img/review/js/jquery.form.js"></script>
+<script type="text/javascript" src="/emenu/assets/img/review/js/jquery.MultiFile.js"></script>
 
 
 
