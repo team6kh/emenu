@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%-- <%@ page isELIgnored="false" %> --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,7 +61,8 @@
 							${resultClass.notice_headtag }&nbsp;${resultClass.notice_subject }
 						</c:if></strong>
 					</th>
-        			<th width="100" class="text-center"><strong>${resultClass.notice_reg_date }</strong></th>
+        			<th width="100" class="text-center"><strong><fmt:formatDate value="${resultClass.notice_reg_date }" pattern="yyyy-MM-dd  HH : mm : ss"/>
+                   </strong></th>
       			</tr>
       	    </thead>
       	    <tbody>
