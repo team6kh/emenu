@@ -16,6 +16,10 @@
 	text-decoration: line;
 }
 
+.noline:hover, .noline:focus {
+	text-decoration: blink;
+}
+
 #dhtmlgoodies_leftPanel{    /* Styling the help panel */
 
     background-color:#474747;    /* Noti-background color */
@@ -326,24 +330,32 @@ document.documentElement.onhelp  = keyboardShowLeftPanel;
 				</c:when>
 				<%-- 로그인 후 --%>
 				<c:when test="${not empty session_id}">
-					<form class="navbar-form navbar-right" action="/emenu/user/logout.do" method="post">
-						<a href="/emenu/user/get.do?user_type=${session_type}&user_id=${session_id}" class="btn btn-link">${session_name} (${session_id}) 님 환영합니다.</a>
-						
+					<form class="navbar-form navbar-right" action="/emenu/user/logout.do" method="post" style="margin-top: 0px; margin-bottom: 0px;">
+						<a href="/emenu/user/get.do?user_type=${session_type}&user_id=${session_id}" class="btn btn-link" style="margin-top:8px; margin-bottm:8px;">${session_name} (${session_id}) 님 환영합니다.</a>
+							
 						<c:if test="${session_type == 'buyer'}" >
-							<a href="/emenu/user/buyer/dashboard.do?session_id=${session_id}" class="btn btn-link"> 
-								<span class="glyphicon glyphicon-bell"></span>
-								<span class="badge">${session_cpn}</span>
-							</a>&nbsp;&nbsp;&nbsp;&nbsp;
+							<ul class="nav navbar-nav">
+								<li>
+									<a href="/emenu/user/buyer/dashboard.do?session_id=${session_id}"> 
+										<span class="glyphicon glyphicon-bell"></span>
+										<span class="badge">${session_cpn}</span>
+									</a>
+								</li>
+							</ul>
 						</c:if>
 						
 						<c:if test="${session_type == 'seller'}" >
-							<a href="/emenu/user/dashSeller.do?sesssion_id=${session_id}" class="btn btn-link"> 
-								<span class="glyphicon glyphicon-bell"></span>
-								<span class="badge">${session_cpn}</span>
-							</a>&nbsp;&nbsp;&nbsp;&nbsp;
+							<ul class="nav navbar-nav">
+								<li>
+									<a href="/emenu/user/dashSeller.do?sesssion_id=${session_id}" class="btn btn-link noline" style="margin-top:8px; margin-bottm:8px;"> 
+										<span class="glyphicon glyphicon-bell"></span>
+										<span class="badge">${session_cpn}</span>
+									</a>
+								</li>
+							</ul>	
 						</c:if>
 						
-						<button type="submit" class="btn btn-warning">로그아웃</button>
+						<button type="submit" class="btn btn-warning" style="margin-top:8px; margin-bottm:8px;">로그아웃</button>
 					</form>
 				</c:when>				
 			</c:choose>
