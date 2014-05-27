@@ -93,12 +93,12 @@
 	
 	<select id="getUnusedCpnInfo"  resultClass="int" parameterClass="java.lang.String">
 		select count(*) from paid_board
-		where paid_cpn_used = 0
+		where paid_cpn_used = 0 and session_id=#session_id#
 	</select>
 
 	<select id="selectUnusedCpnInfo"  resultClass="paidDTO" parameterClass="java.lang.String">
 		select * from paid_board
-		where paid_cpn_used = 0
+		where paid_cpn_used = 0 and session_id=#session_id#
 	</select>
 	
 	<select id="selectPaidLastNum" resultClass="paidDTO" parameterClass="int">

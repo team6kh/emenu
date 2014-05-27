@@ -215,7 +215,9 @@
 			</div>
 
 			<div class="pull-right">
+			<c:if test="${!(session_id eq 'admin')}">
 				<button type="button" class="btn btn-primary" onclick="return checkId()">글쓰기</button>
+				</c:if>
 			</div>
 
 		</div>

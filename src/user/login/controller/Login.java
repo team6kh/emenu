@@ -58,6 +58,8 @@ public class Login {
 			@ModelAttribute LoginDTO login,
 			HttpServletRequest request) throws SQLException {
 		
+		String loginFeedback = "";
+		
 		/*
 		 * HTTP Status 405 - Request method 'GET' not supported
 		 * Disable "loginFormPro" after logged in
@@ -90,6 +92,7 @@ public class Login {
 				
 				//쿠폰 사이즈를 구해 세션을 생성한다.
 				int count = (Integer)sqlMapper.queryForObject("Paid.getUnusedCpnInfo", result.getBuyer_id());
+				
 				if(count==0){
 					session.setAttribute("session_cpn", 0);
 				}else{
@@ -101,8 +104,10 @@ public class Login {
 				return "/redirector.do";
 			}
 			
-			// 구매자 로그인 실패입니다. redirect to "error"
-			return "redirect:/error.do";
+			// 구매자 로그인 실패입니다.
+			loginFeedback = "login_error";
+			request.setAttribute("loginFeedback", loginFeedback);
+			return "/user/login/form.do";
 		
 		// 로그인 타입이 "판매자"
 		} else if (login.getLogin_type().equals("seller")) {
@@ -149,8 +154,10 @@ public class Login {
 				return "/redirector.do";
 			}
 			
-			// 판매자 로그인 실패입니다. redirect to "error"
-			return "redirect:/error.do";			
+			// 판매자 로그인 실패입니다.
+			loginFeedback = "login_error";
+			request.setAttribute("loginFeedback", loginFeedback);
+			return "/user/login/form.do";		
 		
 		// 로그인 타입이 "관리자"
 		} else if (login.getLogin_type().equals("admin")) {
@@ -166,8 +173,10 @@ public class Login {
 				return "redirect:/user/admin/dashboard.do";
             }
             
-            // 관리자 로그인 실패입니다. redirect to "error"
-         	return "redirect:/error.do";	
+            // 관리자 로그인 실패입니다.
+            loginFeedback = "login_error";
+			request.setAttribute("loginFeedback", loginFeedback);
+			return "/user/login/form.do";	
         }
 		
 		// 로그인 타입이 없습니다. 로그인 실패입니다. redirect to "error"

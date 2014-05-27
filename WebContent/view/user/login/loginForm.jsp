@@ -32,9 +32,16 @@
 	<!-- container -->
 	<div class="container">
 
-		<form class="form-signin" action="/emenu/user/login.do" method="post">
-		
+		<form class="form-signin" action="/emenu/user/login.do" method="post">			
+
 			<h2 class="form-signin-heading">조기요...</h2>
+			
+			<c:if test="${loginFeedback eq 'login_error'}">						
+				<div class="alert alert-danger alert-dismissable" id="alert_div">			  
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+					<a href="#" class="alert-link" id="alert_placeholder">아이디 또는 비밀번호를 확인하세요.</a>			  
+				</div>
+			</c:if>
 			
 			<select class="form-control" name="login_type">
 				<option value="buyer">구매자</option>

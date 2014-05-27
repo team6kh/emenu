@@ -71,20 +71,20 @@
 
 	<select id="getCount" resultClass="int" parameterClass="cartDTO">
 		SELECT count(*) FROM cart_board
-		where cart_rest_num=#cart_rest_num# and cart_restopt_subject = #cart_restopt_subject# and session_id = session_id 
+		where cart_rest_num=#cart_rest_num# and cart_restopt_subject = #cart_restopt_subject# and session_id = #session_id# 
 	</select>
 	
 	<!-- update -->
 	<update id="plusAmount" parameterClass="cartDTO">
 		UPDATE cart_board
 		SET cart_amount = #cart_amount# + 1
-		where cart_rest_num=#cart_rest_num# and cart_restopt_subject = #cart_restopt_subject# and session_id = session_id 
+		where cart_rest_num=#cart_rest_num# and cart_restopt_subject = #cart_restopt_subject# and session_id = #session_id#
 	</update>
 	
 	<update id="minusAmount" parameterClass="cartDTO">
 		UPDATE cart_board
 		SET cart_amount = #cart_amount# - 1
-		where cart_rest_num=#cart_rest_num# and cart_restopt_subject = #cart_restopt_subject# and session_id = session_id 
+		where cart_rest_num=#cart_rest_num# and cart_restopt_subject = #cart_restopt_subject# and session_id = #session_id#
 	</update>
 	
 	<update id="updatePayList" parameterClass="int">
