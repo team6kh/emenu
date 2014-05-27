@@ -223,6 +223,10 @@
 		readRV.style.display = "block";
 		updateRV.style.display="none";
 		
+	function deleteModal() {
+		alert("deleteModal");
+	}
+		
 		
 	}
 </script>
@@ -494,7 +498,30 @@
                                         &nbsp;&nbsp;&nbsp;&nbsp;
 										<c:if test="${reviewDTO.review_writer == sessionScope.session_id}">
 											<button class="btn btn-default" onclick="return updateRV_form('${reviewDTO.review_num}')">수정</button>
-                                            <button class="btn btn-default" onclick="javascript:open('deleteReviewForm.do?rest_num=${rest_num}&review_rest_currentPage=${currentPage}&ccp=${ccp}&review_num=${reviewDTO.review_num}','confirm','toolbar=no, location=no, status= no, menubar=no, scrollbars=no, resizeable=no, width=300, height=135')">삭제</button>
+											
+											<!-- Button trigger modal : 삭제 -->
+											<button class="btn btn-default" data-toggle="modal" data-target="#deleteModal">삭제</button>					
+											
+											<!-- Modal -->
+											<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+												<div class="modal-dialog">
+													
+													<div class="modal-content">							
+														<div class="modal-body">
+															<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+															<h4 class="modal-title" id="deleteModalLabel">정말 삭제하시겠습니까?</h4>															
+														</div>														
+														<div class="modal-footer">
+															<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>									
+															<button class="btn btn-primary" onclick="location.href='deleteReviewPro.do?rest_num=${rest_num}&review_rest_currentPage=${currentPage}&ccp=${ccp}&review_num=${reviewDTO.review_num}'">확인</button>
+														</div>					
+													</div>
+													
+												</div>
+											</div>
+											<!-- /.Modal -->
+											
+                                            <!-- <button class="btn btn-default" onclick="javascript:open('deleteReviewForm.do?rest_num=${rest_num}&review_rest_currentPage=${currentPage}&ccp=${ccp}&review_num=${reviewDTO.review_num}','confirm','toolbar=no, location=no, status= no, menubar=no, scrollbars=no, resizeable=no, width=300, height=135')">삭제</button>  -->
 										</c:if>
                                         <c:if test="${(sessionScope.session_type == 'buyer') && (sessionScope.session_id != reviewDTO.review_writer)}">
                                             <button type="button" class="btn btn-default" onclick="javascript:open('reportReviewForm.do?review_num=${reviewDTO.review_num}','confirm','toolbar=no, location=no, status= no, menubar=no, scrollbars=no, resizeable=no, width=800, height=450')">신고하기</button>
@@ -604,7 +631,7 @@
 <!-- JS Global Compulsory -->			
 
 <script type="text/javascript" src="assets/js/modernizr.custom.js"></script>		
-<script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>	
+<!-- <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script> -->	
 <!-- JS Implementing Plugins -->           
 <script type="text/javascript" src="assets/plugins/flexslider/jquery.flexslider-min.js"></script>
 <script type="text/javascript" src="assets/plugins/parallax-slider/js/modernizr.js"></script>
