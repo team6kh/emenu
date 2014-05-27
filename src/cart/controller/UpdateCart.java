@@ -2,6 +2,7 @@ package cart.controller;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.text.Normalizer.Form;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,7 +65,17 @@ public class UpdateCart {
 		//옵션중복시에 장바구니 데이터 수량만 update
 		sqlMapper.update("Cart.plusAmount", paramClass);
 		
-		return "redirect:listCart.do?rest_num="+cart_rest_num+"&rest_subject="+cart_rest_subject;
+		
+		String redirect = "";
+		if(request.getParameter("from")==null){
+			System.out.println("rest페이지에서 눌럿을때");
+			redirect = "redirect:listCart.do?rest_num="+cart_rest_num+"&rest_subject="+cart_rest_subject;
+		}else{
+			System.out.println("마이 페이지에서 눌럿을때");
+			redirect = "redirect:/cartboard.do";
+		}
+		
+		return redirect;
 	}
 	
 	//minusAmount.do
@@ -83,17 +94,28 @@ public class UpdateCart {
 		//해당 리스트의 레코드를 get함
 		list = sqlMapper.queryForList("Cart.getAmount", paramClass);
 		
-		//옵션중복시에 장바구니 데이터 수량만 update
-		int amount = list.get(0).getCart_amount(); //현재 레코드의 수량이 뭔지 알아봄.
-		if(amount == 1){ //수량이 0일 경우
-			paramClass.setCart_amount(2);
-			sqlMapper.update("Cart.minusAmount", paramClass);
-		}else{ // 0이 아닌 다른 숫자일 경우
-			paramClass.setCart_amount(amount);
-			sqlMapper.update("Cart.minusAmount", paramClass);
+		if(list !=null){
+			//옵션중복시에 장바구니 데이터 수량만 update
+			int amount = list.get(0).getCart_amount(); //현재 레코드의 수량이 뭔지 알아봄.
+			if(amount == 1){ //수량이 0일 경우
+				paramClass.setCart_amount(2);
+				sqlMapper.update("Cart.minusAmount", paramClass);
+			}else{ // 0이 아닌 다른 숫자일 경우
+				paramClass.setCart_amount(amount);
+				sqlMapper.update("Cart.minusAmount", paramClass);
+			}
 		}
 		
-		return "redirect:listCart.do?rest_num="+cart_rest_num+"&rest_subject="+cart_rest_subject;
+		String redirect = "";
+		if(request.getParameter("from")==null){
+			System.out.println("rest페이지에서 눌럿을때");
+			redirect = "redirect:listCart.do?rest_num="+cart_rest_num+"&rest_subject="+cart_rest_subject;
+		}else{
+			System.out.println("마이 페이지에서 눌럿을때");
+			redirect = "redirect:/cartboard.do";
+		}
+		
+		return redirect;
 	}
 	
 	

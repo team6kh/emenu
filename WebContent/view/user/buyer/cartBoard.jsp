@@ -156,7 +156,12 @@
 										<td align="center"><a href="/emenu/readRest.do?rest_num=${list.cart_rest_num}"><img src="/emenu/${list.cart_restopt_destFile1}" alt="N/A" class="img-responsive" style="min-height:40px;height:40px;"></a></td>
 										<td align="center"><a href="/emenu/readRest.do?rest_num=${list.cart_rest_num}">${list.cart_restopt_subject}</a></td>
 										<td align="center">${list.cart_restopt_priceplus}</td>
-										<td align="center">${list.cart_amount}</td>
+										<td align="center">
+											${list.cart_amount} 
+											<a href="/emenu/plusAmount.do?cart_rest_num=${list.cart_rest_num}&cart_rest_subject=${list.cart_rest_subject}&cart_restopt_subject=${list.cart_restopt_subject}&from=cartboard" ><font color="#F15F5F"><span class="glyphicon glyphicon-plus-sign"></span></font></a>
+											<a href="/emenu/minusAmount.do?cart_rest_num=${list.cart_rest_num}&cart_rest_subject=${list.cart_rest_subject}&cart_restopt_subject=${list.cart_restopt_subject}&from=cartboard" ><font color="#6799FF"><span class="glyphicon glyphicon-minus-sign"></span></font></a>
+											<input type="hidden" name="cart_amount" value="${list.cart_amount}" />
+										</td>
 										<td align="center"> <a href="deleteCheckedCart.do?cart_num=${list.cart_num}"><span class="glyphicon glyphicon-trash"></span></a></td>
 									</tr>
 								</c:forEach>
