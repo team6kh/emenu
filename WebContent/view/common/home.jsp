@@ -66,6 +66,15 @@
 	border: 5px solid #b6991c;
 	background-color: #debb27;
 }
+
+.cart {
+	background-image: url('/emenu/assets/img/common/home_random_menu.png');
+}
+
+.cart:hover {
+	color: #000000;
+}
+
 </style>
 
 </head>
@@ -83,9 +92,14 @@
 				<c:if test="${fn:length(listCart) ne 0}">
 					<!-- 장바구니 image -->
 					<li>
-						<div class="masonry">
+						<div class="masonry cart">
 							<a href="/emenu/cartboard.do">
-							<img src="/emenu/assets/img/common/home_cart.png" alt="N/A"></a>
+								<img								
+									src="/emenu/assets/img/common/home_cart.png"
+									onmouseover="this.src='/emenu/assets/img/common/home_cart_hover.png'"
+									onmouseout="this.src='/emenu/assets/img/common/home_cart.png'"
+									alt="N/A">
+							</a>
 						</div>
 					</li>
 					<!-- end 장바구니 image-->
@@ -103,7 +117,12 @@
 				<li>
 					<div class="masonry">
 						<a href="/emenu/home.do">
-						<img src="/emenu/assets/img/common/home_random_menu.png" alt="N/A"></a>
+							<img								
+								src="/emenu/assets/img/common/home_random_menu.png"
+								onmouseover="this.src='/emenu/assets/img/common/home_random_menu_hover.png'"
+								onmouseout="this.src='/emenu/assets/img/common/home_random_menu.png'"
+								alt="N/A">
+						</a>
 					</div>
 				</li>
 				<!-- end randomMenu image-->
