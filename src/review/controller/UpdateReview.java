@@ -48,11 +48,13 @@ public class UpdateReview
     {
         // 첨부파일 이외의 값들 DB update
         sqlMapper.update("Review.updateReview", reviewDTO);
-        review_files = request.getFiles("review_files");
-        
-        // 새로운 첨부한 파일이 있는 경우, 기존 첨부파일을 삭제하고 새 첨부파일을 서버에 저장한다
-        if (!review_files.isEmpty())
+     
+        // 첨부파일이 있으면, 서버의 지정된 경로로 첨부파일 복사하기
+        if (!request.getFiles("review_files").get(0).isEmpty())
         {
+            
+            // 업로드된 첨부파일 꺼내오기
+            review_files = request.getFiles("review_files");
             // 첨부파일 저장된 경로
             String fileUploadPath = Constants.COMMON_FILE_PATH
                     + Constants.REVIEW_FILE_PATH;

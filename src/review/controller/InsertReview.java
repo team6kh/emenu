@@ -57,12 +57,11 @@ public class InsertReview
         // 첨부파일을 제외한 나머지 프로퍼티들 DB에 insert
         sqlMapper.insert("Review.insertReview", reviewDTO);
         
-        // 업로드된 첨부파일 꺼내오기
-        review_files = request.getFiles("review_files");
-        
         // 첨부파일이 있으면, 서버의 지정된 경로로 첨부파일 복사하기
-        if (!review_files.isEmpty())
+        if (!request.getFiles("review_files").get(0).isEmpty())
         {
+            // 업로드된 첨부파일 꺼내오기
+            review_files = request.getFiles("review_files");
             // 첨부파일 저장할 경로
             String fileUploadPath = Constants.COMMON_FILE_PATH
                     + Constants.REVIEW_FILE_PATH;
