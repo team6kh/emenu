@@ -121,6 +121,32 @@
 		}		
 	}
 	
+	// 정규식을 이용한 휴대폰 번호 validation
+	function validateMobilenum(userinput) {		
+		
+		//var mobilenum = /^\d{10}$/;  
+		var mobilenum = /(01[016789])(\d{8})/;
+		
+		var sp_input = userinput.buyer_mobilenum.value.substr(0,3);
+		var sp = /01[016789]/;
+		// 010,011,016,017,018,019
+		
+		if (!sp_input.match(sp)) {
+			feedbackMobilenum.innerHTML = "알맞은 통신사 번호가 아닙니다.";
+			$('#divMobilenum').addClass('has-error'); // bootstrap validation
+		    return false;
+		} else if (userinput.buyer_mobilenum.value.match(mobilenum)) {
+			feedbackMobilenum.innerHTML = "사용하셔도 좋습니다.";
+			$('#divMobilenum').removeClass('has-error'); // bootstrap validation
+			$('#divMobilenum').addClass('has-success'); // bootstrap validation
+		    return true;
+		} else {
+			feedbackMobilenum.innerHTML = "알맞은 휴대폰 번호가 아닙니다.";
+			$('#divMobilenum').addClass('has-error'); // bootstrap validation
+		    return false; 
+		}	  
+	}  
+	
 	// 사용되지 않음.
 	function okSubmit() {
 		var regId = regForm.feedbackRegId.value;
@@ -194,9 +220,10 @@
 			  <input type="password" class="form-control" name="confirm_pw" placeholder="비밀번호를 재입력 해주세요." onkeyup="confirmPw();" required>
 			  <p class="help-block" id="feedbackConfirmPw">비밀번호를 동일하게 입력해주세요.</p>
 			</div>
-			<div class="form-group">
+			<div class="form-group" id="divMobilenum">
 			  <label>휴대폰</label>
-			  <input type="text" class="form-control" placeholder="'-'를 제외하고 입력해주세요." name="buyer_mobilenum" required>
+			  <input type="text" class="form-control" placeholder="'-'를 제외하고 입력해주세요." id="buyer_mobilenum" name="buyer_mobilenum" maxlength="12" onkeyup="validateMobilenum(this.form);" required>
+			  <p class="help-block" id="feedbackMobilenum"></p>
 			</div>			
 			<div class="form-group">
 			  <label>이메일</label>
@@ -226,7 +253,7 @@
 			change : function() {
 				this.value = this.value.replace(/\s/g, "");
 			}
-		});
+		});		
 	</script>
 </body>
 </html>
