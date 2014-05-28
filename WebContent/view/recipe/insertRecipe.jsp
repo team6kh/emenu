@@ -56,7 +56,7 @@
 				<input type="hidden" id="currentPage" name="currentPage" value="${currentPage}" />
 			</c:if>
 			
-			<c:if test="${resultClass != NULL && pagingHtml != NULL && session_id != null}">
+			<c:if test="${resultClass != NULL &&  session_id != null}">
 		    <form name="inputWarning" action="updateRecipe.do" method="post" enctype="multipart/form-data"  onSubmit="return submitContents(this);">
 				<input type="hidden" id="recipe_num" name="recipe_num" value="${resultClass.recipe_num}" />
 				<input type="hidden" id="currentPage" name="currentPage" value="${currentPage}" />
@@ -80,12 +80,12 @@
 					<tr>
 						<td style="width: 20%;" align="center">제목</td>
 						<td colspan="3" align="left">
-						  <input type="text" name="recipe_subject" value="${resultClass.recipe_subject}" required /></td>
+						  <input type="text" name="recipe_subject" id="recipe_subject" value="${resultClass.recipe_subject}" required /></td>
 					</tr>
 					<tr>
 						<td style="width: 20%;" align="center">요리명</td>
 						<td colspan="3" align="left">
-						  <input type="text" name="recipe_foodsubject" value="${resultClass.recipe_foodsubject}" required /></td>
+						  <input type="text" name="recipe_foodsubject" id="recipe_foodsubject" value="${resultClass.recipe_foodsubject}" required /></td>
 					</tr>
 					
 					<c:if test="${session_id != null}">
@@ -100,7 +100,7 @@
 					<tr>
 						<td style="width: 20%;" align="center">작성자</td>
 						<td colspan="3" align="left">
-							<input type="text" name="recipe_writer" value="${resultClass.recipe_writer}" required />
+							<input type="text" name="recipe_writer" id="recipe_writer" value="${resultClass.recipe_writer}" required />
 						</td>
 					</tr>
 					</c:if>
@@ -108,36 +108,37 @@
 					<tr>
 						<td style="width: 20%;" align="center">비밀번호</td>
 						<td colspan="3" align="left">
-							<input type="password" name="recipe_password" value="${resultClass.recipe_password}" required />
+							<input type="password" name="recipe_password" id="recipe_password" value="${resultClass.recipe_password}" required />
 						</td>
 					</tr>
 					<tr>
 						<td style="width: 20%;" align="center">재료</td>
 						<td colspan="3" align="left">
-							<input type="text" size="50" maxlength="50" name="recipe_method" value="${resultClass.recipe_method}" required />
+							<input type="text" size="50" maxlength="50" name="recipe_method" id="recipe_method" value="${resultClass.recipe_method}" required />
 						</td>
 					</tr>
 					<tr>
 						<td style="width: 20%;" align="center">소요 시간</td>
 						<td align="left">
-							<input type="text" name="recipe_time" value="${resultClass.recipe_time}" required />&nbsp;&nbsp;분</td>
+							<input type="text" name="recipe_time" id="recipe_time" value="${resultClass.recipe_time}" required />&nbsp;&nbsp;분</td>
 						<td style="width: 20%;" align="center">비용</td>
 						<td align="left">
-							<input type="text" name="recipe_price" value="${resultClass.recipe_price}" required />&nbsp;&nbsp;원</td>
+							<input type="text" name="recipe_price" id="recipe_price" value="${resultClass.recipe_price}" required />&nbsp;&nbsp;원</td>
 					</tr>
 					<tr>
 					
 						<td style="width: 20%;" align="center">방법 및 상세내용</td>
 						<td colspan="3">
-					    	<textarea name="recipe_content" id="recipe_content" Style="width:850px" >${pagingHtml}</textarea>
+					    	<textarea name="recipe_content" id="recipe_content" Style="width:850px" >${resultClass.recipe_content}</textarea>
 					    </td>
 					</tr>
 	
 					<tr>
 						<td colspan="4" align="right">		
-							<input class="btn btn-default" type="reset" value="다시작성">	
+							<input class="btn btn-default" name="reset" id="reset" type="reset" value="다시작성" OnClick="SmartReset();" >	
 							<input class="btn btn-default" name="list" type="button" value="목록보기" OnClick="javascript:location.href='listRecipe.do?currentPage=${currentPage}'">				    
 						    <input class="btn btn-primary" name="submit" type="submit" value="등록"> 
+						   
 						</td>
 					</tr>
 				</table>
@@ -163,7 +164,11 @@
 		sSkinURI: "<%=request.getContextPath()%>/assets/se2/SmartEditor2Skin.html",
 		fCreator: "createSEditor2"
 	});
-
+    function SmartReset(){
+    	
+			 oEditors.getById["recipe_content"].exec("SET_IR",[""]);
+		
+    } 
 	function submitContents(elClickedObj){ 
 
 		oEditors.getById["recipe_content"].exec("UPDATE_CONTENTS_FIELD", []);

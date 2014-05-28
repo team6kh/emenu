@@ -53,10 +53,10 @@ public class UpdateRecipe {
 										//파라미터 request				//파라미터 DTO로 자동 set(), get()
 				
 				resultClass = (RecipeDTO) sqlMapper.queryForObject("Recipe.selectOne", paramClass.getRecipe_num());
-				StringBuffer pagingHtml = new StringBuffer();
-				pagingHtml.append(resultClass.getRecipe_content());
+				StringBuffer recipe_content = new StringBuffer();
+				recipe_content.append(resultClass.getRecipe_content());
 				request.setAttribute("resultClass", resultClass);
-				request.setAttribute("pagingHtml", pagingHtml);
+				request.setAttribute("recipe_content", recipe_content);
 				request.setAttribute("currentPage", request.getParameter("currentPage"));
 				return "insertRecipeForm.do";
 
