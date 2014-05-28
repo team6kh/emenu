@@ -118,8 +118,8 @@
 	        <!-- 슬라이드 메뉴 리스트 -->
 	        <c:forEach var="list" items="${list}">
 	        <div class="da-slide">
-	        
-	            <div class="da-img"><img src="${list.recipe_file}" alt="" /></div>
+	             <H2><i>${list.recipe_subject}</i></H2>
+	            <div class="da-img"><img src="${list.recipe_file}" alt=""  width="600" height="200" /></div>
 	        </div>        
 	        </c:forEach>
 	        <!-- 화살표 -->
