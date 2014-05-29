@@ -43,7 +43,7 @@ public class InsertRecipe {
 	//insertRecipeForm.do
 		@RequestMapping("/insertRecipeForm.do")
 		public String insertRecipeForm(HttpServletRequest request, HttpSession session){
-			if(request.getParameter("currentPage")==null){
+			if(request.getParameter("currentPage")==null || request.getParameter("currentPage")=="" ){
 				currentPage = 1;
 			}else{
 				currentPage=Integer.parseInt(request.getParameter("currentPage"));
