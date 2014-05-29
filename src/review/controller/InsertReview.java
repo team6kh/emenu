@@ -60,6 +60,7 @@ public class InsertReview
         // 첨부파일이 있으면, 서버의 지정된 경로로 첨부파일 복사하기
         if (!request.getFiles("review_files").get(0).isEmpty())
         {
+
             // 업로드된 첨부파일 꺼내오기
             review_files = request.getFiles("review_files");
             // 첨부파일 저장할 경로
@@ -84,11 +85,11 @@ public class InsertReview
             // DB update 처리를 한다. (첨부파일명을 DB에 저장)
             sqlMapper.update("Review.updateReviewFile", reviewDTO);
          
-            // 후기 페이지 값 설정
-            ccp = 1;
-            request.setAttribute("ccp", ccp);
         }
-     
+
+        // 후기 페이지 값 설정
+        ccp = 1;
+        request.setAttribute("ccp", ccp);
         return "/view/review/goReadRest.jsp";
     }
     
