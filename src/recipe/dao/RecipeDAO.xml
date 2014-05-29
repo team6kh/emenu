@@ -190,9 +190,21 @@
 		ORDER BY recipe_readcount DESC
 	</select>
 	
+	<!-- selectMyReadcountDesc 쿼리문 정의 -->
+	<select id="selectMyReadcountDesc" resultMap="recipeRes">
+		SELECT * FROM RECIPE_BOARD WHERE recipe_memberwriter = #recipe_memberwriter#
+		ORDER BY recipe_readcount DESC
+	</select>
+	
 	<!-- selectTimeDesc 쿼리문 정의 -->
 	<select id="selectTimeDesc" resultMap="recipeRes">
 		SELECT * FROM RECIPE_BOARD
+		ORDER BY recipe_time DESC
+	</select>
+	
+	<!-- selectMyTimeDesc 쿼리문 정의 -->
+	<select id="selectMyTimeDesc" resultMap="recipeRes">
+		SELECT * FROM RECIPE_BOARD WHERE recipe_memberwriter = #recipe_memberwriter#
 		ORDER BY recipe_time DESC
 	</select>
 	
@@ -202,9 +214,21 @@
 		ORDER BY recipe_price DESC
 	</select>
 	
+	<!-- selectMyPriceDesc 쿼리문 정의 -->
+	<select id="selectMyPriceDesc" resultMap="recipeRes">
+		SELECT * FROM RECIPE_BOARD WHERE recipe_memberwriter = #recipe_memberwriter#
+		ORDER BY recipe_price DESC
+	</select>
+	
 	<!-- selectRecommendDesc 쿼리문 정의 -->
 	<select id="selectRecommendDesc" resultMap="recipeRes">
 		SELECT * FROM RECIPE_BOARD
+		ORDER BY recipe_recommend DESC
+	</select>
+	
+	<!-- selectMyRecommendDesc 쿼리문 정의 -->
+	<select id="selectMyRecommendDesc" resultMap="recipeRes">
+		SELECT * FROM RECIPE_BOARD WHERE recipe_memberwriter = #recipe_memberwriter#
 		ORDER BY recipe_recommend DESC
 	</select>
 	
