@@ -100,6 +100,9 @@
 	.da-arrows span {
 		top: 40%;
 	}
+	.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+		vertical-align: middle;
+	}
 </style>
 
 </head>
@@ -118,8 +121,8 @@
 	        <!-- 슬라이드 메뉴 리스트 -->
 	        <c:forEach var="list" items="${list}">
 	        <div class="da-slide">
-	        
-	            <div class="da-img"><img src="${list.recipe_file}" alt="" /></div>
+	             <H2><i>${list.recipe_subject}</i></H2>
+	            <div class="da-img"><img src="${list.recipe_file}" alt=""  width="600" height="200" /></div>
 	        </div>        
 	        </c:forEach>
 	        <!-- 화살표 -->
@@ -176,7 +179,7 @@
                     <tr>
                         <td align ="center">${list.recipe_num}</td>
                         <td align ="center">${list.recipe_foodkind}</td>
-                        <td align ="left"><a href=${viewURL}><img src="${list.recipe_file}" width="130" height="80" />${list.recipe_subject}</a></td>
+                        <td align ="left"><a href=${viewURL}><img src="${list.recipe_file}" width="130" height="80" />&nbsp;&nbsp;&nbsp;&nbsp;${list.recipe_subject}</a></td>
                         <td align ="center">${list.recipe_foodsubject}</td>
                         <td align ="center">${list.recipe_writer}</td>
                         <td align ="center"><fmt:formatDate value="${list.recipe_reg_date}" pattern="yyyy-MM-dd HH:mm:ss"/></td>

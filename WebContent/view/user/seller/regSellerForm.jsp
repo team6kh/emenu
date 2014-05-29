@@ -99,6 +99,32 @@
 		}
 	}
 	
+	// 정규식을 이용한 휴대폰 번호 validation
+	function validateMobilenum(userinput) {		
+		
+		//var mobilenum = /^\d{10}$/;  
+		var mobilenum = /(01[016789])(\d{8})/;
+		
+		var sp_input = userinput.seller_mobilenum.value.substr(0,3);
+		var sp = /01[016789]/;
+		// 010,011,016,017,018,019
+		
+		if (!sp_input.match(sp)) {
+			feedbackMobilenum.innerHTML = "알맞은 통신사 번호가 아닙니다.";
+			$('#divMobilenum').addClass('has-error'); // bootstrap validation
+		    return false;
+		} else if (userinput.seller_mobilenum.value.match(mobilenum)) {
+			feedbackMobilenum.innerHTML = "사용하셔도 좋습니다.";
+			$('#divMobilenum').removeClass('has-error'); // bootstrap validation
+			$('#divMobilenum').addClass('has-success'); // bootstrap validation
+		    return true;
+		} else {
+			feedbackMobilenum.innerHTML = "알맞은 휴대폰 번호가 아닙니다.";
+			$('#divMobilenum').addClass('has-error'); // bootstrap validation
+		    return false; 
+		}	  
+	}  
+	
 	// 비밀번호 확인
 	function confirmPw() {
 		if (document.regForm.confirm_pw.value != document.regForm.seller_pw.value) {
@@ -207,7 +233,7 @@
 			</div>							
 			<div class="form-group">
 			  <label>전화번호</label>
-			  <input type="text" class="form-control" placeholder="'-'를 제외하고 입력해주세요." name="seller_telnum" required>
+			  <input type="text" class="form-control" placeholder="'-'를 제외하고 입력해주세요." name="seller_telnum" maxlength="12"  onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" onKeyPress ="this.value=this.value.replace(/[^0-9]/g,'');" required>
 			</div>
 			<div class="form-group" id="divRegId">
 			  <label>판매자 아이디</label>
@@ -229,9 +255,10 @@
 			  <input type="password" class="form-control" name="confirm_pw" placeholder="비밀번호를 재입력 해주세요." onkeyup="confirmPw();" required>
 			  <p class="help-block" id="feedbackConfirmPw">비밀번호를 동일하게 입력해주세요.</p>
 			</div>			
-			<div class="form-group">
+			<div class="form-group" id="divMobilenum">
 			  <label>휴대폰</label>
-			  <input type="text" class="form-control" placeholder="'-'를 제외하고 입력해주세요." name="seller_mobilenum" required>
+			  <input type="text" class="form-control" placeholder="'-'를 제외하고 입력해주세요." id="seller_mobilenum" name="seller_mobilenum" maxlength="11" onkeyup="validateMobilenum(this.form);" required>
+			  <p class="help-block" id="feedbackMobilenum"></p>
 			</div>
 			<div class="form-group">
 			  <label>이메일</label>
@@ -261,6 +288,23 @@
 				this.value = this.value.replace(/\s/g, "");
 			}
 		});
+		
+		/*
+		$(document).ready(function() {
+			$("#divMobilenum").keydown(function(event) {
+				// Allow only backspace and delete
+				if ( event.keyCode == 46 || event.keyCode == 8 ) {
+					// let it happen, don't do anything
+				}
+				else {
+					// Ensure that it is a number and stop the keypress
+					if (event.keyCode < 48 || event.keyCode > 57 ) {
+						event.preventDefault();	
+					}	
+				}
+			});
+		});
+		*/
 	</script>
 </body>
 </html>
