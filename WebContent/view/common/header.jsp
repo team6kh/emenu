@@ -347,7 +347,7 @@ document.documentElement.onhelp  = keyboardShowLeftPanel;
 						<c:if test="${session_type == 'seller'}" >
 							<ul class="nav navbar-nav">
 								<li>
-									<a href="/emenu/user/dashSeller.do?sesssion_id=${session_id}" class="btn btn-link noline" style="margin-top:8px; margin-bottm:8px;"> 
+									<a href="/emenu/user/dashSeller.do?sesssion_id=${session_id}"> 
 										<span class="glyphicon glyphicon-bell"></span>
 										<span class="badge">${session_cpn}</span>
 									</a>
