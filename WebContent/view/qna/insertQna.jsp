@@ -25,7 +25,7 @@
 	function fn_checkLogin(){
 		if("${session_id}" == '') {
 			alert("!로그인 하셔야 글을 쓰실 수 있습니다.");
-			window.location.href= "listQna.action";
+			window.location.href= "listQna.do";
 		}
 	}
 </script>
