@@ -18,7 +18,7 @@
 
 <!-- Bootstrap core CSS -->
 <link href="dist/css/bootstrap.min.css" rel="stylesheet">
-ㅋ`
+
 <!-- Custom styles for this template -->
 <link href="view/jogiyo.css" rel="stylesheet">
 <link href="view/common/common-template.css" rel="stylesheet">

@@ -54,8 +54,8 @@
 			      		<a href="${url}">
 			      		<img src="${list.rest_destFile1}" alt="N/A" class="img-responsive" style="min-height:125px;height:125px;">
 			      		</a>
-			      		<div class="caption">
-			        		<h3>${list.rest_subject}</h3>
+			      		<div class="caption text-center">
+			        		<h4>${list.rest_subject}</h4>
 			      		</div>
 			    	</div>
 		      	</div>		      			      	
